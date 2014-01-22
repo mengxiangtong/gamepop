@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "url": "#/local/bilibili/",
+      "name": "哔哩哔哩动画",
+      "icon": "./mocks/images/bilibili.jpg",
+      "has-guide": true,
+      "has-offline": true
+    },
+    {
+      "url": "#/remote/zhihu/",
+      "name": "知乎日报",
+      "icon": "./mocks/images/zhihu.jpg",
+      "hasGuide": true
+    },
+    {
+      "url": "#/no-guide",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    }
+  ]
+}

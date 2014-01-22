@@ -1,0 +1,15 @@
+# IDE
+.idea
+
+# repos
+bower_components
+node_modules
+
+# android
+res
+
+# test
+spec
+
+# compiled
+css/*.css

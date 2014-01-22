@@ -1,0 +1,35 @@
+{
+  "name": "GamePop",
+  "version": "0.1.0",
+  "authors": [
+    "Meathill <lujia.zhai@dianjoy.com>"
+  ],
+  "description": "a mobile game guide application",
+  "main": "index.html",
+  "keywords": [
+    "game",
+    "guide",
+    "mobile",
+    "web",
+    "spa"
+  ],
+  "license": "MIT",
+  "homepage": "http://yxpopo.com/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.0",
+    "handlebars": "~1.3.0",
+    "jquery": "~2.0.3",
+    "lodash": "~2.4.1",
+    "pure": "~0.3.0",
+    "font-awesome": "~4.0.3",
+    "nervenet": "~0.1.1"
+  }
+}
