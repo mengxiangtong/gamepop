@@ -11,14 +11,13 @@
 <title>游戏泡泡</title>
 
 <header id="header">
-  <a href="#" class="back-button pure-button"><i class="fa fa-chevron-left"></i></a>
+  <a href="#/" class="back-button pure-button"><i class="fa fa-chevron-left"></i></a>
   <h1 id="logo">游戏泡泡</h1>
-  <a href="#" class="settings pure-button"><i class="fa fa-bars"></i></a>
 </header>
 <ul id="apps" class="pure-g">
   <script type="text/html-template">
     {{#each apps}}
-    <li class="{{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}}">
+    <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide{{/if}}">
       <figure>
         <a href="{{url}}"><img src="{{icon}}" alt="{{name}}"></a>
         <figcaption><a href="{{url}}">{{name}}</a></figcaption>
@@ -26,6 +25,13 @@
     </li>
     {{/each}}
   </script>
+  <div class="no-guide-dialog pure-menu pure-menu-open hide">
+    <a class="pure-menu-heading">这个游戏暂时还没有攻略哦~</a>
+    <ul>
+      <li><a href="#" class="require-button"><i class="fa fa-fw fa-gavel"></i> 我要攻略！</a></li>
+      <li><a href="#/play/game" class="game-button"><i class="fa fa-fw fa-share-square-o"></i> 直接玩游戏好了</a></li>
+    </ul>
+  </div>
 </ul>
 <h2 class="title"><i class="fa fa-rss"></i> 游戏新闻</h2>
 <ul class="pure-g" id="feeds">
@@ -39,9 +45,9 @@
   </script>
 </ul>
 <nav id="main-nav">
-  <a href="#/all" class="pure-button"><i class="fa fa-list"></i> 全部攻略</a>
-  <a href="#/home" class="pure-button">我的游戏</a>
-  <a href="#/offline" class="pure-button"><i class="fa fa-cloud-download"></i> 离线攻略</a>
+  <a href="#/all" class="pure-button"><i class="fa fa-list"></i><span> 全部攻略</span></a>
+  <a href="#/" class="pure-button pure-button-active"><i class="fa fa-gamepad"></i><span> 我的游戏</span></a>
+  <a href="#/offline" class="pure-button"><i class="fa fa-cloud-download"></i><span> 离线攻略</span></a>
 </nav>
 
 <div id="page-container"></div>

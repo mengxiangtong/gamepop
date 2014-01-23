@@ -1,0 +1,56 @@
+<ul id="offline-list" class="list-panel">
+  <script type="text/html-template">
+    <li class="item">
+      <img src="{{icon}}" />
+      <div>
+        <h2>{{name}}</h2>
+      </div>
+      <div class="btn-group">
+        {{#if is-download}}
+        <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
+        <a href="#" class="delete-button pure-button"><i class="fa fa-trash-o"></i> 删除</a>
+        {{/if}}
+        {{#if downloading}}
+        <p><i class="fa fa-download"></i> 50%</p>
+        <a href="#" class="pure-button pause-button"><i class="fa fa-pause"></i> 暂停</a>
+        {{/if}}
+        {{#if normal}}
+        <a href="#" class="pure-button pause-button"><i class="fa fa-download"></i> 下载</a>
+        {{/if}}
+      </div>
+    </li>
+  </script>
+  <li class="item">
+    <img src="mocks/images/bilibili.jpg" />
+    <div>
+      <h2>哔哩哔哩视频</h2>
+    </div>
+    <div class="btn-group">
+      <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
+      <a href="#" class="delete-button pure-button"><i class="fa fa-trash-o"></i> 删除</a>
+    </div>
+  </li>
+  <li class="item">
+    <img src="mocks/images/zhihu.jpg" />
+    <div>
+      <h2>知乎</h2>
+      <div class="progress">
+        <div class="bar" style="width: 50%" ></div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <p><i class="fa fa-download"></i> 50%</p>
+      <a href="#" class="pure-button pause-button"><i class="fa fa-pause"></i> 暂停</a>
+    </div>
+  </li>
+  <li class="item">
+    <img src="mocks/images/skype.jpg" />
+    <div>
+      <h2>Skype</h2>
+    </div>
+    <div class="btn-group">
+      <p>&nbsp;</p>
+      <a href="#" class="pure-button pause-button"><i class="fa fa-download"></i> 下载</a>
+    </div>
+  </li>
+</ul>

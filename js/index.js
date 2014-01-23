@@ -23,6 +23,7 @@
     context.mapValue('gui', gui);
     context.mapValue('router', router);
     context
+      .inject(gui)
       .inject(feeds)
       .inject(router);
 

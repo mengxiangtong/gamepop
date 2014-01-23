@@ -14,15 +14,16 @@
 
 #apps
   list-style: none
+  position: relative
 
-  li
+  .item
     text-align: center
 
     &.guide:after,
     &.offline:before
       font-family: 'FontAwesome'
-      font-size: 30px
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2)
+      font-size: 40px
+      text-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8)
 
     &.guide:after
       content: "\f00c"
@@ -32,6 +33,15 @@
       content: "\f0ed"
       color: #f15a24
 
+    &.no-guide
+      -webkit-filter: grayscale(100%)
+      -moz-filter: grayscale(100%)
+      -ms-filter: grayscale(100%)
+      filter: grayscale(100%)
+
+      img
+        box-shadow: none
+
   img
     border-radius: 12px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
@@ -40,6 +50,12 @@
     color: #444
     text-decoration: none
     line-height: 30px
+
+.pure-menu.pure-menu-open.no-guide-dialog
+  position: absolute
+  top: 0
+  left: 0
+  width: 200px
 
 h2.title
   background: #E0E0E0
@@ -69,10 +85,10 @@ h2.title
     color: #FFF
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2)
     border-radius: 0
-    border-right: 1px solid #3A9DC2
+    padding: 0.5em 0
 
-    &:last-child
-      border-right: none
+    + a
+      border-left: 1px solid #3A9DC2
 
 #page-container
   overflow-x: hidden

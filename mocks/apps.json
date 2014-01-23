@@ -11,12 +11,13 @@
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
-      "hasGuide": true
+      "has-guide": true
     },
     {
-      "url": "#/no-guide",
+      "url": "#/no-guide/skype",
       "name": "Skype",
-      "icon": "./mocks/images/skype.jpg"
+      "icon": "./mocks/images/skype.jpg",
+      "no-guide": true
     }
   ]
 }

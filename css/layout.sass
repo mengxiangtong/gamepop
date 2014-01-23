@@ -5,6 +5,14 @@ body
 body
   display: flex
   flex-direction: column
+  overflow: hidden
+
+  &.all,
+  &.offline,
+  &.article
+    #header
+      .pure-button
+        display: block
 
 #header
   max-height: $topbar-height
@@ -29,7 +37,7 @@ body
   padding: 20px 0 0 20px
   margin: 0
 
-  li
+  .item
     margin: 0 20px 20px 0
     position: relative
     flex: auto
@@ -40,8 +48,8 @@ body
       left: 50%
 
     &:before
-      top: 5px
-      margin-left: -45px
+      top: -5px
+      margin-left: -55px
 
     &:after
       top: 70px
@@ -95,3 +103,6 @@ h2.title
   &.active
     top: 60px
     bottom: 60px
+
+  #loading
+    margin: 40px auto
