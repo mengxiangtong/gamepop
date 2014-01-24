@@ -3,8 +3,8 @@ body
   height: 100%
 
 body
-  display: flex
-  flex-direction: column
+  @extend .row
+  @extend .column
   overflow: hidden
 
   &.all,
@@ -14,8 +14,12 @@ body
       .pure-button
         display: block
 
+#apps,
+#feeds
+  @extend .one
+
 #header
-  max-height: $topbar-height
+  height: $topbar-height
 
   .pure-button
     position: absolute
@@ -38,9 +42,10 @@ body
   margin: 0
 
   .item
+    @extend .one
     margin: 0 20px 20px 0
     position: relative
-    flex: auto
+    min-width: 20%
 
     &:before,
     &:after
@@ -67,29 +72,22 @@ h2.title
   padding: 20px 0 0 20px
 
   li
+    @extend .one
     margin: 0 20px 20px 0
     padding: 20px
     box-sizing: border-box
-    flex: auto
-    width: 45%
+    min-width: 40%
+    max-width: 45%
 
 #main-nav
   max-height: 60px
-  display: flex
-  flex-direction: row
   position: relative
   z-index: 15
 
   a
+    @extend .one
     font-size: 20px
     line-height: 40px
-    flex: auto
-
-#header,
-#apps,
-#feeds,
-#main-nav
-  flex: 1
 
 #page-container
   position: absolute

@@ -13,5 +13,34 @@ a
   border-radius: 4px
   background: rgb(202, 60, 60)
 
-.pure-g
-  letter-spacing: 0
+.row
+  display: -webkit-box
+  display: box
+
+  display: -webkit-flex
+  display: -ms-flexbox
+  display: flex
+
+  -webkit-box-lines: multiple
+  box-lines: multiple
+
+  -webkit-box-orient: horizontal
+  box-orient: horizontal
+  -webkit-flex-flow: row wrap
+  -ms-flex-flow: row wrap
+  flex-flow: row wrap
+
+  text-rendering: optimizespeed
+  font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif
+
+.column
+  -webkit-box-orient: vertical
+  box-orient: vertical
+  -webkit-flex-flow: column
+  -ms-flex-flow: column
+  flex-flow: column
+
+.one
+  -webkit-box-flex: 1
+  box-flex: 1
+  flex: 1

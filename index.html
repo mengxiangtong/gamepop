@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8"/>
 <meta name="format-detection" content="telephone=no"/>
-<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height"/>
 <link rel="stylesheet" href="bower_components/pure/pure-min.css">
 <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
@@ -14,7 +13,7 @@
   <a href="#/" class="back-button pure-button"><i class="fa fa-chevron-left"></i></a>
   <h1 id="logo">游戏泡泡</h1>
 </header>
-<ul id="apps" class="pure-g">
+<ul id="apps" class="row">
   <script type="text/html-template">
     {{#each apps}}
     <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide{{/if}}">
@@ -34,7 +33,7 @@
   </div>
 </ul>
 <h2 class="title"><i class="fa fa-rss"></i> 游戏新闻</h2>
-<ul class="pure-g" id="feeds">
+<ul class="row" id="feeds">
   <script type="text/html-template">
     {{#each feeds}}
     <li class="item">
@@ -44,7 +43,7 @@
     {{/each}}
   </script>
 </ul>
-<nav id="main-nav">
+<nav id="main-nav" class="row">
   <a href="#/all" class="pure-button"><i class="fa fa-list"></i><span> 全部攻略</span></a>
   <a href="#/" class="pure-button pure-button-active"><i class="fa fa-gamepad"></i><span> 我的游戏</span></a>
   <a href="#/offline" class="pure-button"><i class="fa fa-cloud-download"></i><span> 离线攻略</span></a>

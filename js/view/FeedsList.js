@@ -17,7 +17,7 @@
     },
     item_tapHandler: function (event) {
       var target = $(event.currentTarget).find('a').attr('href');
-      this.$router.navigate(target);
+      this.$router.navigate('#/feeds/' + encodeURIComponent(target));
     }
   });
 }(Nervenet.createNameSpace('Gamepop.view')));
