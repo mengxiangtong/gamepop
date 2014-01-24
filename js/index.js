@@ -1,5 +1,7 @@
-
-;(function (window) {
+/**
+ * main
+ */
+;(function () {
   function onDeviceReady() {
     init();
   }
@@ -35,4 +37,4 @@
   }
 
   document.addEventListener('deviceready', onDeviceReady, false);
-}(window));
+}());

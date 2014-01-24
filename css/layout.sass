@@ -14,14 +14,10 @@ body
       .pure-button
         display: block
 
-#apps,
-#feeds
-  @extend .one
-
 #header
   height: $topbar-height
 
-  .pure-button
+  .btn
     position: absolute
     top: 15px
     display: none
@@ -37,14 +33,13 @@ body
     right: 15px
 
 #apps
-  max-height: 230px
-  padding: 20px 0 0 20px
+  padding: 10px 10px 0
   margin: 0
 
   .item
     @extend .one
-    margin: 0 20px 20px 0
     position: relative
+    padding: 10px
     min-width: 20%
 
     &:before,
@@ -80,27 +75,27 @@ h2.title
     max-width: 45%
 
 #main-nav
-  max-height: 60px
-  position: relative
-  z-index: 15
+  height: 60px
 
   a
-    @extend .one
+    @extend .one-auto
+    padding: 0
+    display: block
     font-size: 20px
-    line-height: 40px
+    line-height: 60px
 
 #page-container
   position: absolute
-  top: 100%
+  top: 60px
   left: 0
   right: 0
-  bottom: -200px
+  bottom: 60px
   z-index: 10
-  transition: all 0.4s
+  display: none
 
   &.active
-    top: 60px
-    bottom: 60px
+    display: block
 
   #loading
+    display: block
     margin: 40px auto

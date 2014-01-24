@@ -11,8 +11,9 @@
     $router: null,
     events: {
       'tap': 'tapHandler',
-      'click .back-button': 'preventDefault',
-      'tap .back-button': 'backButton_clickHandler'
+      'click': 'preventDefault',
+      'tap .back-button': 'backButton_clickHandler',
+      'tap #main-nav a': 'mainNav_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -21,13 +22,15 @@
       this.page = $('#page-container');
     },
     activeNavButton: function (str) {
-      this.$('#main-nav [href$="#/' + str + '"]').addClass('pure-button-active')
-        .siblings().removeClass('pure-button-active');
+      this.$('#main-nav [href$="#/' + str + '"]').addClass('active')
+        .siblings().removeClass('active');
     },
     backHome: function () {
       this.page.removeClass('active');
       this.$el.attr('class', '');
       this.$('h1').text('游戏泡泡');
+      this.$('#main-nav a').removeClass('active')
+        .eq(1).addClass('active');
     },
     showPage: function (url, className) {
       this.page
@@ -50,10 +53,15 @@
         this.$router.navigate('#/' + paths.slice(0, -1).join('/'));
       }
     },
+    mainNav_tapHandler: function (event) {
+      this.$router.navigate(event.currentTarget.hash);
+      $(event.currentTarget).addClass('active')
+        .siblings().removeClass('active');
+    },
     preventDefault: function (event) {
       event.preventDefault();
     },
-    tapHandler: function () {
+    tapHandler: function (event) {
       this.$('.pure-menu').remove();
     }
   });

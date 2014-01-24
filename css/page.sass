@@ -3,7 +3,6 @@
  * ==================================*/
 .filter
   padding: 10px
-  display: flex
   background: #DDD
 
   div
@@ -14,22 +13,17 @@
 
   select
     width: 100%
-    height: 34px
-    padding: 6px 12px
     font-size: 14px
-    line-height: 30px
 
 #guide-list
   list-style: none
   margin: 0
-  padding: 0
-  display: flex
-  padding: 20px 0 0 20px
+  padding: 10px 10px 0
 
-  li
-    flex: auto
+  .item
+    @extend .one
+    padding: 10px
     text-align: center
-    margin: 0 20px 20px 0
 
   img
     max-width: 100px
@@ -43,14 +37,14 @@
  * offline
  * ==================================*/
 #offline-list
+  @extend .row
+  @extend .column
   list-style: none
-  display: flex
-  flex-direction: column
   padding: 20px
   margin: 0
 
   .item
-    display: flex
+    @extend .row
     border: 1px solid #CCC
     padding: 10px
 
@@ -58,7 +52,7 @@
       border-top: none
 
     > *
-      flex: auto
+      @extend .one-auto
 
     img
       width: 80px
@@ -89,10 +83,15 @@
       width: 85px
       max-width: 85px
       margin-left: 10px
+      text-align: center
 
       p
         line-height: 30px
-        margin: 3px 0 16px
+        margin: 3px 0 17px
 
-      .pure-button:only-child
-        margin-top: 49px
+      .btn
+        width: 85px
+        line-height: 30px
+
+        &:only-child
+          margin-top: 50px

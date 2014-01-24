@@ -1,4 +1,4 @@
-<form class="filter">
+<form class="filter row">
   <div>
     <select>
       <option> == 排序 == </option>
@@ -18,7 +18,7 @@
   </div>
 </form>
 
-<ul id="guide-list">
+<ul id="guide-list" class="row">
   <script type="text/html-template">
     {{#each apps}}
     <li>
@@ -29,19 +29,19 @@
     </li>
     {{/each}}
   </script>
-  <li>
+  <li class="item">
     <figure>
       <a href="#/local/bilibili/"><img src="mocks/images/bilibili.jpg" ></a>
       <figcaption><a href="#/local/bilibili/">哔哩哔哩视频</a></figcaption>
     </figure>
   </li>
-  <li>
+  <li class="item">
     <figure>
       <a href="#/remote/zhihu/"><img src="./mocks/images/zhihu.jpg" alt="知乎日报"></a>
       <figcaption><a href="#/remote/zhihu/">知乎日报</a></figcaption>
     </figure>
   </li>
-  <li>
+  <li class="item">
     <figure>
       <a href="#/remote/skype"><img src="./mocks/images/skype.jpg" alt="Skype"></a>
       <figcaption><a href="#/remote/skype">Skype</a></figcaption>
