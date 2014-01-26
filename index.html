@@ -3,22 +3,22 @@
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height"/>
 <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
 <link rel="stylesheet" href="css/index.css"/>
 <link rel="stylesheet" href="css/all.css">
 <title>游戏泡泡</title>
 
 <header id="header">
-  <a href="#/" class="back-button btn"><i class="fa fa-chevron-left"></i></a>
+  <a href="#/" class="back-button btn no-click"><i class="fa fa-chevron-left"></i></a>
   <h1 id="logo">游戏泡泡</h1>
+  <a href="#" class="game-button btn"><i class="fa fa-gamepad"></i></a>
 </header>
 <ul id="apps" class="row one">
   <script type="text/html-template">
     {{#each apps}}
-    <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide{{/if}}">
+    <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide no-click{{/if}}">
       <figure>
-        <a href="{{url}}"><img src="{{icon}}" alt="{{name}}"></a>
-        <figcaption><a href="{{url}}">{{name}}</a></figcaption>
+        <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
+        <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
       </figure>
     </li>
     {{/each}}
@@ -32,7 +32,7 @@
   </div>
 </ul>
 <h2 class="title"><i class="fa fa-rss"></i> 游戏新闻</h2>
-<ul class="row one" id="feeds">
+<ul class="one" id="feeds">
   <script type="text/html-template">
     {{#each feeds}}
     <li class="item">
@@ -42,7 +42,7 @@
     {{/each}}
   </script>
 </ul>
-<nav id="main-nav" class="row">
+<nav id="main-nav" class="row footer">
   <a href="#/all" class="btn">全部攻略</a>
   <a href="#/" class="btn">我的游戏</a>
   <a href="#/offline" class="btn">离线攻略</a>

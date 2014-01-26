@@ -13,3 +13,6 @@ spec
 
 # compiled
 css/*.css
+
+# mocks
+mocks/local

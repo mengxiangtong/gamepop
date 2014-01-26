@@ -9,7 +9,7 @@
       "all": "showAll",
       "offline": "showOffline",
       'config': 'showConfiguration',
-      "local/:game": "showLocalGuide",
+      "local/:game(/*path)": "showLocalGuide",
       'remote/:game': 'showRemoteGuide'
     },
     backHome: function () {
@@ -27,11 +27,15 @@
     showConfiguration: function () {
       this.$gui.showPage('template/config.html', 'config');
     },
-    showConfiguration: function (game) {
-      this.$gui.showPage('local/' + game + '/', 'local-' + game);
+    showLocalGuide: function (game, path) {
+      path = path ? path : '';
+      this.$gui.showPage(config.local + game + '/' + path, 'game-' + game);
+      this.$gui.setGame(game);
     },
-    showConfiguration: function (game) {
-      this.$gui.showPage('http://yxpopo.com/' + game + '/', 'remote-' + game);
+    showRemoteGuide: function (game, path) {
+      path = path ? path : '';
+      this.$gui.showPage(config.remote + game + '/' + path, 'game-' + game);
+      this.$gui.setGame(game);
     }
   });
 }(Nervenet.createNameSpace('Gamepop')));

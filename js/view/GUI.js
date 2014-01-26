@@ -10,8 +10,8 @@
   ns.GUI = Backbone.View.extend({
     $router: null,
     events: {
+      'click .no-click': 'preventDefault',
       'tap': 'tapHandler',
-      'click': 'preventDefault',
       'tap .back-button': 'backButton_clickHandler',
       'tap #main-nav a': 'mainNav_tapHandler'
     },
@@ -32,6 +32,9 @@
       this.$('#main-nav a').removeClass('active')
         .eq(1).addClass('active');
     },
+    setGame: function (game) {
+      this.$('.game-button').attr('href', 'game://' + game);
+    },
     showPage: function (url, className) {
       this.page
         .html('<i class="fa fa-spin fa-spinner fa-4x" id="loading"></i>')
@@ -50,7 +53,15 @@
       if (paths.length === 0) {
         location.href = 'popo:return';
       } else {
-        this.$router.navigate('#/' + paths.slice(0, -1).join('/'));
+        var last = paths.pop();
+        if (last === '' || /^\.html?$/i.test(last.substr(last.lastIndexOf('.')))) {
+          paths.pop();
+        }
+        if (paths.join('/') === 'local') {
+          this.$router.navigate('#/');
+        } else {
+          this.$router.navigate('#/' + paths.join('/'));
+        }
       }
     },
     mainNav_tapHandler: function (event) {
@@ -61,7 +72,7 @@
     preventDefault: function (event) {
       event.preventDefault();
     },
-    tapHandler: function (event) {
+    tapHandler: function () {
       this.$('.pure-menu').remove();
     }
   });

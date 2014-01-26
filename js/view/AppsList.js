@@ -5,7 +5,6 @@
   ns.AppsList = Backbone.View.extend({
     $router: null,
     events: {
-      'click .no-guide': 'noGuide_clickHandler',
       'tap .no-guide': 'noGuide_tapHandler',
       'tap .require-button': 'requireButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler'
@@ -23,9 +22,6 @@
       var href = event.currentTarget.href
         , game = href.substr(href.lastIndexOf('/') + 1);
       this.$router.navigate('game://' + game);
-    },
-    noGuide_clickHandler: function (event) {
-      event.preventDefault();
     },
     noGuide_tapHandler: function (event) {
       var target = $(event.currentTarget),

@@ -6,30 +6,42 @@ body
   @extend .row
   @extend .column
   overflow: hidden
+  padding: 0
+  margin: 0
 
   &.all,
   &.offline,
-  &.article
+  &.article,
+  &[class^=game]
     #header
-      .pure-button
+      .btn
         display: block
+
+  &[class^=game]
+    #main-nav
+      display: none
+
+    #page-container
+      bottom: 0
 
 #header
   height: $topbar-height
 
   .btn
     position: absolute
-    top: 15px
+    top: 10px
     display: none
-
-  &.article
-    .pure-button
-      display: inline-block
+    font-size: 2em
+    padding: 4px 0
+    min-width: 40px
+    background: transparent
 
   .back-button
+    text-align: left
     left: 15px
 
-  .settings
+  .game-button
+    text-align: right
     right: 15px
 
 #apps
@@ -64,17 +76,13 @@ h2.title
 
 #feeds
   margin: 0
-  padding: 20px 0 0 20px
+  padding: 20px
 
   li
-    @extend .one
-    margin: 0 20px 20px 0
     padding: 20px
     box-sizing: border-box
-    min-width: 40%
-    max-width: 45%
 
-#main-nav
+.footer
   height: 60px
 
   a
@@ -99,3 +107,23 @@ h2.title
   #loading
     display: block
     margin: 40px auto
+
+  img
+    max-width: 100%
+
+section
+  padding: 20px
+
+  h2:first-child
+    margin-top: 0
+
+  ul.row
+    list-style: none
+    margin: 0
+    padding: 0
+
+    > *
+      box-sizing: border-box
+
+    .col-1-2
+      max-width: 50%
