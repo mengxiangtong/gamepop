@@ -1,37 +1,25 @@
 #header
-  background: #EEE
-  line-height: 60px
   color: #333
   text-shadow: 0 1px 0 #FFF
-  border-bottom: 1px solid #CCC
+  background: #f8f8f8
+  border-bottom: 1px solid #E9E9E9
 
 #logo
-  background: url(../img/logo.png) no-repeat 0 8px
-  background-size: 60px 45px
-  padding-left: 60px
-  width: 112px
+  background: url(../img/logo.png) no-repeat 0 12px
+  padding-left: 50px
+  width: 88px
   margin: 0 auto
+  font-size: 22px
 
 #apps
-  list-style: none
   position: relative
+  background: url(../img/slidebg.png)
+
+  #apps-container ul
+    list-style: none
 
   .item
     text-align: center
-
-    &.guide:after,
-    &.offline:before
-      font-family: 'FontAwesome'
-      font-size: 40px
-      text-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.8)
-
-    &.guide:after
-      content: "\f00c"
-      color: #1fa67a
-
-    &.offline:before
-      content: "\f0ed"
-      color: #f15a24
 
     &.no-guide
       -webkit-filter: grayscale(100%)
@@ -43,51 +31,103 @@
         box-shadow: none
 
   img
-    border-radius: 12px
+    border-radius: 16px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 
+    &.guide:after
+      content: ''
+      background: url(../img/icon.png)
+      width: 40px
+      height: 40px
+
+    &.offline:after
+      width: 50px
+      background-position: 50px 0
+
   a
-    color: #444
+    color: #FFF
     text-decoration: none
+    font-size: 18px
     line-height: 30px
 
-.pure-menu.pure-menu-open.no-guide-dialog
-  position: absolute
-  top: 0
-  left: 0
-  width: 200px
+  .indicators
+    list-style: none
+    font: 8px/8px Airal
+
+    li
+      font: 8px/8px Airal
+      width: 8px
+      height: 8px
+      overflow: hidden
+      background: #686F74
+
+      &.active
+        background: #CECDCD
+
+  .no-guide-dialog
+    background: #2163C5
+    text-align: center
+
+    &:before
+      content: ''
+      border-bottom: 15px solid #2163c5
+      border-left: 12px solid transparent
+      border-right: 12px solid transparent
+
+    .heading
+      font-size: 16px
+      color: #9EB8D2
+      line-height: 45px
+
+    ul
+      list-style: none
+
+      li
+        border-top: 1px solid #497DCC
+        color: #FFF
+        line-height: 70px
 
 h2.title
-  background: #E0E0E0
-  border-bottom: 1px solid #CCC
+  background: #E7E7E7
   line-height: 50px
   text-indent: 10px
+  font-size: 18px
+  color: #333
 
 #feeds
   overflow-x: hidden
   overflow-y: auto
   list-style: none
+  background: #F5F5F5
 
   li
-    border: 1px solid #CCC
+    padding: 20px
+    border-bottom: 1px solid #E7E7E7
 
   a
-    color: #333
+    color: #1B416C
     text-decoration: none
+    font-size: 22px
+    font-weight: normal
+    line-height: 25px
 
     &:visited
       color: #999
 
+  p
+    color: #333
+    font-size: 16px
+
 
 .footer
   a
-    background: rgb(66, 184, 221)
+    background: #1397E2
     color: #FFF
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2)
     border-radius: 0
 
-    + a
-      border-left: 1px solid #3A9DC2
+    &.active
+      background: #0683CB
 
 #page-container
   overflow-x: hidden

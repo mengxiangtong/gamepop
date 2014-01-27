@@ -32,9 +32,10 @@
     Backbone.history.start();
   }
 
-  if (DEBUG) {
-    init();
+  if (PHONEGAP) {
+    document.addEventListener('deviceready', onDeviceReady, false);
+  } else {
+    $(init);
   }
 
-  document.addEventListener('deviceready', onDeviceReady, false);
 }());

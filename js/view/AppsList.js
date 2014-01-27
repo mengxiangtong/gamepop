@@ -11,12 +11,32 @@
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
-      this.menu = this.$('.pure-menu').remove().removeClass('hide');
+      this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
 
       this.collection.on('reset', this.render, this);
     },
     render: function (collection) {
-      this.$el.html(this.template({apps: collection.toJSON()}));
+      var html = '',
+          data = collection.toJSON();
+      for (var i = 0, len = data.length / 8; i < len; i++) {
+        html += this.template({apps: data.slice(i * 8, (i + 1) * 8)});
+      }
+      this.$('#apps-scroller').html(html);
+      if (data.length > 8) {
+        this.iscroll = new IScroll('#apps-container', {
+          scrollX: true,
+          scrollY: false,
+          momentum: false,
+          snap: true,
+          snapSpeed: 400,
+          indicators: {
+            el: this.$('.indicators')[0],
+            resize: false
+          }
+        });
+      } else {
+        this.$('.indicators').remove();
+      }
     },
     gameButton_tapHandler: function (event) {
       var href = event.currentTarget.href
@@ -27,18 +47,31 @@
       var target = $(event.currentTarget),
           offset = target.position(),
           width = target.width(),
-          height = target.height();
+          height = target.height(),
+          link = target.find('a').attr('href'),
+          alias = link.substr(link.lastIndexOf('/') + 1);
       this.menu
         .css({
-          top: offset.top + height /2,
-          left: offset.left + (width - 200 >> 1)
+          top: offset.top + height - 40,
+          left: offset.left + (width - 190 >> 1)
         })
-        .appendTo(this.$el);
+        .appendTo(this.$el)
+        .find('.require-button').attr('href', '#/require/' + alias)
+        .end().find('.game-button').attr('href', 'game://' + alias);
 
       event.stopPropagation();
     },
     requireButton_tapHandler: function (event) {
       // TODO 增加向服务器发送攻略需求的功能
+      var hash = event.currentTarget.hash
+        , alias = hash.substr(hash.lastIndexOf('/') + 1);
+      $.ajax({
+        type: 'POST',
+        url: config.require,
+        data: {
+          game: alias
+        }
+      });
       alert('您的需求已收到，我们不会让您久等的。');
     }
   });

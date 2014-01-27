@@ -5,7 +5,8 @@ var config = {
   apps: 'apps.json',
   feeds: 'feeds.json',
   local: 'local/',
-  remote: 'http://yxpopo.com/'
+  remote: 'http://r.yxpopo.com/guide',
+  require: 'http://www.yxpopo.com/require/'
 };
 
 if (DEBUG) {

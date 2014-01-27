@@ -73,7 +73,7 @@
       event.preventDefault();
     },
     tapHandler: function () {
-      this.$('.pure-menu').remove();
+      this.$('.no-guide-dialog').remove();
     }
   });
 }(Nervenet.createNameSpace('Gamepop.view')));

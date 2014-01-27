@@ -10,7 +10,7 @@
       "offline": "showOffline",
       'config': 'showConfiguration',
       "local/:game(/*path)": "showLocalGuide",
-      'remote/:game': 'showRemoteGuide'
+      'remote/:game(/*path)': 'showRemoteGuide'
     },
     backHome: function () {
       this.$gui.backHome();

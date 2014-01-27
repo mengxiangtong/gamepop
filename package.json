@@ -1,0 +1,36 @@
+{
+  "name": "GamePop",
+  "version": "0.1.0",
+  "description": "a mobile game guide application",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Dianjoy/gamepop.git"
+  },
+  "keywords": [
+    "game",
+    "guide",
+    "mobile",
+    "web",
+    "spa"
+  ],
+  "author": "Meathill <lujia.zhai@dianjoy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dianjoy/gamepop/issues"
+  },
+  "homepage": "https://github.com/Dianjoy/gamepop",
+  "dependencies": {
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-imagemin": "~0.5.0",
+    "grunt-contrib-compress": "~0.6.0",
+    "grunt": "~0.4.2"
+  }
+}

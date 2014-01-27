@@ -25,6 +25,7 @@ body
       bottom: 0
 
 #header
+  line-height: $topbar-height
   height: $topbar-height
 
   .btn
@@ -45,42 +46,88 @@ body
     right: 15px
 
 #apps
-  padding: 10px 10px 0
-  margin: 0
+  padding: 25px 10px 0
+  position: relative
+
+  #apps-container ul
+    @extend .row
+    margin: 0
+    padding: 0
+    justify-content: center
 
   .item
     @extend .one
     position: relative
-    padding: 10px
-    min-width: 20%
-
-    &:before,
-    &:after
-      position: absolute
-      left: 50%
-
-    &:before
-      top: -5px
-      margin-left: -55px
-
-    &:after
-      top: 70px
-      margin-left: 20px
+    padding: 0 5px 10px
+    width: 25%
+    max-width: 25%
 
     img
       max-width: 100px
       max-height: 100px
+
+      &:after
+        position: absolute
+        left: 50%
+        top: 62px
+        margin-left: 12px
+
+      &.offline:after
+        top: 64px
+        margin-left: 4px
+
+  figcaption
+    text-wrap: none
+
+  .indicators
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 12px
+    text-align: center
+    margin: 0
+    padding: 0
+
+    li
+      display: inline-block
+
+      + li
+        margin-left: 10px
+
+  .no-guide-dialog
+    position: absolute
+    top: 0
+    left: 0
+    width: 190px
+
+    &:before
+      position: absolute
+      width: 0
+      height: 0
+      top: -15px
+      left: 50%
+      margin-left: -12px
+
+    ul
+      margin: 0
+      padding: 0
 
 h2.title
   margin: 0
 
 #feeds
   margin: 0
-  padding: 20px
+  padding: 0
 
   li
     padding: 20px
     box-sizing: border-box
+
+  h3
+    margin: 0
+
+  p
+    margin-bottom: 0
 
 .footer
   height: 60px
