@@ -7,20 +7,20 @@
   }
   function init() {
     var context = Nervenet.createContext(),
-        gui = new Gamepop.view.GUI({
+        gui = new gamepop.view.GUI({
           el: document.body
         }),
-        appsCollection = new Gamepop.model.AppsCollection(),
-        apps = new Gamepop.view.AppsList({
+        appsCollection = new gamepop.model.AppsCollection(),
+        apps = new gamepop.view.AppsList({
           el: '#apps',
           collection: appsCollection
         }),
-        feedsCollection = new Gamepop.model.FeedsCollection(),
-        feeds = new Gamepop.view.FeedsList({
+        feedsCollection = new gamepop.model.FeedsCollection(),
+        feeds = new gamepop.view.FeedsList({
           el: '#feeds',
           collection: feedsCollection
         }),
-        router = new Gamepop.Router();
+        router = new gamepop.Router();
 
     context.mapValue('gui', gui);
     context.mapValue('router', router);

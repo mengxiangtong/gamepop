@@ -2,22 +2,42 @@
  * all
  * ==================================*/
 .filter
-  padding: 10px
   background: #DDD
 
-  div
-    flex: auto
+  ul
+    @extend .ul
+    @extend .one-auto
+    background: #333
+    color: #FFF
+    text-indent: 20px
+    font-size: 18px
+    line-height: 60px
+    height: 60px
+    overflow: hidden
 
-    + div
-      margin-left: 10px
+    &.active
+      height: auto
 
-  select
-    width: 100%
-    font-size: 14px
+    + ul
+      border-left: 1px solid #555
+
+  .dropdown
+    position: relative
+
+    &:after
+      content: ''
+      width: 0
+      height: 0
+      border-top: 6px solid #FFF
+      border-left: 4px solid transparent
+      border-right: 4px solid transparent
+      position: absolute
+      right: 20px
+      top: 28px
+
 
 #guide-list
-  list-style: none
-  margin: 0
+  @extend .ul
   padding: 10px 10px 0
 
   .item
@@ -39,62 +59,62 @@
 #offline-list
   @extend .row
   @extend .column
-  list-style: none
-  padding: 20px
-  margin: 0
+  @extend .ul
 
   .item
     @extend .row
-    border: 1px solid #CCC
-    padding: 10px
+    border-bottom: 1px solid #CCC
+    padding: 20px
 
-    + .item
-      border-top: none
-
-    > *
-      @extend .one-auto
+    &:last-child
+      border-bottom: none
 
     img
-      width: 80px
-      max-width: 80px
-      height: 80px
-      margin-right: 10px
-      border-radius: 8px
+      width: 100px
+      max-width: 100px
+      height: 100px
+      margin-right: 15px
+      border-radius: 12px
 
     h2
-      font-size: 20px
+      @extend .one
+      font-size: 24px
       line-height: 30px
       margin: 0 0 30px
 
     .progress
-      height: 20px
-      line-height: 20px
+      width: 100%
+      height: 5px
+      line-height: 5px
       background: #DDD
-      box-shadow: inset 1px 1px 2px #CCC
-      border-radius: 4px
+      overflow: hidden
+      margin-top: 10px
 
       .bar
-        height: 20px
-        line-height: 20px
-        background: rgb(66, 184, 221)
-        border-radius: 4px
+        height: 5px
+        line-height: 5px
+        background: #2db817
+        overflow: hidden
 
     .btn-group
-      width: 85px
-      max-width: 85px
-      margin-left: 10px
-      text-align: center
+      width: 120px
+      margin-left: 15px
 
       p
+        text-align: right
         line-height: 30px
-        margin: 3px 0 17px
+        margin: 0 0 20px
+        font-size: 18px
 
       .btn
-        width: 85px
-        line-height: 30px
+        width: 100%
+        font-size: 20px
+        padding: 0
+        line-height: 50px
+        border-radius: 2px
 
         &:only-child
-          margin-top: 50px
+          margin-top: 30px
 
 /* ====================================
  * guide
@@ -104,6 +124,7 @@
  * --------------*/
 .carousel
   max-height: 400px
+  overflow: hidden
 
   img
     width: 100%
@@ -111,10 +132,10 @@
     display: block
 
 .game-header
-  background: #E0E0E0
-  border-bottom: 1px solid #CCC
+  background: #333333
   line-height: 50px
   position: relative
+  color: #FFF
 
   h2
     margin: 0
@@ -130,18 +151,24 @@
 
 .home-page
   a
-    font-size: 2em
+    background: #FFF
+    font-size: 22px
+    line-height: 2.5
     width: 90%
     margin: 5% 5% 0
+    border: 2px solid #6FADF0
+    color: #3aaff2
 
 /* ----------------
  * stages
  * --------------*/
 .page-header
+  background: #e7e7e7
+  text-indent: 20px
 
   h1
-    font-size: 25px
-    line-height: 100%
+    font-size: 22px
+    line-height: 50px
     margin: 0 0 20px
 
 [class^=game]

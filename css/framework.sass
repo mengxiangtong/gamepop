@@ -16,10 +16,20 @@
   background: url(../img/slidebg.png)
 
   #apps-container ul
-    list-style: none
+    @extend .ul
 
   .item
     text-align: center
+
+    &.guide:after
+      content: ''
+      background: url(../img/icon.png)
+      width: 40px
+      height: 40px
+
+    &.offline:after
+      width: 50px
+      background-position: 50px 0
 
     &.no-guide
       -webkit-filter: grayscale(100%)
@@ -34,16 +44,6 @@
     border-radius: 16px
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 
-    &.guide:after
-      content: ''
-      background: url(../img/icon.png)
-      width: 40px
-      height: 40px
-
-    &.offline:after
-      width: 50px
-      background-position: 50px 0
-
   a
     color: #FFF
     text-decoration: none
@@ -51,7 +51,7 @@
     line-height: 30px
 
   .indicators
-    list-style: none
+    @extend .ul
     font: 8px/8px Airal
 
     li
@@ -95,10 +95,9 @@ h2.title
   color: #333
 
 #feeds
+  @extend .ul
   overflow-x: hidden
   overflow-y: auto
-  list-style: none
-  background: #F5F5F5
 
   li
     padding: 20px
@@ -132,4 +131,4 @@ h2.title
 #page-container
   overflow-x: hidden
   overflow-y: auto
-  background: #FFF
+  background: #F5F5F5

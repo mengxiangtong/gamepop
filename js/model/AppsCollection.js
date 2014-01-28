@@ -23,4 +23,4 @@
       localStorage.setItem(LOCAL_NAME, JSON.stringify(this.toJSON()));
     }
   });
-}(Nervenet.createNameSpace('Gamepop.model')));
+}(Nervenet.createNameSpace('gamepop.model')));

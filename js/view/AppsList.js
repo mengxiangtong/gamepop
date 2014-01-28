@@ -75,4 +75,4 @@
       alert('您的需求已收到，我们不会让您久等的。');
     }
   });
-}(Nervenet.createNameSpace('Gamepop.view')));
+}(Nervenet.createNameSpace('gamepop.view')));

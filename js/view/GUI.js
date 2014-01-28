@@ -76,4 +76,4 @@
       this.$('.no-guide-dialog').remove();
     }
   });
-}(Nervenet.createNameSpace('Gamepop.view')));
+}(Nervenet.createNameSpace('gamepop.view')));

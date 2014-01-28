@@ -20,4 +20,4 @@
       this.$router.navigate('#/feeds/' + encodeURIComponent(target));
     }
   });
-}(Nervenet.createNameSpace('Gamepop.view')));
+}(Nervenet.createNameSpace('gamepop.view')));

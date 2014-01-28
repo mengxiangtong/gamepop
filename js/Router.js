@@ -38,4 +38,4 @@
       this.$gui.setGame(game);
     }
   });
-}(Nervenet.createNameSpace('Gamepop')));
+}(Nervenet.createNameSpace('gamepop')));
