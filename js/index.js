@@ -24,10 +24,12 @@
 
     context.mapValue('gui', gui);
     context.mapValue('router', router);
+    context.mediatorMap.isBackbone = true;
     context
       .inject(gui)
       .inject(feeds)
-      .inject(router);
+      .inject(router)
+      .mediatorMap.map('.all-guides-list', gamepop.view.AllGuides, {isSingle: true});
 
     Backbone.history.start();
   }

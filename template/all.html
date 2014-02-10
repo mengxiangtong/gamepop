@@ -1,45 +1,29 @@
-<form class="filter row">
-  <ul class="dropdown">
-    <li class="active">更新时间</li>
-    <li>发布时间</li>
-    <li>点击热度</li>
-  </ul>
-  <ul class="dropdown">
-    <li class="active">全部</li>
-    <li>角色扮演</li>
-    <li>益智</li>
-    <li>赛车</li>
-    <li>解密</li>
-  </ul>
-</form>
+<div class="all-guides-list">
+  <form class="filter row">
+    <div class="dropdown">
+      <input type="radio" name="sort" value="order_by_game" id="sort-1" checked><label for="sort-1">更新时间</label>
+      <input type="radio" name="sort" value="order_by_guide" id="sort-2"><label for="sort-2">发布时间</label>
+    </div>
+    <div class="dropdown">
+      <input type="radio" name="group" value="order_by_guide" id="group-all" checked><label for="group-all">发布时间</label>
+    </div>
+  </form>
 
-<ul id="guide-list" class="row">
-  <script type="text/html-template">
-    {{#each apps}}
-    <li>
-      <figure>
-        <a href="{{url}}"><img src="{{icon}}" ></a>
-        <figcaption><a href="{{url}}">{{name}}</a></figcaption>
-      </figure>
-    </li>
-    {{/each}}
-  </script>
-  <li class="item">
-    <figure>
-      <a href="#/local/bilibili/"><img src="mocks/images/bilibili.jpg" ></a>
-      <figcaption><a href="#/local/bilibili/">哔哩哔哩视频</a></figcaption>
-    </figure>
-  </li>
-  <li class="item">
-    <figure>
-      <a href="#/remote/zhihu/"><img src="./mocks/images/zhihu.jpg" alt="知乎日报"></a>
-      <figcaption><a href="#/remote/zhihu/">知乎日报</a></figcaption>
-    </figure>
-  </li>
-  <li class="item">
-    <figure>
-      <a href="#/remote/skype"><img src="./mocks/images/skype.jpg" alt="Skype"></a>
-      <figcaption><a href="#/remote/skype">Skype</a></figcaption>
-    </figure>
-  </li>
-</ul>
+  <ul id="guide-list" class="row">
+    <script type="text/html-template">
+      {{#each apps}}
+      <li>
+        <figure>
+          <a href="{{url}}"><img src="{{icon}}" ></a>
+          <figcaption><a href="{{url}}">{{name}}</a></figcaption>
+        </figure>
+      </li>
+      {{/each}}
+    </script>
+  </ul>
+
+  <div class="btn-group pagination">
+    <a class="btn no-click" href="#/prev"><i class="fa fa-chevron-left"></i> 上一页</a>
+    <a class="btn no-click" href="#/next">下一页 <i class="fa fa-chevron-right"></i></a>
+  </div>
+</div>

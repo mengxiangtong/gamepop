@@ -9,6 +9,7 @@
 
   ns.GUI = Backbone.View.extend({
     $router: null,
+    $context: null,
     events: {
       'click .no-click': 'preventDefault',
       'tap': 'tapHandler',
@@ -38,11 +39,7 @@
     showPage: function (url, className) {
       this.page
         .html('<i class="fa fa-spin fa-spinner fa-4x" id="loading"></i>')
-        .load(url, function (response, status, xhr) {
-          if (status === 'error') {
-            this.innerHTML = '加载失败';
-          }
-        })
+        .load(url, _.bind(this.page_loadCompleteHandler, this))
         .addClass('active');
       this.$el.attr('class', className);
       this.$('h1').text(TITLES[className] || '游戏泡泡');
@@ -68,6 +65,13 @@
       this.$router.navigate(event.currentTarget.hash);
       $(event.currentTarget).addClass('active')
         .siblings().removeClass('active');
+    },
+    page_loadCompleteHandler: function (response, status, xhr) {
+      if (status === 'error') {
+        this.innerHTML = '加载失败';
+        return;
+      }
+      this.$context.mediatorMap.check(this.page[0]);
     },
     preventDefault: function (event) {
       event.preventDefault();
