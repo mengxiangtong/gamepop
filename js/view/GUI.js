@@ -38,7 +38,7 @@
     },
     showPage: function (url, className) {
       this.page
-        .html('<i class="fa fa-spin fa-spinner fa-4x" id="loading"></i>')
+        .html('<p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>')
         .load(url, _.bind(this.page_loadCompleteHandler, this))
         .addClass('active');
       this.$el.attr('class', className);

@@ -2,6 +2,7 @@
  * Created by meathill on 14-1-28.
  */
 ;(function (ns) {
+  'use strict';
   ns.AllGuides = Backbone.View.extend({
     events: {
       'tap .pagination a': 'pagination_tapHandler',
@@ -13,9 +14,14 @@
       this.collection = new gamepop.model.AllGuidesCollection();
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.fetch();
+
+      this.form = this.$('form')[0];
+      this.form.elements.group.value = this.collection.options.group;
+      this.form.elements.sort.value = this.collection.options.sort;
     },
     render: function () {
-      this.$('#guide-list').html(this.template(this.collection.toJSON()));
+      this.$('#guide-list').html(this.template({games: this.collection.toJSON()}));
+      this.$('.pagination a').removeClass('disabled');
     },
     collection_resetHandler: function () {
       this.render();
@@ -29,16 +35,20 @@
       }
     },
     input_changeHandler: function (event) {
-      var input = $(event.currentTarget)
-        , dropdown = input.parent()
-        , form = dropdown.parent()[0];
-      this.collection.setOptions(form.elements.group, form.elements.sort);
+      var dropdown = $(event.currentTarget).parent();
+      this.collection.setOptions(this.form.elements.group.value, this.form.elements.sort.value);
       dropdown.removeClass('active');
     },
     pagination_tapHandler: function (event) {
+      if (/disabled/.test(event.currentTarget.className)) {
+        return;
+      }
       var target = event.currentTarget.hash
         , dir = target.substr(2);
       this.collection[dir]();
+      this.$('.pagination a')
+        .addClass('disabled')
+        .first().toggleClass('hide', this.collection.curr <= 1);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

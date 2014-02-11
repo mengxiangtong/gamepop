@@ -3,6 +3,7 @@
     {
       "url": "#/local/bilibili/",
       "name": "哔哩哔哩动画",
+      "alias": "",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
       "has-offline": true

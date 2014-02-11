@@ -5,15 +5,16 @@
   ns.AllGuidesCollection = Backbone.Collection.extend({
     curr: 1,
     baseUrl: 'http://a.yxpopo.com/vapi/game_list/',
+    options: {
+      group: '0',
+      sort: 'order_by_pub'
+    },
     fetch: function () {
       this.url = this.baseUrl + this.curr + '/';
       Backbone.Collection.prototype.fetch.call(this, {
         reset: true,
         data: this.options
       });
-    },
-    parse: function (response) {
-
     },
     next: function () {
       this.curr += 1;

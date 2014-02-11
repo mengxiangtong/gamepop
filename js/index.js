@@ -29,7 +29,12 @@
       .inject(gui)
       .inject(feeds)
       .inject(router)
-      .mediatorMap.map('.all-guides-list', gamepop.view.AllGuides, {isSingle: true});
+      .mediatorMap
+        .map('.all-guides-list', gamepop.view.AllGuides, {isSingle: true})
+        .map('#offline-list', gamepop.view.Offline, {
+          isSingle: true,
+          collection: appsCollection
+        });
 
     Backbone.history.start();
   }

@@ -1,21 +1,32 @@
 <div class="all-guides-list">
   <form class="filter row">
     <div class="dropdown">
-      <input type="radio" name="sort" value="order_by_game" id="sort-1" checked><label for="sort-1">更新时间</label>
-      <input type="radio" name="sort" value="order_by_guide" id="sort-2"><label for="sort-2">发布时间</label>
+      <input type="radio" name="sort" value="order_by_update" id="sort-1"><label for="sort-1">更新时间</label>
+      <input type="radio" name="sort" value="order_by_pub" id="sort-2"><label for="sort-2">发布时间</label>
     </div>
     <div class="dropdown">
-      <input type="radio" name="group" value="order_by_guide" id="group-all" checked><label for="group-all">发布时间</label>
+      <input type="radio" name="group" value="0" id="group-all"><label for="group-all">全部游戏</label>
+      <input type="radio" name="group" value="1" id="group-1"><label for="group-1">休闲时间</label>
+      <input type="radio" name="group" value="2" id="group-2"><label for="group-2">跑酷竞速</label>
+      <input type="radio" name="group" value="3" id="group-3"><label for="group-3">宝石消除</label>
+      <input type="radio" name="group" value="4" id="group-4"><label for="group-4">网络游戏</label>
+      <input type="radio" name="group" value="5" id="group-5"><label for="group-5">动作射击</label>
+      <input type="radio" name="group" value="6" id="group-6"><label for="group-6">扑克棋牌</label>
+      <input type="radio" name="group" value="7" id="group-7"><label for="group-7">儿童益智</label>
+      <input type="radio" name="group" value="8" id="group-8"><label for="group-8">塔防守卫</label>
+      <input type="radio" name="group" value="9" id="group-9"><label for="group-9">体育格斗</label>
+      <input type="radio" name="group" value="10" id="group-10"><label for="group-10">角色扮演</label>
+      <input type="radio" name="group" value="11" id="group-11"><label for="group-11">经营策略</label>
     </div>
   </form>
 
   <ul id="guide-list" class="row">
     <script type="text/html-template">
-      {{#each apps}}
+      {{#each games}}
       <li>
         <figure>
-          <a href="{{url}}"><img src="{{icon}}" ></a>
-          <figcaption><a href="{{url}}">{{name}}</a></figcaption>
+          <a href="#/remote/{{guide_name}}"><img src="{{icon}}" alt="{{app_name}}"></a>
+          <figcaption><a href="#/remote/{{guide_name}}">{{app_name}}</a></figcaption>
         </figure>
       </li>
       {{/each}}
@@ -23,7 +34,7 @@
   </ul>
 
   <div class="btn-group pagination">
-    <a class="btn no-click" href="#/prev"><i class="fa fa-chevron-left"></i> 上一页</a>
-    <a class="btn no-click" href="#/next">下一页 <i class="fa fa-chevron-right"></i></a>
+    <a class="btn btn-default no-click hide" href="#/prev"><i class="fa fa-chevron-left"></i> 上一页</a>
+    <a class="btn btn-default no-click" href="#/next">下一页 <i class="fa fa-chevron-right"></i></a>
   </div>
 </div>
