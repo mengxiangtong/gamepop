@@ -39,13 +39,13 @@
     </ul>
   </div>
 </div>
-<h2 class="title"><i class="fa fa-rss"></i> 游戏新闻</h2>
+<h2 class="title"><i></i> 游戏新闻</h2>
 <ul class="one" id="feeds">
   <script type="text/html-template">
     {{#each feeds}}
     <li class="item">
-      <h3><a href="{{link}}">{{title}}</a></h3>
-      <p>{{author}} <small><time>{{pubdate}}</time></small></p>
+      <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
+      <p>来源：{{source}} | <time>{{pub_date}}</time></p>
     </li>
     {{/each}}
   </script>

@@ -10,7 +10,8 @@
       "offline": "showOffline",
       'config': 'showConfiguration',
       "local/:game(/*path)": "showLocalGuide",
-      'remote/:game(/*path)': 'showRemoteGuide'
+      'remote/:game(/*path)': 'showRemoteGuide',
+      'news/:id': 'showNewsById'
     },
     backHome: function () {
       this.$gui.backHome();
@@ -36,6 +37,9 @@
       path = path ? path : '';
       this.$gui.showPage(config.remote + game + '/' + path, 'game-' + game);
       this.$gui.setGame(game);
+    },
+    showNewsById: function (id) {
+      this.$gui.showPage(config.news + id, 'news-' + id);
     }
   });
 }(Nervenet.createNameSpace('gamepop')));

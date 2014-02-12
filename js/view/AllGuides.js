@@ -21,7 +21,13 @@
     },
     render: function () {
       this.$('#guide-list').html(this.template({games: this.collection.toJSON()}));
-      this.$('.pagination a').removeClass('disabled');
+      this.$('.pagination a')
+        .find('.fa-spin').toggleClass(function () {
+          var dir = $(this).parent().index() === 0 ? 'left' : 'right';
+          return 'fa-spin fa-spinner fa-chevron-' + dir;
+        })
+        .end().last().removeClass('disabled')
+        .end().first().toggleClass('disabled', this.collection.curr <= 1);
     },
     collection_resetHandler: function () {
       this.render();
@@ -43,12 +49,15 @@
       if (/disabled/.test(event.currentTarget.className)) {
         return;
       }
-      var target = event.currentTarget.hash
-        , dir = target.substr(2);
+      var target = $(event.currentTarget)
+        , hash = event.currentTarget.hash
+        , dir = hash.substr(2);
       this.collection[dir]();
       this.$('.pagination a')
-        .addClass('disabled')
-        .first().toggleClass('hide', this.collection.curr <= 1);
+        .addClass('disabled');
+      target.find('i')
+        .addClass('fa-spin fa-spinner')
+        .removeClass('fa-chevron-left fa-chevron-right');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

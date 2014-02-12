@@ -12,7 +12,7 @@
     background: #333
     color: #FFF
     text-indent: 20px
-    font-size: 18px
+    font-size: 16px
     line-height: 50px
     height: 50px
     overflow: hidden
@@ -55,20 +55,25 @@
 
 #guide-list
   @extend .ul
-  padding: 70px 10px 20px
+  min-height: 300px
+  padding: 60px 10px 0
 
   .item
-    @extend .one
-    padding: 10px
+    flex: auto
+    padding: 10px 5px
     text-align: center
+    width: 20%
+    border-bottom: 1px solid #CCC
 
   img
-    max-width: 100px
+    max-width: 100%
     border-radius: 12px
 
   figcaption
     line-height: 30px
 
+.pagination
+  margin: 20px 0 30px
 
 /* ====================================
  * offline
@@ -192,3 +197,13 @@
     figcaption
       text-align: center
       line-height: 2em
+
+/* ====================================
+ * guide
+ * ==================================*/
+.news-detail
+  padding: 5px 20px
+
+  img
+    max-width: 100%
+    height: auto

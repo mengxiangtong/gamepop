@@ -54,7 +54,7 @@
         if (last === '' || /^\.html?$/i.test(last.substr(last.lastIndexOf('.')))) {
           paths.pop();
         }
-        if (paths.join('/') === 'local') {
+        if (/^local|news$/.test(paths.join('/'))) {
           this.$router.navigate('#/');
         } else {
           this.$router.navigate('#/' + paths.join('/'));

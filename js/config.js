@@ -3,14 +3,13 @@
  */
 var config = {
   apps: 'apps.json',
-  feeds: 'feeds.json',
+  feeds: 'http://a.yxpopo.com/newslist.php',
   local: 'local/',
-  remote: 'http://r.yxpopo.com/guide',
+  remote: 'http://a.yxpopo.com/vguide/',
+  news: 'http://a.yxpopo.com/news-detail.php?id=',
   require: 'http://www.yxpopo.com/require/'
 };
 
 if (DEBUG) {
-  for (var prop in config) {
-    config[prop] = 'mocks/' + config[prop];
-  }
+  config.apps = 'mocks/apps.json';
 }

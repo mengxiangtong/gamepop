@@ -17,6 +17,11 @@ body
       .btn
         display: block
 
+  &[class^=news]
+    #header
+      .back-button
+        display: block
+
   &[class^=game]
     #main-nav
       display: none
@@ -33,7 +38,7 @@ body
 
   .btn
     position: absolute
-    top: 10px
+    top: 5px
     display: none
     font-size: 2em
     padding: 4px 0
@@ -49,7 +54,7 @@ body
     right: 15px
 
 #apps
-  padding: 25px 0 0 20px
+  padding: 15px 0 0 10px
   position: relative
 
   #apps-container ul
@@ -58,25 +63,23 @@ body
     padding: 0
 
   .item
-    @extend .one
+    flex: auto
     position: relative
-    margin: 0 20px 10px 0
-    width: 25%
+    margin: 0 10px 10px 0
+    width: 20%
     max-width: 25%
 
     &:after
       position: absolute
-      left: 50%
-      top: 62px
-      margin-left: 12px
+      right: -2px
+      top: 60px
 
     &.offline:after
-      top: 64px
+      top: 62px
       margin-left: 4px
 
     img
-      max-width: 100px
-      max-height: 100px
+      max-width: 100%
 
   figcaption
     text-wrap: none
@@ -116,6 +119,15 @@ body
 
 h2.title
   margin: 0
+  line-height: 40px
+  text-indent: 10px
+
+  i
+    display: inline-block
+    width: 5px
+    overflow: hidden
+    height: 0.8em
+    vertical-align: middle
 
 #feeds
   margin: 0
@@ -132,21 +144,20 @@ h2.title
     margin: 10px 0 0
 
 .footer
-  height: 60px
+  height: $topbar-height
 
   a
     @extend .one-auto
     padding: 0
     display: block
-    font-size: 20px
-    line-height: 60px
+    line-height: $topbar-height
 
 #page-container
   position: absolute
-  top: 60px
+  top: $topbar-height
   left: 0
   right: 0
-  bottom: 60px
+  bottom: $topbar-height
   z-index: 10
   display: none
 
@@ -174,7 +185,3 @@ section
 
     .col-1-2
       max-width: 50%
-
-  p,
-  .jiathis_style
-    padding: 0 20px

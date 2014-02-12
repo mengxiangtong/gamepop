@@ -8,7 +8,12 @@
     initialize: function () {
       this.url = config.feeds;
       if (navigator.onLine) {
-        this.fetch();
+        this.fetch({
+          reset: true,
+          data: {
+            ps: 20
+          }
+        });
       } else {
         var cache = localStorage.getItem(LOCAL_NAME);
         cache = cache ? JSON.parse(cache) : [];
@@ -16,8 +21,8 @@
       }
     },
     parse: function (response) {
-      this.reset(response.rss.channel.item);
-      localStorage.setItem(LOCAL_NAME, JSON.stringify(this.toJSON()));
+      localStorage.setItem(LOCAL_NAME, JSON.stringify(response.list));
+      return response.list;
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));

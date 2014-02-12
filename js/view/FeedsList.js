@@ -16,8 +16,8 @@
       this.$el.html(this.template({feeds: collection.toJSON()}));
     },
     item_tapHandler: function (event) {
-      var target = $(event.currentTarget).find('a').attr('href');
-      this.$router.navigate('#/feeds/' + encodeURIComponent(target));
+      var href = $(event.currentTarget).find('a').attr('href');
+      this.$router.navigate(href);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));
