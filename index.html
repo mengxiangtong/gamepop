@@ -15,16 +15,14 @@
   <div id="apps-container">
     <div id="apps-scroller">
       <script type="text/html-template">
-        <ul>
-          {{#each apps}}
-          <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide no-click{{/if}}">
-            <figure>
-              <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
-              <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
-            </figure>
-          </li>
-          {{/each}}
-        </ul>
+        {{#each apps}}
+        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide no-click{{/if}}">
+          <figure>
+            <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
+            <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
+          </figure>
+        </li>
+        {{/each}}
       </script>
     </div>
   </div>

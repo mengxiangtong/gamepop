@@ -21,7 +21,7 @@
       var html = '',
           data = collection.toJSON();
       for (var i = 0, len = data.length / 8; i < len; i++) {
-        html += this.template({apps: data.slice(i * 8, (i + 1) * 8)});
+        html += '<ul>' + this.template({apps: data.slice(i * 8, (i + 1) * 8)}) + '</ul>';
       }
       this.$('#apps-scroller').html(html);
       if (data.length > 8) {
@@ -40,13 +40,8 @@
         this.$('.indicators').remove();
       }
     },
-    collection_addHandler: function (model) {
-      var ul = this.$('#apps-scroller ul');
-      for (var i = ul.length; i > 0; i--) {
-        if (ul.eq(i).children().length < 8) {
-          ul.append(this.template({apps: [model.toJSON()]}));
-        }
-      }
+    collection_addHandler: function () {
+      this.render(this.collection);
     },
     collection_changeHandler: function (model) {
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));

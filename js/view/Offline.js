@@ -69,7 +69,8 @@
         this.collection.get(download).set({
           "has-offline": true,
           "has-guide": true,
-          "downloading": false
+          "downloading": false,
+          "url": '#/local/' + download + '/index.html'
         });
         this.$('.download-button').removeClass('disabled');
         clearInterval(interval);
