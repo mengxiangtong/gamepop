@@ -1,20 +1,22 @@
 {
   "apps": [
     {
-      "url": "#/local/bilibili/",
+      "id": "bilibili",
+      "url": "#/local/hdppl/",
       "name": "哔哩哔哩动画",
-      "alias": "",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
       "has-offline": true
     },
     {
+      "id": "zhihu",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
     },
     {
+      "id": "skype",
       "url": "#/no-guide/skype",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg",

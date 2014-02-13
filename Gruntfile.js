@@ -42,6 +42,30 @@ module.exports = function (grunt) {
         }]
       }
     },
+    htmlmin: {
+      options: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeEmptyAttributes: true
+      },
+      index: {
+        files: [{
+          expand: true,
+          cwd: TEMP,
+          src: ['index.html'],
+          dest: BUILD
+        }]
+      },
+      template: {
+        files: [{
+          expand: true,
+          cwd: 'template/',
+          src: ['all.html', 'offline.html'],
+          dest: BUILD + 'template/'
+        }]
+      }
+    },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
@@ -117,9 +141,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
   grunt.registerTask('index', 'make index html', function () {
-    grunt.file.write(BUILD + 'index.html', html);
+    grunt.file.write(TEMP + 'index.html', html);
   });
   grunt.registerTask('version', 'create a version file', function () {
     var version = 'Version: ' + grunt.config.get('pkg').version + '\nbuild at: ' + grunt.template.today('yyyy-mm-dd hh:MM:ss');
@@ -134,6 +159,7 @@ module.exports = function (grunt) {
     'uglify',
     'concat',
     'index',
+    'htmlmin',
     'compress',
     'version',
     'clean:end'

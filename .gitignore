@@ -15,4 +15,5 @@ spec
 css/*.css
 
 # mocks
+local
 mocks/local

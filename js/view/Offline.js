@@ -12,10 +12,34 @@
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
+      this.collection.on('change:has-offline', this.collection_changeHandler, this);
       this.render();
+
+      this.showProgress();
     },
     render: function () {
+      if (!this.template) {
+        return;
+      }
       this.$el.html(this.template({apps: this.collection.toJSON()}));
+    },
+    setElement: function (el) {
+      Backbone.View.prototype.setElement.call(this, el);
+      this.render();
+    },
+    showProgress: function () {
+      if (this.$('.downloading').length > 0) {
+        download = this.$('.downloading').attr('class').split(' ')[1];
+        interval = setInterval(_.bind(this.progress_handler, this), 500);
+        this.$('.download-button').addClass('disabled');
+      }
+    },
+    collection_changeHandler: function (model, value) {
+      var item = this.$('.' + model.id)
+        , newItem = this.template({apps: [model.toJSON()]});
+      item.replaceWith(newItem);
+
+      this.showProgress();
     },
     deleteButton_tapHandler: function (event) {
       $(event.currentTarget).closest('.item').fadeOut(function () {
@@ -30,7 +54,7 @@
       var item = target.closest('.item');
       item.find('.btn').hide()
         .end().find('p').removeClass('hidden')
-        .end().append('<div class="progress><div class="bar"></div></div>');
+        .end().append('<div class="progress"><div class="bar"></div></div>');
       download = event.currentTarget.pathname.substr(2);
       interval = setInterval(_.bind(this.progress_handler, this), 500);
       this.$('.download-button').addClass('disabled');
@@ -42,13 +66,14 @@
         item.find('span').text(percent)
           .end().find('.bar').width(percent + '%');
       } else {
-        item
-          .find('.btn').show()
-          .end().find('p').addClass('text-success')
-          .end().find('i').removeClass('fa-download').addClass('fa-check')
-          .end().find('.progress').remove();
+        this.collection.get(download).set({
+          "has-offline": true,
+          "has-guide": true,
+          "downloading": false
+        });
+        this.$('.download-button').removeClass('disabled');
+        clearInterval(interval);
       }
-
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

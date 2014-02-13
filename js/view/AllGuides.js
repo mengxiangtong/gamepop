@@ -11,7 +11,6 @@
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
-      this.collection = new gamepop.model.AllGuidesCollection();
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.fetch();
 
@@ -20,6 +19,9 @@
       this.form.elements.sort.value = this.collection.options.sort;
     },
     render: function () {
+      if (!this.template) {
+        return;
+      }
       this.$('#guide-list').html(this.template({games: this.collection.toJSON()}));
       this.$('.pagination a')
         .find('.fa-spin').toggleClass(function () {
@@ -28,6 +30,10 @@
         })
         .end().last().removeClass('disabled')
         .end().first().toggleClass('disabled', this.collection.curr <= 1);
+    },
+    setElement: function (el) {
+      Backbone.View.prototype.setElement.call(this, el);
+      this.render();
     },
     collection_resetHandler: function () {
       this.render();

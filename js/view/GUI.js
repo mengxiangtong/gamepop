@@ -50,15 +50,7 @@
       if (paths.length === 0) {
         location.href = 'popo:return';
       } else {
-        var last = paths.pop();
-        if (last === '' || /^\.html?$/i.test(last.substr(last.lastIndexOf('.')))) {
-          paths.pop();
-        }
-        if (/^local|news$/.test(paths.join('/'))) {
-          this.$router.navigate('#/');
-        } else {
-          this.$router.navigate('#/' + paths.join('/'));
-        }
+        history.back();
       }
     },
     mainNav_tapHandler: function (event) {
@@ -67,8 +59,9 @@
         .siblings().removeClass('active');
     },
     page_loadCompleteHandler: function (response, status, xhr) {
+      console.log(response);
       if (status === 'error') {
-        this.innerHTML = '加载失败';
+        this.$('#page-container').html('加载失败');
         return;
       }
       this.$context.mediatorMap.check(this.page[0]);

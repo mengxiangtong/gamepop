@@ -17,7 +17,7 @@
       <script type="text/html-template">
         <ul>
           {{#each apps}}
-          <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide no-click{{/if}}">
+          <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if no-guide}}no-guide no-click{{/if}}">
             <figure>
               <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
               <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
@@ -73,6 +73,7 @@
 <script src="js/view/GUI.js"></script>
 <script src="js/view/AllGuides.js"></script>
 <script src="js/view/Offline.js"></script>
+<script src="js/view/GamePage.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>

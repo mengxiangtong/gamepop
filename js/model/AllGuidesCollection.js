@@ -3,8 +3,11 @@
  */
 ;(function (ns) {
   ns.AllGuidesCollection = Backbone.Collection.extend({
-    curr: 1,
     baseUrl: 'http://a.yxpopo.com/vapi/game_list/',
+    curr: 1,
+    model: Backbone.Model.extend({
+      idAttribute: 'guide_name'
+    }),
     options: {
       group: '0',
       sort: 'order_by_pub'

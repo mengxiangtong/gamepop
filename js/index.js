@@ -20,18 +20,27 @@
           el: '#feeds',
           collection: feedsCollection
         }),
+        allGuidesCollection = new gamepop.model.AllGuidesCollection(),
         router = new gamepop.Router();
 
     context.mapValue('gui', gui);
     context.mapValue('router', router);
+    context.mapValue('all', allGuidesCollection);
     context.mediatorMap.isBackbone = true;
     context
       .inject(gui)
       .inject(feeds)
       .inject(router)
       .mediatorMap
-        .map('.all-guides-list', gamepop.view.AllGuides, {isSingle: true})
+        .map('.all-guides-list', gamepop.view.AllGuides, {
+          isSingle: true,
+          collection: allGuidesCollection
+        })
         .map('#offline-list', gamepop.view.Offline, {
+          isSingle: true,
+          collection: appsCollection
+        })
+        .map('.game-page', gamepop.view.GamePage, {
           isSingle: true,
           collection: appsCollection
         });

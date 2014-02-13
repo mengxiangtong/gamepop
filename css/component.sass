@@ -1,3 +1,6 @@
+/* ====================================
+ * offline
+ * ==================================*/
 .btn
   display: inline-block
   background: #E0E0E0
@@ -36,7 +39,8 @@
     -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
 
-.btn-primary
+.btn-primary,
+.download-button
   background: #1397e2
   color: #FFF
 
@@ -44,16 +48,32 @@
   &:active
     background: #0683cb
 
-.list-panel
+.btn-danger,
+.delete-button
+  background: #D00000
+  color: #FFF
 
-  > li
-    &:first-of-type
-      border-top-left-radius: 8px
-      border-top-right-radius: 8px
+  &.active,
+  &:active
+    background: darken(#D00000, 10%)
 
-    &:last-of-type
-      border-bottom-left-radius: 8px
-      border-bottom-right-radius: 8px
+/* ====================================
+ * alert
+ * ==================================*/
+.alert
+  padding: 10px
+  margin: 10px
+  border: 1px solid transparent
+  border-radius: 4px
+
+  h3,
+  h4
+    margin: 0 0 5px
+
+.alert-info
+  background-color: #d9edf7
+  border-color: #bce8f1
+  color: #31708f
 
 .pagination
   text-align: center

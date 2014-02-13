@@ -1,19 +1,40 @@
-<ul id="offline-list" class="list-panel">
+<ul id="offline-list">
   <script type="text/html-template">
     {{#each apps}}
-    <li class="item {{alias}}">
+    {{#if has-guide}}
+    <li class="item {{id}}">
       <a href="{{url}}"><img src="{{icon}}" /></a>
       <h2><a href="{{url}}">{{name}}</a></h2>
       <div class="btn-group">
-        {{#if is-download}}
+        {{#if has-guide}}
+        {{#if has-offline}}
         <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
-        <a href="delete://{{alias}}" class="delete-button btn"><i class="fa fa-trash-o"></i> 删除</a>
+        <a href="delete://{{id}}" class="delete-button btn"><i class="fa fa-fw fa-trash-o"></i> 删除</a>
         {{else}}
         <p class="hidden"><i class="fa fa-download"></i> <span></span>%</p>
-        <a href="download://{{alias}}" class="btn pause-button"><i class="fa fa-download"></i> 下载</a>
+        <a href="download://{{id}}/{{name}}" class="btn download-button"><i class="fa fa-fw fa-download"></i> 下载</a>
+        {{/if}}
+        {{/if}}
+        {{#if downloading}}
+        <p><i class="fa fa-download"></i> <span>0</span>%</p>
         {{/if}}
       </div>
     </li>
+    {{/if}}
+    {{#if downloading}}
+    <li class="item {{id}} downloading">
+      <a href="{{url}}"><img src="{{icon}}" /></a>
+      <h2><a href="{{url}}">{{name}}</a></h2>
+      <div class="btn-group">
+        <p><i class="fa fa-download"></i> <span></span>%</p>
+      </div>
+      <div class="progress"><div class="bar"></div></div>
+    </li>
+    {{/if}}
     {{/each}}
   </script>
 </ul>
+<div class="alert alert-info">
+  <h4>温馨提示：</h4>
+  游戏攻略通常含有大量图片，在线观看可能产生很大流量，我们建议您先在WIFI环境下载攻略到手机，即可尽情观看，再无扣费之忧。
+</div>

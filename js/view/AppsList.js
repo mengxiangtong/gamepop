@@ -14,6 +14,8 @@
       this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
 
       this.collection.on('reset', this.render, this);
+      this.collection.on('add', this.collection_addHandler, this);
+      this.collection.on('change', this.collection_changeHandler, this);
     },
     render: function (collection) {
       var html = '',
@@ -37,6 +39,17 @@
       } else {
         this.$('.indicators').remove();
       }
+    },
+    collection_addHandler: function (model) {
+      var ul = this.$('#apps-scroller ul');
+      for (var i = ul.length; i > 0; i--) {
+        if (ul.eq(i).children().length < 8) {
+          ul.append(this.template({apps: [model.toJSON()]}));
+        }
+      }
+    },
+    collection_changeHandler: function (model) {
+      this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
     gameButton_tapHandler: function (event) {
       var href = event.currentTarget.href
