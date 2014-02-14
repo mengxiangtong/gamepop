@@ -19,8 +19,7 @@
       "id": "skype",
       "url": "#/no-guide/skype",
       "name": "Skype",
-      "icon": "./mocks/images/skype.jpg",
-      "no-guide": true
+      "icon": "./mocks/images/skype.jpg"
     }
   ]
 }

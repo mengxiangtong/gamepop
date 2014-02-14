@@ -56,14 +56,11 @@
 #guide-list
   @extend .ul
   min-height: 300px
-  padding: 50px 0 0
-  margin: 0 5px
+  padding: 50px 5px 0
 
   .item
     @extend .one-auto
-    display: inline-block
-    -webkit-box-sizing: border-box
-    box-sizing: border-box
+    @extend .wrap
     padding: 10px 5px
     text-align: center
     width: 24%
@@ -76,6 +73,8 @@
 
   figcaption
     line-height: 30px
+    height: 30px
+    overflow: hidden
 
 .pagination
   margin: 20px 0
@@ -92,15 +91,19 @@
     @extend .row
     border-bottom: 1px solid #CCC
     padding: 10px
+    position: relative
 
     &:last-child
       border-bottom: none
 
+    &.downloading
+      padding-bottom: 25px
+
     img
       display: block
       width: 80px
-      max-width: 100%
       height: 80px
+      max-width: 100%
       margin-right: 10px
       border-radius: 10px
 
@@ -108,22 +111,6 @@
       @extend .one
       font-size: 18px
       line-height: 30px
-      margin: 0 0 30px
-
-    .progress
-      width: 100%
-      height: 5px
-      line-height: 5px
-      background: #DDD
-      overflow: hidden
-      margin-top: 10px
-
-      .bar
-        width: 1px
-        height: 5px
-        line-height: 5px
-        background: #2db817
-        overflow: hidden
 
     .btn-group
       width: 100px
@@ -141,6 +128,23 @@
         line-height: 40px
         border-radius: 2px
 
+    .progress
+      position: absolute
+      left: 10px
+      right: 10px
+      bottom: 15px
+      height: 5px
+      line-height: 5px
+      background: #DDD
+      overflow: hidden
+
+      .bar
+        width: 1px
+        height: 5px
+        line-height: 5px
+        background: #2db817
+        overflow: hidden
+
 /* ====================================
  * guide
  * ==================================*/
@@ -148,12 +152,11 @@
  * index
  * --------------*/
 .carousel
-  max-height: 400px
+  max-height: 300px
   overflow: hidden
 
   img
     width: 100%
-    max-height: 400px
     display: block
 
 .game-header

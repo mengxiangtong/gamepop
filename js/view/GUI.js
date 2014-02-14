@@ -59,7 +59,6 @@
         .siblings().removeClass('active');
     },
     page_loadCompleteHandler: function (response, status, xhr) {
-      console.log(response);
       if (status === 'error') {
         this.$('#page-container').html('加载失败');
         return;

@@ -4,6 +4,7 @@
 ;(function (ns) {
   ns.GamePage = Backbone.View.extend({
     $all: null,
+    $context: null,
     events: {
       'tap .download-button': 'downloadButton_tapHandler',
       'tap a': 'a_tapHandler'
@@ -15,18 +16,10 @@
       }
     },
     downloadButton_tapHandler: function (event) {
-      var path = event.currentTarget.pathname
-        , names = path.substr(2).split('/');
+      var path = event.currentTarget.href
+        , names = path.substr(11).split('/');
       names[1] = decodeURIComponent(names[1]);
-      if (!this.collection.get(names[0])) {
-        this.collection.add({
-          "id": names[0],
-          "url": "#/remote/" + names[0] + '/',
-          "name": names[1],
-          "icon": this.$all.get(names[0]).get('icon_path'),
-          "downloading": true
-        });
-      }
+      this.$context.trigger('download', names[0], names[1], this.collection);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

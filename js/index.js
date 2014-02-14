@@ -2,6 +2,7 @@
  * main
  */
 ;(function () {
+  'use strict';
   function onDeviceReady() {
     init();
   }
@@ -44,6 +45,7 @@
           isSingle: true,
           collection: appsCollection
         });
+    context.mapEvent('download', gamepop.controller.DownloadCommand);
 
     Backbone.history.start();
   }

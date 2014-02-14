@@ -9,9 +9,6 @@
   display: -ms-flexbox
   display: flex
 
-  -webkit-box-lines: multiple
-  box-lines: multiple
-
   -webkit-box-orient: horizontal
   box-orient: horizontal
   -webkit-flex-flow: row wrap
@@ -38,6 +35,11 @@
   -webkit-box-flex: 1
   box-flex: 1
   flex: auto
+
+.wrap
+  display: inline-block
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
 
 /* ====================================
  * layouts
@@ -98,7 +100,7 @@ body
     right: 15px
 
 #apps
-  padding: 15px 0 0 10px
+  padding: 15px 5px 0
   position: relative
   min-height: 215px
 
@@ -110,26 +112,29 @@ body
     padding: 0
 
   .item
-    flex: auto
+    @extend .one-auto
+    @extend .wrap
     position: relative
-    margin: 0 10px 10px 0
-    width: 20%
+    padding: 0 5px 10px
+    width: 24%
     max-width: 25%
 
     &:after
       position: absolute
-      right: -2px
-      top: 60px
+      right: 4px
+      top: 50px
 
     &.offline:after
-      top: 62px
+      top: 52px
       margin-left: 4px
 
     img
       max-width: 100%
 
   figcaption
-    text-wrap: none
+    line-height: 30px
+    height: 30px
+    overflow: hidden
 
   .indicators
     position: absolute
