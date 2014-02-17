@@ -40,6 +40,7 @@
   display: inline-block
   -webkit-box-sizing: border-box
   box-sizing: border-box
+  vertical-align: top
 
 /* ====================================
  * layouts
@@ -121,14 +122,15 @@ body
 
     &:after
       position: absolute
-      right: 4px
-      top: 50px
+      right: 3px
+      bottom: 39px
 
     &.offline:after
-      top: 52px
-      margin-left: 4px
+      bottom: 37px
+      right: 2px
 
     img
+      display: block
       max-width: 100%
 
   figcaption
@@ -168,6 +170,12 @@ body
     ul
       margin: 0
       padding: 0
+
+      a
+        line-height: 70px
+        width: 100%
+        text-align: center
+        display: block
 
 h2.title
   margin: 0

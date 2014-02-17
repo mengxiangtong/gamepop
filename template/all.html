@@ -1,7 +1,7 @@
 <div class="all-guides-list">
   <form class="filter row">
     <div class="dropdown">
-      <input type="radio" name="sort" value="order_by_update" id="sort-1"><label for="sort-1">更新时间</label>
+      <input type="radio" name="sort" value="order_by_hot" id="sort-1"><label for="sort-1">攻略热度</label>
       <input type="radio" name="sort" value="order_by_pub" id="sort-2"><label for="sort-2">发布时间</label>
     </div>
     <div class="dropdown">
@@ -25,7 +25,7 @@
       {{#each games}}
       <li class="item">
         <figure>
-          <a href="#/remote/{{guide_name}}"><img src="{{icon_path}}" alt="{{app_name}}"></a>
+          <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
           <figcaption><a href="#/remote/{{guide_name}}">{{app_name}}</a></figcaption>
         </figure>
       </li>

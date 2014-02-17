@@ -12,6 +12,7 @@
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
       this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
+      this.$el.css('min-height', ((this.$el.width() - 40 >> 2) + 40 << 1) + 'px');
 
       this.collection.on('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
@@ -61,7 +62,7 @@
       this.menu
         .css({
           top: offset.top + height - 40,
-          left: offset.left + (width - 190 >> 1)
+          left: offset.left + (width - 180 >> 1)
         })
         .appendTo(this.$el)
         .find('.require-button').attr('href', '#/require/' + alias)
@@ -77,7 +78,7 @@
         type: 'POST',
         url: config.require,
         data: {
-          game: alias
+          packagename: alias
         }
       });
       alert('您的需求已收到，我们不会让您久等的。');

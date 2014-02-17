@@ -15,21 +15,22 @@
       this.collection.fetch();
 
       this.form = this.$('form')[0];
-      this.form.elements.group.value = this.collection.options.group;
-      this.form.elements.sort.value = this.collection.options.sort;
+      this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
+      this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
     },
     render: function () {
       if (!this.template) {
         return;
       }
       this.$('#guide-list').html(this.template({games: this.collection.toJSON()}));
+      this.$('.filter i').remove();
       this.$('.pagination a')
         .find('.fa-spin').toggleClass(function () {
           var dir = $(this).parent().index() === 0 ? 'left' : 'right';
           return 'fa-spin fa-spinner fa-chevron-' + dir;
         })
-        .end().last().removeClass('disabled')
-        .end().first().toggleClass('disabled', this.collection.curr <= 1);
+        .end().last().toggleClass('disabled', this.collection.curr > this.collection.total - 2)
+        .end().first().toggleClass('disabled', this.collection.curr < 1);
     },
     setElement: function (el) {
       Backbone.View.prototype.setElement.call(this, el);
@@ -42,14 +43,17 @@
       var target = $(event.currentTarget);
       if (!target.hasClass('active')) {
         target.addClass('active');
-      } else if (event.target.control.checked) {
+      } else if ('control' in event.target && event.target.control.checked) {
         target.removeClass('active');
       }
     },
     input_changeHandler: function (event) {
-      var dropdown = $(event.currentTarget).parent();
-      this.collection.setOptions(this.form.elements.group.value, this.form.elements.sort.value);
+      var target = event.currentTarget
+        , label = $(target).next()
+        , dropdown = label.parent();
+      this.collection.setOptions(target.name, target.value);
       dropdown.removeClass('active');
+      label.append('<i class="fa fa-spin fa-spinner"></i>');
     },
     pagination_tapHandler: function (event) {
       if (/disabled/.test(event.currentTarget.className)) {
@@ -64,6 +68,9 @@
       target.find('i')
         .addClass('fa-spin fa-spinner')
         .removeClass('fa-chevron-left fa-chevron-right');
+    },
+    preventDefault: function (event) {
+      event.preventDefault();
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

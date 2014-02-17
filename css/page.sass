@@ -9,6 +9,8 @@
 
   .dropdown
     @extend .one-auto
+    @extend .row
+    @extend .column
     background: #333
     color: #FFF
     text-indent: 20px
@@ -17,9 +19,6 @@
     height: 50px
     overflow: hidden
     position: relative
-    display: flex
-    flex-direction: column
-    flex-wrap: nowrap
 
     &.active
       height: auto
@@ -42,6 +41,8 @@
       display: none
 
       &:checked + label
+        -webkit-box-ordinal-group: 1
+        box-ordinal-group: 1
         order: 0
         border-top: none
 
@@ -51,12 +52,19 @@
       height: 50px
       min-height: 50px
       border-top: 1px solid #555
+      -webkit-box-ordinal-group: 2
+      box-ordinal-group: 2
       order: 1
+
+    i
+      text-indent: 0
+      margin-left: 0.5em
 
 #guide-list
   @extend .ul
   min-height: 300px
   padding: 50px 5px 0
+  font: 0/0 Arial
 
   .item
     @extend .one-auto
@@ -65,13 +73,13 @@
     text-align: center
     width: 24%
     max-width: 25%
-    border-bottom: 1px solid #CCC
 
   img
     max-width: 100%
     border-radius: 12px
 
   figcaption
+    font-size: 14px
     line-height: 30px
     height: 30px
     overflow: hidden
@@ -154,6 +162,9 @@
 .carousel
   max-height: 300px
   overflow: hidden
+
+  .item
+    width: 100%
 
   img
     width: 100%

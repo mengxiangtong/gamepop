@@ -45,10 +45,11 @@
       this.$('h1').text(TITLES[className] || '游戏泡泡');
     },
     backButton_clickHandler: function () {
-      var hash = location.hash.substr(2)
-        , paths = hash.split('/');
-      if (paths.length === 0) {
+      var hash = location.hash.substr(2);
+      if (hash === '') {
         location.href = 'popo:return';
+      } else if (hash === 'all' || hash === 'offline') {
+        this.$router.navigate('#/');
       } else {
         history.back();
       }

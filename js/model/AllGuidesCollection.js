@@ -3,37 +3,41 @@
  */
 ;(function (ns) {
   ns.AllGuidesCollection = Backbone.Collection.extend({
-    baseUrl: 'http://a.yxpopo.com/vapi/game_list/',
-    curr: 1,
+    curr: 0,
+    total: 0,
     model: Backbone.Model.extend({
       idAttribute: 'guide_name'
     }),
     options: {
       group: '0',
-      sort: 'order_by_pub'
+      sort: 'order_by_hot'
     },
     fetch: function () {
-      this.url = this.baseUrl + this.curr + '/';
+      this.url = config.all + this.curr + '/';
       Backbone.Collection.prototype.fetch.call(this, {
         reset: true,
         data: this.options
       });
     },
+    parse: function (response) {
+      this.total = Math.ceil(response.count / 20);
+      return response.list;
+    },
     next: function () {
-      this.curr += 1;
-      this.fetch();
+      if (this.curr < this.total - 2) {
+        this.curr += 1;
+        this.fetch();
+      }
     },
     prev: function () {
-      if (this.curr > 1) {
+      if (this.curr > 0) {
         this.curr -= 1;
         this.fetch();
       }
     },
-    setOptions: function (group, sort) {
-      this.options = {
-        group: group,
-        sort: sort
-      };
+    setOptions: function (key, value) {
+      this.options[key] = value;
+      this.curr = 0;
       this.fetch();
     }
   });

@@ -8,7 +8,8 @@
       this.fetch({
         reset: true,
         data: {
-          ps: 20
+          ps: 20,
+          ts: Date.now()
         }
       });
     },
