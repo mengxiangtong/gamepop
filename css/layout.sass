@@ -1,3 +1,8 @@
+*
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
 /* ====================================
  * guide
  * ==================================*/
@@ -100,17 +105,21 @@ body
     text-align: right
     right: 15px
 
+#logo
+  padding-left: 50px
+  width: 138px
+  margin: 0 auto
+
 #apps
-  padding: 15px 5px 0
+  padding: 10px 5px 0
   position: relative
   min-height: 215px
+  overflow: hidden
 
   #apps-container ul
     @extend .row
-    width: 100%
-    height: 100%
-    margin: 0
-    padding: 0
+    @extend .ul
+    float: left
 
   .item
     @extend .one-auto
@@ -123,10 +132,10 @@ body
     &:after
       position: absolute
       right: 3px
-      bottom: 39px
+      bottom: 44px
 
     &.offline:after
-      bottom: 37px
+      bottom: 43px
       right: 2px
 
     img
@@ -140,18 +149,8 @@ body
 
   .indicators
     position: absolute
-    left: 0
-    right: 0
-    bottom: 12px
-    text-align: center
-    margin: 0
-    padding: 0
-
-    li
-      display: inline-block
-
-      + li
-        margin-left: 10px
+    left: 50%
+    bottom: 10px
 
   .no-guide-dialog
     position: absolute

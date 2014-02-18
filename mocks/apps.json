@@ -30,6 +30,27 @@
       "has-offline": true
     },
     {
+      "id": "zhihu1",
+      "url": "#/remote/zhihu/",
+      "name": "知乎日报",
+      "icon": "./mocks/images/zhihu.jpg",
+      "has-guide": true
+    },
+    {
+      "id": "skype1",
+      "url": "#/no-guide/skype",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    },
+    {
+      "id": "bilibili2",
+      "url": "#/local/hdppl/",
+      "name": "哔哩哔哩动画",
+      "icon": "./mocks/images/bilibili.jpg",
+      "has-guide": true,
+      "has-offline": true
+    },
+    {
       "id": "zhihu2",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
@@ -37,7 +58,7 @@
       "has-guide": true
     },
     {
-      "id": "skype3",
+      "id": "skype2",
       "url": "#/no-guide/skype",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg"

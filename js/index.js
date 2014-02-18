@@ -12,10 +12,6 @@
           el: document.body
         }),
         appsCollection = new gamepop.model.AppsCollection(),
-        apps = new gamepop.view.AppsList({
-          el: '#apps',
-          collection: appsCollection
-        }),
         feedsCollection = new gamepop.model.FeedsCollection(),
         feeds = new gamepop.view.FeedsList({
           el: '#feeds',
@@ -46,6 +42,11 @@
           collection: appsCollection
         });
     context.mapEvent('download', gamepop.controller.DownloadCommand);
+    context.mapEvent('layout', gamepop.controller.CreateCssCommand);
+    context.createInstance(gamepop.view.AppsList, {
+      el: '#apps',
+      collection: appsCollection
+    });
 
     Backbone.history.start();
   }

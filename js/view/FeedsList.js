@@ -13,7 +13,13 @@
       this.collection.on('reset', this.render, this);
     },
     render: function (collection) {
-      this.$el.html(this.template({feeds: collection.toJSON()}));
+      this.$('ul').html(this.template({feeds: collection.toJSON()}));
+      this.scroll = new IScroll(this.el, {
+        momentum: false,
+        mouseWheel: false,
+        disableMouse: true,
+        disablePointer: true
+      });
     },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).find('a').attr('href');

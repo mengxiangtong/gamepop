@@ -31,6 +31,7 @@
     "font-awesome": "~4.0.3",
     "nervenet": "~0.1.2",
     "animate.css": "~3.0.0",
-    "hammerjs": "~1.0.6"
+    "hammerjs": "~1.0.6",
+    "iscroll": "~5.1.1"
   }
 }

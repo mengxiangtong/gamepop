@@ -3,6 +3,7 @@
  */
 ;(function (ns) {
   ns.AppsList = Backbone.View.extend({
+    $context: null,
     $router: null,
     events: {
       'tap .no-guide': 'noGuide_tapHandler',
@@ -12,33 +13,42 @@
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
       this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
-      this.$el.css('min-height', ((this.$el.width() - 40 >> 2) + 40 << 1) + 'px');
 
       this.collection.on('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('change', this.collection_changeHandler, this);
     },
     render: function (collection) {
+      this.$context.trigger('layout', this.$el.width(), Math.ceil(collection.length / 8));
+
       var html = '',
           data = collection.toJSON();
       for (var i = 0, len = data.length / 8; i < len; i++) {
         html += '<ul>' + this.template({apps: data.slice(i * 8, (i + 1) * 8)}) + '</ul>';
       }
       this.$('#apps-scroller').html(html);
+      var indicators = this.$('.indicators');
       if (data.length > 8) {
         this.iscroll = new IScroll('#apps-container', {
           scrollX: true,
           scrollY: false,
+          scrollbars: false,
           momentum: false,
+          mouseWheel: false,
+          disableMouse: true,
+          disablePointer: true,
           snap: true,
-          snapSpeed: 400,
           indicators: {
-            el: this.$('.indicators')[0],
+            el: indicators[0],
             resize: false
           }
         });
+        var width = Math.ceil(data.length / 8) * 16 - 8;
+        indicators
+          .width(width)
+          .css('margin-left', (-width >> 1) + 'px');
       } else {
-        this.$('.indicators').remove();
+        indicators.remove();
       }
     },
     collection_addHandler: function () {

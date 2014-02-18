@@ -163,8 +163,13 @@
   max-height: 300px
   overflow: hidden
 
+  ul
+    @extend .ul
+    min-height: 100px
+
   .item
-    width: 100%
+    height: 100%
+    float: left
 
   img
     width: 100%
@@ -186,6 +191,8 @@
     right: 10px
 
 .home-page
+  padding: 0 0 5%
+
   a
     background: #FFF
     font-size: 22px

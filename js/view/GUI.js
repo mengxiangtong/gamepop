@@ -18,8 +18,11 @@
     },
     initialize: function () {
       Hammer(this.el, {
-        drag: false
+        drag: false,
+        hold: false,
+        transform: false
       });
+      this.sw = document.body.clientWidth;
       this.page = $('#page-container');
     },
     activeNavButton: function (str) {
@@ -39,7 +42,7 @@
     showPage: function (url, className) {
       this.page
         .html('<p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>')
-        .load(url, _.bind(this.page_loadCompleteHandler, this))
+        .load(url, {sw: this.sw}, _.bind(this.page_loadCompleteHandler, this))
         .addClass('active');
       this.$el.attr('class', className);
       this.$('h1').text(TITLES[className] || '游戏泡泡');
