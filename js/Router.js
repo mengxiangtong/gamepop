@@ -39,7 +39,7 @@
       this.$gui.setGame(game);
     },
     showNewsById: function (id) {
-      this.$gui.showPage(config.news + id, 'news-' + id);
+      this.$gui.showPage(config.news, 'news-' + id, {id: id});
     }
   });
 }(Nervenet.createNameSpace('gamepop')));

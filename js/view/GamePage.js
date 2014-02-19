@@ -6,6 +6,7 @@
     $all: null,
     $context: null,
     events: {
+      'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
       'tap a': 'a_tapHandler'
     },
@@ -15,6 +16,8 @@
         this.iscroll.destroy();
       }
       if (this.$('.carousel').length) {
+        var length = this.$('.carousel .item').length;
+        this.$('.carousel ul').width(document.body.clientWidth * length);
         this.iscroll = new IScroll(this.$('.carousel')[0], {
           scrollX: true,
           scrollY: false,
@@ -32,6 +35,9 @@
       if (a.hostname === 'a.yxpopo.com') {
         a.href = '#/remote' + a.pathname.replace('vguide/', '');
       }
+    },
+    backButton_tapHandler: function (event) {
+      history.back();
     },
     downloadButton_tapHandler: function (event) {
       var path = event.currentTarget.href

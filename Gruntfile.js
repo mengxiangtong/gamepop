@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         files: [
           {
             src: csses,
-            dest: BUILD + 'css/all.css'
+            dest: BUILD + 'css/style.css'
           }
         ]
       }
@@ -144,6 +144,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
   grunt.registerTask('index', 'make index html', function () {
+    html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>')
     grunt.file.write(TEMP + 'index.html', html);
   });
   grunt.registerTask('version', 'create a version file', function () {

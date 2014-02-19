@@ -22,7 +22,6 @@
         hold: false,
         transform: false
       });
-      this.sw = document.body.clientWidth;
       this.page = $('#page-container');
     },
     activeNavButton: function (str) {
@@ -39,10 +38,10 @@
     setGame: function (game) {
       this.$('.game-button').attr('href', 'game://' + game);
     },
-    showPage: function (url, className) {
+    showPage: function (url, className, data) {
       this.page
         .html('<p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>')
-        .load(url, {sw: this.sw}, _.bind(this.page_loadCompleteHandler, this))
+        .load(url, data, _.bind(this.page_loadCompleteHandler, this))
         .addClass('active');
       this.$el.attr('class', className);
       this.$('h1').text(TITLES[className] || '游戏泡泡');

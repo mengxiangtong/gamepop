@@ -19,14 +19,14 @@
       this.collection.on('change', this.collection_changeHandler, this);
     },
     render: function (collection) {
-      this.$context.trigger('layout', this.$el.width(), Math.ceil(collection.length / 8));
-
       var html = '',
           data = collection.toJSON();
       for (var i = 0, len = data.length / 8; i < len; i++) {
         html += '<ul>' + this.template({apps: data.slice(i * 8, (i + 1) * 8)}) + '</ul>';
       }
-      this.$('#apps-scroller').html(html);
+      this.$('#apps-scroller')
+        .width(this.$el.width() * Math.ceil(data.length / 8))
+        .html(html);
       var indicators = this.$('.indicators');
       if (data.length > 8) {
         this.iscroll = new IScroll('#apps-container', {

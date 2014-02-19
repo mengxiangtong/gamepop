@@ -6,6 +6,22 @@
   function onDeviceReady() {
     init();
   }
+  function createCss(width) {
+    var style = document.createElement('style')
+      , scroller = width -10
+      , itemWidth = scroller - 12 >> 2
+      , imgWidth = itemWidth - 10
+      , height = itemWidth + 40 << 1
+      , content = '#apps{height:' + height + 'px;min-height:' + height + 'px;}';
+    content += '#apps-scroller{height:' + height + 'px;}';
+    content += '#apps-scroller ul{width:' + scroller + 'px;height:' + height + 'px;}';
+    content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px}';
+    content += '#apps-scroller img,#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
+    content += '.carousel .item{width:' + width + 'px;}';
+    content += '.guide-group .item{min-width:' + (scroller - 28 >> 1) + 'px;}';
+    style.innerHTML = content;
+    document.head.appendChild(style);
+  }
   function init() {
     var context = Nervenet.createContext(),
         gui = new gamepop.view.GUI({
@@ -42,11 +58,14 @@
           collection: appsCollection
         });
     context.mapEvent('download', gamepop.controller.DownloadCommand);
-    context.mapEvent('layout', gamepop.controller.CreateCssCommand);
     context.createInstance(gamepop.view.AppsList, {
       el: '#apps',
       collection: appsCollection
     });
+
+    // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
+    // 所以只能用JS算出宽度
+    createCss(document.body.clientWidth);
 
     Backbone.history.start();
   }

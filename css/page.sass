@@ -1,3 +1,5 @@
+@import "define"
+
 /* ====================================
  * all
  * ==================================*/
@@ -73,6 +75,9 @@
     text-align: center
     width: 24%
     max-width: 25%
+
+    &:active
+      background-color: #E7E7E7
 
   img
     max-width: 100%
@@ -160,7 +165,7 @@
  * index
  * --------------*/
 .carousel
-  max-height: 300px
+  max-height: 250px
   overflow: hidden
 
   ul
@@ -203,32 +208,85 @@
     color: #3aaff2
 
 /* ----------------
- * stages
+ * list
  * --------------*/
 .page-header
   background: #e7e7e7
   text-indent: 20px
 
-  h1
-    font-size: 22px
-    line-height: 50px
+  h3
+    font-size: 18px
+    line-height: 40px
     margin: 0 0 20px
 
-[class^=game]
-  .col-1-2
+.guide-group
+  .list
+    @extend .ul
+    @extend .row
+    padding: 0 0 0 10px
+
+  .item
+    @extend .one-auto
+    @extend .wrap
+    color: #FFF
+    font-size: 16px
+    line-height: 1.5em
+    border-radius: 4px
+    padding: 0.75em 1em
+    margin-right: 10px
+    margin-bottom: 10px
+    width: 45%
+    max-width: 50%
+
+    &:first-child,
+    &:nth-child(8n)
+      font-size: 20px
+      width: 100%
+      max-width: 100%
+
+    a
+      color: #FFF
+
+    &.style1
+      background-color: #324b51
+
+    &.style2
+      background-color: #173943
+
+    &.style3
+      background-color: #18365d
+
+    &.style4
+      background-color: #030f17
+
+    &.style5
+      background-color: #193963
+
+    &.style6
+      background-color: #031728
+
+    &.style7
+      background-color: #122144
+
+  p
     padding: 0 10px
 
-    figcaption
-      text-align: center
-      line-height: 2em
-
-/* ====================================
- * guide
- * ==================================*/
+/* ----------------
+ * detail
+ * --------------*/
 .news-detail,
 .guide-detail
-  padding: 5px 20px
+  padding: 0 20px 5px
 
   img
     max-width: 100%
     height: auto
+
+  h1
+    line-height: 1.6em
+
+  h2
+    text-indent: 20px
+
+  article
+    padding: 0 0 1em

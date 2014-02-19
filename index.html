@@ -3,7 +3,12 @@
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height"/>
 <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/all.css">
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/framework.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/component.css">
+<link rel="stylesheet" href="css/page.css">
+<link rel="stylesheet" href="css/media.css">
 <title>游戏泡泡</title>
 
 <header id="header">
@@ -27,7 +32,7 @@
     </div>
   </div>
   <div class="indicators">
-    <div></div>
+    <div class="token"></div>
   </div>
   <div class="no-guide-dialog hide">
     <div class="heading">暂时还没有攻略哦~</div>
@@ -38,18 +43,16 @@
   </div>
 </div>
 <h2 class="title"><i></i> 游戏新闻</h2>
-<div class="one" id="feeds">
-  <ul>
-    <script type="text/html-template">
-      {{#each feeds}}
-      <li class="item">
-        <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
-        <p>来源：{{source}} | <time>{{pub_date}}</time></p>
-      </li>
-      {{/each}}
-    </script>
-  </ul>
-</div>
+<ul class="one" id="feeds">
+  <script type="text/html-template">
+    {{#each feeds}}
+    <li class="item">
+      <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
+      <p>来源：{{source}} | <time>{{pub_date}}</time></p>
+    </li>
+    {{/each}}
+  </script>
+</ul>
 
 <nav id="main-nav" class="row footer">
   <a href="#/all" class="btn">全部攻略</a>
@@ -65,7 +68,7 @@
 <script src="bower_components/lodash/dist/lodash.min.js"></script>
 <script src="bower_components/backbone/backbone-min.js"></script>
 <script src="bower_components/nervenet/nervenet.min.js"></script>
-<script src="bower_components/iscroll/build/iscroll.js"></script>
+<script src="bower_components/iscroll/dist/iscroll-min.js"></script>
 <script src="js/model/AppsCollection.js"></script>
 <script src="js/model/FeedsCollection.js"></script>
 <script src="js/model/AllGuidesCollection.js"></script>
@@ -76,8 +79,7 @@
 <script src="js/view/Offline.js"></script>
 <script src="js/view/GamePage.js"></script>
 <script src="js/controller/DownloadCommand.js"></script>
-<script src="js/controller/CreateCssCommand.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
-<script src="js/index.js"></script>
+<script src="js/index.js?3"></script>

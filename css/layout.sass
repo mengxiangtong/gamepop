@@ -1,51 +1,4 @@
-*
-  -webkit-box-sizing: border-box
-  -moz-box-sizing: border-box
-  box-sizing: border-box
-
-/* ====================================
- * guide
- * ==================================*/
-.row
-  display: -webkit-box
-  display: box
-
-  display: -webkit-flex
-  display: -ms-flexbox
-  display: flex
-
-  -webkit-box-orient: horizontal
-  box-orient: horizontal
-  -webkit-flex-flow: row wrap
-  -ms-flex-flow: row wrap
-  flex-flow: row wrap
-
-  text-rendering: optimizespeed
-  font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif
-
-.column
-  @extend .row
-  -webkit-box-orient: vertical
-  box-orient: vertical
-  -webkit-flex-flow: column
-  -ms-flex-flow: column
-  flex-flow: column
-
-.one
-  -webkit-box-flex: 1
-  box-flex: 1
-  flex: 1
-
-.one-auto
-  -webkit-box-flex: 1
-  box-flex: 1
-  flex: auto
-
-.wrap
-  display: inline-block
-  -webkit-box-sizing: border-box
-  box-sizing: border-box
-  vertical-align: top
+@import "define"
 
 /* ====================================
  * layouts
@@ -190,8 +143,8 @@ h2.title
 
 #feeds
   @extend .one
-  margin: 0
-  padding: 0
+  @extend .ul
+  overflow: auto
 
   li
     padding: 20px
@@ -205,6 +158,7 @@ h2.title
 
 .footer
   height: $topbar-height
+  z-index: 15
 
   a
     @extend .one-auto
@@ -230,18 +184,3 @@ h2.title
 
   img
     max-width: 100%
-
-section
-
-  h2
-    text-indent: 20px
-
-  ul.row
-    @extend .ul
-    padding: 0 10px
-
-    > *
-      box-sizing: border-box
-
-    .col-1-2
-      max-width: 50%
