@@ -2,7 +2,7 @@
  * Created by meathill on 14-2-14.
  */
 ;(function (ns) {
-  var games = []
+  var games
     , interval = 0;
   function check() {
     for (var i = 0, len = games.length; i < len; i++) {
@@ -25,12 +25,14 @@
     }
   }
   ns.DownloadCommand = function (id, name, collection, context) {
+    games = context.getValue('downloads');
+    var icon = context.getValue('all').get(id) ? context.getValue('all').get(id).get('icon_path') : 'img/image.png';
     if (!collection.get(id)) {
       collection.add({
         "id": id,
         "url": "#/remote/" + id + '/',
         "name": name,
-        "icon": context.getValue('all').get(id).get('icon_path'),
+        "icon": icon,
         "downloading": true
       });
     }

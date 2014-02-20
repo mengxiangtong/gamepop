@@ -8,7 +8,6 @@ body
   height: 100%
 
 body
-  @extend .row
   @extend .column
   overflow: hidden
   padding: 0
@@ -64,31 +63,33 @@ body
   margin: 0 auto
 
 #apps
-  padding: 10px 5px 0
   position: relative
   min-height: 215px
-  overflow: hidden
 
-  #apps-container ul
-    @extend .row
-    @extend .ul
-    float: left
+  #apps-container
+    overflow: hidden
+
+    ul
+      @extend .ul
+      @extend .row
+      @extend .wrap-container
+      float: left
+      padding: 10px 5px
 
   .item
-    @extend .one-auto
     @extend .wrap
     position: relative
     padding: 0 5px 10px
-    width: 24%
+    width: 25%
     max-width: 25%
 
     &:after
       position: absolute
       right: 3px
-      bottom: 44px
+      bottom: 38px
 
     &.offline:after
-      bottom: 43px
+      bottom: 37px
       right: 2px
 
     img
@@ -96,14 +97,10 @@ body
       max-width: 100%
 
   figcaption
+    font-size: 14px
     line-height: 30px
     height: 30px
     overflow: hidden
-
-  .indicators
-    position: absolute
-    left: 50%
-    bottom: 10px
 
   .no-guide-dialog
     position: absolute
@@ -148,7 +145,6 @@ h2.title
 
   li
     padding: 20px
-    box-sizing: border-box
 
   h3
     margin: 0
@@ -156,7 +152,8 @@ h2.title
   p
     margin: 10px 0 0
 
-.footer
+#main-nav
+  position: relative
   height: $topbar-height
   z-index: 15
 

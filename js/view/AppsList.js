@@ -58,9 +58,7 @@
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
     gameButton_tapHandler: function (event) {
-      var href = event.currentTarget.href
-        , game = href.substr(href.lastIndexOf('/') + 1);
-      this.$router.navigate('game://' + game);
+      location.href = event.currentTarget.href;
     },
     noGuide_tapHandler: function (event) {
       var target = $(event.currentTarget),
@@ -71,7 +69,7 @@
           alias = link.substr(link.lastIndexOf('/') + 1);
       this.menu
         .css({
-          top: offset.top + height - 40,
+          top: offset.top + height - 30,
           left: offset.left + (width - 180 >> 1)
         })
         .appendTo(this.$el)

@@ -8,17 +8,15 @@
   }
   function createCss(width) {
     var style = document.createElement('style')
-      , scroller = width -10
-      , itemWidth = scroller - 12 >> 2
+      , itemWidth = width - 10 >> 2
       , imgWidth = itemWidth - 10
-      , height = itemWidth + 40 << 1
+      , height = imgWidth + 50 << 1
       , content = '#apps{height:' + height + 'px;min-height:' + height + 'px;}';
     content += '#apps-scroller{height:' + height + 'px;}';
-    content += '#apps-scroller ul{width:' + scroller + 'px;height:' + height + 'px;}';
+    content += '#apps-scroller ul{width:' + width + 'px;height:' + height + 'px;}';
     content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px}';
     content += '#apps-scroller img,#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
-    content += '.carousel .item{width:' + width + 'px;}';
-    content += '.guide-group .item{min-width:' + (scroller - 28 >> 1) + 'px;}';
+    content += '.carousel .item,#guide-list{width:' + width + 'px;}';
     style.innerHTML = content;
     document.head.appendChild(style);
   }
@@ -39,6 +37,7 @@
     context.mapValue('gui', gui);
     context.mapValue('router', router);
     context.mapValue('all', allGuidesCollection);
+    context.mapValue('downloads', []);
     context.mediatorMap.isBackbone = true;
     context
       .inject(gui)
@@ -77,3 +76,6 @@
   }
 
 }());
+
+// for duoshuo
+var duoshuoQuery = {short_name:"yxpopo"};

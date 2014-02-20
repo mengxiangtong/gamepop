@@ -37,6 +37,7 @@
     },
     setGame: function (game) {
       this.$('.game-button').attr('href', 'game://' + game);
+      this.$context.mapValue('game', game);
     },
     showPage: function (url, className, data) {
       this.page

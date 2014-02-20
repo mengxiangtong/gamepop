@@ -40,8 +40,12 @@ $topbar-height: 50px
   box-flex: 1
   flex: auto
 
+.wrap-container
+  // 这两个0解决inline-block时会在块之间产生空隙的问题
+  font-size: 0
+  line-height: 0
+
 .wrap
   display: inline-block
-  -webkit-box-sizing: border-box
-  box-sizing: border-box
   vertical-align: top
+  flex: auto

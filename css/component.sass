@@ -1,5 +1,5 @@
 /* ====================================
- * offline
+ * btn
  * ==================================*/
 .btn
   display: inline-block
@@ -11,7 +11,6 @@
   padding: 0.5em 0.5em
   border-radius: 3px
   border: 1px solid transparent
-  box-sizing: border-box
 
   &.active,
   &:active
@@ -86,3 +85,20 @@
   .hide
     display: inline-block
     visibility: hidden
+
+/* ====================================
+ * indicators
+ * ==================================*/
+.indicators
+  position: absolute
+  left: 50%
+  bottom: 10px
+  font: 8px/8px Airal
+  background-image: url(../img/indicator.png)
+  min-width: 8px
+
+  div
+    width: 8px
+    height: 8px
+    overflow: hidden
+    background: #CECDCD
