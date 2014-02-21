@@ -26,7 +26,11 @@
 
     &.offline:after
       width: 37px
-      background-position: 37px 0
+      background-position: -37px 0
+
+    &.downloading:after
+      width: 37px
+      background-position: -75px 0
 
     &.no-guide
       -webkit-filter: grayscale(100%)
@@ -106,6 +110,11 @@ h2.title
 
     &.active
       background: #0683CB
+
+  .badge
+    border: 1px solid #FFF
+    font-size: 12px
+    background-color: #dd514c
 
 #page-container
   overflow-x: hidden

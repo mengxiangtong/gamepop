@@ -58,15 +58,18 @@
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
     gameButton_tapHandler: function (event) {
-      location.href = event.currentTarget.href;
+      var href = event.currentTarget.href
+      location.href = href;
+      ga('send', 'event', 'game', 'start', href.substr(7));
     },
     noGuide_tapHandler: function (event) {
-      var target = $(event.currentTarget),
-          offset = target.position(),
-          width = target.width(),
-          height = target.height(),
-          link = target.find('a').attr('href'),
-          alias = link.substr(link.lastIndexOf('/') + 1);
+      var target = $(event.currentTarget)
+        , offset = target.position()
+        , width = target.width()
+        , height = target.height()
+        , link = target.find('a').attr('href')
+        , alias = link.substr(link.lastIndexOf('/') + 1)
+        , name = target.find('figcaption').text();
       this.menu
         .css({
           top: offset.top + height - 30,
@@ -74,7 +77,7 @@
         })
         .appendTo(this.$el)
         .find('.require-button').attr('href', '#/require/' + alias)
-        .end().find('.game-button').attr('href', 'game://' + alias);
+        .end().find('.game-button').attr('href', 'game://' + alias + '/' + name);
 
       event.stopPropagation();
     },
@@ -90,6 +93,7 @@
         }
       });
       alert('您的需求已收到，我们不会让您久等的。');
+      ga('send', 'event', 'game', 'require', alias);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

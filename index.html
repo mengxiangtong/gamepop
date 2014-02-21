@@ -3,11 +3,11 @@
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height"/>
 <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/component.css">
 <link rel="stylesheet" href="css/framework.css">
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/component.css">
 <link rel="stylesheet" href="css/page.css">
+<link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/media.css">
 <title>游戏泡泡</title>
 
@@ -21,7 +21,7 @@
     <div id="apps-scroller">
       <script type="text/html-template">
         {{#each apps}}
-        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
+        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
           <figure>
             <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
             <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
@@ -75,6 +75,7 @@
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/FeedsList.js"></script>
 <script src="js/view/GUI.js"></script>
+<script src="js/view/Nav.js"></script>
 <script src="js/view/AllGuides.js"></script>
 <script src="js/view/Offline.js"></script>
 <script src="js/view/GamePage.js"></script>
@@ -83,5 +84,3 @@
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
 <script src="js/index.js"></script>
-
-<script src="http://192.168.10.139:8081/target/target-script-min.js#meathill"></script>

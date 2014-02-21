@@ -13,8 +13,8 @@
     events: {
       'click .no-click': 'preventDefault',
       'tap': 'tapHandler',
-      'tap .back-button': 'backButton_clickHandler',
-      'tap #main-nav a': 'mainNav_tapHandler'
+      'tap .back-button': 'backButton_tapHandler',
+      'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -23,10 +23,6 @@
         transform: false
       });
       this.page = $('#page-container');
-    },
-    activeNavButton: function (str) {
-      this.$('#main-nav [href$="#/' + str + '"]').addClass('active')
-        .siblings().removeClass('active');
     },
     backHome: function () {
       this.page.removeClass('active');
@@ -37,7 +33,7 @@
     },
     setGame: function (game) {
       this.$('.game-button').attr('href', 'game://' + game);
-      this.$context.mapValue('game', game);
+      this.$context.mapValue('game', game, true);
     },
     showPage: function (url, className, data) {
       this.page
@@ -47,7 +43,7 @@
       this.$el.attr('class', className);
       this.$('h1').text(TITLES[className] || '游戏泡泡');
     },
-    backButton_clickHandler: function () {
+    backButton_tapHandler: function () {
       var hash = location.hash.substr(2);
       if (hash === '') {
         location.href = 'popo:return';
@@ -57,10 +53,9 @@
         history.back();
       }
     },
-    mainNav_tapHandler: function (event) {
-      this.$router.navigate(event.currentTarget.hash);
-      $(event.currentTarget).addClass('active')
-        .siblings().removeClass('active');
+    gameButton_tapHandler: function (event) {
+      var href = event.currentTarget.href;
+      ga('send', 'event', 'game', 'start', href.substr(href.lastIndexOf('/') + 1));
     },
     page_loadCompleteHandler: function (response, status, xhr) {
       if (status === 'error') {

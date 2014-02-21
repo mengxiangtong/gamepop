@@ -42,27 +42,26 @@ module.exports = function (grunt) {
         }]
       }
     },
-    htmlmin: {
+    cssmin: {
       options: {
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseBooleanAttributes: true,
-        removeEmptyAttributes: true
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      index: {
+      minify: {
+        files: [
+          {
+            src: csses,
+            dest: BUILD + 'css/style.css'
+          }
+        ]
+      }
+    },
+    imagemin: {
+      img: {
         files: [{
           expand: true,
-          cwd: TEMP,
-          src: ['index.html'],
-          dest: BUILD
-        }]
-      },
-      template: {
-        files: [{
-          expand: true,
-          cwd: 'template/',
-          src: ['all.html', 'offline.html'],
-          dest: BUILD + 'template/'
+          cwd: 'img/',
+          src: ['**/*.{png,jpg}'],
+          dest: BUILD + 'img/'
         }]
       }
     },
@@ -85,17 +84,18 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      minify: {
-        files: [
-          {
-            src: csses,
-            dest: BUILD + 'css/style.css'
-          }
-        ]
+    replace: {
+      version: {
+        options: {
+          patterns: [{
+            match: 'version',
+            replacement: '<%= pkg.version %>'
+          }]
+        },
+        files: [{
+          src: [TEMP + 'index.js'],
+          dest: TEMP + 'index.js'
+        }]
       }
     },
     concat: {
@@ -107,13 +107,27 @@ module.exports = function (grunt) {
         dest: BUILD + 'js/index.js'
       }
     },
-    imagemin: {
-      img: {
+    htmlmin: {
+      options: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeEmptyAttributes: true
+      },
+      index: {
         files: [{
           expand: true,
-          cwd: 'img/',
-          src: ['**/*.{png,jpg}'],
-          dest: BUILD + 'img/'
+          cwd: TEMP,
+          src: ['index.html'],
+          dest: BUILD
+        }]
+      },
+      template: {
+        files: [{
+          expand: true,
+          cwd: 'template/',
+          src: ['all.html', 'offline.html'],
+          dest: BUILD + 'template/'
         }]
       }
     },
@@ -142,6 +156,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-replace');
 
   grunt.registerTask('index', 'make index html', function () {
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>')
@@ -158,6 +173,7 @@ module.exports = function (grunt) {
     'cssmin',
     'imagemin',
     'uglify',
+    'replace',
     'concat',
     'index',
     'htmlmin',

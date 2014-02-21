@@ -14,6 +14,7 @@
     },
     initialize: function () {
       this.collection.on('change', this.collection_changeHandler, this);
+      this.collection.on('add', this.collection_addHandler, this);
     },
     setElement: function (element, delegate) {
       Backbone.View.prototype.setElement.call(this, element, delegate);
@@ -66,8 +67,8 @@
         case 'downloaded':
           this.$('.download-button').html('<i class="fa fa-play"></i> 离线版本')
             .attr('href', '#/local/' + game + '/index.html')
-            .removeClass('download-button')
-            .addClass('btn-primary');
+            .removeClass('download-button disabled')
+            .addClass('btn-success');
           break;
 
         case 'progress':
@@ -83,6 +84,14 @@
     },
     backButton_tapHandler: function () {
       history.back();
+    },
+    collection_addHandler: function (model) {
+      if (model.id !== game) {
+        return;
+      }
+      if (model.get('downloading')) {
+        this.setDownloadButtonStatus('downloading');
+      }
     },
     collection_changeHandler: function (model) {
       if (model.id !== game) {

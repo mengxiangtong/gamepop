@@ -27,13 +27,13 @@
       this.render();
     },
     collection_changeHandler: function (model) {
-      if ('has-offline' in model.changedAttributes() || 'has-guide' in model.changedAttributes) {
+      if ('has-offline' in model.changed || 'downloading' in model.changed) {
         var item = this.$('.' + model.id)
           , newItem = this.template({apps: [model.toJSON()]});
         item.replaceWith(newItem);
         return;
       }
-      if ('progress'in model.changedAttributes()) {
+      if ('progress'in model.changed) {
         $('.' + model.id).find('span').text(model.get('progress'))
           .end().find('.bar').width(model.get('progress') + '%');
       }

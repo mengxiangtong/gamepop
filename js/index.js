@@ -14,33 +14,39 @@
       , content = '#apps{height:' + height + 'px;min-height:' + height + 'px;}';
     content += '#apps-scroller{height:' + height + 'px;}';
     content += '#apps-scroller ul{width:' + width + 'px;height:' + height + 'px;}';
-    content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px}';
+    content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
     content += '#apps-scroller img,#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
     content += '.carousel .item,#guide-list{width:' + width + 'px;}';
     style.innerHTML = content;
     document.head.appendChild(style);
   }
   function init() {
-    var context = Nervenet.createContext(),
-        gui = new gamepop.view.GUI({
+    var context = Nervenet.createContext()
+      , gui = new gamepop.view.GUI({
           el: document.body
-        }),
-        appsCollection = new gamepop.model.AppsCollection(),
-        feedsCollection = new gamepop.model.FeedsCollection(),
-        feeds = new gamepop.view.FeedsList({
+        })
+      , appsCollection = new gamepop.model.AppsCollection()
+      , feedsCollection = new gamepop.model.FeedsCollection()
+      , feeds = new gamepop.view.FeedsList({
           el: '#feeds',
           collection: feedsCollection
-        }),
-        allGuidesCollection = new gamepop.model.AllGuidesCollection(),
-        router = new gamepop.Router();
+        })
+      , allGuidesCollection = new gamepop.model.AllGuidesCollection()
+      , nav = new gamepop.view.Nav({
+          el: '#main-nav',
+          collection: appsCollection
+        })
+      , router = new gamepop.Router();
 
     context.mapValue('gui', gui);
+    context.mapValue('nav', nav);
     context.mapValue('router', router);
     context.mapValue('all', allGuidesCollection);
     context.mapValue('downloads', []);
     context.mediatorMap.isBackbone = true;
     context
       .inject(gui)
+      .inject(nav)
       .inject(feeds)
       .inject(router)
       .mediatorMap
@@ -66,7 +72,21 @@
     // 所以只能用JS算出宽度
     createCss(document.body.clientWidth);
 
+    // 分析路径
     Backbone.history.start();
+
+    // for native
+    gamepop.back = _.bind(gui.backButton_tapHandler, gui);
+
+    // ga
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-35957679-10', 'c.yxpopo.com');
+    ga('send', 'pageview');
+    ga('send', 'event', 'version', '@@version');
   }
 
   if (PHONEGAP) {

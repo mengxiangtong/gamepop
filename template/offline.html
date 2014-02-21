@@ -2,33 +2,21 @@
   <script type="text/html-template">
     {{#each apps}}
     {{#if has-guide}}
-    <li class="item {{id}}">
+    <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
       <a href="{{url}}"><img src="{{icon}}" /></a>
       <h2><a href="{{url}}">{{name}}</a></h2>
       <div class="btn-group">
-        {{#if has-guide}}
         {{#if has-offline}}
         <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
         <a href="delete://{{id}}" class="delete-button btn"><i class="fa fa-fw fa-trash-o"></i> 删除</a>
         {{else}}
-        <p class="hidden"><i class="fa fa-download"></i> <span></span>%</p>
-        <a href="download://{{id}}/{{name}}" class="btn download-button"><i class="fa fa-fw fa-download"></i> 下载</a>
-        {{/if}}
-        {{/if}}
-        {{#if downloading}}
-        <p><i class="fa fa-download"></i> <span>0</span>%</p>
+        <p {{#unless downloading}}class="hidden"{{/unless}}><i class="fa fa-download"></i> <span></span>%</p>
+        <a href="download://{{id}}/{{name}}" class="btn download-button {{#if downloading}}disabled hide{{/if}}"><i class="fa fa-fw fa-download"></i> 下载</a>
         {{/if}}
       </div>
-    </li>
-    {{/if}}
-    {{#if downloading}}
-    <li class="item {{id}} downloading">
-      <a href="{{url}}"><img src="{{icon}}" /></a>
-      <h2><a href="{{url}}">{{name}}</a></h2>
-      <div class="btn-group">
-        <p><i class="fa fa-download"></i> <span></span>%</p>
-      </div>
+      {{#if downloading}}
       <div class="progress"><div class="bar"></div></div>
+      {{/if}}
     </li>
     {{/if}}
     {{/each}}
