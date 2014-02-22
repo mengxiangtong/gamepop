@@ -10,12 +10,12 @@
         <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
         <a href="delete://{{id}}" class="delete-button btn"><i class="fa fa-fw fa-trash-o"></i> 删除</a>
         {{else}}
-        <p {{#unless downloading}}class="hidden"{{/unless}}><i class="fa fa-download"></i> <span></span>%</p>
+        <p {{#unless downloading}}class="hidden"{{/unless}}><i class="fa fa-download"></i> <span>{{progress}}</span>%</p>
         <a href="download://{{id}}/{{name}}" class="btn download-button {{#if downloading}}disabled hide{{/if}}"><i class="fa fa-fw fa-download"></i> 下载</a>
         {{/if}}
       </div>
       {{#if downloading}}
-      <div class="progress"><div class="bar"></div></div>
+      <div class="progress"><div class="bar" style="width:{{progress}}%"></div></div>
       {{/if}}
     </li>
     {{/if}}

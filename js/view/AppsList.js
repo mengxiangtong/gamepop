@@ -58,7 +58,7 @@
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
     gameButton_tapHandler: function (event) {
-      var href = event.currentTarget.href
+      var href = event.currentTarget.href;
       location.href = href;
       ga('send', 'event', 'game', 'start', href.substr(7));
     },

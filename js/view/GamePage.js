@@ -51,7 +51,7 @@
       game = this.$context.getValue('game');
       var model = this.collection.get(game);
       if (model && model.has('downloading')) {
-        this.setDownloadButtonStatus('downloading');
+        this.setDownloadButtonStatus('downloading', model.get('progress'));
       }
       if (model && model.get('has-offline')) {
         this.setDownloadButtonStatus('downloaded');
@@ -60,8 +60,9 @@
     setDownloadButtonStatus: function (status, percent) {
       switch (status) {
         case 'downloading':
+          var button = '<i class="fa fa-spin fa-spinner"></i> <span>正在下载' + (percent ? '（' + percent + '%）' : '')+ '</span>';
           this.$('.download-button').addClass('disabled')
-            .html('<i class="fa fa-spin fa-spinner"></i> <span>正在下载</span>');
+            .html(button);
           break;
 
         case 'downloaded':

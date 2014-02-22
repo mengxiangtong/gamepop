@@ -32,7 +32,8 @@
         .eq(1).addClass('active');
     },
     setGame: function (game) {
-      this.$('.game-button').attr('href', 'game://' + game);
+      var name = this.$context.getValue(/remote/.test(location.hash) ? 'all' : 'apps').get(game).get('app_name');
+      this.$('.game-button').attr('href', 'game://' + game + '/' + name);
       this.$context.mapValue('game', game, true);
     },
     showPage: function (url, className, data) {
