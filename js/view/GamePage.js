@@ -82,6 +82,9 @@
       if (a.hostname === 'a.yxpopo.com') {
         a.href = '#/remote' + a.pathname.replace('vguide/', '');
       }
+      if (DEBUG && a.hostname === config.localhost) {
+        a.href = '#/remote' + a.pathname;
+      }
     },
     backButton_tapHandler: function () {
       history.back();

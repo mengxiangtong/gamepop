@@ -79,6 +79,14 @@
     // for native
     gamepop.back = _.bind(gui.backButton_tapHandler, gui);
 
+    // for duoshuo
+    if (navigator.onLine) {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'http://static.duoshuo.com/embed.js';
+      document.head.appendChild(script);
+    }
+
     // ga
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

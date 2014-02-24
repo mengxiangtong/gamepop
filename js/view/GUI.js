@@ -32,6 +32,9 @@
         .eq(1).addClass('active');
     },
     setGame: function (game) {
+      if (name === this.$context.getValue('game')) {
+        return;
+      }
       var name = this.$context.getValue(/remote/.test(location.hash) ? 'all' : 'apps').get(game).get('app_name');
       this.$('.game-button').attr('href', 'game://' + game + '/' + name);
       this.$context.mapValue('game', game, true);
@@ -64,6 +67,11 @@
         return;
       }
       this.$context.mediatorMap.check(this.page[0]);
+      // 多说评论框
+      var duoshuo = this.page.find('.ds-thread');
+      if ('DUOSHUO' in window && duoshuo.length > 0) {
+        DUOSHUO.EmbedThread(duoshuo[0]);
+      }
     },
     preventDefault: function (event) {
       event.preventDefault();

@@ -14,4 +14,6 @@ var config = {
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
   config.news = 'http://meathill.pc/gamepop-api/news-detail.php';
+  config.remote ='http://meathill.pc/gamepop-api/vguide/';
+  config.localhost = 'meathill.pc';
 }

@@ -51,7 +51,7 @@
     },
     showNewsById: function (id) {
       this.$gui.showPage(config.news, 'news-' + id, {id: id});
-      this.sendGA('/news/' + ido);
+      this.sendGA('/news/' + id);
     }
   });
 }(Nervenet.createNameSpace('gamepop')));
