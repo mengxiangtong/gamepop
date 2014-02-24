@@ -32,7 +32,7 @@
         .eq(1).addClass('active');
     },
     setGame: function (game) {
-      if (name === this.$context.getValue('game')) {
+      if (game === this.$context.getValue('game')) {
         return;
       }
       var name = this.$context.getValue(/remote/.test(location.hash) ? 'all' : 'apps').get(game).get('app_name');

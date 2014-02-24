@@ -80,10 +80,10 @@
     a_tapHandler: function (event) {
       var a = event.currentTarget;
       if (a.hostname === 'a.yxpopo.com') {
-        a.href = '#/remote' + a.pathname.replace('vguide/', '');
+        a.href = '#/remote' + a.pathname.replace(/vguide\//g, '');
       }
       if (DEBUG && a.hostname === config.localhost) {
-        a.href = '#/remote' + a.pathname;
+        a.href = '#/remote' + a.pathname.replace(/vguide\//g, '');
       }
     },
     backButton_tapHandler: function () {
