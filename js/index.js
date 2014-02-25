@@ -28,7 +28,7 @@
       , appsCollection = new gamepop.model.AppsCollection()
       , feedsCollection = new gamepop.model.FeedsCollection()
       , feeds = new gamepop.view.FeedsList({
-          el: '#feeds',
+          el: '#feeds-title, #feeds',
           collection: feedsCollection
         })
       , allGuidesCollection = new gamepop.model.AllGuidesCollection()
@@ -78,6 +78,7 @@
 
     // for native
     gamepop.back = _.bind(gui.backButton_tapHandler, gui);
+    gamepop.refresh = _.bind(appsCollection.fetch, appsCollection);
 
     // for duoshuo
     if (navigator.onLine) {

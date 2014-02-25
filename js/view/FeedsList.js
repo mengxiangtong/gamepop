@@ -10,10 +10,16 @@
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
 
+      this.render();
       this.collection.on('reset', this.render, this);
     },
     render: function (collection) {
-      this.$el.html(this.template({feeds: collection.toJSON()}));
+      if (collection) {
+        this.$('.fa-spin').hide();
+      } else {
+        collection = this.collection;
+      }
+      this.$el.last().html(this.template({feeds: collection.toJSON()}));
     },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).find('a').attr('href');
