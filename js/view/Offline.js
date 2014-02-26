@@ -3,8 +3,6 @@
  */
 ;(function (ns) {
   'use strict';
-  var download = ''
-    , interval = 0;
   ns.Offline = Backbone.View.extend({
     $context: null,
     events: {
@@ -39,13 +37,18 @@
       }
     },
     deleteButton_tapHandler: function (event) {
+      var target = $(event.currentTarget);
+      if (target.hasClass('disabled')) {
+        return;
+      }
       var id = event.currentTarget.href.substr(9),
           model = this.collection.get(id);
       setTimeout(function () {
         model.set('has-offline', false);
-      }, 400);
-      $(event.currentTarget).addClass('disabled')
+      }, 600);
+      target.addClass('disabled')
         .find('i').toggleClass('fa-trash fa-spin fa-spinner');
+      location.href = event.currentTarget.href;
     },
     downloadButton_tapHandler: function (event) {
       var target = $(event.currentTarget);

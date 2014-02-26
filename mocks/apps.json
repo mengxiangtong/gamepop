@@ -9,8 +9,8 @@
       "has-offline": true
     },
     {
-      "id": "zhihu",
-      "url": "#/remote/zhihu/",
+      "id": "qqdzpk",
+      "url": "#/remote/qqdzpk/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true

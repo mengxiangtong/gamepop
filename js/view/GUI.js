@@ -8,6 +8,8 @@
   };
 
   ns.GUI = Backbone.View.extend({
+    $apps: null,
+    $all: null,
     $router: null,
     $context: null,
     events: {
@@ -35,7 +37,8 @@
       if (game === this.$context.getValue('game')) {
         return;
       }
-      var name = this.$context.getValue(/remote/.test(location.hash) ? 'all' : 'apps').get(game).get('app_name');
+      var model = this.$apps.get(game) ? this.$apps.get(game) : this.$all.get(game)
+        , name = model.get('app_name');
       this.$('.game-button').attr('href', 'game://' + game + '/' + name);
       this.$context.mapValue('game', game, true);
     },

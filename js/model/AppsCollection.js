@@ -13,9 +13,6 @@
       } else if ('apps' in response) {
         this.reset(response.apps);
       }
-    },
-    toJSON: function () {
-      return Backbone.Collection.prototype.toJSON.call(this);
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));

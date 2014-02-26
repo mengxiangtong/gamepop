@@ -15,7 +15,7 @@ module.exports = function (grunt) {
   // 取CSS
   html = html.replace(CSS_REG, function (match, src) {
     csses.push(src);
-    return src.substr(0, 3) === 'css' ? match : '';
+    return '';
   });
   html = html.replace(JS_REG, function (match, src) {
     var isLib = src.substr(0, 2) !== 'js';
@@ -163,8 +163,11 @@ module.exports = function (grunt) {
     grunt.file.write(TEMP + 'index.html', html);
   });
   grunt.registerTask('version', 'create a version file', function () {
-    var version = 'Version: ' + grunt.config.get('pkg').version + '\nbuild at: ' + grunt.template.today('yyyy-mm-dd hh:MM:ss');
-    grunt.file.write(config.version, version);
+    var version = {
+      version: grunt.config.get('pkg').version,
+      build: grunt.template.today('yyyy-mm-dd hh:MM:ss')
+    };
+    grunt.file.write(config.version, JSON.stringify(version));
   });
 
   grunt.registerTask('default', [
