@@ -42,18 +42,20 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      minify: {
-        files: [
-          {
-            src: csses,
-            dest: BUILD + 'css/style.css'
-          }
-        ]
+    sass: {
+      css: {
+        options: {
+          style: 'compressed'
+        },
+        files: [{
+          expand: true,
+          cwd: 'css/',
+          src: ['*.sass'],
+          dest: 'css/',
+          ext: '.css'
+        }]
       }
+
     },
     imagemin: {
       img: {
@@ -73,7 +75,8 @@ module.exports = function (grunt) {
             'DEBUG': false,
             'PHONEGAP': false
           },
-          dead_code: true
+          dead_code: true,
+          unused: true
         },
         report: 'gzip'
       },
@@ -99,12 +102,16 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      options: {
-        separator: ';\n'
-      },
       js: {
+        options: {
+          separator: ';\n'
+        },
         src: libs.concat(TEMP + 'index.js'),
         dest: BUILD + 'js/index.js'
+      },
+      css: {
+        src: csses,
+        dest: BUILD + 'css/style.css'
       }
     },
     htmlmin: {
@@ -116,10 +123,8 @@ module.exports = function (grunt) {
       },
       index: {
         files: [{
-          expand: true,
-          cwd: TEMP,
-          src: ['index.html'],
-          dest: BUILD
+          src: TEMP + 'index.html',
+          dest: BUILD + 'index.html'
         }]
       },
       template: {
@@ -149,7 +154,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -173,7 +178,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'clean:start',
     'copy',
-    'cssmin',
+    'sass',
     'imagemin',
     'uglify',
     'replace',
