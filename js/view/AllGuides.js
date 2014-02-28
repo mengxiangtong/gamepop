@@ -14,8 +14,6 @@
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.fetch();
 
-      this.form = this.$('form')[0];
-      this.list = this.$('#guide-list');
       this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
       this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
     },
@@ -35,6 +33,8 @@
     },
     setElement: function (el, delegate) {
       Backbone.View.prototype.setElement.call(this, el, delegate);
+      this.form = this.$('form')[0];
+      this.list = this.$('#guide-list');
       this.render();
     },
     collection_resetHandler: function () {

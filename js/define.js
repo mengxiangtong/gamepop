@@ -11,7 +11,8 @@ var DEBUG = true
   }
   , DUOSHUO = DUOSHUO || {
     EmbedThread: function (dom) {}
-  };
+  }
+  , ga = ga || function (method, url) { };
 
 if (DEBUG) {
   (function (window) {

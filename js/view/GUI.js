@@ -25,7 +25,6 @@
         transform: false
       });
       this.page = $('#page-container');
-      gamepop.polyfill.checkScroll(this.page[0], this);
     },
     backHome: function () {
       this.page.removeClass('active');
@@ -68,7 +67,7 @@
       var href = event.currentTarget.href;
       ga('send', 'event', 'game', 'start', href.substr(href.lastIndexOf('/') + 1));
     },
-    page_loadCompleteHandler: function (response, status, xhr) {
+    page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
         this.$('#page-container').html('加载失败');
         return;
@@ -80,7 +79,9 @@
         DUOSHUO.EmbedThread(duoshuo[0]);
       }
       // android 2.x 刷新滚动条
-      gamepop.polyfill.refreshScroll(this);
+      if (!gamepop.polyfill.refreshScroll(this)) {
+        gamepop.polyfill.checkScroll(this.page[0], this);
+      }
     },
     preventDefault: function (event) {
       event.preventDefault();
