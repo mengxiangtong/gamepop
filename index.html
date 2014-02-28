@@ -22,10 +22,8 @@
       <script type="text/html-template">
         {{#each apps}}
         <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
-          <figure>
-            <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
-            <figcaption><a href="{{url}}" title="{{name}}">{{name}}</a></figcaption>
-          </figure>
+          <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
+          <h3><a href="{{url}}" title="{{name}}">{{name}}</a></h3>
         </li>
         {{/each}}
       </script>
@@ -43,7 +41,12 @@
   </div>
 </div>
 
-<h2 id="feeds-title"><i class="bar"></i> 游戏新闻 <i class="fa fa-refresh fa-spin pull-right"></i></h2>
+<h2 id="feeds-title">
+  <i class="bar"></i>
+  游戏新闻
+  <i class="fa fa-refresh fa-spin pull-right refresh-button"></i>
+  <i class="fa fa-angle-double-up pull-right extend-button"></i>
+</h2>
 <div class="one" id="feeds">
   <ul>
     <script type="text/html-template">
@@ -53,6 +56,9 @@
         <p>来源：{{source}} | <time>{{pub_date}}</time></p>
       </li>
       {{/each}}
+      <li class="load-more item">
+        加载更多
+      </li>
     </script>
   </ul>
 </div>

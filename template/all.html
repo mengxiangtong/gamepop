@@ -24,10 +24,8 @@
     <script type="text/html-template">
       {{#each games}}
       <li class="item">
-        <figure>
-          <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
-          <figcaption><a href="#/remote/{{guide_name}}">{{app_name}}</a></figcaption>
-        </figure>
+        <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
+        <h3><a href="#/remote/{{guide_name}}">{{app_name}}</a></h3>
       </li>
       {{/each}}
     </script>

@@ -6,7 +6,8 @@
     $router: null,
     events: {
       'tap .item': 'item_tapHandler',
-      'tap .fa-refresh': 'refreshHandler'
+      'tap .refresh-button': 'refreshButton_taHandler',
+      'tap .extend-button': 'extendButton_tapHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
@@ -24,11 +25,14 @@
 
       gamepop.polyfill.checkScroll(this.$el[1], this);
     },
+    extendButton_tapHandler: function () {
+
+    },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).find('a').attr('href');
       this.$router.navigate(href);
     },
-    refreshHandler: function (event) {
+    refreshButton_taHandler: function (event) {
       $(event.target).addClass('fa-spin');
       this.collection.fetch({reset: true});
     }
