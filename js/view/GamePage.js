@@ -9,8 +9,7 @@
     $context: null,
     events: {
       'tap .back-button': 'backButton_tapHandler',
-      'tap .download-button': 'downloadButton_tapHandler',
-      'tap a': 'a_tapHandler'
+      'tap .download-button': 'downloadButton_tapHandler'
     },
     initialize: function () {
       this.collection.on('change', this.collection_changeHandler, this);
@@ -75,15 +74,6 @@
         case 'progress':
           this.$('.download-button span').text('正在下载（' + percent + '%）');
           break;
-      }
-    },
-    a_tapHandler: function (event) {
-      var a = event.currentTarget;
-      if (a.hostname === 'a.yxpopo.com') {
-        a.href = '#/remote' + a.pathname.replace(/vguide\//g, '');
-      }
-      if (DEBUG && a.hostname === config.localhost) {
-        a.href = '#/remote' + a.pathname.replace(/vguide\//g, '');
       }
     },
     backButton_tapHandler: function () {

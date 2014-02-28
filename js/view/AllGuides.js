@@ -15,6 +15,7 @@
       this.collection.fetch();
 
       this.form = this.$('form')[0];
+      this.list = this.$('#guide-list');
       this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
       this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
     },
@@ -22,7 +23,7 @@
       if (!this.template) {
         return;
       }
-      this.$('#guide-list').html(this.template({games: this.collection.toJSON()}));
+      this.list.html(this.template({games: this.collection.toJSON()}));
       this.$('.filter i').remove();
       this.$('.pagination a')
         .find('.fa-spin').toggleClass(function () {
@@ -32,8 +33,8 @@
         .end().last().toggleClass('disabled', this.collection.curr > this.collection.total - 2)
         .end().first().toggleClass('disabled', this.collection.curr < 1);
     },
-    setElement: function (el) {
-      Backbone.View.prototype.setElement.call(this, el);
+    setElement: function (el, delegate) {
+      Backbone.View.prototype.setElement.call(this, el, delegate);
       this.render();
     },
     collection_resetHandler: function () {

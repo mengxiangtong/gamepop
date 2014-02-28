@@ -40,12 +40,14 @@
         "name": name,
         "icon": icon,
         "has-guide": true,
-        "downloading": true
+        "downloading": true,
+        "progress": 0
       });
     }
     var game = collection.get(id);
     game.set({
-      "downloading": true
+      "downloading": true,
+      "progress": 0
     });
     if (games.indexOf(game) === -1) {
       games.push(game);

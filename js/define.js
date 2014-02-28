@@ -2,7 +2,16 @@
  * Created by meathill on 14-1-21.
  */
 var DEBUG = true
-  , PHONEGAP = false;
+  , PHONEGAP = false
+  , gamepop = gamepop || {
+    view: {},
+    model: {},
+    polyfill: {},
+    controller: {}
+  }
+  , DUOSHUO = DUOSHUO || {
+    EmbedThread: function (dom) {}
+  };
 
 if (DEBUG) {
   (function (window) {

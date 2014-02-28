@@ -20,8 +20,8 @@
       }
       this.$el.html(this.template({apps: this.collection.toJSON()}));
     },
-    setElement: function (el) {
-      Backbone.View.prototype.setElement.call(this, el);
+    setElement: function (el, delegate) {
+      Backbone.View.prototype.setElement.call(this, el, delegate);
       this.render();
     },
     collection_changeHandler: function (model) {

@@ -32,7 +32,6 @@
         this.iscroll = new IScroll('#apps-container', {
           scrollX: true,
           scrollY: false,
-          scrollbars: false,
           momentum: false,
           mouseWheel: false,
           disableMouse: true,

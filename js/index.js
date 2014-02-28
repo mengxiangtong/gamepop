@@ -108,4 +108,4 @@
 }());
 
 // for duoshuo
-var duoshuoQuery = {short_name:"yxpopo"};
+var duoshuoQuery = {short_name: "yxpopo"};

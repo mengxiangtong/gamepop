@@ -25,6 +25,7 @@
         transform: false
       });
       this.page = $('#page-container');
+      gamepop.polyfill.checkScroll(this.page[0], this);
     },
     backHome: function () {
       this.page.removeClass('active');
@@ -38,7 +39,10 @@
         return;
       }
       var model = this.$apps.get(game) ? this.$apps.get(game) : this.$all.get(game)
-        , name = model.get('app_name');
+        , name = '';
+      if (model) {
+        name = model.get('name') || model.get('app_name');
+      }
       this.$('.game-button').attr('href', 'game://' + game + '/' + name);
       this.$context.mapValue('game', game, true);
     },
@@ -75,6 +79,8 @@
       if ('DUOSHUO' in window && duoshuo.length > 0) {
         DUOSHUO.EmbedThread(duoshuo[0]);
       }
+      // android 2.x 刷新滚动条
+      gamepop.polyfill.refreshScroll(this);
     },
     preventDefault: function (event) {
       event.preventDefault();
