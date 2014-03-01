@@ -2,6 +2,7 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
+  var fragment;
   ns.FeedsList = Backbone.View.extend({
     $context: null,
     $router: null,
@@ -13,10 +14,12 @@
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
+      this.loadButton = this.$('.load-more').remove();
 
       this.render();
       this.collection.on('reset', this.render, this);
-      this.collection.on('add', this.render, this);
+      this.collection.on('add', this.collection_addHandler, this);
+      this.collection.on('sync', this.collection_readyHandler, this);
     },
     render: function (collection) {
       if (collection) {
@@ -24,9 +27,23 @@
       } else {
         collection = this.collection;
       }
-      this.$('ul').html(this.template({feeds: collection.toJSON()}));
+      this.$('ul')
+        .html(this.template({feeds: collection.toJSON()}))
+        .append(this.loadButton);
 
       gamepop.polyfill.checkScroll(this.$el[1], this);
+    },
+    collection_addHandler: function (model) {
+      var html = this.template({feeds: [model.toJSON()]});
+      fragment = fragment ? fragment.add(html) : $(html);
+    },
+    collection_readyHandler: function () {
+      if (fragment) {
+        fragment.insertBefore(this.loadButton);
+        fragment = null;
+        gamepop.polyfill.refreshScroll(this);
+      }
+      this.$('.load-more i').remove();
     },
     extendButton_tapHandler: function () {
       this.$context.trigger('collapse-apps');
@@ -37,7 +54,12 @@
       this.$router.navigate(href);
     },
     loadButton_tapHandler: function (event) {
-      this.collection.next();
+      var target = $(event.currentTarget);
+      if (this.collection.next()) {
+        target.prepend('<i class="fa fa-spin fa-spinner"></i>');
+      } else {
+        target.html('新闻您都看完了，我们会努力找来更多的');
+      }
     },
     refreshButton_taHandler: function (event) {
       $(event.target).addClass('fa-spin');

@@ -3,7 +3,7 @@
  */
 ;(function (ns) {
   var LOCAL = 'news',
-      curr = 0;
+      curr = 1;
   ns.FeedsCollection = Backbone.Collection.extend({
     initialize: function () {
       var store = localStorage.getItem(LOCAL);
@@ -19,22 +19,25 @@
         }
       });
     },
-    parse: function (response) {
-      var store = JSON.stringify(response.list);
-      localStorage.setItem(LOCAL, store);
+    parse: function (response, options) {
+      if (options.reset) {
+        var store = JSON.stringify(response.list);
+        localStorage.setItem(LOCAL, store);
+      }
       return response.list;
     },
     next: function () {
       curr++;
       if (curr > 10) {
-        return;
+        return false;
       }
       this.fetch({
         data: {
           ps: 20,
-          p: curr
+          pn: curr
         }
       });
+      return true;
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));
