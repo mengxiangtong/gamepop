@@ -2,7 +2,8 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
-  var LOCAL = 'news';
+  var LOCAL = 'news',
+      curr = 0;
   ns.FeedsCollection = Backbone.Collection.extend({
     initialize: function () {
       var store = localStorage.getItem(LOCAL);
@@ -14,8 +15,7 @@
       this.fetch({
         reset: true,
         data: {
-          ps: 20,
-          ts: Date.now()
+          ps: 20
         }
       });
     },
@@ -23,6 +23,18 @@
       var store = JSON.stringify(response.list);
       localStorage.setItem(LOCAL, store);
       return response.list;
+    },
+    next: function () {
+      curr++;
+      if (curr > 10) {
+        return;
+      }
+      this.fetch({
+        data: {
+          ps: 20,
+          p: curr
+        }
+      });
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));

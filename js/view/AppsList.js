@@ -81,7 +81,6 @@
       event.stopPropagation();
     },
     requireButton_tapHandler: function (event) {
-      // TODO 增加向服务器发送攻略需求的功能
       var hash = event.currentTarget.hash
         , alias = hash.substr(hash.lastIndexOf('/') + 1);
       $.ajax({

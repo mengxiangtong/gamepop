@@ -16,7 +16,7 @@
   <h1 id="logo">游戏泡泡</h1>
   <a href="#" class="game-button btn"><i class="fa fa-gamepad"></i></a>
 </header>
-<div id="apps" class="one">
+<div id="apps">
   <div id="apps-container">
     <div id="apps-scroller">
       <script type="text/html-template">
@@ -56,8 +56,8 @@
         <p>来源：{{source}} | <time>{{pub_date}}</time></p>
       </li>
       {{/each}}
-      <li class="load-more item">
-        加载更多
+      <li class="load-more">
+        点击加载更多
       </li>
     </script>
   </ul>
@@ -90,6 +90,7 @@
 <script src="js/view/Offline.js"></script>
 <script src="js/view/GamePage.js"></script>
 <script src="js/controller/DownloadCommand.js"></script>
+<script src="js/controller/Commands.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/polyfill/Android.js"></script>
 <script src="js/define.js"></script>

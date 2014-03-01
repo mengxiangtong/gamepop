@@ -11,7 +11,7 @@
       , itemWidth = width - 10 >> 2
       , imgWidth = itemWidth - 10
       , height = imgWidth + 50 << 1
-      , content = '#apps{height:' + height + 'px;min-height:' + height + 'px;}';
+      , content = '#apps{height:' + height + 'px;}';
     content += '#apps-scroller{height:' + height + 'px;}';
     content += '#apps-scroller ul{width:' + width + 'px;height:' + height + 'px;}';
     content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
@@ -26,6 +26,10 @@
           el: document.body
         })
       , appsCollection = new gamepop.model.AppsCollection()
+      , list = new gamepop.view.AppsList({
+          el: '#apps',
+          collection: appsCollection
+        })
       , feedsCollection = new gamepop.model.FeedsCollection()
       , feeds = new gamepop.view.FeedsList({
           el: '#feeds-title, #feeds',
@@ -39,6 +43,7 @@
       , router = new gamepop.Router();
 
     context.mapValue('gui', gui);
+    context.mapValue('list', list);
     context.mapValue('nav', nav);
     context.mapValue('router', router);
     context.mapValue('all', allGuidesCollection);
@@ -64,10 +69,7 @@
           collection: appsCollection
         });
     context.mapEvent('download', gamepop.controller.DownloadCommand);
-    context.createInstance(gamepop.view.AppsList, {
-      el: '#apps',
-      collection: appsCollection
-    });
+    context.mapEvent('collapse-apps', gamepop.controller.AppsListCollapseCommand);
 
     // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
     // 所以只能用JS算出宽度
