@@ -67,7 +67,6 @@
     gameButton_tapHandler: function (event) {
       var href = event.currentTarget.href;
       location.href = href;
-      ga('send', 'event', 'game', 'start', href.substr(7));
     },
     noGuide_tapHandler: function (event) {
       var target = $(event.currentTarget)
@@ -99,7 +98,6 @@
         }
       });
       alert('您的需求已收到，我们不会让您久等的。');
-      ga('send', 'event', 'game', 'require', alias);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

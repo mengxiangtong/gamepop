@@ -2,10 +2,11 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
-  var TITLES = {
-    'all': '攻略大全',
-    'offline': '离线管理'
-  };
+  var touches
+    , TITLES = {
+        'all': '攻略大全',
+        'offline': '离线管理'
+      };
 
   ns.GUI = Backbone.View.extend({
     $apps: null,
@@ -13,10 +14,11 @@
     $router: null,
     $context: null,
     events: {
+      'click': 'clickHandler',
       'click .no-click': 'preventDefault',
       'tap': 'tapHandler',
-      'tap .back-button': 'backButton_tapHandler',
-      'tap .game-button': 'gameButton_tapHandler'
+      'touch': 'touchHandler',
+      'tap .back-button': 'backButton_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -25,6 +27,8 @@
         transform: false
       });
       this.page = $('#page-container');
+      this.loading = this.page.find('#loading').remove();
+      this.error = this.page.find('.alert-error').remove();
     },
     backHome: function () {
       this.page.removeClass('active');
@@ -47,7 +51,7 @@
     },
     showPage: function (url, className, data) {
       this.page
-        .html('<p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>')
+        .html(this.loading)
         .load(url, data, _.bind(this.page_loadCompleteHandler, this))
         .addClass('active');
       this.$el.attr('class', className);
@@ -63,13 +67,9 @@
         history.back();
       }
     },
-    gameButton_tapHandler: function (event) {
-      var href = event.currentTarget.href;
-      ga('send', 'event', 'game', 'start', href.substr(href.lastIndexOf('/') + 1));
-    },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
-        this.$('#page-container').html('加载失败');
+        this.$('#page-container').html(this.error);
         return;
       }
       this.$context.mediatorMap.check(this.page[0]);
@@ -78,11 +78,21 @@
         gamepop.polyfill.checkScroll(this.page[0], this);
       }
     },
+    clickHandler: function (event) {
+      // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
+      // 这个函数通过记录touch时的对象，和之后的a对比，如果不等于或者不包含就放弃该次点击
+      if (event.target !== touches && !$.contains(event.target, touches)) {
+        event.preventDefault();
+      }
+    },
     preventDefault: function (event) {
       event.preventDefault();
     },
     tapHandler: function () {
       this.$('.no-guide-dialog').remove();
+    },
+    touchHandler: function (event) {
+      touches = event.target;
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

@@ -70,7 +70,12 @@
   <a href="#/offline" class="btn">离线攻略</a>
 </nav>
 
-<div id="page-container"></div>
+<div id="page-container">
+  <p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>
+  <div class="alert alert-error">
+    <i class="fa fa-frown-o"></i> 加载失败
+  </div>
+</div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>

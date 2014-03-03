@@ -44,7 +44,10 @@
       var id = event.currentTarget.href.substr(9),
           model = this.collection.get(id);
       setTimeout(function () {
-        model.set('has-offline', false);
+        model.set({
+          "has-offline": false,
+          "url": "#/remote/" + id + '/'
+        });
       }, 600);
       target.addClass('disabled')
         .find('i').toggleClass('fa-trash fa-spin fa-spinner');

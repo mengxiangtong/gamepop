@@ -29,7 +29,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      start: [BUILD, '../popo.*.zip'],
+      start: [BUILD, '../popo.<%= pkg.version %>.zip'],
       end: [TEMP]
     },
     copy: {
