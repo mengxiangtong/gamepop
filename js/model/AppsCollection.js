@@ -9,9 +9,9 @@
     },
     parse: function (response) {
       if (_.isArray(response)) {
-        this.reset(response);
+        return response;
       } else if ('apps' in response) {
-        this.reset(response.apps);
+        return response.apps;
       }
     }
   });

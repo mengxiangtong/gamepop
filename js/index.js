@@ -67,7 +67,8 @@
         .map('.game-page', gamepop.view.GamePage, {
           isSingle: true,
           collection: appsCollection
-        });
+        })
+        .map('.ds-thread', gamepop.component.DuoshuoProxy);
     context.mapEvent('download', gamepop.controller.DownloadCommand);
     context.mapEvent('collapse-apps', gamepop.controller.AppsListCollapseCommand);
 
@@ -83,7 +84,11 @@
     gamepop.refresh = _.bind(appsCollection.fetch, appsCollection);
 
     // for duoshuo
+    console.log('online: ' + navigator.onLine);
     if (navigator.onLine) {
+      if (DEBUG) {
+        DUOSHUO = null;
+      }
       var script = document.createElement('script');
       script.async = true;
       script.src = 'http://static.duoshuo.com/embed.js';

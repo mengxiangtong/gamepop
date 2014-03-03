@@ -9,7 +9,7 @@ var DEBUG = true
     polyfill: {},
     controller: {}
   }
-  , DUOSHUO = DUOSHUO || {
+  , DUOSHUO = {
     EmbedThread: function (dom) {}
   }
   , ga = ga || function (method, url) { };

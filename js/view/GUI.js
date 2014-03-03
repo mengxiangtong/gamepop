@@ -3,7 +3,7 @@
  */
 ;(function (ns) {
   var TITLES = {
-    'all': '全部攻略',
+    'all': '攻略大全',
     'offline': '离线管理'
   };
 
@@ -73,11 +73,6 @@
         return;
       }
       this.$context.mediatorMap.check(this.page[0]);
-      // 多说评论框
-      var duoshuo = this.page.find('.ds-thread');
-      if ('DUOSHUO' in window && duoshuo.length > 0) {
-        DUOSHUO.EmbedThread(duoshuo[0]);
-      }
       // android 2.x 刷新滚动条
       if (!gamepop.polyfill.refreshScroll(this)) {
         gamepop.polyfill.checkScroll(this.page[0], this);

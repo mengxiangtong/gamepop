@@ -30,9 +30,9 @@
       interval = 0;
     }
   }
-  ns.DownloadCommand = function (id, name, collection, context) {
-    games = context.getValue('downloads');
-    var icon = context.getValue('all').get(id) ? context.getValue('all').get(id).get('icon_path') : 'img/image.png';
+  ns.DownloadCommand = function (id, name, collection) {
+    games = this.getValue('downloads');
+    var icon = this.getValue('all').get(id) ? this.getValue('all').get(id).get('icon_path') : 'img/image.png';
     if (!collection.get(id)) {
       collection.add({
         "id": id,

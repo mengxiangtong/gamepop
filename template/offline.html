@@ -3,7 +3,7 @@
     {{#each apps}}
     {{#if has-guide}}
     <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
-      <a href="{{url}}"><img src="{{icon}}" /></a>
+      <a href="{{url}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" /></a>
       <h2><a href="{{url}}">{{name}}</a></h2>
       <div class="btn-group">
         {{#if has-offline}}

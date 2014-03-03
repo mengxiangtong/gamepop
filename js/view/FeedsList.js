@@ -6,6 +6,7 @@
   ns.FeedsList = Backbone.View.extend({
     $context: null,
     $router: null,
+    loadButton: null,
     events: {
       'tap .item': 'item_tapHandler',
       'tap .load-more': 'loadButton_tapHandler',
@@ -30,6 +31,7 @@
       this.$('ul')
         .html(this.template({feeds: collection.toJSON()}))
         .append(this.loadButton);
+      this.loadButton.removeClass('disabled');
 
       gamepop.polyfill.checkScroll(this.$el[1], this);
     },
@@ -43,7 +45,8 @@
         fragment = null;
         gamepop.polyfill.refreshScroll(this);
       }
-      this.$('.load-more i').remove();
+      this.loadButton.removeClass('disabled')
+        .find('i').remove();
     },
     extendButton_tapHandler: function () {
       this.$context.trigger('collapse-apps');
@@ -55,6 +58,10 @@
     },
     loadButton_tapHandler: function (event) {
       var target = $(event.currentTarget);
+      if (target.hasClass('disabled')) {
+        return;
+      }
+      target.addClass('disabled');
       if (this.collection.next()) {
         target.prepend('<i class="fa fa-spin fa-spinner"></i>');
       } else {

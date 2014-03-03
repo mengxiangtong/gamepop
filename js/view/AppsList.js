@@ -29,6 +29,10 @@
         .html(html);
       var indicators = this.$('.indicators');
       if (data.length > 8) {
+        if (this.iscroll) {
+          this.iscroll.refresh();
+          return;
+        }
         this.iscroll = new IScroll('#apps-container', {
           scrollX: true,
           scrollY: false,
@@ -47,7 +51,11 @@
           .width(width)
           .css('margin-left', (-width >> 1) + 'px');
       } else {
-        indicators.remove();
+        if (this.iscroll) {
+          this.iscroll.destroy();
+          this.iscroll = null;
+        }
+        indicators.hide();
       }
     },
     collection_addHandler: function () {
@@ -68,7 +76,7 @@
         , height = target.height()
         , link = target.find('a').attr('href')
         , alias = link.substr(link.lastIndexOf('/') + 1)
-        , name = target.find('figcaption').text();
+        , name = target.find('h3').text();
       this.menu
         .css({
           top: offset.top + height - 30,

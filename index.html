@@ -22,7 +22,7 @@
       <script type="text/html-template">
         {{#each apps}}
         <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
-          <a href="{{url}}" title="{{name}}"><img src="{{icon}}" alt="{{name}}"></a>
+          <a href="{{url}}" title="{{name}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" alt="{{name}}"></a>
           <h3><a href="{{url}}" title="{{name}}">{{name}}</a></h3>
         </li>
         {{/each}}
@@ -57,7 +57,7 @@
       </li>
       {{/each}}
     </script>
-    <li class="load-more">
+    <li class="load-more disabled">
       点击加载更多
     </li>
   </ul>
@@ -65,7 +65,7 @@
 
 
 <nav id="main-nav" class="row">
-  <a href="#/all" class="btn">全部攻略</a>
+  <a href="#/all" class="btn">攻略大全</a>
   <a href="#/" class="btn">我的游戏</a>
   <a href="#/offline" class="btn">离线攻略</a>
 </nav>
@@ -91,6 +91,7 @@
 <script src="js/view/GamePage.js"></script>
 <script src="js/controller/DownloadCommand.js"></script>
 <script src="js/controller/Commands.js"></script>
+<script src="js/component/DuoshuoProxy.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/polyfill/Android.js"></script>
 <script src="js/define.js"></script>
