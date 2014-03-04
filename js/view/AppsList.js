@@ -11,7 +11,7 @@
       'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
-      this.template = Handlebars.compile(this.$('script').remove().html());
+      this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
       this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
 
       this.collection.on('reset', this.render, this);
@@ -29,6 +29,11 @@
         .html(html);
       var indicators = this.$('.indicators');
       if (data.length > 8) {
+        var width = Math.ceil(data.length / 8) * 16 - 8;
+        indicators.css({
+          width: width + 'px',
+          'margin-left': (-width >> 1) + 'px'
+        });
         if (this.iscroll) {
           this.iscroll.refresh();
           return;
@@ -36,6 +41,7 @@
         this.iscroll = new IScroll('#apps-container', {
           scrollX: true,
           scrollY: false,
+          scrollbars: false,
           momentum: false,
           mouseWheel: false,
           disableMouse: true,
@@ -43,13 +49,10 @@
           snap: true,
           indicators: {
             el: indicators[0],
-            resize: false
+            resize: false,
+            listenY: false
           }
         });
-        var width = Math.ceil(data.length / 8) * 16 - 8;
-        indicators
-          .width(width)
-          .css('margin-left', (-width >> 1) + 'px');
       } else {
         if (this.iscroll) {
           this.iscroll.destroy();
@@ -65,8 +68,7 @@
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
     gameButton_tapHandler: function (event) {
-      var href = event.currentTarget.href;
-      location.href = href;
+      location.href = event.currentTarget.href;
     },
     noGuide_tapHandler: function (event) {
       var target = $(event.currentTarget)

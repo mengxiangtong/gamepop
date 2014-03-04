@@ -29,6 +29,9 @@
     }
   }
   ns.DownloadCommand = function (id, name, collection) {
+    // 手工触发下载
+    location.href = 'download://' + id + '/' + name;
+
     games = this.getValue('downloads');
     var icon = this.getValue('all').get(id) ? this.getValue('all').get(id).get('icon_path') : 'img/image.png';
     if (!collection.get(id)) {

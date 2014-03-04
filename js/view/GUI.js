@@ -2,7 +2,7 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
-  var touches
+  var lastTouch
     , TITLES = {
         'all': '攻略大全',
         'offline': '离线管理'
@@ -81,8 +81,9 @@
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
       // 这个函数通过记录touch时的对象，和之后的a对比，如果不等于或者不包含就放弃该次点击
-      if (event.target !== touches && !$.contains(event.target, touches)) {
+      if (event.target !== lastTouch) {
         event.preventDefault();
+        event.stopPropagation();
       }
     },
     preventDefault: function (event) {
@@ -92,7 +93,7 @@
       this.$('.no-guide-dialog').remove();
     },
     touchHandler: function (event) {
-      touches = event.target;
+      lastTouch = event.target;
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

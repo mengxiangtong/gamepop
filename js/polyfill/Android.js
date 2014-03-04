@@ -13,7 +13,7 @@
    * @return IScroll
    */
   ns.checkScroll = function (dom, context) {
-    if (isAndroid && androidVersion < 3) {
+    if (this.needIScroll) {
       if (context.iscroll) {
         context.iscroll.destroy();
       }
@@ -43,4 +43,5 @@
     }
     return false;
   }
+  ns.needIScroll = isAndroid && androidVersion < 3;
 }(Nervenet.createNameSpace('gamepop.polyfill')));

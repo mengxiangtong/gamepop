@@ -71,6 +71,9 @@
         .map('.ds-thread', gamepop.component.DuoshuoProxy);
     context.mapEvent('download', gamepop.controller.DownloadCommand);
     context.mapEvent('collapse-apps', gamepop.controller.AppsListCollapseCommand);
+    if (gamepop.polyfill.needIScroll) {
+      context.mapEvent('refresh-iscroll', gamepop.controller.refreshIScrollCommand);
+    }
 
     // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
     // 所以只能用JS算出宽度
