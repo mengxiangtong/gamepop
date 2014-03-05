@@ -28,12 +28,13 @@
         .find('.fa-spin').toggleClass('fa-spin fa-spinner')
         .end().last().prop('disabled', this.collection.curr > this.collection.total - 2)
         .end().first().prop('disabled', this.collection.curr < 1);
+      this.form.removeClass('loading');
 
       this.$context.trigger('refresh-iscroll');
     },
     setElement: function (el, delegate) {
       Backbone.View.prototype.setElement.call(this, el, delegate);
-      this.form = this.$('form')[0];
+      this.form = this.$('form');
       this.list = this.$('#guide-list');
       this.render();
     },
@@ -41,6 +42,9 @@
       this.render();
     },
     filter_tapHandler: function (event) {
+      if (this.form.hasClass('loading')) {
+        return;
+      }
       var target = $(event.currentTarget);
       if (!target.hasClass('active')) {
         target.addClass('active');
@@ -55,6 +59,7 @@
       this.collection.setOptions(target.name, target.value);
       dropdown.removeClass('active');
       label.append('<i class="fa fa-spin fa-spinner"></i>');
+      this.form.addClass('loading');
     },
     pagination_tapHandler: function (event) {
       if (event.currentTarget.disabled) {

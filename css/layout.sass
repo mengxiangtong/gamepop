@@ -111,7 +111,7 @@ body
     position: absolute
     top: 0
     left: 0
-    width: 190px
+    width: 180px
 
     &:before
       position: absolute
@@ -130,6 +130,10 @@ body
         width: 100%
         text-align: center
         display: block
+
+    @for $i from 1 through 8
+      &.offset#{$i}:before
+        margin-left: -12px + 8px * $i
 
 #feeds-title
   margin: 0

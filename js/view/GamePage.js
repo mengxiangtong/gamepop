@@ -49,7 +49,7 @@
       // 下载按钮的状态
       game = this.$context.getValue('game');
       var model = this.collection.get(game);
-      if (model && model.has('downloading')) {
+      if (model && model.get('downloading')) {
         this.setDownloadButtonStatus('downloading', model.get('progress'));
       }
       if (model && model.get('has-offline')) {

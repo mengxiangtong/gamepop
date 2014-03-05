@@ -12,7 +12,14 @@ var DEBUG = true
   , DUOSHUO = {
     EmbedThread: function (dom) {}
   }
-  , ga = ga || function (method, url) { };
+  , ga = {
+    event: function (type, target, label, value) {
+      console.log(type, target, label, value)
+    },
+    pageview: function (url) {
+      console.log(url);
+    }
+  };
 
 if (DEBUG) {
   (function (window) {

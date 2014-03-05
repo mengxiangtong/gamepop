@@ -1,6 +1,12 @@
 {
   "apps": [
     {
+      "id": "skype",
+      "url": "#/no-guide/skype",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    },
+    {
       "id": "bilibili",
       "url": "#/local/hdppl/",
       "name": "哔哩哔哩动画",
@@ -14,12 +20,6 @@
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
-    },
-    {
-      "id": "skype",
-      "url": "#/no-guide/skype",
-      "name": "Skype",
-      "icon": "./mocks/images/skype.jpg"
     },
     {
       "id": "bilibili1",
@@ -51,17 +51,17 @@
       "has-offline": true
     },
     {
+      "id": "skype2",
+      "url": "#/no-guide/skype",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    },
+    {
       "id": "zhihu2",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
-    },
-    {
-      "id": "skype2",
-      "url": "#/no-guide/skype",
-      "name": "Skype",
-      "icon": "./mocks/images/skype.jpg"
     }
   ]
 }

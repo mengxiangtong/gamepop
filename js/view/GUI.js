@@ -16,9 +16,9 @@
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
-      'tap': 'tapHandler',
       'touch': 'touchHandler',
-      'tap .back-button': 'backButton_tapHandler'
+      'tap .back-button': 'backButton_tapHandler',
+      'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -67,6 +67,10 @@
         history.back();
       }
     },
+    gameButton_tapHandler: function (event) {
+      ga.event('game', 'play', this.$context.getValue('game'));
+      location.href = event.currentTarget.href;
+    },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
         this.$('#page-container').html(this.error);
@@ -81,7 +85,10 @@
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
       // 这个函数通过记录touch时的对象，和之后的a对比，如果不等于或者不包含就放弃该次点击
-      if (event.target !== lastTouch) {
+      // 还要避免label和对应的input之间出现click问题
+      var isLabel = lastTouch.tagName.toLowerCase() === 'label'
+        , isLabelControl = isLabel && event.target === lastTouch.control;
+      if (event.target !== lastTouch && !isLabelControl) {
         event.preventDefault();
         event.stopPropagation();
       }
@@ -89,10 +96,11 @@
     preventDefault: function (event) {
       event.preventDefault();
     },
-    tapHandler: function () {
-      this.$('.no-guide-dialog').remove();
-    },
     touchHandler: function (event) {
+      var dialog = this.$('.no-guide-dialog');
+      if (dialog.length > 0 && !$.contains(dialog[0], event.target)) {
+        dialog.remove();
+      }
       lastTouch = event.target;
     }
   });

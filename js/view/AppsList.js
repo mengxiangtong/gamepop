@@ -7,8 +7,7 @@
     $router: null,
     events: {
       'tap .no-guide': 'noGuide_tapHandler',
-      'tap .require-button': 'requireButton_tapHandler',
-      'tap .game-button': 'gameButton_tapHandler'
+      'tap .require-button': 'requireButton_tapHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
@@ -67,9 +66,6 @@
     collection_changeHandler: function (model) {
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
     },
-    gameButton_tapHandler: function (event) {
-      location.href = event.currentTarget.href;
-    },
     noGuide_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , offset = target.position()
@@ -77,13 +73,18 @@
         , height = target.height()
         , link = target.find('a').attr('href')
         , alias = link.substr(link.lastIndexOf('/') + 1)
-        , name = target.find('h3').text();
+        , name = target.find('h3').text()
+        , left = offset.left + (width - 180 >> 1)
+        , maxLeft = document.body.clientWidth - 180;
       this.menu
         .css({
           top: offset.top + height - 30,
-          left: offset.left + (width - 180 >> 1)
+          left: left > maxLeft ? maxLeft : left
         })
         .appendTo(this.$el)
+        .toggleClass(function () {
+          return 'offset' + ((left - maxLeft >> 3) + 1);
+        }, left > maxLeft)
         .find('.require-button').attr('href', '#/require/' + alias)
         .end().find('.game-button').attr('href', 'game://' + alias + '/' + name);
 
@@ -100,6 +101,7 @@
         }
       });
       alert('您的需求已收到，我们不会让您久等的。');
+      ga.event('game', 'require', alias);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

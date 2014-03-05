@@ -8,16 +8,19 @@
     games = _.filter(games, function (game) {
       var percent = progress.getDownLoadProgress(game.id);
       if (percent >= 100) {
+        game.unset('progress');
         game.set({
           "has-offline": true,
           "downloading": false,
           "url": '#/local/' + game.id + '/index.html'
         });
+        ga.event('download', 'ok', game.id);
         return false;
       } else if (percent === -1) {
         game.set({
           "downloading": false
         });
+        ga.event('download', 'fail', game.id);
         return false;
       }
       game.set('progress', percent);
@@ -56,5 +59,6 @@
     if (interval === 0) {
       interval = setInterval(check, 500);
     }
+    ga.event('download', 'start', id);
   };
 }(Nervenet.createNameSpace('gamepop.controller')));
