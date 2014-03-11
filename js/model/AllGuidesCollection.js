@@ -16,7 +16,7 @@
       this.url = config.all + this.curr + '/';
       Backbone.Collection.prototype.fetch.call(this, {
         reset: true,
-        data: this.options
+        data: _.extend({ts: Date.now()}, this.options)
       });
     },
     parse: function (response) {

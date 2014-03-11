@@ -32,7 +32,7 @@
         indicators.css({
           width: width + 'px',
           'margin-left': (-width >> 1) + 'px'
-        });
+        }).show();
         if (this.iscroll) {
           this.iscroll.refresh();
           return;
@@ -45,6 +45,7 @@
           mouseWheel: false,
           disableMouse: true,
           disablePointer: true,
+          click: true,
           snap: true,
           indicators: {
             el: indicators[0],

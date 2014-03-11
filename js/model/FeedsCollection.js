@@ -15,7 +15,8 @@
       this.fetch({
         reset: true,
         data: {
-          ps: 20
+          ps: 20,
+          ts: Date.now()
         }
       });
     },
@@ -34,7 +35,8 @@
       this.fetch({
         data: {
           ps: 20,
-          pn: curr
+          pn: curr,
+          ts: Date.now()
         }
       });
       return true;

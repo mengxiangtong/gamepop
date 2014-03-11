@@ -2,11 +2,12 @@
  * Created by meathill on 14-2-14.
  */
 ;(function (ns) {
-  var games
+  var games = []
     , interval = 0;
   function check() {
     games = _.filter(games, function (game) {
       var percent = progress.getDownLoadProgress(game.id);
+      console.log('check', game.id, percent);
       if (percent >= 100) {
         game.unset('progress');
         game.set({
@@ -26,7 +27,9 @@
       game.set('progress', percent);
       return true;
     });
+    console.log('check turn', games.length);
     if (games.length === 0) {
+      console.log('download all');
       clearInterval(interval);
       interval = 0;
     }
@@ -35,7 +38,6 @@
     // 手工触发下载
     location.href = 'download://' + id + '/' + name;
 
-    games = this.getValue('downloads');
     var icon = this.getValue('all').get(id) ? this.getValue('all').get(id).get('icon_path') : 'img/image.png';
     if (!collection.get(id)) {
       collection.add({

@@ -48,7 +48,6 @@
     context.mapValue('router', router);
     context.mapValue('all', allGuidesCollection);
     context.mapValue('apps', appsCollection);
-    context.mapValue('downloads', []);
     context.mediatorMap.isBackbone = true;
     context
       .inject(gui)

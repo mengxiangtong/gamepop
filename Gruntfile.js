@@ -76,7 +76,8 @@ module.exports = function (grunt) {
             'PHONEGAP': false
           },
           dead_code: true,
-          unused: true
+          unused: true,
+          drop_console: true
         },
         report: 'gzip'
       },
