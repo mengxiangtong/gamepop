@@ -34,18 +34,18 @@
     },
     showLocalGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPage(config.local + game + '/' + path, 'local game-' + game);
+      this.$gui.showPage(config.local + game + '/' + path, 'local game game-' + game);
       this.$gui.setGame(game);
       ga.pageview('local/' + game + '/' + path);
     },
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPage(config.remote + game + '/' + path, 'remote game-' + game);
+      this.$gui.showPage(config.remote + game + '/' + path, 'remote game game-' + game);
       this.$gui.setGame(game);
       ga.pageview('remote/' + game + '/' + path);
     },
     showNewsById: function (id) {
-      this.$gui.showPage(config.news, 'news-' + id, {id: id});
+      this.$gui.showPage(config.news, 'news news-' + id, {id: id});
       ga.pageview('news/' + id);
     }
   });

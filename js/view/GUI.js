@@ -68,7 +68,7 @@
       }
     },
     gameButton_tapHandler: function (event) {
-      ga.event('game', 'play', this.$context.getValue('game'));
+      ga.event(['game', 'play', this.$context.getValue('game')].join(','));
       location.href = event.currentTarget.href;
     },
     page_loadCompleteHandler: function (response, status) {

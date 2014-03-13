@@ -102,7 +102,7 @@
         }
       });
       alert('您的需求已收到，我们不会让您久等的。');
-      ga.event('game', 'require', alias);
+      ga.event(['game', 'require', alias].join(','));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

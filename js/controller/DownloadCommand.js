@@ -15,13 +15,13 @@
           "downloading": false,
           "url": '#/local/' + game.id + '/index.html'
         });
-        ga.event('download', 'ok', game.id);
+        ga.event(['download', 'ok', game.id].join(','));
         return false;
       } else if (percent === -1) {
         game.set({
           "downloading": false
         });
-        ga.event('download', 'fail', game.id);
+        ga.event(['download', 'fail', game.id].join(','));
         return false;
       }
       game.set('progress', percent);
@@ -61,6 +61,6 @@
     if (interval === 0) {
       interval = setInterval(check, 500);
     }
-    ga.event('download', 'start', id);
+    ga.event(['download', 'start', id].join(','));
   };
 }(Nervenet.createNameSpace('gamepop.controller')));
