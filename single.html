@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, height=device-height"/>
+<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/component.css">
+<link rel="stylesheet" href="css/framework.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/page.css">
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/media.css">
+<title>游戏泡泡</title>
+
+<header id="header">
+  <a href="#/" class="back-button btn no-click"><i class="fa fa-chevron-left"></i></a>
+  <h1 id="logo">游戏泡泡</h1>
+  <a href="#" class="game-button btn"><i class="fa fa-gamepad"></i></a>
+</header>
+
+<div id="page-container">
+  <p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>
+  <div class="alert alert-error">
+    <i class="fa fa-frown-o"></i> 加载失败
+  </div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script src="bower_components/hammerjs/hammer.min.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="bower_components/backbone/backbone-min.js"></script>
+<script src="bower_components/nervenet/nervenet.min.js"></script>
+<script src="bower_components/iscroll/dist/iscroll-min.js"></script>
+<script src="js/view/GUI.js"></script>
+<script src="js/view/GamePage.js"></script>
+<script src="js/SingleRouter.js"></script>
+<script src="js/polyfill/Android.js"></script>
+<script src="js/define.js"></script>
+<script src="js/single.js"></script>

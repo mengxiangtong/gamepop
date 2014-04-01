@@ -2,35 +2,26 @@
  * Created by meathill on 14-1-24.
  */
 module.exports = function (grunt) {
-  var config = grunt.file.readJSON('grunt-config.json')
-    , BUILD = config.build
+  var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
+    , config = grunt.file.readJSON('grunt-config.json')
+    , BUILD =  config[isSingle ?  'single': 'build']
     , TEMP = config.temp
+    , target = isSingle ? 'single.html' : 'index.html'
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , csses = []
     , libs = []
-    , jses = []
-    , html = grunt.file.read('index.html');
-
-  // 取CSS
-  html = html.replace(CSS_REG, function (match, src) {
-    csses.push(src);
-    return '';
-  });
-  html = html.replace(JS_REG, function (match, src) {
-    var isLib = src.substr(0, 2) !== 'js';
-    if (src.indexOf('define.js') !== -1) {
-      return '';
-    }
-    isLib ? libs.push(src) : jses.push(src);
-    return src.indexOf('index.js') !== -1 ? match : '';
-  });
+    , jses = [];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      start: [BUILD, '../popo.<%= pkg.version %>.zip'],
+      start: [BUILD, '../popo.<%= pkg.version %>.zip', '../single.<%= pkg.version %>.zip'],
       end: [TEMP]
+    },
+    index: {
+      index: 'index.html',
+      single: 'single.html'
     },
     copy: {
       font: {
@@ -84,7 +75,7 @@ module.exports = function (grunt) {
       js: {
         files: [{
           src: jses,
-          dest: TEMP + 'index.js'
+          dest: TEMP + (isSingle ? 'single' : 'index') + '.js'
         }]
       }
     },
@@ -107,8 +98,8 @@ module.exports = function (grunt) {
         options: {
           separator: ';\n'
         },
-        src: libs.concat(TEMP + 'index.js'),
-        dest: BUILD + 'js/index.js'
+        src: libs,
+        dest: BUILD + 'js/' + (isSingle ? 'single' : 'index') + '.js'
       },
       css: {
         src: csses,
@@ -124,8 +115,8 @@ module.exports = function (grunt) {
       },
       index: {
         files: [{
-          src: TEMP + 'index.html',
-          dest: BUILD + 'index.html'
+          src: TEMP + target,
+          dest: BUILD + target
         }]
       },
       template: {
@@ -140,7 +131,7 @@ module.exports = function (grunt) {
     compress: {
       app: {
         options: {
-          archive: '../popo.<%= pkg.version %>.zip',
+          archive: '../' + (isSingle ? 'single' : 'popo') + '.<%= pkg.version %>.zip',
           mode: 'zip',
           pretty: true
         },
@@ -164,9 +155,24 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-replace');
 
-  grunt.registerTask('index', 'make index html', function () {
-    html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>')
-    grunt.file.write(TEMP + 'index.html', html);
+  grunt.registerMultiTask('index', 'make index html', function () {
+    var html = grunt.file.read(this.data);
+    // 取CSS
+    html = html.replace(CSS_REG, function (match, src) {
+      csses.push(src);
+      return '';
+    });
+    html = html.replace(JS_REG, function (match, src) {
+      var isLib = src.substr(0, 2) !== 'js';
+      if (src.indexOf('define.js') !== -1) {
+        return '';
+      }
+      isLib ? libs.push(src) : jses.push(src);
+      return /index|single\.js/.test(src) ? match : '';
+    });
+    libs.push(TEMP + grunt.cli.tasks[0] + '.js');
+    html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
+    grunt.file.write(TEMP + this.data, html);
   });
   grunt.registerTask('version', 'create a version file', function () {
     var version = {
@@ -178,13 +184,27 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean:start',
+    'index:index',
     'copy',
     'sass',
     'imagemin',
     'uglify',
     'replace',
     'concat',
-    'index',
+    'htmlmin',
+    'compress',
+    'version',
+    'clean:end'
+  ]);
+  grunt.registerTask('single', [
+    'clean:start',
+    'index:single',
+    'copy',
+    'sass',
+    'imagemin',
+    'uglify',
+    'replace',
+    'concat',
     'htmlmin',
     'compress',
     'version',

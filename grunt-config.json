@@ -1,5 +1,6 @@
 {
   "build": "../web-build/",
+  "single": "../single/",
   "temp": "temp/",
   "version": "../release.log"
 }

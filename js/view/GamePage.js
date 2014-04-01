@@ -102,6 +102,7 @@
     },
     downloadButton_tapHandler: function (event) {
       if ($(event.currentTarget).hasClass('disabled')) {
+        event.preventDefault();
         return;
       }
       var path = event.currentTarget.href
