@@ -170,6 +170,13 @@
 /* ====================================
  * guide
  * ==================================*/
+.single
+  .download-button
+    display: none
+
+  .game-index .back-button
+    display: none
+
 /* ----------------
  * index
  * --------------*/
@@ -209,16 +216,36 @@
   display: none
 
 .home-page
-  padding: 0 0 5%
+  @extend .wrap-container
+  padding: 5px
 
-  a
-    background: #FFF
-    font-size: 22px
-    line-height: 2.5
-    width: 90%
-    margin: 5% 5% 0
-    border: 2px solid #6FADF0
-    color: #3aaff2
+  .item
+    display: inline-block
+    width: 50%
+    padding: 5px
+
+    a
+      display: block
+      height: 80px
+      border: 2px solid #6FADF0
+      position: relative
+      border-radius: 6px
+      -webkit-background-size: cover
+      background-size: cover
+      box-shadow: 0 2px 2px #CCC
+
+    span
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      background: rgba(33, 33, 33, 0.8)
+      font-size: 14px
+      line-height: 1.9em
+      padding-top: 0.1em
+      color: #FFF
+      text-indent: 0.5em
+      border-radius: 0 0 4px 4px
 
 /* ----------------
  * list
@@ -236,55 +263,27 @@
   .list
     @extend .ul
     @extend .row
-    @extend .wrap-container
 
   .item
     @extend .wrap
-    color: #FFF
     font-size: 16px
     line-height: 1.5em
     border-radius: 4px
-    margin-left: 4%
-    margin-bottom: 4%
-    width: 44%
-    max-width: 44%
-
-    &:first-child,
-    &:nth-child(8n)
-      font-size: 20px
-      width: 92%
-      max-width: 92%
+    margin: 3% 3% 0
+    width: 94%
+    background: #EEE
 
     a
-      color: #FFF
       display: block
       padding: 0.75em 1em
       min-height: 4.5em
 
       &:active,
       &.active
-        background-color: rgba(255, 255, 255, 0.125)
+        background-color: #8CC0FC
 
-    &.style1
-      background-color: #324b51
-
-    &.style2
-      background-color: #173943
-
-    &.style3
-      background-color: #18365d
-
-    &.style4
-      background-color: #030f17
-
-    &.style5
-      background-color: #193963
-
-    &.style6
-      background-color: #031728
-
-    &.style7
-      background-color: #122144
+      small
+        color: #999
 
   p
     padding: 0 4%
