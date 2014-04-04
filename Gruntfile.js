@@ -170,7 +170,7 @@ module.exports = function (grunt) {
       isLib ? libs.push(src) : jses.push(src);
       return /index|single\.js/.test(src) ? match : '';
     });
-    libs.push(TEMP + grunt.cli.tasks[0] + '.js');
+    libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
     grunt.file.write(TEMP + this.data, html);
   });
