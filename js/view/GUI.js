@@ -11,6 +11,7 @@
   ns.GUI = Backbone.View.extend({
     $apps: null,
     $all: null,
+    $recent: null,
     $router: null,
     $context: null,
     events: {
@@ -77,10 +78,9 @@
         return;
       }
       this.$context.mediatorMap.check(this.page[0]);
-      // android 2.x 刷新滚动条
-      if (!gamepop.polyfill.refreshScroll(this)) {
-        gamepop.polyfill.checkScroll(this.page[0], this);
-      }
+
+      // 增加历史记录
+      this.$recent.addArticle(location.hash, this.page.find('h1').text(), this.page.find('.thumbnail').attr('src'));
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件

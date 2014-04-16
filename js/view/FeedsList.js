@@ -30,8 +30,6 @@
         .html(this.template({feeds: collection.toJSON()}))
         .append(this.loadButton);
       this.loadButton.removeClass('disabled');
-
-      gamepop.polyfill.checkScroll(this.$el[1], this);
     },
     collection_addHandler: function (model) {
       var html = this.template({feeds: [model.toJSON()]});
@@ -41,14 +39,9 @@
       if (fragment) {
         fragment.insertBefore(this.loadButton);
         fragment = null;
-        gamepop.polyfill.refreshScroll(this);
       }
       this.loadButton.removeClass('disabled')
         .find('i').remove();
-    },
-    extendButton_tapHandler: function () {
-      this.$context.trigger('collapse-apps');
-      this.$('.extend-button').toggleClass('fa-angle-double-down fa-angle-double-up');
     },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).find('a').attr('href');
@@ -65,10 +58,6 @@
       } else {
         target.html('新闻您都看完了，我们会努力找来更多的');
       }
-    },
-    refreshButton_taHandler: function (event) {
-      $(event.target).addClass('fa-spin');
-      this.collection.fetch({reset: true});
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));
