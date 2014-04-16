@@ -2,10 +2,7 @@
 @import "define"
 
 #header
-  color: #333
-  text-shadow: 0 1px 0 #FFF
-  background: #f8f8f8
-  border-bottom: 1px solid #E9E9E9
+  background: $topbar-background-color
 
   .btn
     background: transparent
@@ -14,12 +11,31 @@
       background: #DDD
 
 #logo
-  background: url(../img/logo.png) no-repeat 0 8px
-  font-size: 18px
+  background: url(../img/logo.png) no-repeat 0 4px
+  font-size: 16px
+  text-indent: 50px
+
+#main-nav
+  background-color: $nav-background-color
+
+  a
+    font-size: 16px
+    text-align: center
+
+    &:active
+      background-color: rgba(255, 255, 255, 0.4)
+
+    &.active:after,
+    &:active:after
+      content: ' '
+
+  .badge
+    border: 1px solid #FFF
+    font-size: 12px
+    background-color: #dd514c
 
 #apps
   position: relative
-  background: url(../img/slidebg.png)
   -webkit-transition: all .4s
   transition: all .4s
 
@@ -33,15 +49,11 @@
       content: ''
       background-image: url(../img/icon.png)
       background-size: auto 30px
-      width: 30px
-      height: 30px
 
     &.offline:after
-      width: 37px
       background-position: -37px 0
 
     &.downloading:after
-      width: 37px
       background-position: -75px 0
 
     &.no-guide
@@ -95,17 +107,20 @@
 #feeds
 
   li
-    border-bottom: 1px solid #E7E7E7
+    background-color: $list-background-color
+    border-radius: 4px
 
   a
-    color: #1B416C
     text-decoration: none
-    font-size: 18px
+    font-size: 16px
     font-weight: normal
     line-height: 25px
 
     &:visited
-      color: #999
+      color: #CCC
+
+  img
+    border-radius: 4px
 
   p
     color: #999
@@ -116,23 +131,7 @@
     text-align: center
     color: #666
 
-#main-nav
-  a
-    background: #1397E2
-    color: #FFF
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2)
-    border-radius: 0
-    font-size: 18px
-
-    &.active
-      background: #0683CB
-
-  .badge
-    border: 1px solid #FFF
-    font-size: 12px
-    background-color: #dd514c
-
 #page-container
   overflow-x: hidden
   overflow-y: auto
-  background: #F5F5F5
+  background: $background-color

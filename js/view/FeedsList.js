@@ -9,9 +9,7 @@
     loadButton: null,
     events: {
       'tap .item': 'item_tapHandler',
-      'tap .load-more': 'loadButton_tapHandler',
-      'tap .refresh-button': 'refreshButton_taHandler',
-      'tap .extend-button': 'extendButton_tapHandler'
+      'tap .load-more': 'loadButton_tapHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());

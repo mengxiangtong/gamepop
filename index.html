@@ -16,18 +16,23 @@
   <h1 id="logo">游戏泡泡</h1>
   <a href="#" class="game-button btn"><i class="fa fa-gamepad"></i></a>
 </header>
+<nav id="main-nav" class="row">
+  <a href="#/all">攻略大全</a>
+  <a href="#/">我的游戏</a>
+  <a href="#/offline">离线攻略</a>
+</nav>
+
 <div id="apps">
   <div id="apps-container">
-    <div id="apps-scroller">
+    <ul id="apps-scroller">
       <script type="text/html-template">
         {{#each apps}}
         <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
           <a href="{{url}}" title="{{name}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" alt="{{name}}"></a>
-          <h3><a href="{{url}}" title="{{name}}">{{name}}</a></h3>
         </li>
         {{/each}}
       </script>
-    </div>
+    </ul>
   </div>
   <div class="indicators">
     <div class="token"></div>
@@ -41,17 +46,12 @@
   </div>
 </div>
 
-<h2 id="feeds-title">
-  <i class="bar"></i>
-  游戏新闻
-  <i class="fa fa-refresh fa-spin pull-right refresh-button"></i>
-  <i class="fa fa-angle-double-up pull-right extend-button"></i>
-</h2>
 <div class="one" id="feeds">
   <ul>
     <script type="text/html-template">
       {{#each feeds}}
       <li class="item">
+        {{#if icon_path}}<img src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
         <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
         <p>来源：{{source}} | <time>{{pub_date}}</time></p>
       </li>
@@ -64,11 +64,6 @@
 </div>
 
 
-<nav id="main-nav" class="row">
-  <a href="#/all" class="btn">攻略大全</a>
-  <a href="#/" class="btn">我的游戏</a>
-  <a href="#/offline" class="btn">离线攻略</a>
-</nav>
 
 <div id="page-container">
   <p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>

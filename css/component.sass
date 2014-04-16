@@ -1,4 +1,6 @@
 @charset "utf-8"
+@import "define"
+
 /* ====================================
  * btn
  * ==================================*/
@@ -119,15 +121,16 @@
   position: absolute
   left: 50%
   bottom: 10px
-  font: 8px/8px Airal
+  font: 10px/10px Airal
   background-image: url(../img/indicator.png)
-  min-width: 8px
+  min-width: 10px
 
   div
-    width: 8px
-    height: 8px
+    width: 10px
+    height: 10px
+    border-radius: 50%
     overflow: hidden
-    background: #CECDCD
+    background: $indicator-active-color
 
 /* ====================================
  * badge

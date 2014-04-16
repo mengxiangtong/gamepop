@@ -36,10 +36,8 @@ body
 
 #header
   line-height: $topbar-height
-  height: $topbar-height
   position: relative
   z-index: 20
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2)
 
   .btn
     position: absolute
@@ -56,13 +54,36 @@ body
     right: 10px
 
 #logo
-  padding-left: 50px
-  width: 138px
-  margin: 0 auto
+  margin: 0 0 0 $gap
+
+#main-nav
+  z-index: 15
+
+  a
+    @extend .one-auto
+    display: block
+    line-height: $nav-height
+    position: relative
+
+    &:active:after,
+    &.active:after
+      position: absolute
+      left: 50%
+      margin-left: -6px
+      bottom: 0
+      width: 0
+      height: 0
+      border-left: 6px solid transparent
+      border-right: 6px solid transparent
+      border-bottom: 6px solid $background-color
+
+  .badge
+    position: absolute
+    right: 5px
+    top: 5px
 
 #apps
   position: relative
-  height: 254px
 
   &.collapse
     height: 0
@@ -71,29 +92,31 @@ body
 
   #apps-container
     overflow: hidden
+    padding: $gap-l 0 $gap-l + 10px
 
     ul
       @extend .ul
       @extend .row
-      @extend .wrap-container
-      float: left
-      padding: 5px 5px 15px
 
   .item
-    @extend .wrap
+    @extend .one
     position: relative
-    padding: 5px
-    width: 25%
-    max-width: 25%
+    padding-left: $gap-icon
 
     &:after
       position: absolute
-      right: 3px
-      bottom: 32px
+      right: 0
+      bottom: 0
+      width: 30px
+      height: 29px
 
-    &.offline:after
-      bottom: 31px
-      right: 2px
+    &.guide:after
+      width: 28px
+
+    &.offline:after,
+    &.downloading:after
+      width: 37px
+      height: 27px
 
     img
       display: block
@@ -107,84 +130,31 @@ body
     overflow: hidden
     margin: 0
 
-  .no-guide-dialog
-    position: absolute
-    top: 0
-    left: 0
-    width: 180px
-
-    &:before
-      position: absolute
-      width: 0
-      height: 0
-      top: -15px
-      left: 50%
-      margin-left: -12px
-
-    ul
-      margin: 0
-      padding: 0
-
-      a
-        line-height: 70px
-        width: 100%
-        text-align: center
-        display: block
-
-    @for $i from 1 through 8
-      &.offset#{$i}:before
-        margin-left: -12px + 8px * $i
-
-#feeds-title
-  margin: 0
-  line-height: 40px
-  text-indent: 10px
-
-  .bar
-    display: inline-block
-    width: 5px
-    overflow: hidden
-    height: 0.8em
-    vertical-align: middle
-
-  .fa
-    text-indent: 0
-    line-height: 40px
-    width: 40px
-    text-align: center
-    margin-left: 0
-
 #feeds
   @extend .one
   overflow: auto
+  padding: 0 $gap-icon
 
   ul
     @extend .ul
 
   li
-    padding: 20px
+    padding: $gap
+
+    + li
+      margin-top: $gap
+
+  img
+    max-height: 80px
+    display: block
+    float: left
+    margin-right: $gap
 
   h3
     margin: 0
 
   p
     margin: 10px 0 0
-
-#main-nav
-  position: relative
-  height: $topbar-height
-  z-index: 15
-
-  a
-    @extend .one-auto
-    padding: 0
-    display: block
-    line-height: $topbar-height
-
-  .badge
-    position: absolute
-    right: 5px
-    top: 5px
 
 #page-container
   position: absolute

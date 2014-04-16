@@ -18,17 +18,16 @@
       this.collection.on('change', this.collection_changeHandler, this);
     },
     render: function (collection) {
-      var html = '',
-          data = collection.toJSON();
-      for (var i = 0, len = data.length / 8; i < len; i++) {
-        html += '<ul>' + this.template({apps: data.slice(i * 8, (i + 1) * 8)}) + '</ul>';
-      }
+      var html = this.template({apps: collection.toJSON()})
+        , width = this.$el.width() - 12 >> 2
+        , data = collection.toJSON();
       this.$('#apps-scroller')
-        .width(this.$el.width() * Math.ceil(data.length / 8))
+        .width(width * Math.ceil(data.length / 4) << 2)
+        .css('padding-right', width * (4 - data.length % 4))
         .html(html);
       var indicators = this.$('.indicators');
       if (data.length > 8) {
-        var width = Math.ceil(data.length / 8) * 16 - 8;
+        var width = Math.ceil(data.length / 4) * 20 - 10;
         indicators.css({
           width: width + 'px',
           'margin-left': (-width >> 1) + 'px'

@@ -11,11 +11,9 @@
       , itemWidth = width - 10 >> 2
       , imgWidth = itemWidth - 10
       , height = imgWidth + 50 << 1
-      , content = '#apps{height:' + height + 'px;}';
-    content += '#apps-scroller{height:' + height + 'px;}';
-    content += '#apps-scroller ul{width:' + width + 'px;height:' + height + 'px;}';
-    content += '#apps-scroller .item,#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
-    content += '#apps-scroller img,#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
+      , content = '';
+    content += '#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
+    content += '#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
     content += '.carousel .item,#guide-list{width:' + width + 'px;}';
     style.innerHTML = content;
     document.head.appendChild(style);
