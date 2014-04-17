@@ -1,5 +1,6 @@
 @charset "utf-8"
 @import "define"
+@import "../bower_components/font-awesome/scss/font-awesome"
 
 #header
   background: $topbar-background-color
@@ -19,15 +20,17 @@
   background-color: $nav-background-color
 
   a
-    font-size: 16px
+    font-size: 15px
     text-align: center
 
     &:active
       background-color: rgba(255, 255, 255, 0.4)
 
-    &.active:after,
-    &:active:after
-      content: ' '
+    &.active
+      background-color: #70BFFF
+
+      &:after
+        content: ' '
 
   .badge
     border: 1px solid #FFF
@@ -74,28 +77,6 @@
     text-decoration: none
     font-size: 14px
 
-  .no-guide-dialog
-    background: #2163C5
-    text-align: center
-
-    &:before
-      content: ''
-      border-bottom: 15px solid #2163c5
-      border-left: 12px solid transparent
-      border-right: 12px solid transparent
-
-    .heading
-      font-size: 16px
-      color: #9EB8D2
-      line-height: 45px
-
-    ul
-      list-style: none
-      color: #FFF
-
-      li
-        border-top: 1px solid #497DCC
-
 #feeds-title
   background: #E7E7E7
   font-size: 16px
@@ -131,7 +112,18 @@
     text-align: center
     color: #666
 
-#page-container
+.page-container
   overflow-x: hidden
   overflow-y: auto
   background: $background-color
+
+  .navbar
+    @extend #header
+
+    h2
+      @extend #logo
+      @extend .fa-angle-left
+
+      &:before
+        @extend .fa
+        display: inline

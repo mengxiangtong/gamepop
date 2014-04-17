@@ -15,17 +15,17 @@
       'news/:id': 'showNewsById'
     },
     backHome: function () {
-      this.$gui.backHome();
+      this.$gui.showMainPage('homepage');
       this.$nav.activeNavButton('');
       ga.pageview('home');
     },
     showAll: function () {
-      this.$gui.showPage('template/all.html', 'all');
+      this.$gui.showMainPage('all');
       this.$nav.activeNavButton('all');
       ga.pageview('all');
     },
     showOffline: function () {
-      this.$gui.showPage('template/offline.html', 'offline');
+      this.$gui.showMainPage('offline');
       this.$nav.activeNavButton('offline');
       ga.pageview('offline');
     },
@@ -34,18 +34,18 @@
     },
     showLocalGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPage(config.local + game + '/' + path, 'local game game-' + game);
+      this.$gui.showPopupPage(config.local + game + '/' + path, 'local game game-' + game);
       this.$gui.setGame(game);
       ga.pageview('local/' + game + '/' + path);
     },
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPage(config.remote + game + '/' + path, 'remote game game-' + game);
+      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game game-' + game);
       this.$gui.setGame(game);
       ga.pageview('remote/' + game + '/' + path);
     },
     showNewsById: function (id) {
-      this.$gui.showPage(config.news, 'news news-' + id, {id: id});
+      this.$gui.showPopupPage(config.news, 'news news-' + id, {id: id});
       ga.pageview('news/' + id);
     }
   });

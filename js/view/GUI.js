@@ -3,6 +3,10 @@
  */
 ;(function (ns) {
   var lastTouch
+    , curr = '#homepage'
+    , topPage = '#homepage'
+    , all
+    , offline
     , TITLES = {
         'all': '攻略大全',
         'offline': '离线管理'
@@ -19,7 +23,9 @@
       'click .no-click': 'preventDefault',
       'touch': 'touchHandler',
       'tap .back-button': 'backButton_tapHandler',
-      'tap .game-button': 'gameButton_tapHandler'
+      'tap .game-button': 'gameButton_tapHandler',
+      'webkitAnimationEnd': 'animationEndHandler',
+      'animationEnd': 'animationEndHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -27,16 +33,8 @@
         hold: false,
         transform: false
       });
-      this.page = $('#page-container');
-      this.loading = this.page.find('#loading').remove();
-      this.error = this.page.find('.alert-error').remove();
-    },
-    backHome: function () {
-      this.page.removeClass('active');
-      this.$el.attr('class', '');
-      this.$('h1').text('游戏泡泡');
-      this.$('#main-nav a').removeClass('active')
-        .eq(1).addClass('active');
+      this.template = this.$('#page-container');
+      curr = topPage = $(curr);
     },
     setGame: function (game) {
       if (game === this.$context.getValue('game')) {
@@ -50,23 +48,37 @@
       this.$('.game-button').attr('href', 'game://' + game + '/' + name);
       this.$context.mapValue('game', game, true);
     },
-    showPage: function (url, className, data) {
-      this.page
-        .html(this.loading)
-        .load(url, data, _.bind(this.page_loadCompleteHandler, this))
-        .addClass('active');
+    showMainPage: function (target) {
+      if (curr.is('#' + target)) {
+        return;
+      }
+      var page = $('#' + target)
+        , outDir = page.index() < curr.index() ? 'Right' : 'Left'
+        , inDir = outDir === 'Left' ? 'Right' : 'Left';
+      page.removeClass('out').addClass('active animated slideIn' + inDir);
+      curr.addClass('animated slideOut' + outDir);
+      curr = page;
+      this.$context.mediatorMap.check(page[0]);
+      this.$('h1').text(TITLES[target] || '游戏泡泡');
+    },
+    showPopupPage: function (url, className, data, title) {
+      topPage = this.template.clone();
+      topPage
+        .removeClass('out')
+        .addClass('active animated fast fadeInScaleUp')
+        .appendTo('body')
+        .find('h2').text(title).end()
+        .find('.content').load(url, data, _.bind(this.page_loadCompleteHandler, this));
       this.$el.attr('class', className);
-      this.$('h1').text(TITLES[className] || '游戏泡泡');
     },
     backButton_tapHandler: function () {
       var hash = location.hash.substr(2);
       if (hash === '') {
         location.href = 'popo:return';
-      } else if (hash === 'all' || hash === 'offline') {
-        this.$router.navigate('#/');
       } else {
         history.back();
       }
+      $(event.target).closest('.page-container').addClass('animated fast fadeOutScaleDown');
     },
     gameButton_tapHandler: function (event) {
       ga.event(['game', 'play', this.$context.getValue('game')].join(','));
@@ -74,13 +86,34 @@
     },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
-        this.$('#page-container').html(this.error);
+        topPage
+          .find('.alert').removeClass('hide').end()
+          .find('.loading').remove();
         return;
       }
-      this.$context.mediatorMap.check(this.page[0]);
+      this.$context.mediatorMap.check(topPage[0]);
 
       // 增加历史记录
-      this.$recent.addArticle(location.hash, this.page.find('h1').text(), this.page.find('.thumbnail').attr('src'));
+      if (topPage.is('.page-container')) {
+        topPage.find('.navbar h2').text(topPage.find('h1, h2').text());
+        this.$recent.addArticle(location.hash, topPage.find('h1, h2').text(), topPage.find('.thumbnail').attr('src'));
+      }
+    },
+    animationEndHandler: function (event) {
+      var target = $(event.target)
+        , classes = event.target.className;
+      if (/slideout/i.test(classes)) {
+        return target.removeClass('animated slideOutLeft slideOutRight active').addClass('out');
+      }
+      if (/slidein/i.test(classes)){
+        return target.removeClass('animated slideInLeft slideInRight');
+      }
+      if (/scaleup/i.test(classes)) {
+        return target.removeClass('animated fadeInScaleUp fast');
+      }
+      if (/scaledown/i.test(classes)) {
+        return target.remove();
+      }
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件

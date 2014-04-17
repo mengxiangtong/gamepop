@@ -1,5 +1,6 @@
 @charset "utf-8"
 @import "define"
+@import "../bower_components/colors/sass/variables"
 
 /* ====================================
  * all
@@ -66,8 +67,7 @@
 #guide-list
   @extend .ul
   @extend .wrap-container
-  min-height: 300px
-  padding: 55px 5px 0
+  padding: $gap 5px
 
   .item
     @extend .wrap
@@ -244,6 +244,12 @@
       color: #FFF
       text-indent: 0.5em
       border-radius: 0 0 4px 4px
+
+  .btn
+    font-size: 20px
+    background-color: $blue
+    width: 90%
+    margin: $gap 5%
 
 /* ----------------
  * list

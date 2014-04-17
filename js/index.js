@@ -6,12 +6,11 @@
   function onDeviceReady() {
     init();
   }
-  function createCss(width) {
+  function createCss(width, height) {
     var style = document.createElement('style')
       , itemWidth = width - 10 >> 2
       , imgWidth = itemWidth - 10
-      , height = imgWidth + 50 << 1
-      , content = '';
+      , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
     content += '#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
     content += '#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
     content += '.carousel .item,#guide-list{width:' + width + 'px;}';
@@ -72,7 +71,7 @@
 
     // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
     // 所以只能用JS算出宽度
-    createCss(document.body.clientWidth);
+    createCss(document.body.clientWidth, document.body.clientHeight);
 
     // 分析路径
     Backbone.history.start();
@@ -80,6 +79,9 @@
     // for native
     gamepop.back = _.bind(gui.backButton_tapHandler, gui);
     gamepop.refresh = _.bind(appsCollection.fetch, appsCollection);
+
+    // stat
+    ga.pageview('/');
   }
 
   if (PHONEGAP) {

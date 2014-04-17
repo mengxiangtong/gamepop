@@ -37,27 +37,25 @@ body
 #header
   line-height: $topbar-height
   position: relative
-  z-index: 20
+  z-index: 5
 
   .btn
     position: absolute
-    top: 4px
-    display: none
-    font-size: 2em
-    padding: 4px 0
+    font-size: 1.5em
+    top: 0
+    line-height: $topbar-height - 3px
+    border: 0
+    padding: 0 0 3px
     min-width: 40px
 
-  .back-button
-    left: 5px
-
-  .game-button
-    right: 10px
+  .search-button
+    right: $gap-s
 
 #logo
   margin: 0 0 0 $gap
 
 #main-nav
-  z-index: 15
+  z-index: 5
 
   a
     @extend .one-auto
@@ -65,7 +63,6 @@ body
     line-height: $nav-height
     position: relative
 
-    &:active:after,
     &.active:after
       position: absolute
       left: 50%
@@ -142,10 +139,10 @@ body
     padding: $gap
 
     + li
-      margin-top: $gap
+      margin-top: $gap-s
 
   img
-    max-height: 80px
+    height: 80px
     display: block
     float: left
     margin-right: $gap
@@ -156,21 +153,54 @@ body
   p
     margin: 10px 0 0
 
-#page-container
+.app-container
+  @extend .column
+  @extend .one
+  overflow: auto
+  
+  &.active
+    position: absolute
+
+.out
+  display: none
+
+.page-container
   position: absolute
-  top: $topbar-height
+  top: 0
   left: 0
   right: 0
-  bottom: $topbar-height
+  bottom: 0
   z-index: 10
+  padding-top: $topbar-height
   display: none
 
   &.active
     display: block
 
-  #loading
+  .loading
     text-align: center
     padding: 40px 0
 
   img
     max-width: 100%
+
+  .navbar
+    @extend #header
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+
+    h2
+      @extend #logo
+      max-width: 60%
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      margin-left: 25px
+
+      &:before
+        position: absolute
+        left: -45px
+        font-size: 2em
+        line-height: $topbar-height

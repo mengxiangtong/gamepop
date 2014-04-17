@@ -22,6 +22,9 @@ body
   font-size: 14px
   line-height: 1.42857143em
 
+h1, h2, h3, h4
+  font-weight: normal
+
 figure
   margin: 0
 
@@ -44,22 +47,67 @@ a
   background: rgb(202, 60, 60)
 
 
-@keyframes fade
-  from
-    opacity: 1.0
-  50%
-    opacity: 0.4
-  to
-    opacity: 1.0
+/* ====================================
+ * animated
+ * ==================================*/
+.animated.fast
+  -webkit-animation-duration: 0.5s
+  animation-duration: 0.5s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
 
-@-webkit-keyframes fade
-  from
-    opacity: 1.0
-  50%
-    opacity: 0.4
-  to
-    opacity: 1.0
+@-webkit-keyframes fadeInScaleUp
+  0%
+    opacity: 0
+    -webkit-transform: translateY(20px) scale(0.9)
+    transform: translateY(20px) scale(0.9)
 
-.blink
-  -webkit-animation: fade 3000ms infinite
-  animation: fade 3000ms infinite
+  100%
+    opacity: 1
+    -webkit-transform: translateY(0) scale(1)
+    transform: translateY(0) scale(1)
+
+@keyframes fadeInScaleUp
+  0%
+    opacity: 0
+    -webkit-transform: translateY(20px) scale(0.9)
+    -ms-transform: translateY(20px) scale(0.9)
+    transform: translateY(20px) scale(0.9)
+
+  100%
+    opacity: 1
+    -webkit-transform: translateY(0) scale(1)
+    -ms-transform: translateY(0) scale(1)
+    transform: translateY(0) scale(1)
+
+.fadeInScaleUp
+  -webkit-animation-name: fadeInScaleUp
+  animation-name: fadeInScaleUp
+
+@-webkit-keyframes fadeOutScaleDown
+  0%
+    opacity: 1
+    -webkit-transform: translateY(0) scale(1)
+    transform: translateY(0) scale(1)
+
+  100%
+    opacity: 0
+    -webkit-transform: translateY(20px) scale(0.9)
+    transform: translateY(20px) scale(0.9)
+
+@keyframes fadeOutScaleDown
+  0%
+    opacity: 1
+    -webkit-transform: translateY(0) scale(1)
+    -ms-transform: translateY(0) scale(1)
+    transform: translateY(0) scale(1)
+
+  100%
+    opacity: 0
+    -webkit-transform: translateY(20px) scale(0.9)
+    -ms-transform: translateY(20px) scale(0.9)
+    transform: translateY(20px) scale(0.9)
+
+.fadeOutScaleDown
+  -webkit-animation-name: fadeOutScaleDown
+  animation-name: fadeOutScaleDown
