@@ -8,7 +8,8 @@ var config = {
   remote: 'http://a.yxpopo.com/vguide/',
   news: 'http://a.yxpopo.com/news-detail.php',
   require: 'http://a.yxpopo.com/no_guide_log.php',
-  all: 'http://a.yxpopo.com/vapi/game_list/'
+  all: 'http://a.yxpopo.com/vapi/game_list/',
+  search: 'http://a.yxpopo.com/search.php'
 };
 
 if (DEBUG) {
@@ -17,4 +18,5 @@ if (DEBUG) {
   config.remote ='http://meathill.pc/gamepop-api/vguide/';
   config.localhost = 'meathill.pc';
   config.all = 'http://meathill.pc/gamepop-api/game_list/';
+  config.search = 'http://meathill.pc/gamepop-api/search.php';
 }

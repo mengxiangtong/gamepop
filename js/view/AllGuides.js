@@ -22,20 +22,17 @@
       if (!this.template) {
         return;
       }
-      this.list.html(this.template({games: this.collection.toJSON()}));
+      this.$el.html(this.template({games: this.collection.toJSON()}));
       this.$('.filter i').remove();
       this.$('button')
         .find('.fa-spin').toggleClass('fa-spin fa-spinner')
         .end().last().prop('disabled', this.collection.curr > this.collection.total - 2)
         .end().first().prop('disabled', this.collection.curr < 1);
-      this.form.removeClass('loading');
 
       this.$context.trigger('refresh-iscroll');
     },
     setElement: function (el, delegate) {
       Backbone.View.prototype.setElement.call(this, el, delegate);
-      this.form = this.$('form');
-      this.list = this.$('#guide-list');
       this.render();
     },
     collection_resetHandler: function () {

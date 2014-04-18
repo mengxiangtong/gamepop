@@ -38,6 +38,7 @@
           collection: appsCollection
         })
       , recent = new gamepop.model.RecentArticles()
+      , results = new gamepop.model.SearchResults()
       , router = new gamepop.Router();
 
     context.mapValue('gui', gui);
@@ -65,9 +66,12 @@
         .map('.game-page', gamepop.view.GamePage, {
           isSingle: true,
           collection: appsCollection
+        })
+        .map('.search-form', gamepop.view.SearchForm, {
+          isSingle: true,
+          collection: results
         });
     context.mapEvent('download', gamepop.controller.DownloadCommand);
-    context.mapEvent('collapse-apps', gamepop.controller.AppsListCollapseCommand);
 
     // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
     // 所以只能用JS算出宽度
