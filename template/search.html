@@ -1,0 +1,15 @@
+<h2 class="hide">搜索游戏</h2>
+<form class="search-form">
+  <input type="search" name="keyword" placeholder="搜索">
+  <ul class="wrap-container results">
+    <script type="text/x-handlebars-template">
+      {{#each games}}
+      <li class="item">
+        <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
+        <h3><a href="#/remote/{{guide_name}}">{{game_name}}</a></h3>
+      </li>
+      {{/each}}
+    </script>
+    <li class="info">请输入游戏名称</li>
+  </ul>
+</form>

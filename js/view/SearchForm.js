@@ -5,9 +5,7 @@
   ns.SearchForm = Backbone.View.extend({
     events: {
       'submit': 'submitHandler',
-      'keydown input': 'input_keyDownHandler',
-      'focusin input': 'input_focusInHandler',
-      'focusout input': 'input_focusOutHandler'
+      'keydown input': 'input_keyDownHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
@@ -41,14 +39,6 @@
     submitHandler: function (event) {
       this.search();
       event.preventDefault();
-    },
-    input_focusInHandler: function () {
-      this.$('.results').removeClass('hide');
-    },
-    input_focusOutHandler: function () {
-      if (this.collection.length > 0) {
-        this.$('.results').addClass('hide');
-      }
     },
     input_keyDownHandler: function (event) {
       if (event.keyCode === 13) {

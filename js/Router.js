@@ -9,6 +9,7 @@
       "": 'backHome',
       "all": "showAll",
       "offline": "showOffline",
+      "search(/:keyword)": "showSearch",
       "local/:game(/*path)": "showLocalGuide",
       'remote/:game(/*path)': 'showRemoteGuide',
       'news/:id': 'showNewsById'
@@ -39,6 +40,9 @@
       this.$gui.setGame(game);
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game game-' + game);
       ga.pageview('remote/' + game + '/' + path);
+    },
+    showSearch: function (keyword) {
+      this.$gui.showPopupPage('template/search.html', 'search');
     },
     showNewsById: function (id) {
       this.$gui.showPopupPage(config.news, 'news news-' + id, {id: id});

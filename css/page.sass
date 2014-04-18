@@ -5,6 +5,23 @@
 /* ====================================
  * all
  * ==================================*/
+#all .search-button
+  line-height: 28px
+  border-radius: 15px
+  background: $list-background-color
+  margin: $gap-l $gap $gap
+  border: 1px solid #666
+  text-indent: 15px
+  color: #999
+  position: relative
+
+  &:after
+    content: '\f002'
+    font-family: 'FontAwesome'
+    color: #CCC
+    position: absolute
+    right: 15px
+
 #guide-list
   @extend .ul
   @extend .wrap-container

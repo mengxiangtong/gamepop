@@ -61,7 +61,7 @@
       this.$context.mediatorMap.check(page[0]);
       this.$('h1').text(TITLES[target] || '游戏泡泡');
     },
-    showPopupPage: function (url, className, data, title) {
+    showPopupPage: function (url, className, data) {
       if (pages.length > 0 && pages[pages.length - 1].data('url') === url) {
         return;
       }
@@ -71,7 +71,6 @@
         .addClass('active animated fast fadeInScaleUp')
         .data('url', url)
         .appendTo('body')
-        .find('h2').text(title).end()
         .find('.content').load(url, data, _.bind(this.page_loadCompleteHandler, this));
       this.$el.attr('class', className);
       pages.push(topPage);
