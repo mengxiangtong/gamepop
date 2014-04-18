@@ -4,6 +4,7 @@
 ;(function (ns) {
   'use strict';
   var game;
+  // TODO: 下一版先把这里的game和model重构了
   ns.GamePage = Backbone.View.extend({
     $all: null,
     $context: null,
@@ -27,7 +28,7 @@
         var length = carousel.find('.item').length;
         carousel.find('ul').width(document.body.clientWidth * length)
           .end().find('.indicators').css({
-            width: (length << 4) - 8,
+            width: (length * 20) - 10,
             'margin-left': 4 - (length << 3)
           });
         this.iscroll = new IScroll(carousel[0], {
@@ -47,7 +48,7 @@
       }
 
       // 下载按钮的状态
-      game = this.$context.getValue('game');
+      game = this.$context.getValue('game-id');
       var model = this.collection.get(game);
       if (model && model.get('downloading')) {
         this.setDownloadButtonStatus('downloading', model.get('progress'));
@@ -106,7 +107,7 @@
         return;
       }
       var path = event.currentTarget.href
-        , alias = this.$context.getValue('game')
+        , alias = this.$context.getValue('game-id')
         , fullname = decodeURIComponent(path.substr(path.lastIndexOf('/') + 1));
       this.$context.trigger('download', alias, fullname, this.collection);
     }

@@ -9,7 +9,6 @@
       "": 'backHome',
       "all": "showAll",
       "offline": "showOffline",
-      'config': 'showConfiguration',
       "local/:game(/*path)": "showLocalGuide",
       'remote/:game(/*path)': 'showRemoteGuide',
       'news/:id': 'showNewsById'
@@ -29,19 +28,16 @@
       this.$nav.activeNavButton('offline');
       ga.pageview('offline');
     },
-    showConfiguration: function () {
-      this.$gui.showPage('template/config.html', 'config');
-    },
     showLocalGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPopupPage(config.local + game + '/' + path, 'local game game-' + game);
       this.$gui.setGame(game);
+      this.$gui.showPopupPage(config.local + game + '/' + path, 'local game game-' + game);
       ga.pageview('local/' + game + '/' + path);
     },
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
-      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game game-' + game);
       this.$gui.setGame(game);
+      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game game-' + game);
       ga.pageview('remote/' + game + '/' + path);
     },
     showNewsById: function (id) {

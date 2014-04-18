@@ -22,9 +22,23 @@
   <a href="#/offline">离线攻略</a>
 </nav>
 
-<div class="app-container all-guides-list out" id="all">
-  <ul id="guide-list" class="row">
-    <script type="text/html-template">
+<div class="app-container out" id="all">
+  <form class="search-form">
+    <input type="search" name="keyword" placeholder="搜索">
+    <ul class="wrap-container results hide">
+      <script type="text/x-handlebars-template">
+      {{#each games}}
+      <li class="item">
+        <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
+        <h3><a href="#/remote/{{guide_name}}">{{game_name}}</a></h3>
+      </li>
+      {{/each}}
+      </script>
+      <li class="info">搜索结果</li>
+    </ul>
+  </form>
+  <ul id="guide-list" class="row all-guides-list one">
+    <script type="text/x-handlebars-template">
       {{#each games}}
       <li class="item">
         <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
@@ -40,7 +54,7 @@
   <div id="apps">
     <div id="apps-container">
       <ul id="apps-scroller">
-        <script type="text/html-template">
+        <script type="text/x-handlebars-template">
           {{#each apps}}
           <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
             <a href="{{url}}" title="{{name}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" alt="{{name}}"></a>
@@ -61,7 +75,7 @@
           <span class="icon"></span><span class="label">下拉刷新</span>
         </div>
         <ul>
-          <script type="text/html-template">
+          <script type="text/x-handlebars-template">
             {{#each feeds}}
             <li class="item">
               {{#if icon_path}}<img src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
@@ -79,7 +93,7 @@
 
 <div class="app-container out" id="offline">
   <ul id="offline-list">
-    <script type="text/html-template">
+    <script type="text/x-handlebars-template">
       {{#each apps}}
       {{#if has-guide}}
       <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
@@ -115,7 +129,7 @@
   </header>
   <div class="content">
     <p id="loading"><i class="fa fa-spin fa-spinner fa-4x"></i></p>
-    <div class="alert alert-error">
+    <div class="alert alert-error hide">
       <i class="fa fa-frown-o"></i> 加载失败
     </div>
   </div>
@@ -134,15 +148,16 @@
 <script src="js/model/FeedsCollection.js"></script>
 <script src="js/model/AllGuidesCollection.js"></script>
 <script src="js/model/RecentArticles.js"></script>
+<script src="js/model/SearchResults.js"></script>
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/FeedsList.js"></script>
 <script src="js/view/GUI.js"></script>
 <script src="js/view/Nav.js"></script>
+<script src="js/view/SearchForm.js"></script>
 <script src="js/view/AllGuides.js"></script>
 <script src="js/view/Offline.js"></script>
 <script src="js/view/GamePage.js"></script>
 <script src="js/controller/DownloadCommand.js"></script>
-<script src="js/controller/Commands.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>

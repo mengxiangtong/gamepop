@@ -1,5 +1,6 @@
 @charset "utf-8"
 @import "define"
+@import "page"
 
 /* ====================================
  * btn
@@ -142,3 +143,41 @@
   background-color: #CCC
   color: #FFF
   padding: 0 0.5em
+
+/* ====================================
+ * search
+ * ==================================*/
+.search-form
+  @extend #guide-list
+  margin: $gap-l $gap $gap
+  position: relative
+
+  [type=search]
+    width: 100%
+    height: 30px
+    background-color: $list-background-color
+    border-radius: 15px
+    border: 1px solid #999
+    text-indent: 10px
+    color: #FFF
+    font-size: 14px
+    padding: 0
+
+  > .fa-spin
+    position: absolute
+    right: 10px
+    top: 5px
+    line-height: 20px
+
+  ul
+    @extend .ul
+    padding: 5px 0
+
+    .info
+      display: none
+      color: #999
+      text-indent: 17px
+      line-height: 20px
+
+      &:only-child
+        display: block

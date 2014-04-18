@@ -5,8 +5,7 @@
   var lastTouch
     , curr = '#homepage'
     , topPage = '#homepage'
-    , all
-    , offline
+    , pages = []
     , TITLES = {
         'all': '攻略大全',
         'offline': '离线管理'
@@ -37,7 +36,7 @@
       curr = topPage = $(curr);
     },
     setGame: function (game) {
-      if (game === this.$context.getValue('game')) {
+      if (game === this.$context.getValue('game-id')) {
         return;
       }
       var model = this.$apps.get(game) ? this.$apps.get(game) : this.$all.get(game)
@@ -46,7 +45,8 @@
         name = model.get('name') || model.get('app_name');
       }
       this.$('.game-button').attr('href', 'game://' + game + '/' + name);
-      this.$context.mapValue('game', game, true);
+      this.$context.mapValue('game', model, true);
+      this.$context.mapValue('game-id', game, true);
     },
     showMainPage: function (target) {
       if (curr.is('#' + target)) {
@@ -62,26 +62,33 @@
       this.$('h1').text(TITLES[target] || '游戏泡泡');
     },
     showPopupPage: function (url, className, data, title) {
+      if (pages.length > 0 && pages[pages.length - 1].data('url') === url) {
+        return;
+      }
       topPage = this.template.clone();
       topPage
         .removeClass('out')
         .addClass('active animated fast fadeInScaleUp')
+        .data('url', url)
         .appendTo('body')
         .find('h2').text(title).end()
         .find('.content').load(url, data, _.bind(this.page_loadCompleteHandler, this));
       this.$el.attr('class', className);
+      pages.push(topPage);
     },
     backButton_tapHandler: function () {
       var hash = location.hash.substr(2);
-      if (hash === '') {
+      if (hash === '' || history.length === 0) {
         location.href = 'popo:return';
       } else {
         history.back();
+        if (pages.length > 0) {
+          pages.pop().addClass('animated fast fadeOutScaleDown');
+        }
       }
-      $(event.target).closest('.page-container').addClass('animated fast fadeOutScaleDown');
     },
     gameButton_tapHandler: function (event) {
-      ga.event(['game', 'play', this.$context.getValue('game')].join(','));
+      ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
       location.href = event.currentTarget.href;
     },
     page_loadCompleteHandler: function (response, status) {
@@ -95,8 +102,12 @@
 
       // 增加历史记录
       if (topPage.is('.page-container')) {
-        topPage.find('.navbar h2').text(topPage.find('h1, h2').text());
-        this.$recent.addArticle(location.hash, topPage.find('h1, h2').text(), topPage.find('.thumbnail').attr('src'));
+        var model = this.$context.getValue('game')
+          , content = topPage.find('.content')
+          , title = content.find('h1, h2').text()
+          , thumbnail = content.find('.thumbnail').attr('src');
+        topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
+        this.$recent.addArticle(location.hash, title, thumbnail);
       }
     },
     animationEndHandler: function (event) {
