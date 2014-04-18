@@ -10,9 +10,8 @@ var config = {
   require: 'http://a.yxpopo.com/no_guide_log.php',
   all: 'http://a.yxpopo.com/vapi/game_list/'
 };
-
-if (DEBUG) {
-  config.apps = 'mocks/apps.json';
+config.apps = 'mocks/apps.json';
+if (false) {
   config.news = 'http://meathill.pc/gamepop-api/news-detail.php';
   config.remote ='http://meathill.pc/gamepop-api/vguide/';
   config.localhost = 'meathill.pc';

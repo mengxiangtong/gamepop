@@ -55,17 +55,25 @@
   </div>
 
   <div class="one" id="feeds">
-    <ul>
-      <script type="text/html-template">
-        {{#each feeds}}
-        <li class="item">
-          {{#if icon_path}}<img src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
-          <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
-          <p>来源：{{source}} | <time>{{pub_date}}</time></p>
-        </li>
-        {{/each}}
-      </script>
-    </ul>
+    <div class="wrapper">
+      <div>
+        <div class="pulldown">
+          <span class="icon"></span><span class="label">下拉刷新</span>
+        </div>
+        <ul>
+          <script type="text/html-template">
+            {{#each feeds}}
+            <li class="item">
+              {{#if icon_path}}<img src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
+              <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
+              <p>来源：{{source}} | <time>{{pub_date}}</time></p>
+            </li>
+            {{/each}}
+          </script>
+        </ul>
+        <div class="loading"><span class="fa fa-spin fa-spinner"></span></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -113,13 +121,15 @@
   </div>
 </div>
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/handlebars/handlebars.min.js"></script>
-<script src="bower_components/hammerjs/hammer.min.js"></script>
-<script src="bower_components/lodash/dist/lodash.min.js"></script>
-<script src="bower_components/backbone/backbone-min.js"></script>
-<script src="bower_components/nervenet/nervenet.min.js"></script>
-<script src="bower_components/iscroll/dist/iscroll-min.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/handlebars/handlebars.js"></script>
+<script src="bower_components/hammerjs/hammer.js"></script>
+<script src="bower_components/lodash/dist/lodash.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/nervenet/nervenet.js"></script>
+<script src="bower_components/iscroll/build/iscroll.js"></script>
+<script src="bower_components/iscroll/build/iscroll-probe.js"></script>
+<script src="js/component/ago.js"></script>
 <script src="js/model/AppsCollection.js"></script>
 <script src="js/model/FeedsCollection.js"></script>
 <script src="js/model/AllGuidesCollection.js"></script>
