@@ -28,7 +28,6 @@
       return response.list;
     },
     next: function () {
-      curr++;
       if (curr > 10) {
         return false;
       }

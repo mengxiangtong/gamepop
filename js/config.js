@@ -11,7 +11,6 @@ var config = {
   all: 'http://a.yxpopo.com/vapi/game_list/',
   search: 'http://a.yxpopo.com/search.php'
 };
-
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
   config.news = 'http://meathill.pc/gamepop-api/news-detail.php';

@@ -17,3 +17,5 @@ css/*.css
 # mocks
 local
 mocks/local
+
+.sass-cache
