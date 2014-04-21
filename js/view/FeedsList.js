@@ -9,12 +9,6 @@
   var freshTime = Date.now();
   var ago = gamepop.component.ago;
 
-  function bind(fn, context) {
-    return function () {
-      fn.call(context, this);
-    }
-  }
-
   ns.FeedsList = Backbone.View.extend({
     $context: null,
     $router: null,
@@ -29,7 +23,6 @@
       this.collection.on('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('sync', this.collection_readyHandler, this);
-      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
       //init iscroll
       var scroll = this.scroll = new IScroll(this.$('.wrapper')[0], {
         probeType: 2,
@@ -40,9 +33,8 @@
         shrinkScrollbars: 'clip',
         fadeScrollbars: true
       });
-      scroll.on('scroll', bind(this.onScroll, this));
-      scroll.on('scrollEnd', bind(this.onScrollEnd, this));
-
+      scroll.on('scroll', _.bind(this.onScroll, this, scroll));
+      scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
     },
     handle_touchend: function() {
       //add loading div
