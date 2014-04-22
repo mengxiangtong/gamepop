@@ -6,6 +6,7 @@
   var more = false;
   var loading = false;
   var fragment = '';
+  var lazyLoad = gamepop.component.lazyLoad;
 
   ns.AllGuides = Backbone.View.extend({
     $context: null,
@@ -39,8 +40,10 @@
         return;
       }
       this.$('.all-guides-list').html(this.template({games: this.collection.toJSON()}));
+
       this.$('.filter i').remove();
       setTimeout(function () {
+        lazyLoad(this.$el[0]);
         this.scroll.refresh();
       }.bind(this), 1000);
     },
@@ -55,6 +58,7 @@
         fragment = '';
       }
       setTimeout(function () {
+        lazyLoad(this.$el[0]);
         this.scroll.refresh();
       }.bind(this), 200);
     },
@@ -84,6 +88,7 @@
       if (max -y === 0) {
         more = true;
       }
+      lazyLoad(this.$el[0]);
     },
     onScrollEnd :function (scroll) {
       if (more && !loading) {

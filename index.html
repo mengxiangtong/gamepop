@@ -30,7 +30,7 @@
         <script type="text/x-handlebars-template">
           {{#each games}}
           <li class="item">
-            <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
+            <a href="#/remote/{{guide_name}}"><img src="img/image.png" data-src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
             <h3><a href="#/remote/{{guide_name}}">{{game_name}}</a></h3>
           </li>
           {{/each}}
@@ -136,6 +136,7 @@
 <script src="bower_components/iscroll/build/iscroll.js"></script>
 <script src="bower_components/iscroll/build/iscroll-probe.js"></script>
 <script src="js/component/ago.js"></script>
+<script src="js/component/lazyLoad.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
 <script src="js/model/AppsCollection.js"></script>
