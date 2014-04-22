@@ -3,40 +3,60 @@
  */
 ;(function (ns) {
   'use strict';
+  var more = false;
+  var loading = false;
+  var fragment = '';
+
   ns.AllGuides = Backbone.View.extend({
     $context: null,
     events: {
-      'tap .pagination button': 'pagination_tapHandler',
       'tap .filter .dropdown': 'filter_tapHandler',
       'change form input': 'input_changeHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
-      this.collection.on('reset', this.collection_resetHandler, this);
-      this.collection.fetch();
+      this.collection.on('reset', this.render, this);
+      this.collection.on('add', this.collection_addHandler, this);
+      this.collection.on('sync', this.collection_readyHandler, this);
 
       this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
       this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
+      this.render();
+      var scroll = this.scroll = new IScroll(this.$('.wrapper')[0], {
+        probeType: 2,
+        scrollX: false,
+        scrollY: true,
+        mouseWheel: true,
+        scrollbars: true,
+        shrinkScrollbars: 'clip',
+        fadeScrollbars: true
+      });
+      scroll.on('scroll', _.bind(this.onScroll, this, scroll));
+      scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
     },
     render: function () {
       if (!this.template) {
         return;
       }
-      this.$el.html(this.template({games: this.collection.toJSON()}));
+      this.$('.all-guides-list').html(this.template({games: this.collection.toJSON()}));
       this.$('.filter i').remove();
-      this.$('button')
-        .find('.fa-spin').toggleClass('fa-spin fa-spinner')
-        .end().last().prop('disabled', this.collection.curr > this.collection.total - 2)
-        .end().first().prop('disabled', this.collection.curr < 1);
-
-      this.$context.trigger('refresh-iscroll');
+      setTimeout(function () {
+        this.scroll.refresh();
+      }.bind(this), 1000);
     },
-    setElement: function (el, delegate) {
-      Backbone.View.prototype.setElement.call(this, el, delegate);
-      this.render();
+    collection_addHandler: function (model) {
+      var html = this.template({games: [model.toJSON()]});
+      fragment = fragment + html;
     },
-    collection_resetHandler: function () {
-      this.render();
+    collection_readyHandler: function () {
+      loading = false;
+      if (fragment) {
+        this.$('ul').append(fragment);
+        fragment = '';
+      }
+      setTimeout(function () {
+        this.scroll.refresh();
+      }.bind(this), 200);
     },
     filter_tapHandler: function (event) {
       if (this.form.hasClass('loading')) {
@@ -58,17 +78,18 @@
       label.append('<i class="fa fa-spin fa-spinner"></i>');
       this.form.addClass('loading');
     },
-    pagination_tapHandler: function (event) {
-      if (event.currentTarget.disabled) {
-        return;
+    onScroll: function (scroll) {
+      var y = scroll.y;
+      var max = scroll.maxScrollY;
+      if (max -y === 0) {
+        more = true;
       }
-      this.collection[event.currentTarget.value]();
-      this.$('button').prop('disabled', true);
-      $(event.currentTarget).find('i')
-        .addClass('fa-spin fa-spinner');
     },
-    preventDefault: function (event) {
-      event.preventDefault();
+    onScrollEnd :function (scroll) {
+      if (more && !loading) {
+        loading = true;
+        this.collection.next();
+      }
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));
