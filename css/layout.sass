@@ -36,11 +36,12 @@ body
 
 #main-nav
   z-index: 5
+  line-height: $nav-height
+  width: 100%
 
   a
-    @extend .one-auto
-    display: block
-    line-height: $nav-height
+    flex: 1 1 auto
+    -webkit-flex: 1 1 auto
     position: relative
 
     &.active:after
@@ -61,10 +62,13 @@ body
 
 #all
   overflow: auto
-  position: relative
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
   .wrapper
     position: absolute
-    top: 55px
+    top: 5px
     left: 0
     bottom: 0
     z-index: 1
@@ -95,6 +99,8 @@ body
 
   .item
     @extend .one
+    flex: 1 1 65px
+    -webkit-flex: 1 1 65px
     position: relative
     padding-left: $gap-icon
 
@@ -199,12 +205,17 @@ body
       -webkit-transform: rotate(0deg) translateZ(0)
     to
       -webkit-transform: rotate(360deg) translateZ(0)
-
-.app-container
+.page
   @extend .column
   @extend .one
-  overflow: auto
+  position: relative
 
+.app-container
+  overflow: auto
+  height: 100%
+  top: 0
+  bottom: 0
+  display: block
   &.active
     position: absolute
 
