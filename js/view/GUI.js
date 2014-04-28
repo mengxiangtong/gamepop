@@ -11,6 +11,9 @@
         'offline': '离线管理'
       };
 
+  //没有暴露事件，只能写到这儿了
+  var lazyLoad = gamepop.component.lazyLoad;
+
   ns.GUI = Backbone.View.extend({
     $apps: null,
     $all: null,
@@ -112,6 +115,7 @@
     animationEndHandler: function (event) {
       var target = $(event.target)
         , classes = event.target.className;
+      lazyLoad(event.target);
       if (/slideout/i.test(classes)) {
         return target.removeClass('animated slideOutLeft slideOutRight active').addClass('out');
       }

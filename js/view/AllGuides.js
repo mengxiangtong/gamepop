@@ -33,12 +33,13 @@
         fadeScrollbars: true
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
+      scroll.on('scrollStart', _.bind(this.onScrollStart, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
       var el = this.$('.all-guides-list')[0];
       this.fscroll = fscroll(el, {
-        offsetTop: 1200,
-        offsetBottom: 1200,
-        throttle: 50
+        offsetTop: 800,
+        offsetBottom: 800,
+        throttle: 300
       })
     },
     render: function () {
@@ -48,10 +49,10 @@
       this.$('.all-guides-list').html(this.template({games: this.collection.toJSON()}));
 
       this.$('.filter i').remove();
-      setTimeout(function () {
-        lazyLoad(this.$el[0]);
+      setTimeout(_.bind(function () {
         this.scroll.refresh();
-      }.bind(this), 1000);
+        //lazyLoad(this.$el[0]);
+      }, this), 2000);
     },
     collection_addHandler: function (model) {
       var html = this.template({games: [model.toJSON()]});
@@ -59,18 +60,19 @@
     },
     collection_readyHandler: function () {
       var end = (loading && !fragment);
-      loading = false;
       if (fragment) {
         this.$('ul').append(fragment);
         fragment = '';
       }
-      setTimeout(function () {
-        lazyLoad(this.$el[0]);
+      setTimeout(_.bind(function () {
         this.scroll.refresh();
+        lazyLoad(this.$el[0]);
+        //load completed
+        loading = false;
         if (end) {
           this.$('.more').remove();
         }
-      }.bind(this), 200);
+      },this), 200);
     },
     filter_tapHandler: function (event) {
       if (this.form.hasClass('loading')) {
@@ -95,15 +97,25 @@
     onScroll: function (scroll) {
       var y = scroll.y;
       var max = scroll.maxScrollY;
-      if (max -y === 0) {
+      if (y - max <= 5) {
         more = true;
       }
-      this.fscroll.onscroll();
-      lazyLoad(this.$el[0]);
     },
-    onScrollEnd :function (scroll) {
+    onScrollStart: function (scroll) {
+      window.clearInterval(this.interval);
+      this.interval = window.setInterval(_.bind(function(){
+        //this.fscroll.onscroll();
+        lazyLoad(this.$el[0]);
+      }, this), 300);
+    },
+    onScrollEnd: function (scroll) {
+      this.onScroll(scroll);
+      window.clearInterval(this.interval);
+      //this.fscroll.onscroll();
+      lazyLoad(this.$el[0]);
       if (more && !loading) {
         loading = true;
+        more = false;
         this.collection.next();
       }
     }
