@@ -52,6 +52,7 @@
       fragment = fragment + html;
     },
     collection_readyHandler: function () {
+      var end = (loading && !fragment);
       loading = false;
       if (fragment) {
         this.$('ul').append(fragment);
@@ -60,6 +61,9 @@
       setTimeout(function () {
         lazyLoad(this.$el[0]);
         this.scroll.refresh();
+        if (end) {
+          this.$('.more').remove();
+        }
       }.bind(this), 200);
     },
     filter_tapHandler: function (event) {
