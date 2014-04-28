@@ -8,6 +8,7 @@
   var prepend = true;
   var freshTime = Date.now();
   var ago = gamepop.component.ago;
+  var lazyLoad = gamepop.component.lazyLoad;
 
   ns.FeedsList = Backbone.View.extend({
     $context: null,
@@ -46,6 +47,7 @@
       collection = collection || this.collection;
       this.$('ul')
         .html(this.template({feeds: collection.toJSON()}))
+      lazyLoad(this.$el[0]);
     },
     collection_addHandler: function (model) {
       var html = this.template({feeds: [model.toJSON()]});
@@ -62,6 +64,7 @@
       }
       if (first) first = false;
       setTimeout(function () {
+        lazyLoad(this.$el[0]);
         this.scroll.refresh();
       }.bind(this), 200);
     },
@@ -88,6 +91,7 @@
       } else if (max -y == 0) {
         load = -1;
       }
+      lazyLoad(this.$el[0]);
     },
     onScrollEnd :function (scroll) {
       var refresh = load === 1 ? true : false;
