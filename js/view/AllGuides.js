@@ -34,6 +34,12 @@
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
+      var el = this.$('.all-guides-list')[0];
+      this.fscroll = fscroll(el, {
+        offsetTop: 1200,
+        offsetBottom: 1200,
+        throttle: 50
+      })
     },
     render: function () {
       if (!this.template) {
@@ -92,6 +98,7 @@
       if (max -y === 0) {
         more = true;
       }
+      this.fscroll.onscroll();
       lazyLoad(this.$el[0]);
     },
     onScrollEnd :function (scroll) {
