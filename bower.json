@@ -32,7 +32,7 @@
     "nervenet": "~0.1.5",
     "animate.css": "~3.1.0",
     "hammerjs": "~1.0.10",
-    "fscroll": "~0.0.4",
+    "fscroll": "~0.0.5",
     "iscroll": "~5.1.1",
     "colors": "~0.2.0"
   }
