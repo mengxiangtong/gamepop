@@ -20,7 +20,7 @@
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
 
-      this.render();
+      //this.render();
       this.collection.on('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('sync', this.collection_readyHandler, this);
@@ -66,7 +66,7 @@
       setTimeout(function () {
         lazyLoad(this.$el[0]);
         this.scroll.refresh();
-      }.bind(this), 200);
+      }.bind(this), 400);
     },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).find('a').attr('href');
@@ -77,7 +77,7 @@
       this.collection.fetch({reset: true});
     },
     onScroll: function (scroll) {
-      var $pullDown = this.$('.pulldown');
+      var pullDown = this.$('.pulldown');
       //change stat
       var y = scroll.y;
       var max = scroll.maxScrollY;
@@ -85,15 +85,18 @@
       var t = ago(freshTime);
       if (y > 30) {
         load = 1;
-        $pullDown.addClass('flip').find('.label').html('释放更新 (上次刷新 ' + t + ')');
+        pullDown.addClass('flip').find('.label').html('释放更新 (上次刷新 ' + t + ')');
       } else if (y > 0) {
-        $pullDown.removeClass('flip').find('.label').html('下拉刷新 (上次刷新 ' + t + ')');
-      } else if (max -y == 0) {
+        pullDown.removeClass('flip').find('.label').html('下拉刷新 (上次刷新 ' + t + ')');
+      } else if (y -max <= 5) {
         load = -1;
       }
       lazyLoad(this.$el[0]);
     },
     onScrollEnd :function (scroll) {
+      lazyLoad(this.$el[0]);
+      this.scroll.refresh();
+      if (scroll.y - scroll.maxScrollY <= 5) load = -1;
       var refresh = load === 1 ? true : false;
       var more = load == -1 ? true : false;
       prepend = refresh ? true : false;
@@ -102,8 +105,7 @@
         this.refresh();
       }
       if (more) {
-        var next = _.throttle(this.collection.next, 2000).bind(this.collection);
-        next();
+        this.collection.next();
       }
     }
   });
