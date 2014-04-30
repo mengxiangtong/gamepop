@@ -27,8 +27,16 @@
 #guide-list
   @extend .grid-column-4
 
+  .more
+    text-laign: center
+
 .pagination
   margin: 20px 0
+
+.next
+  display: none
+  text-align: center
+  padding: 10px 0
 
 /* ====================================
  * offline
@@ -167,10 +175,11 @@
 
 .home-page
   @extend .wrap-container
-  padding: 5px
+  margin: 5px
 
   .item
-    display: inline-block
+    display: block
+    float: left
     width: 50%
     padding: 5px
 

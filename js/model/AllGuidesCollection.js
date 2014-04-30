@@ -8,16 +8,16 @@
     model: Backbone.Model.extend({
       idAttribute: 'guide_name'
     }),
+    initialize: function () {
+      this.url = config.all + this.curr + '/';
+      this.fetch({
+        reset: true,
+        data: _.extend({ts: Date.now()}, this.options)
+      })
+    },
     options: {
       group: '0',
       sort: 'order_by_hot'
-    },
-    fetch: function () {
-      this.url = config.all + this.curr + '/';
-      Backbone.Collection.prototype.fetch.call(this, {
-        reset: true,
-        data: _.extend({ts: Date.now()}, this.options)
-      });
     },
     parse: function (response) {
       this.total = Math.ceil(response.count / 20);
@@ -26,8 +26,13 @@
     next: function () {
       if (this.curr < this.total - 2) {
         this.curr += 1;
-        this.fetch();
+        this.url = config.all + this.curr + '/';
+        this.fetch({
+          reset: false,
+          data: _.extend({ts: Date.now()}, this.options)
+        });
       }
+      return true;
     },
     prev: function () {
       if (this.curr > 0) {

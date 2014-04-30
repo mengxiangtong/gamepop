@@ -22,19 +22,26 @@
   <a href="#/offline">离线攻略</a>
 </nav>
 
+<div class="page">
 <div class="app-container out" id="all">
   <a href="#/search" class="search-button">搜索</a>
-  <ul id="guide-list" class="row one all-guides-list grid-column-4">
-    <script type="text/x-handlebars-template">
-      {{#each games}}
-      <li class="item">
-        <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
-        <h3><a href="#/remote/{{guide_name}}">{{game_name}}</a></h3>
-      </li>
-      {{/each}}
-    </script>
-    <li class="loading"><i class="fa fa-spin fa-spinner"></i></li>
-  </ul>
+  <div class="wrapper">
+    <div>
+      <ul id="guide-list" class="row one all-guides-list grid-column-4">
+        <script type="text/x-handlebars-template">
+          {{#each games}}
+          <li class="item">
+            <img src="img/image.png" data-src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}">
+            <h3>{{game_name}}</h3>
+          </li>
+          {{/each}}
+        </script>
+        <li class="loading"><i class="fa fa-spin fa-spinner"></i></li>
+      </ul>
+      <div class="next"><button class="btn btn-default">下一页<i class="fa fa-chevron-right"></i></button></div>
+      <div class="more"><i class="fa fa-spin fa-spinner"></i></div>
+    </div>
+  </div>
 </div>
 
 <div class="app-container" id="homepage">
@@ -55,7 +62,7 @@
     </div>
   </div>
 
-  <div class="one" id="feeds">
+  <div id="feeds">
     <div class="wrapper">
       <div>
         <div class="pulldown">
@@ -65,7 +72,7 @@
           <script type="text/x-handlebars-template">
             {{#each feeds}}
             <li class="item">
-              {{#if icon_path}}<img src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
+              {{#if icon_path}}<img src="img/image.png" data-src="http://r.yxpopo.com{{icon_path}}" alt="{{topic}}">{{/if}}
               <h3><a href="#/news/{{id}}">{{topic}}</a></h3>
               <p>来源：{{source}} | <time>{{pub_date}}</time></p>
             </li>
@@ -117,6 +124,7 @@
   </div>
 
 </div>
+</div>
 
 
 <div id="page-container" class="page-container out">
@@ -138,7 +146,9 @@
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/nervenet/nervenet.js"></script>
 <script src="bower_components/iscroll/build/iscroll-probe.js"></script>
+<script src="js/component/fscroll.js"></script>
 <script src="js/component/ago.js"></script>
+<script src="js/component/lazyLoad.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
 <script src="js/model/AppsCollection.js"></script>

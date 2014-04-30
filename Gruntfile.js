@@ -33,10 +33,10 @@ module.exports = function (grunt) {
         }]
       }
     },
-    sass: {
+    compass: {
       css: {
         options: {
-          style: 'compressed'
+          outputStyle: 'compressed'
         },
         files: [{
           expand: true,
@@ -146,7 +146,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
     'clean:start',
     'index:index',
     'copy',
-    'sass',
+    'compass',
     'imagemin',
     'uglify',
     'replace',
@@ -200,7 +200,7 @@ module.exports = function (grunt) {
     'clean:start',
     'index:single',
     'copy',
-    'sass',
+    'compass',
     'imagemin',
     'uglify',
     'replace',

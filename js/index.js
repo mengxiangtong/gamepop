@@ -57,7 +57,7 @@
       .inject(feeds)
       .inject(router)
       .mediatorMap
-        .map('.all-guides-list', gamepop.view.AllGuides, {
+        .map('#all', gamepop.view.AllGuides, {
           isSingle: true,
           collection: allGuidesCollection
         })
