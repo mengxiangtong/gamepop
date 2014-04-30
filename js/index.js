@@ -8,11 +8,13 @@
   }
   function createCss(width, height) {
     var style = document.createElement('style')
-      , itemWidth = width - 10 >> 2
-      , imgWidth = itemWidth - 10
+      , itemWidth = width - 12 >> 2
+      , imgWidth = itemWidth - 12
       , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
-    content += '#guide-list .item{min-width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
-    content += '#guide-list img{min-width:' + imgWidth + 'px;min-height:' + imgWidth + 'px}';
+    content += '#apps-container .item{width:' + itemWidth + 'px;}';
+    content += '#apps-container img{width:' + imgWidth + 'px;}';
+    content += '.grid-column-4 .item{width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
+    content += '.grid-column-4 img{width:' + imgWidth + 'px;height:' + imgWidth + 'px}';
     content += '.carousel .item,#guide-list{width:' + width + 'px;}';
     style.innerHTML = content;
     document.head.appendChild(style);

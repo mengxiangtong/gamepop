@@ -24,7 +24,7 @@
 
 <div class="app-container out" id="all">
   <a href="#/search" class="search-button">搜索</a>
-  <ul id="guide-list" class="row one all-guides-list">
+  <ul id="guide-list" class="row one all-guides-list grid-column-4">
     <script type="text/x-handlebars-template">
       {{#each games}}
       <li class="item">
@@ -79,34 +79,43 @@
 </div>
 
 <div class="app-container out" id="offline">
-  <ul id="offline-list">
-    <script type="text/x-handlebars-template">
-      {{#each apps}}
-      {{#if has-guide}}
-      <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
-        <a href="{{url}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" /></a>
-        <h2><a href="{{url}}">{{name}}</a></h2>
-        <div class="btn-group">
-          {{#if has-offline}}
-          <p class="text-success"><i class="fa fa-check"></i> 已下载</p>
-          <a href="delete://{{id}}" class="delete-button btn"><i class="fa fa-fw fa-trash-o"></i> 删除</a>
-          {{else}}
-          <p {{#unless downloading}}class="hidden"{{/unless}}><i class="fa fa-download"></i> <span>{{progress}}</span>%</p>
-          <a href="download://{{id}}/{{name}}" class="btn download-button {{#if downloading}}disabled hide{{/if}}"><i class="fa fa-fw fa-download"></i> 下载</a>
-          {{/if}}
-        </div>
-        {{#if downloading}}
-        <div class="progress"><div class="bar" style="width:{{progress}}%"></div></div>
-        {{/if}}
-      </li>
-      {{/if}}
-      {{/each}}
-    </script>
-  </ul>
-  <div class="alert alert-info">
-    <h4>温馨提示：</h4>
-    游戏攻略通常含有大量图片，在线观看可能产生很大流量，我们建议您先在WIFI环境下载攻略到手机，即可尽情观看，再无扣费之忧。
+  <div class="btn-group">
+    <button type="button" class="btn" data-toggle="tab" data-target="#recent-read">最近阅读</button>
+    <button type="button" class="btn active" data-toggle="tab" data-target="#offline-list">离线攻略</button>
   </div>
+  <div class="tab-panes">
+    <ul id="recent-read" class="tab-pane hide">
+
+    </ul>
+    <ul id="offline-list" class="tab-pane">
+      <script type="text/x-handlebars-template">
+        {{#each apps}}
+        {{#if has-guide}}
+        <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
+          <a href="{{url}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" /></a>
+          <div class="info">
+            <h2><a href="{{url}}">{{name}}</a></h2>
+            {{#if has-offline}}
+            <div class="label label-success"><i class="fa fa-check"></i> 已下载</div>
+            {{else}}
+            <p {{#unless downloading}}class="hide"{{/unless}}><i class="fa fa-download"></i> <span>{{progress}}</span>%</p>
+            {{/if}}
+          </div>
+          {{#if has-offline}}
+          <a href="delete://{{id}}" class="delete-button btn">删除</a>
+          {{else}}
+          <a href="download://{{id}}/{{name}}" class="btn download-button {{#if downloading}}disabled hide{{/if}}">下载</a>
+          {{/if}}
+          {{#if downloading}}
+          <div class="progress"><div class="bar" style="width:{{progress}}%"></div></div>
+          {{/if}}
+        </li>
+        {{/if}}
+        {{/each}}
+      </script>
+    </ul>
+  </div>
+
 </div>
 
 
@@ -128,7 +137,6 @@
 <script src="bower_components/lodash/dist/lodash.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/nervenet/nervenet.js"></script>
-<script src="bower_components/iscroll/build/iscroll.js"></script>
 <script src="bower_components/iscroll/build/iscroll-probe.js"></script>
 <script src="js/component/ago.js"></script>
 <script src="js/define.js"></script>

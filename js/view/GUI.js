@@ -23,6 +23,7 @@
       'touch': 'touchHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler',
+      'tap [data-toggle]': 'toggleButton_tapHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
     },
@@ -108,6 +109,14 @@
         topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
         this.$recent.addArticle(location.hash, title, thumbnail);
       }
+    },
+    toggleButton_tapHandler: function (event) {
+      var button = $(event.currentTarget)
+        , target = $(button.data('target'));
+      button.addClass('active')
+        .siblings('.active').removeClass('active');
+      target.removeClass('hide')
+        .siblings().addClass('hide');
     },
     animationEndHandler: function (event) {
       var target = $(event.target)

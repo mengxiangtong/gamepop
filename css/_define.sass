@@ -5,6 +5,7 @@ $gap-s: 5px
 $gap: 10px
 $gap-l: 20px
 $gap-icon: 12px
+$icon-radius: 12px
 
 $topbar-background-color: #555
 $nav-background-color: #7e7e7e
@@ -67,3 +68,36 @@ $indicator-active-color: #70BFFF
   display: inline-block
   vertical-align: top
   flex: auto
+
+.grid-column-4
+  @extend .ul
+  @extend .wrap-container
+  padding: $gap $gap-icon / 2
+
+  .item
+    @extend .wrap
+    padding: $gap-icon / 2
+    text-align: center
+    width: 25%
+    max-width: 25%
+
+    &:active
+      background-color: #E7E7E7
+
+  img
+    max-width: 100%
+    border-radius: $icon-radius
+
+  h3
+    margin: 0
+    font-size: 14px
+    font-weight: normal
+    line-height: 30px
+    height: 30px
+    overflow: hidden
+
+  .loading
+    width: 100%
+    font-size: 50px
+    padding: 1em
+    text-align: center
