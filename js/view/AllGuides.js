@@ -14,6 +14,7 @@
     events: {
       'tap .filter .dropdown': 'filter_tapHandler',
       'change form input': 'input_changeHandler',
+      'tap .item': 'item_tapHandler',
       'tap .next': 'button_nextHandler'
     },
     initialize: function () {
@@ -85,6 +86,10 @@
           this.$('.more').remove();
         }
       },this), 200);
+    },
+    item_tapHandler: function (e) {
+      var href = $(e.currentTarget).attr('data-href');
+      window.location.href = href;
     },
     filter_tapHandler: function (event) {
       if (this.form.hasClass('loading')) {
