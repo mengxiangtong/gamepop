@@ -7,12 +7,14 @@
   var loading = false;
   var fragment = '';
   var lazyLoad = gamepop.component.lazyLoad;
+  var next;
 
   ns.AllGuides = Backbone.View.extend({
     $context: null,
     events: {
       'tap .filter .dropdown': 'filter_tapHandler',
-      'change form input': 'input_changeHandler'
+      'change form input': 'input_changeHandler',
+      'tap .next': 'button_nextHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
@@ -35,12 +37,6 @@
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollStart', _.bind(this.onScrollStart, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
-      var el = this.$('.all-guides-list')[0];
-      this.fscroll = fscroll(el, {
-        offsetTop: 800,
-        offsetBottom: 800,
-        throttle: 300
-      })
     },
     render: function () {
       if (!this.template) {
@@ -51,18 +47,34 @@
       this.$('.filter i').remove();
       setTimeout(_.bind(function () {
         this.scroll.refresh();
-        //lazyLoad(this.$el[0]);
       }, this), 2000);
+    },
+    button_nextHandler: function () {
+      next = false;
+      this.$('.all-guides-list').empty();
+      this.$('.next').hide();
+      this.$('.more').show();
+      this.collection.next();
+      this.scroll.scrollTo(0, 0);
     },
     collection_addHandler: function (model) {
       var html = this.template({games: [model.toJSON()]});
       fragment = fragment + html;
     },
     collection_readyHandler: function () {
+      var curr = this.collection.curr;
+      next = (curr + 1)%4 === 0 ? true : false;
       var end = (loading && !fragment);
       if (fragment) {
         this.$('ul').append(fragment);
         fragment = '';
+      }
+      if (next) {
+        this.$('.more').hide();
+        this.$('.next').show();
+      } else {
+        this.$('.more').show();
+        this.$('.next').hide();
       }
       setTimeout(_.bind(function () {
         this.scroll.refresh();
@@ -104,16 +116,15 @@
     onScrollStart: function (scroll) {
       window.clearInterval(this.interval);
       this.interval = window.setInterval(_.bind(function(){
-        //this.fscroll.onscroll();
         lazyLoad(this.$el[0]);
       }, this), 300);
     },
     onScrollEnd: function (scroll) {
       this.onScroll(scroll);
       window.clearInterval(this.interval);
-      //this.fscroll.onscroll();
       lazyLoad(this.$el[0]);
-      if (more && !loading) {
+      //没有下一页，没有加载中且滚动到底部
+      if (!next && more && !loading) {
         loading = true;
         more = false;
         this.collection.next();
