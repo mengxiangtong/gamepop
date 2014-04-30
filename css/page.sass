@@ -62,6 +62,11 @@
 .pagination
   margin: 20px 0
 
+.next
+  display: none
+  text-align: center
+  padding: 10px 0
+
 /* ====================================
  * offline
  * ==================================*/
@@ -92,8 +97,10 @@
     &>a
       flex: 1 1 82px
       -webkit-flex: 1 1 82px
+      width: 82px
 
     h2
+      @extend .one-auto
       flex: 1 1 auto
       -webkit-flex: 1 1 auto
       font-size: 18px
@@ -103,6 +110,7 @@
     .btn-group
       flex: 0 1 100px
       -webkit-flex: 0 1 100px
+      width: 100px
       padding-left: 15px
 
       p

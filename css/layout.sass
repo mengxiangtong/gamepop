@@ -36,10 +36,13 @@ body
 
 #main-nav
   z-index: 5
-  line-height: $nav-height
   width: 100%
 
   a
+    @extend .one-auto
+    line-height: $nav-height
+    height: $nav-height
+    display: block
     flex: 1 1 auto
     -webkit-flex: 1 1 auto
     position: relative
@@ -211,11 +214,12 @@ body
   position: relative
 
 .app-container
+  @extend .column
+  @extend .one
   overflow: auto
   height: 100%
   top: 0
   bottom: 0
-  display: block
   &.active
     position: absolute
 
