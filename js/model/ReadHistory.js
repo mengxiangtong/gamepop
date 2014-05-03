@@ -4,7 +4,7 @@
 ;(function (ns) {
   var KEY = 'recent'
     , MAX = 5;
-  ns.RecentArticles = Backbone.Collection.extend({
+  ns.ReadHistory = Backbone.Collection.extend({
     comparator: 'timestamp',
     initialize: function () {
       var store = localStorage.getItem(KEY);

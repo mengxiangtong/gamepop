@@ -7,22 +7,27 @@
 /* ====================================
  * all
  * ==================================*/
-#all .search-button
-  line-height: 28px
-  border-radius: 15px
-  background-color: $list-background-color
-  margin: $gap-l $gap $gap
-  border: 1px solid #666
-  text-indent: 15px
-  color: #999
-  position: relative
+#all
+  > div
+    padding-top: $gap-l
 
-  &:after
-    content: '\f002'
-    font-family: 'FontAwesome'
-    color: #CCC
-    position: absolute
-    right: 15px
+  .search-button
+    line-height: 28px
+    border-radius: 15px
+    background-color: $list-background-color
+    margin: 0 $gap $gap
+    border: 1px solid #666
+    text-indent: 15px
+    color: #999
+    position: relative
+    display: block
+
+    &:after
+      content: '\f002'
+      font-family: 'FontAwesome'
+      color: #CCC
+      position: absolute
+      right: 15px
 
 #guide-list
   @extend .grid-column-4
@@ -43,14 +48,11 @@
  * ==================================*/
 #offline
   .btn-group
-    @extend .row
     margin: $gap $gap-l
 
     .btn
-      @extend .one
       @include background-image(linear_gradient(#F0F0F0, #CCC))
-      font-size: 12px
-      line-height: 25px
+      line-height: 30px
       border: 0
       padding: 0
 

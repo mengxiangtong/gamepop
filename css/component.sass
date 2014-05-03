@@ -1,4 +1,4 @@
-@charset "utf-8"
+@charset "UTF-8"
 @import "define"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables"
@@ -93,8 +93,11 @@
  * btn-group
  * ==================================*/
 .btn-group
+  @extend .row
+
   .btn
-    float: left
+    @extend .one
+    dipslay: block
 
     &:first-child
       border-bottom-right-radius: 0

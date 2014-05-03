@@ -39,7 +39,7 @@
           el: '#main-nav',
           collection: appsCollection
         })
-      , recent = new gamepop.model.RecentArticles()
+      , recent = new gamepop.model.ReadHistory()
       , results = new gamepop.model.SearchResults()
       , router = new gamepop.Router();
 
@@ -64,6 +64,9 @@
         .map('#offline-list', gamepop.view.Offline, {
           isSingle: true,
           collection: appsCollection
+        })
+        .map('#recent-read', gamepop.view.RecentArticle, {
+          collection: recent
         })
         .map('.game-page', gamepop.view.GamePage, {
           isSingle: true,

@@ -15,7 +15,7 @@
     $router: null,
     events: {
       'tap .item': 'item_tapHandler',
-      'touchend .wrapper': 'handle_touchend',
+      'touchend .wrapper': 'handle_touchend'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
@@ -30,7 +30,6 @@
         scrollX: false,
         scrollY: true,
         scrollbars: true,
-        mouseWheel: true,
         shrinkScrollbars: 'clip',
         fadeScrollbars: true
       });

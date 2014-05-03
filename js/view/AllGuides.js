@@ -26,14 +26,12 @@
       this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
       this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
       this.render();
-      var scroll = this.scroll = new IScroll(this.$('.wrapper')[0], {
+      var scroll = this.scroll = new IScroll(this.el, {
         probeType: 2,
         scrollX: false,
         scrollY: true,
-        mouseWheel: true,
-        scrollbars: true,
-        shrinkScrollbars: 'clip',
-        fadeScrollbars: true
+        scrollbars: false,
+        shrinkScrollbars: 'clip'
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollStart', _.bind(this.onScrollStart, this, scroll));
