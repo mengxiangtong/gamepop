@@ -92,10 +92,9 @@
     <ul id="recent-read" class="tab-pane hide">
       <script type="text/x-handlebars-template">
         {{#each list}}
-        <li class="item" id="recent-{{id}}">
-          {{#if icon_path}}<img src="img/image.png" data-src="http://r.yxpopo.com/{{icon_path}}" alt="{{topic}}">{{/if}}
-          <h3><a href="#/remote/{{id}}">{{topic}}</a></h3>
-          <p>来源：{{source}} | <time>{{pub_date}}</time></p>
+        <li class="item" id="recent-{{cid}}" data-href="{{hash}}">
+          <h3>{{title}}</h3>
+          <p><span class="{{#if isOffline}}offline{{else}}online{{/if}}"></span> &nbsp; 于 <time datetime="{{timestamp}}">{{ago}}</time> 看过</p>
         </li>
         {{/each}}
       </script>
@@ -152,7 +151,6 @@
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/nervenet/nervenet.js"></script>
 <script src="bower_components/iscroll/build/iscroll-probe.js"></script>
-<script src="js/component/fscroll.js"></script>
 <script src="js/component/ago.js"></script>
 <script src="js/component/lazyLoad.js"></script>
 <script src="js/define.js"></script>

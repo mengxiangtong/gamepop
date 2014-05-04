@@ -11,7 +11,7 @@ var round = Math.round;
  */
 
 ns.ago = function(date){
-  if(typeof date === 'string') date = new Date(date);
+  if (_.isString(date) || _.isNumber(date)) date = new Date(date);
   var now = new Date;
   var t;
 

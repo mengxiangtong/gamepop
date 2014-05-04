@@ -123,7 +123,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'template/',
-          src: ['all.html', 'offline.html'],
+          src: ['search.html'],
           dest: BUILD + 'template/'
         }]
       }

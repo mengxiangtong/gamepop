@@ -17,7 +17,7 @@
   ns.GUI = Backbone.View.extend({
     $apps: null,
     $all: null,
-    $recent: null,
+    $history: null,
     $router: null,
     $context: null,
     events: {
@@ -36,7 +36,7 @@
         hold: false,
         transform: false
       });
-      this.template = this.$('#page-container');
+      this.template = this.$('#page-container').removeAttr('id').remove();
       curr = topPage = $(curr);
     },
     setGame: function (game) {
@@ -103,14 +103,13 @@
       }
       this.$context.mediatorMap.check(topPage[0]);
 
-      // 增加历史记录
-      if (topPage.is('.page-container')) {
+      // 增加历史记录，只记录攻略最终页和新闻页
+      if (topPage.find('.guide-detail, .news-detail').length) {
         var model = this.$context.getValue('game')
           , content = topPage.find('.content')
-          , title = content.find('h1, h2').text()
-          , thumbnail = content.find('.thumbnail').attr('src');
+          , title = content.find('h1, h2').text();
         topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
-        this.$recent.addArticle(location.hash, title, thumbnail);
+        this.$history.addArticle(location.hash, title);
       }
     },
     toggleButton_tapHandler: function (event) {
@@ -119,7 +118,7 @@
       button.addClass('active')
         .siblings('.active').removeClass('active');
       target.removeClass('hide')
-        .siblings().addClass('hide');
+        .siblings('.tab-pane').addClass('hide');
     },
     animationEndHandler: function (event) {
       var target = $(event.target)

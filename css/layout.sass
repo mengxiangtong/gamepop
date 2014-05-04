@@ -65,20 +65,9 @@ body
 
 #all
 
-  .wrapper
-    position: absolute
-    top: 50px
-    left: 0
-    right: 0
-    bottom: 0
-    z-index: 1
-    overflow: hidden
-
-    .more
-      text-align: center
-
-    ul
-      height: 100%
+  .more
+    text-align: center
+    line-height: 2em
 
 #apps
   position: relative
@@ -131,7 +120,8 @@ body
     overflow: hidden
     margin: 0
 
-#feeds
+#feeds,
+#recent-read
   @extend .one
   overflow: auto
   position: relative
@@ -230,7 +220,7 @@ body
 
     h2
       @extend #logo
-      max-width: 60%
+      max-width: 75%
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis

@@ -12,8 +12,6 @@
   ns.AllGuides = Backbone.View.extend({
     $context: null,
     events: {
-      'tap .filter .dropdown': 'filter_tapHandler',
-      'change form input': 'input_changeHandler',
       'tap .item': 'item_tapHandler',
       'tap .next': 'button_nextHandler'
     },
@@ -88,26 +86,6 @@
     item_tapHandler: function (e) {
       var href = $(e.currentTarget).attr('data-href');
       window.location.href = href;
-    },
-    filter_tapHandler: function (event) {
-      if (this.form.hasClass('loading')) {
-        return;
-      }
-      var target = $(event.currentTarget);
-      if (!target.hasClass('active')) {
-        target.addClass('active');
-      } else if ('control' in event.target && event.target.control.checked) {
-        target.removeClass('active');
-      }
-    },
-    input_changeHandler: function (event) {
-      var target = event.currentTarget
-        , label = $(target).next()
-        , dropdown = label.parent();
-      this.collection.setOptions(target.name, target.value);
-      dropdown.removeClass('active');
-      label.append('<i class="fa fa-spin fa-spinner"></i>');
-      this.form.addClass('loading');
     },
     onScroll: function (scroll) {
       var y = scroll.y;

@@ -3,9 +3,21 @@
  */
 ;(function (ns) {
   var KEY = 'recent'
-    , MAX = 5;
+    , REG = /#\/local\//
+    , MAX = 5
+    , ago = gamepop.component.ago
+    , Model = Backbone.Model.extend({
+      idAttribute: 'hash',
+      toJSON: function () {
+        var json = Backbone.Model.prototype.toJSON.call(this);
+        json.cid = this.cid;
+        json.ago = ago(json.timestamp);
+        return json;
+      }
+    });
   ns.ReadHistory = Backbone.Collection.extend({
     comparator: 'timestamp',
+    model: Model,
     initialize: function () {
       var store = localStorage.getItem(KEY);
       if (store) {
@@ -17,20 +29,20 @@
       var json = JSON.stringify(this.toJSON());
       localStorage.setItem(KEY, json);
     },
-    addArticle: function (hash, title, image) {
-      var model = this.get(hash)
-        , data = {
-          title: title,
-          image: image,
-          timestamp: Date.now()
-        };
+    addArticle: function (hash, title) {
+      var model = this.get(hash);
       if (model) {
-        model.set(data);
+        model.set('timestamp', Date.now());
         this.sort();
         return;
       }
 
-      this.add(data, {at: 0});
+      this.add({
+        hash: hash,
+        title: title,
+        timestamp: Date.now(),
+        isOffline: REG.test(hash)
+      }, {at: 0});
       if (this.length > MAX) {
         this.pop();
       }
@@ -38,7 +50,7 @@
       var self = this;
       setTimeout(function () {
         self.sync()
-      }, 0);
+      }, 500);
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));

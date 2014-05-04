@@ -11,6 +11,7 @@
       , itemWidth = width - 12 >> 2
       , imgWidth = itemWidth - 12
       , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
+    content += '#apps-container{min-height:' + (imgWidth + 50) + 'px;}';
     content += '#apps-container .item{width:' + itemWidth + 'px;}';
     content += '#apps-container img{width:' + imgWidth + 'px;}';
     content += '.grid-column-4 .item{width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
@@ -39,7 +40,7 @@
           el: '#main-nav',
           collection: appsCollection
         })
-      , recent = new gamepop.model.ReadHistory()
+      , history = new gamepop.model.ReadHistory()
       , results = new gamepop.model.SearchResults()
       , router = new gamepop.Router();
 
@@ -49,7 +50,7 @@
     context.mapValue('router', router);
     context.mapValue('all', allGuidesCollection);
     context.mapValue('apps', appsCollection);
-    context.mapValue('recent', recent);
+    context.mapValue('history', history);
     context.mediatorMap.isBackbone = true;
     context
       .inject(gui)
@@ -66,7 +67,8 @@
           collection: appsCollection
         })
         .map('#recent-read', gamepop.view.RecentArticle, {
-          collection: recent
+          isSingle: true,
+          collection: history
         })
         .map('.game-page', gamepop.view.GamePage, {
           isSingle: true,

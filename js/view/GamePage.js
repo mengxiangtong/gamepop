@@ -22,6 +22,7 @@
       // 初始化carousel
       if (this.iscroll) {
         this.iscroll.destroy();
+        this.iscroll = null;
       }
       var carousel = this.$('.carousel');
       if (carousel.length) {

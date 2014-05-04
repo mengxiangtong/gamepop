@@ -61,11 +61,32 @@
         background-image: none
         background-color: $topbar-background-color
 
-#offline-list,
+  .tab-panes
+    border-top: 1px solid $nav-background-color
+
 #recent-read
+
+  .online,
+  .offline
+    border-radius: 3px
+    color: $white
+    padding: 0.2em 0.5em
+
+  .online
+    background-color: $blue
+
+    &:before
+      content: '在线'
+
+  .offline
+    background-color: $olive
+
+    &:before
+      content: '已下载'
+
+#offline-list
   @extend .ul
   padding: $gap-s $gap
-  border-top: 1px solid $nav-background-color
 
   .item
     @extend .row
@@ -275,10 +296,11 @@
     padding: 0 0 1em
 
 .game-card
-  padding: $gap
+  padding: $gap-s
   background-color: $list-background-color
   position: relative
-  min-height: $gap * 2 + 60px
+  min-height: $gap-s * 2 + 60px
+  border-radius: 4px
 
   .icon
     width: 60px
@@ -290,6 +312,14 @@
 
   .download-button
     width: 60px
-    line-height: 60px
+    line-height: 28px
     padding: 0
-    margin-left: $gap
+    margin: $gap + $gap-s $gap 0 0
+
+.game-desc
+  margin: $gap 0
+  border-radius: 4px
+
+  p
+    font-size: 12px
+    margin: 0
