@@ -26,7 +26,7 @@
         .css('padding-right', width * (4 - data.length % 4))
         .html(html);
       var indicators = this.$('.indicators');
-      if (data.length > 8) {
+      if (data.length > 0) {
         var width = Math.ceil(data.length / 4) * 20 - 10;
         indicators.css({
           width: width + 'px',

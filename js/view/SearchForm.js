@@ -8,12 +8,13 @@
       'keydown input': 'input_keyDownHandler'
     },
     initialize: function () {
-      this.template = Handlebars.compile(this.$('script').remove().html());
+      this.result = this.$el.next();
+      this.template = Handlebars.compile(this.result.find('script').remove().html());
       this.collection.on('reset', this.collection_resetHandler, this);
     },
     render: function () {
       var info = this.$('.info').remove();
-      this.$('.results')
+      this.result
         .html(this.template({games: this.collection.toJSON()}))
         .append(info);
       this.$('.fa-spin').remove();
@@ -39,6 +40,7 @@
     submitHandler: function (event) {
       this.search();
       event.preventDefault();
+      return false;
     },
     input_keyDownHandler: function (event) {
       if (event.keyCode === 13) {
