@@ -37,6 +37,7 @@ body
 #main-nav
   z-index: 5
   width: 100%
+  position: relative
 
   a
     @extend .one-auto
@@ -45,7 +46,6 @@ body
     display: block
     flex: 1 1 auto
     -webkit-flex: 1 1 auto
-    position: relative
 
     &.active:after
       position: absolute
@@ -121,11 +121,15 @@ body
     margin: 0
 
 #feeds,
-#recent-read
+#recent-read,
+.guide-index .top-article,
+.guide-index .article-list,
+.guide-group .list
   @extend .one
   overflow: auto
   position: relative
   padding: 0 $gap-icon
+  margin: 0
 
   .loading
     text-align: center
@@ -195,8 +199,6 @@ body
   position: absolute
   top: 0
   left: 0
-  right: 0
-  bottom: 0
   z-index: 10
   padding-top: $topbar-height
   display: none

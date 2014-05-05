@@ -104,13 +104,13 @@
       this.$context.mediatorMap.check(topPage[0]);
 
       // 增加历史记录，只记录攻略最终页和新闻页
+      var model = this.$context.getValue('game')
+        , content = topPage.find('.content')
+        , title = content.find('h1, h2').text();
       if (topPage.find('.guide-detail, .news-detail').length) {
-        var model = this.$context.getValue('game')
-          , content = topPage.find('.content')
-          , title = content.find('h1, h2').text();
-        topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
         this.$history.addArticle(location.hash, title);
       }
+      topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)

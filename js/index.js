@@ -11,6 +11,7 @@
       , itemWidth = width - 12 >> 2
       , imgWidth = itemWidth - 12
       , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
+    content += '.page-container{width:' + width + 'px;height:' + height + 'px;}';
     content += '#apps-container{min-height:' + (imgWidth + 50) + 'px;}';
     content += '#apps-container .item{width:' + itemWidth + 'px;}';
     content += '#apps-container img{width:' + imgWidth + 'px;}';

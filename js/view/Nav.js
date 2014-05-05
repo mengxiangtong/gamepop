@@ -2,9 +2,12 @@
  * Created by meathill on 14-2-21.
  */
 ;(function (ns) {
+  'use strict';
+
   function check(model) {
     return model.get('downloading');
   }
+
   ns.Nav = Backbone.View.extend({
     $router: null,
     events: {

@@ -1,4 +1,4 @@
-@charset "utf-8"
+@charset "UTF-8"
 @import "compass/css3/images"
 @import "compass/css3/transition"
 @import "define"
@@ -161,6 +161,16 @@
 /* ----------------
  * index
  * --------------*/
+.guide-index
+  .top-article,
+  .article-list
+    @extend #feeds
+
+  h2
+    text-indent: $gap-l
+    font-size: 1.17em
+    margin: $gap-s + $gap 0 $gap
+
 .carousel
   max-height: 250px
   overflow: hidden
@@ -179,12 +189,13 @@
     display: block
 
 .game-header
-  background: #333333
+  background: $topbar-background-color
   line-height: 50px
   position: relative
   color: #FFF
 
-  h2
+  h1
+    font-size: 1.5em
     margin: 0
     text-indent: 10px
 
@@ -192,6 +203,9 @@
     position: absolute
     top: 10px
     right: 10px
+
+  + .article-list
+    padding-top: $gap
 
 .local .game-header .btn-success
   display: none
@@ -237,43 +251,8 @@
 /* ----------------
  * list
  * --------------*/
-.page-header
-  background: #e7e7e7
-  text-indent: 20px
-
-  h3
-    font-size: 18px
-    line-height: 40px
-    margin: 0 0 20px
-
 .guide-group
-  .list
-    @extend .ul
-    @extend .row
-
-  .item
-    @extend .wrap
-    font-size: 16px
-    line-height: 1.5em
-    border-radius: 4px
-    margin: 3% 3% 0
-    width: 94%
-    background: $list-background-color
-
-    a
-      display: block
-      padding: 0.75em 1em
-      min-height: 4.5em
-
-      &:active,
-      &.active
-        background-color: #8CC0FC
-
-      small
-        color: #999
-
-  p
-    padding: 0 4%
+  padding-top: $gap-icon
 
 /* ----------------
  * detail

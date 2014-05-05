@@ -12,6 +12,7 @@
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
       this.collection.on('change', this.collection_changeHandler, this);
+      this.collection.on('reset', this.collection_resetHandler, this);
       this.render();
     },
     render: function () {
@@ -35,6 +36,9 @@
         $('.' + model.id).find('span').text(model.get('progress'))
           .end().find('.bar').width(model.get('progress') + '%');
       }
+    },
+    collection_resetHandler: function () {
+      this.render();
     },
     deleteButton_tapHandler: function (event) {
       var target = $(event.currentTarget);
