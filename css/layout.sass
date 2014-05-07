@@ -44,8 +44,7 @@ body
     line-height: $nav-height
     height: $nav-height
     display: block
-    flex: 1 1 auto
-    -webkit-flex: 1 1 auto
+    position: relative
 
     &.active:after
       position: absolute
@@ -68,6 +67,9 @@ body
   .more
     text-align: center
     line-height: 2em
+
+#homepage
+  @extend .column
 
 #apps
   position: relative
@@ -184,8 +186,6 @@ body
   position: relative
 
 .app-container
-  @extend .column
-  overflow: auto
   top: 0
   bottom: 0
 
@@ -193,7 +193,7 @@ body
     position: absolute
 
 .out
-  display: none
+  display: none !important
 
 .page-container
   position: absolute
@@ -205,6 +205,10 @@ body
 
   &.active
     display: block
+
+  &.animated
+    .content
+      display: none
 
   .loading
     text-align: center
@@ -227,9 +231,9 @@ body
       overflow: hidden
       text-overflow: ellipsis
       margin-left: 25px
+      line-height: $topbar-height
 
       &:before
         position: absolute
         left: -45px
         font-size: 2em
-        line-height: $topbar-height

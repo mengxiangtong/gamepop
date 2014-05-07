@@ -21,22 +21,19 @@
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('sync', this.collection_readyHandler, this);
 
-      this.$('[name="group"][value="' + this.collection.options.group + '"]').prop('checked', true);
-      this.$('[name="sort"][value="' + this.collection.options.sort + '"]').prop('checked', true);
       this.render();
       var scroll = this.scroll = new IScroll(this.el, {
         probeType: 2,
         scrollX: false,
         scrollY: true,
-        scrollbars: false,
-        shrinkScrollbars: 'clip'
+        scrollbars: false
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollStart', _.bind(this.onScrollStart, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
     },
     render: function () {
-      if (!this.template) {
+      if (!this.template || !this.collection.length) {
         return;
       }
       this.$('.all-guides-list').html(this.template({games: this.collection.toJSON()}));
@@ -60,7 +57,7 @@
     },
     collection_readyHandler: function () {
       var curr = this.collection.curr;
-      next = (curr + 1)%4 === 0 ? true : false;
+      next = (curr + 1) % 4 === 0;
       var end = (loading && !fragment);
       if (fragment) {
         this.$('ul').append(fragment);

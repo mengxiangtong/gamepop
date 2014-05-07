@@ -72,7 +72,6 @@
           collection: history
         })
         .map('.game-page', gamepop.view.GamePage, {
-          isSingle: true,
           collection: appsCollection
         })
         .map('.search-form', gamepop.view.SearchForm, {

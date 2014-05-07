@@ -177,21 +177,21 @@
  * search
  * ==================================*/
 .search-form
-  @extend .grid-column-4
   margin: $gap
   position: relative
 
   [type=search]
     width: 100%
     line-height: 20px
-    height: 30px
     background-color: $list-background-color
-    border-radius: 15px
     border: 1px solid #999
-    text-indent: 10px
+    border-radius: 15px
     color: #FFF
     font-size: 14px
-    padding: 4px 0
+    padding: 5px 0 5px 12px
+
+    &::-webkit-input-placeholder
+      line-height: 30px
 
   > .fa-spin
     position: absolute
@@ -199,15 +199,14 @@
     top: 15px
     line-height: 20px
 
-  ul
-    @extend .ul
-    padding: 5px 0
+.results
+  @extend .grid-column-4
 
-    .info
-      display: none
-      color: #999
-      text-indent: 17px
-      line-height: 20px
+  .info
+    display: none
+    color: #999
+    text-indent: 17px
+    line-height: 20px
 
-      &:only-child
-        display: block
+    &:only-child
+      display: block

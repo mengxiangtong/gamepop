@@ -29,9 +29,7 @@
         probeType: 2,
         scrollX: false,
         scrollY: true,
-        scrollbars: true,
-        shrinkScrollbars: 'clip',
-        fadeScrollbars: true
+        scrollbars: false
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));

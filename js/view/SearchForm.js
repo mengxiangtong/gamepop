@@ -9,16 +9,18 @@
     },
     initialize: function () {
       this.result = this.$el.next();
-      this.template = Handlebars.compile(this.result.find('script').remove().html());
+      this.template = Handlebars.compile(this.result.find('script').remove().html().replace(/\s{2,}|\n/g, ''));
       this.collection.on('reset', this.collection_resetHandler, this);
     },
     render: function () {
-      var info = this.$('.info').remove();
       this.result
-        .html(this.template({games: this.collection.toJSON()}))
-        .append(info);
+        .html(this.template({games: this.collection.toJSON()}));
       this.$('.fa-spin').remove();
       this.$('input').prop('disabled', false);
+    },
+    setElement: function (elements, delegate) {
+      Backbone.View.prototype.setElement.call(this, elements, delegate);
+      this.result = this.$el.next();
     },
     search: function () {
       var keyword = this.$('input').val();
