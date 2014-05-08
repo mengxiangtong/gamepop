@@ -96,9 +96,7 @@
     },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
-        topPage
-          .find('.alert').removeClass('hide').end()
-          .find('.loading').remove();
+        topPage.find('.alert').removeClass('hide');
         return;
       }
       this.$context.mediatorMap.check(topPage[0]);
@@ -110,7 +108,9 @@
       if (topPage.find('.guide-detail, .news-detail').length) {
         this.$history.addArticle(location.hash, title);
       }
-      topPage.find('.navbar h2').text(title || model.get('name') || model.get('app_name'));
+      topPage
+        .find('.navbar h2').text(title || model.get('name') || model.get('app_name')).end()
+        .find('.fa-spin').remove();;
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)

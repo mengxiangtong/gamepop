@@ -152,7 +152,7 @@
   left: 50%
   bottom: 10px
   font: 10px/10px Airal
-  background-image: url(../img/indicator.png)
+  background-image: url(../img/indicator.svg)
   min-width: 10px
 
   div
@@ -160,7 +160,7 @@
     height: 10px
     border-radius: 50%
     overflow: hidden
-    background: $indicator-active-color
+    background: $active-color
 
 /* ====================================
  * badge
@@ -186,12 +186,15 @@
     background-color: $list-background-color
     border: 1px solid #999
     border-radius: 15px
-    color: #FFF
+    color: $font-color
     font-size: 14px
     padding: 5px 0 5px 12px
 
+    &:focus
+      border-color: $active-color
+
     &::-webkit-input-placeholder
-      line-height: 30px
+      line-height: 20px
 
   > .fa-spin
     position: absolute

@@ -1,20 +1,23 @@
 @charset "utf-8"
 @import "define"
 @import "../bower_components/font-awesome/scss/font-awesome"
+@import "../bower_components/colors/sass/variables"
 
 #header
-  background: $topbar-background-color
+  background-color: $topbar-background-color
+  color: $white
 
   .btn
+    color: $white
     background: transparent
 
     &:active
-      background: #DDD
+      background: rgba(255, 255, 255, 0.6)
 
 #logo
-  background: url(../img/logo.png) no-repeat 0 4px
+  background: url(../img/logo.png) no-repeat 0 11px
+  background-size: 28px 23px
   font-size: 16px
-  text-indent: 50px
 
 #main-nav
   background-color: $nav-background-color
@@ -23,14 +26,11 @@
     font-size: 15px
     text-align: center
 
-    &:active
-      background-color: rgba(255, 255, 255, 0.4)
-
     &.active
-      background-color: #70BFFF
+      color: $active-color
 
-      &:after
-        content: ' '
+    &:active
+      background-color: lighten($active-color, 50%)
 
   .badge
     border: 1px solid #FFF
@@ -65,12 +65,8 @@
       -ms-filter: grayscale(100%)
       filter: grayscale(100%)
 
-      img
-        box-shadow: none
-
   img
     border-radius: 16px
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 
   a
     color: #FFF

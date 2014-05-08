@@ -3,12 +3,12 @@
  */
 ;(function (ns) {
   ns.SearchForm = Backbone.View.extend({
+    $router: null,
     events: {
       'submit': 'submitHandler',
       'keydown input': 'input_keyDownHandler'
     },
     initialize: function () {
-      this.result = this.$el.next();
       this.template = Handlebars.compile(this.result.find('script').remove().html().replace(/\s{2,}|\n/g, ''));
       this.collection.on('reset', this.collection_resetHandler, this);
     },
@@ -20,7 +20,11 @@
     },
     setElement: function (elements, delegate) {
       Backbone.View.prototype.setElement.call(this, elements, delegate);
+      if (this.result) {
+        this.result.off();
+      }
       this.result = this.$el.next();
+      this.result.on('tap', '.item', _.bind(this.item_tapHandler, this));
     },
     search: function () {
       var keyword = this.$('input').val();
@@ -39,15 +43,14 @@
     collection_resetHandler: function () {
       this.render();
     },
-    submitHandler: function (event) {
-      this.search();
-      event.preventDefault();
-      return false;
-    },
     input_keyDownHandler: function (event) {
       if (event.keyCode === 13) {
         this.search();
       }
+    },
+    item_tapHandler: function (event) {
+      var href = $(event.currentTarget).data('href');
+      this.$router.navigate(href);
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

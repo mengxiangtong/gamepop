@@ -66,7 +66,7 @@
       }.bind(this), 400);
     },
     item_tapHandler: function (event) {
-      var href = $(event.currentTarget).find('a').attr('href');
+      var href = $(event.currentTarget).data('href');
       this.$router.navigate(href);
     },
     refresh: function() {

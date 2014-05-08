@@ -16,7 +16,7 @@
     border-radius: 15px
     background-color: $list-background-color
     margin: 0 $gap $gap
-    border: 1px solid #666
+    border: 1px solid #999
     text-indent: 15px
     color: #999
     position: relative
@@ -49,20 +49,25 @@
 #offline
   .btn-group
     margin: $gap $gap-l
+    border: 1px solid #999
+    border-radius: 4px
+    padding: 5px
 
     .btn
-      @include background-image(linear_gradient(#F0F0F0, #CCC))
       line-height: 30px
       border: 0
       padding: 0
+      background: none
 
       &.active
         color: #FFF
         background-image: none
         background-color: $topbar-background-color
+        border-radius: 3px
 
   .tab-panes
     border-top: 1px solid $nav-background-color
+    padding-top: $gap
 
 #recent-read
 
@@ -86,7 +91,7 @@
 
 #offline-list
   @extend .ul
-  padding: $gap-s $gap
+  padding: 0 $gap
 
   .item
     @extend .row
@@ -256,7 +261,7 @@
  * --------------*/
 .news-detail,
 .guide-detail
-  padding: 0 20px 5px
+  padding: 0 $gap-l $gap-l
 
   img
     max-width: 100%

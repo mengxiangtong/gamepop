@@ -11,6 +11,7 @@
 
   ns.AllGuides = Backbone.View.extend({
     $context: null,
+    $router: null,
     events: {
       'tap .item': 'item_tapHandler',
       'tap .next': 'button_nextHandler'
@@ -24,6 +25,7 @@
       this.render();
       var scroll = this.scroll = new IScroll(this.el, {
         probeType: 2,
+        click: true,
         scrollX: false,
         scrollY: true,
         scrollbars: false
@@ -81,8 +83,8 @@
       },this), 200);
     },
     item_tapHandler: function (e) {
-      var href = $(e.currentTarget).attr('data-href');
-      window.location.href = href;
+      var href = $(e.currentTarget).data('href');
+      this.$router.navigate(href);
     },
     onScroll: function (scroll) {
       var y = scroll.y;
@@ -92,14 +94,14 @@
       }
     },
     onScrollStart: function (scroll) {
-      window.clearInterval(this.interval);
+      clearInterval(this.interval);
       this.interval = window.setInterval(_.bind(function(){
         lazyLoad(this.$el[0]);
       }, this), 300);
     },
     onScrollEnd: function (scroll) {
       this.onScroll(scroll);
-      window.clearInterval(this.interval);
+      clearInterval(this.interval);
       lazyLoad(this.$el[0]);
       //没有下一页，没有加载中且滚动到底部
       if (!next && more && !loading) {

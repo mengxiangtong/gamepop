@@ -31,6 +31,14 @@ module.exports = function (grunt) {
           src: ['*.{ttf,otf}'],
           dest: BUILD + 'fonts/'
         }]
+      },
+      svg: {
+        files: [{
+          expand: true,
+          cwd: 'img/',
+          src: ['*.svg'],
+          dest: BUILD + 'img/'
+        }]
       }
     },
     compass: {

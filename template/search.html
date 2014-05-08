@@ -5,9 +5,9 @@
 <ul class="wrap-container results grid-column-4">
   <script type="text/x-handlebars-template">
     {{#each games}}
-    <li class="item">
-      <a href="#/remote/{{guide_name}}"><img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}"></a>
-      <h3><a href="#/remote/{{guide_name}}">{{game_name}}</a></h3>
+    <li class="item" data-href="#/remote/{{guide_name}}">
+      <img src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}">
+      <h3>{{game_name}}</h3>
     </li>
     {{/each}}
   </script>

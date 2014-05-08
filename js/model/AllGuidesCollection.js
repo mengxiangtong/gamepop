@@ -12,12 +12,8 @@
       this.url = config.all + this.curr + '/';
       this.fetch({
         reset: true,
-        data: _.extend({ts: Date.now()}, this.options)
+        data: {ts: Date.now()}
       })
-    },
-    options: {
-      group: '0',
-      sort: 'order_by_hot'
     },
     parse: function (response) {
       this.total = Math.ceil(response.count / 20);
@@ -29,7 +25,7 @@
         this.url = config.all + this.curr + '/';
         this.fetch({
           reset: false,
-          data: _.extend({ts: Date.now()}, this.options)
+          data: {ts: Date.now()}
         });
       }
       return true;
@@ -39,11 +35,6 @@
         this.curr -= 1;
         this.fetch();
       }
-    },
-    setOptions: function (key, value) {
-      this.options[key] = value;
-      this.curr = 0;
-      this.fetch();
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));
