@@ -3,7 +3,7 @@
  */
 ;(function (ns) {
   var LOCAL = 'news',
-      curr = 1;
+      curr = 0;
   ns.FeedsCollection = Backbone.Collection.extend({
     initialize: function () {
       var store = localStorage.getItem(LOCAL);
@@ -31,6 +31,7 @@
       if (curr > 10) {
         return false;
       }
+      curr++;
       this.fetch({
         data: {
           ps: 20,
