@@ -12,6 +12,7 @@
       "search(/:keyword)": "showSearch",
       "local/:game(/*path)": "showLocalGuide",
       'remote/:game(/*path)': 'showRemoteGuide',
+      'no-guide/:game(/:name)': 'showNoGuidePage',
       'news/:id': 'showNewsById'
     },
     backHome: function () {
@@ -43,10 +44,15 @@
     },
     showSearch: function (keyword) {
       this.$gui.showPopupPage('template/search.html', 'search');
+      ga.pageview('search');
     },
     showNewsById: function (id) {
       this.$gui.showPopupPage(config.news, 'news news-' + id, {id: id});
       ga.pageview('news/' + id);
+    },
+    showNoGuidePage: function (game, name) {
+      this.$gui.showPopupPage('template/no-guide.html', 'no-guide');
+      ga.pageview('no-guide/' + game + '/' + name);
     }
   });
 }(Nervenet.createNameSpace('gamepop')));

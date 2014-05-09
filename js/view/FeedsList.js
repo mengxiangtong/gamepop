@@ -12,9 +12,7 @@
 
   ns.FeedsList = Backbone.View.extend({
     $context: null,
-    $router: null,
     events: {
-      'tap .item': 'item_tapHandler',
       'touchend .wrapper': 'handle_touchend'
     },
     initialize: function () {
@@ -27,9 +25,10 @@
       //init iscroll
       var scroll = this.scroll = new IScroll(this.$('.wrapper')[0], {
         probeType: 2,
-        scrollX: false,
-        scrollY: true,
-        scrollbars: false
+        momentum: false,
+        mouseWheel: false,
+        disableMouse: true,
+        disablePointer: true
       });
       scroll.on('scroll', _.bind(this.onScroll, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
@@ -44,7 +43,7 @@
       collection = collection || this.collection;
       this.$('ul')
         .html(this.template({feeds: collection.toJSON()}))
-      lazyLoad(this.$el[0]);
+      lazyLoad(this.el);
     },
     collection_addHandler: function (model) {
       var html = this.template({feeds: [model.toJSON()]});
@@ -64,10 +63,6 @@
         lazyLoad(this.$el[0]);
         this.scroll.refresh();
       }.bind(this), 400);
-    },
-    item_tapHandler: function (event) {
-      var href = $(event.currentTarget).data('href');
-      this.$router.navigate(href);
     },
     refresh: function() {
       freshTime = Date.now();

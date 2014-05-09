@@ -19,7 +19,7 @@
 <nav id="main-nav" class="row">
   <a href="#/all">攻略大全</a>
   <a href="#/">我的游戏</a>
-  <a href="#/offline">离线攻略</a>
+  <a href="#/offline">个人中心</a>
 </nav>
 
 <div class="page">
@@ -27,7 +27,7 @@
   <div>
     <a href="#/search" class="search-button">搜索</a>
     <ul id="guide-list" class="row one all-guides-list grid-column-4">
-      <script type="text/x-handlebars-template">
+      <script type="text/x-handlebars-template" id="template-all">
         {{#each games}}
         <li class="item" data-href="#/remote/{{guide_name}}">
           <img src="img/image.png" class="ph" data-src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}">
@@ -36,7 +36,10 @@
         {{/each}}
       </script>
     </ul>
-    <div class="next"><button class="btn btn-default">下一页<i class="fa fa-chevron-right"></i></button></div>
+    <div class="pagination">
+      <button class="btn btn-default prev-button hide"><i class="fa fa-chevron-left"></i> 上一页</button>
+      <button class="btn btn-default next-button pull-right">下一页 <i class="fa fa-chevron-right"></i></button>
+    </div>
     <div class="more"><i class="fa fa-spin fa-spinner fa-2x"></i></div>
   </div>
 </div>
@@ -44,11 +47,11 @@
 <div class="app-container" id="homepage">
   <div id="apps">
     <div id="apps-container">
-      <ul id="apps-scroller">
+      <ul>
         <script type="text/x-handlebars-template">
           {{#each apps}}
-          <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide no-click{{/unless}}">
-            <a href="{{url}}" title="{{name}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" alt="{{name}}"></a>
+          <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}" data-href="{{url}}">
+            <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
           </li>
           {{/each}}
         </script>
@@ -58,7 +61,7 @@
       <div class="token"></div>
     </div>
   </div>
-
+  <h2 id="feeds-title">最新资讯</h2>
   <div id="feeds">
     <div class="wrapper">
       <div>
@@ -84,11 +87,11 @@
 
 <div class="app-container out" id="offline">
   <div class="btn-group">
-    <button type="button" class="btn" data-toggle="tab" data-target="#recent-read">最近阅读</button>
-    <button type="button" class="btn active" data-toggle="tab" data-target="#offline-list">离线攻略</button>
+    <button type="button" class="btn active" data-toggle="tab" data-target="#recent-read">最近阅读</button>
+    <button type="button" class="btn" data-toggle="tab" data-target="#offline-list">离线攻略</button>
   </div>
   <div class="tab-panes">
-    <ul id="recent-read" class="tab-pane hide">
+    <ul id="recent-read" class="tab-pane">
       <script type="text/x-handlebars-template">
         {{#each list}}
         <li class="item" id="recent-{{cid}}" data-href="{{hash}}">
@@ -98,7 +101,7 @@
         {{/each}}
       </script>
     </ul>
-    <ul id="offline-list" class="tab-pane">
+    <ul id="offline-list" class="tab-pane hide">
       <script type="text/x-handlebars-template">
         {{#each apps}}
         {{#if has-guide}}

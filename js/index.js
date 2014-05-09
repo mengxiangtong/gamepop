@@ -12,7 +12,7 @@
       , imgWidth = itemWidth - 12
       , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
     content += '.page-container{width:' + width + 'px;height:' + height + 'px;}';
-    content += '#apps-container{min-height:' + (imgWidth + 50) + 'px;}';
+    content += '#apps-container{min-height:' + (imgWidth + 35) + 'px;}';
     content += '#apps-container .item{width:' + itemWidth + 'px;}';
     content += '#apps-container img{width:' + imgWidth + 'px;}';
     content += '.grid-column-4 .item{width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
@@ -33,7 +33,7 @@
         })
       , feedsCollection = new gamepop.model.FeedsCollection()
       , feeds = new gamepop.view.FeedsList({
-          el: '#feeds-title, #feeds',
+          el: '#feeds',
           collection: feedsCollection
         })
       , allGuidesCollection = new gamepop.model.AllGuidesCollection()

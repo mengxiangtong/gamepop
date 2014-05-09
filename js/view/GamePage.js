@@ -3,7 +3,10 @@
  */
 ;(function (ns) {
   'use strict';
-  var game;
+
+  var game
+    , lazyload = gamepop.component.lazyLoad;
+
   // TODO: 下一版先把这里的game和model重构了
   ns.GamePage = Backbone.View.extend({
     $all: null,
@@ -15,6 +18,8 @@
     initialize: function () {
       this.collection.on('change', this.collection_changeHandler, this);
       this.collection.on('add', this.collection_addHandler, this);
+
+      lazyload(this.el);
     },
     setElement: function (element, delegate) {
       Backbone.View.prototype.setElement.call(this, element, delegate);

@@ -32,8 +32,12 @@
     },
     prev: function () {
       if (this.curr > 0) {
-        this.curr -= 1;
-        this.fetch();
+        this.curr -= 5;
+        this.url = config.all + this.curr + '/';
+        this.fetch({
+          reset: true,
+          data: {ts: Date.now()}
+        });
       }
     }
   });

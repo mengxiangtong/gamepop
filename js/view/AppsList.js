@@ -4,11 +4,6 @@
 ;(function (ns) {
   ns.AppsList = Backbone.View.extend({
     $context: null,
-    $router: null,
-    events: {
-      'tap .no-guide': 'noGuide_tapHandler',
-      'tap .require-button': 'requireButton_tapHandler'
-    },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
       this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
@@ -21,7 +16,7 @@
       var html = this.template({apps: collection.toJSON()})
         , width = this.$el.width() - 12 >> 2
         , data = collection.toJSON();
-      this.$('#apps-scroller')
+      this.$('ul')
         .width(width * Math.ceil(data.length / 4) << 2)
         .css('padding-right', width * (4 - data.length % 4))
         .html(html);
@@ -44,7 +39,6 @@
           mouseWheel: false,
           disableMouse: true,
           disablePointer: true,
-          click: true,
           snap: true,
           indicators: {
             el: indicators[0],
@@ -65,43 +59,6 @@
     },
     collection_changeHandler: function (model) {
       this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
-    },
-    noGuide_tapHandler: function (event) {
-      var target = $(event.currentTarget)
-        , offset = target.position()
-        , width = target.width()
-        , height = target.height()
-        , link = target.find('a').attr('href')
-        , alias = link.substr(link.lastIndexOf('/') + 1)
-        , name = target.find('h3').text()
-        , left = offset.left + (width - 180 >> 1)
-        , maxLeft = document.body.clientWidth - 180;
-      this.menu
-        .css({
-          top: offset.top + height - 30,
-          left: left > maxLeft ? maxLeft : left
-        })
-        .appendTo(this.$el)
-        .toggleClass(function () {
-          return 'offset' + ((left - maxLeft >> 3) + 1);
-        }, left > maxLeft)
-        .find('.require-button').attr('href', '#/require/' + alias)
-        .end().find('.game-button').attr('href', 'game://' + alias + '/' + name);
-
-      event.stopPropagation();
-    },
-    requireButton_tapHandler: function (event) {
-      var hash = event.currentTarget.hash
-        , alias = hash.substr(hash.lastIndexOf('/') + 1);
-      $.ajax({
-        type: 'POST',
-        url: config.require,
-        data: {
-          packagename: alias
-        }
-      });
-      alert('您的需求已收到，我们不会让您久等的。');
-      ga.event(['game', 'require', alias].join(','));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

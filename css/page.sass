@@ -29,24 +29,32 @@
       position: absolute
       right: 15px
 
+  .load
+    color: $blue
+    text-align: center
+
 #guide-list
   @extend .grid-column-4
 
   .more
+    padding: $gap 0
     text-align: center
 
 .pagination
-  margin: 20px 0
-
-.next
+  padding: $gap $gap-icon
   display: none
-  text-align: center
-  padding: 10px 0
+  overflow: hidden
+
+  .btn
+    line-height: 24px
+    width: 90px
 
 /* ====================================
  * offline
  * ==================================*/
 #offline
+  @extend .column
+
   .btn-group
     margin: $gap $gap-l
     border: 1px solid #999
@@ -66,8 +74,10 @@
         border-radius: 3px
 
   .tab-panes
+    @extend .one
     border-top: 1px solid $nav-background-color
     padding-top: $gap
+    overflow: auto
 
 #recent-read
 
@@ -222,7 +232,8 @@
     width: 50%
     padding: 5px
 
-    a
+    a,
+    div
       display: block
       height: 80px
       position: relative
@@ -262,6 +273,15 @@
 .news-detail,
 .guide-detail
   padding: 0 $gap-l $gap-l
+
+  a
+    color: $blue
+    text-decoration: underline
+
+    &[target=_blank]:after
+      content: ' \f08e'
+      font-family: 'FontAwesome'
+      font-size: 0.8em
 
   img
     max-width: 100%
@@ -304,3 +324,23 @@
   p
     font-size: 12px
     margin: 0
+
+/* ====================================
+ * no-guide
+ * ==================================*/
+.no-guide
+
+  .page-container
+    @extend .vcenter
+
+  p
+    text-align: center
+    color: #999
+
+  .btn
+    background-color: $blue
+    width: 165px
+    line-height: 45px
+    font-size: 14px
+    color: $white
+    margin-top: 50px

@@ -4,7 +4,7 @@
 ;(function (ns) {
   var KEY = 'recent'
     , REG = /#\/local\//
-    , MAX = 5
+    , MAX = 8
     , ago = gamepop.component.ago
     , Model = Backbone.Model.extend({
       idAttribute: 'hash',

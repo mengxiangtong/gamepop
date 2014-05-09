@@ -8,8 +8,9 @@
     , pages = []
     , TITLES = {
         'all': '攻略大全',
-        'offline': '离线管理'
-      };
+        'offline': '个人中心'
+      }
+    , isSliding = false;
 
   //没有暴露事件，只能写到这儿了
   var lazyLoad = gamepop.component.lazyLoad;
@@ -24,6 +25,7 @@
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
       'touch': 'touchHandler',
+      'tap .item': 'item_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler',
       'tap [data-toggle]': 'toggleButton_tapHandler',
@@ -53,14 +55,15 @@
       this.$context.mapValue('game-id', game, true);
     },
     showMainPage: function (target) {
-      if (curr.is('#' + target)) {
+      if (curr.is('#' + target) || isSliding) {
         return;
       }
+      isSliding = true;
       var page = $('#' + target)
         , outDir = page.index() < curr.index() ? 'Right' : 'Left'
         , inDir = outDir === 'Left' ? 'Right' : 'Left';
-      page.removeClass('out').addClass('active animated slideIn' + inDir);
-      curr.addClass('animated slideOut' + outDir);
+      page.removeClass('out').addClass('active fast animated slideIn' + inDir);
+      curr.addClass('fast animated slideOut' + outDir);
       curr = page;
       this.$context.mediatorMap.check(page[0]);
       this.$('h1').text(TITLES[target] || '游戏泡泡');
@@ -81,7 +84,7 @@
     },
     backButton_tapHandler: function () {
       var hash = location.hash.substr(2);
-      if (hash === '' || history.length === 0) {
+      if (hash === '' || history.length === 1) {
         location.href = 'popo:return';
       } else {
         history.back();
@@ -93,6 +96,13 @@
     gameButton_tapHandler: function (event) {
       ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
       location.href = event.currentTarget.href;
+    },
+    item_tapHandler: function (event) {
+      var href = $(event.currentTarget).data('href');
+      if (!href) {
+        return;
+      }
+      this.$router.navigate(href);
     },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {
@@ -110,7 +120,13 @@
       }
       topPage
         .find('.navbar h2').text(title || model.get('name') || model.get('app_name')).end()
-        .find('.fa-spin').remove();;
+        .find('.fa-spin').remove();
+
+      // 给load进来的页面增加mediator
+      var map = this.$context.mediatorMap;
+      setTimeout(function () {
+        map.check(topPage[0]);
+      }, 0);
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)
@@ -128,6 +144,7 @@
         return target.removeClass('animated slideOutLeft slideOutRight active').addClass('out');
       }
       if (/slidein/i.test(classes)){
+        isSliding = false;
         return target.removeClass('animated slideInLeft slideInRight');
       }
       if (/scaleup/i.test(classes)) {
@@ -152,10 +169,6 @@
       event.preventDefault();
     },
     touchHandler: function (event) {
-      var dialog = this.$('.no-guide-dialog');
-      if (dialog.length > 0 && !$.contains(dialog[0], event.target)) {
-        dialog.remove();
-      }
       lastTouch = event.target;
     }
   });

@@ -69,14 +69,9 @@ body
 #apps
   position: relative
 
-  &.collapse
-    height: 0
-    min-height: 0
-    overflow: hidden
-
   #apps-container
     overflow: hidden
-    padding: $gap-l 0 $gap-l + 10px
+    padding: $gap + $gap-s 0 $gap-l
     margin-right: $gap-icon
 
     ul
@@ -109,13 +104,13 @@ body
       display: block
       max-width: 100%
 
-  h3
-    font-size: 14px
-    font-weight: normal
-    line-height: 30px
-    height: 30px
-    overflow: hidden
-    margin: 0
+  .indicators
+    bottom: 2px
+
+#feeds-title
+  line-height: 20px
+  text-indent: $gap
+  margin: 0
 
 #feeds,
 #recent-read,
@@ -159,11 +154,13 @@ body
   li
     padding: $gap
     overflow: hidden
+    list-style: none
 
     + li
       margin-top: $gap-s
 
   img
+    width: 120px
     height: 80px
     display: block
     float: left

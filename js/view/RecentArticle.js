@@ -5,10 +5,6 @@
   var interval = 0
     , ago = gamepop.component.ago;
   ns.RecentArticle = Backbone.View.extend({
-    $router: null,
-    events: {
-      'tap .item': 'item_tapHandler'
-    },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html());
 
@@ -17,7 +13,7 @@
       this.collection.on('sort', this.collection_sortHandler, this);
 
       this.render();
-      interval = setInterval(_.bind(this.refreshTime, this), 6000);
+      interval = setInterval(_.bind(this.refreshTime, this), 60000);
     },
     render: function () {
       this.$el.html(this.template({list: this.collection.toJSON()}));
@@ -38,9 +34,6 @@
     },
     collection_sortHandler: function (collection) {
       this.$el.prepend(this.$('#recent-' + collection.at(0).cid));
-    },
-    item_tapHandler: function (event) {
-      this.$router.navigate($(event.currentTarget).data('href'));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

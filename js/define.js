@@ -34,7 +34,13 @@ if (DEBUG) {
           return 0;
         }
       }
-    }
+    };
+
+    window.device = {
+      openKeyboard: function () {
+        console.log('zhima, zhima, open keyboard');
+      }
+    };
   }(window));
 
 }

@@ -131,7 +131,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'template/',
-          src: ['search.html'],
+          src: ['search.html', 'no-guide.html'],
           dest: BUILD + 'template/'
         }]
       }

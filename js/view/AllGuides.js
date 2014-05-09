@@ -11,10 +11,9 @@
 
   ns.AllGuides = Backbone.View.extend({
     $context: null,
-    $router: null,
     events: {
-      'tap .item': 'item_tapHandler',
-      'tap .next': 'button_nextHandler'
+      'tap .next-button': 'nextButton_tapHandler',
+      'tap .prev-button': 'prevButton_tapHandler'
     },
     initialize: function () {
       this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
@@ -26,12 +25,11 @@
       var scroll = this.scroll = new IScroll(this.el, {
         probeType: 2,
         click: true,
-        scrollX: false,
-        scrollY: true,
-        scrollbars: false
+        momentum: false,
+        mouseWheel: false,
+        disableMouse: true,
+        disablePointer: true
       });
-      scroll.on('scroll', _.bind(this.onScroll, this, scroll));
-      scroll.on('scrollStart', _.bind(this.onScrollStart, this, scroll));
       scroll.on('scrollEnd', _.bind(this.onScrollEnd, this, scroll));
     },
     render: function () {
@@ -45,13 +43,13 @@
         this.scroll.refresh();
       }, this), 2000);
     },
-    button_nextHandler: function () {
+    page: function (dir) {
       next = false;
       this.$('.all-guides-list').empty();
-      this.$('.next').hide();
+      this.$('.pagination').hide();
       this.$('.more').show();
-      this.collection.next();
       this.scroll.scrollTo(0, 0);
+      this.collection[dir]();
     },
     collection_addHandler: function (model) {
       var html = this.template({games: [model.toJSON()]});
@@ -59,50 +57,35 @@
     },
     collection_readyHandler: function () {
       var curr = this.collection.curr;
-      next = (curr + 1) % 4 === 0;
+      next = (curr + 1) % 3 === 0;
       var end = (loading && !fragment);
       if (fragment) {
         this.$('ul').append(fragment);
         fragment = '';
       }
-      if (next) {
-        this.$('.more').hide();
-        this.$('.next').show();
-      } else {
-        this.$('.more').show();
-        this.$('.next').hide();
-      }
+      this.$('.more').toggle(!next);
+      this.$('.pagination').toggle(next);
+      this.$('.prev-button').toggleClass('hide', this.collection.curr < 3);
+      this.$('.next-button').toggleClass('hide', this.collection.total <= this.collection.curr + 1);
       setTimeout(_.bind(function () {
         this.scroll.refresh();
-        lazyLoad(this.$el[0]);
+        lazyLoad(this.el);
         //load completed
         loading = false;
         if (end) {
-          this.$('.more').remove();
+          this.$('.more').text('没有攻略了');
         }
       },this), 200);
     },
-    item_tapHandler: function (e) {
-      var href = $(e.currentTarget).data('href');
-      this.$router.navigate(href);
+    nextButton_tapHandler: function () {
+      this.page('next');
     },
-    onScroll: function (scroll) {
-      var y = scroll.y;
-      var max = scroll.maxScrollY;
-      if (y - max <= 5) {
-        more = true;
-      }
-    },
-    onScrollStart: function (scroll) {
-      clearInterval(this.interval);
-      this.interval = window.setInterval(_.bind(function(){
-        lazyLoad(this.$el[0]);
-      }, this), 300);
+    prevButton_tapHandler: function () {
+      this.page('prev');
     },
     onScrollEnd: function (scroll) {
-      this.onScroll(scroll);
-      clearInterval(this.interval);
-      lazyLoad(this.$el[0]);
+      more = scroll.y - scroll.maxScrollY <= 5;
+      lazyLoad(this.el);
       //没有下一页，没有加载中且滚动到底部
       if (!next && more && !loading) {
         loading = true;
