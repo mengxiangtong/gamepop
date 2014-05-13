@@ -17,7 +17,7 @@
     content += '#apps-container img{width:' + imgWidth + 'px;}';
     content += '.grid-column-4 .item{width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
     content += '.grid-column-4 img{width:' + imgWidth + 'px;height:' + imgWidth + 'px}';
-    content += '.carousel .item,#guide-list{width:' + width + 'px;}';
+    content += '.carousel,.carousel .item,#guide-list{width:' + width + 'px;}';
     style.innerHTML = content;
     document.head.appendChild(style);
   }
@@ -42,7 +42,9 @@
           collection: appsCollection
         })
       , history = new gamepop.model.ReadHistory()
-      , results = new gamepop.model.SearchResults()
+      , results = new (Backbone.Collection.extend({
+        url: config.search
+      }))
       , router = new gamepop.Router();
 
     context.mapValue('gui', gui);

@@ -37,7 +37,7 @@
       this.collection.fetch({
         reset: true,
         data: {
-          keyword: keyword
+          w: keyword
         }
       });
       this.$('input').prop('disabled', true);

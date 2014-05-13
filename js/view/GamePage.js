@@ -12,7 +12,6 @@
     $all: null,
     $context: null,
     events: {
-      'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler'
     },
     initialize: function () {
@@ -35,7 +34,7 @@
         carousel.find('ul').width(document.body.clientWidth * length)
           .end().find('.indicators').css({
             width: (length * 20) - 10,
-            'margin-left': 4 - (length << 3)
+            'margin-left': 5 - (length * 10)
           });
         this.iscroll = new IScroll(carousel[0], {
           scrollX: true,
@@ -82,9 +81,6 @@
           this.$('.download-button span').text('正在下载（' + percent + '%）');
           break;
       }
-    },
-    backButton_tapHandler: function () {
-      history.back();
     },
     collection_addHandler: function (model) {
       if (model.id !== game) {

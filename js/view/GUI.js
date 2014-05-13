@@ -109,24 +109,17 @@
         topPage.find('.alert').removeClass('hide');
         return;
       }
-      this.$context.mediatorMap.check(topPage[0]);
 
       // 增加历史记录，只记录攻略最终页和新闻页
       var model = this.$context.getValue('game')
         , content = topPage.find('.content')
-        , title = content.find('h1, h2').text();
+        , title = content.find('h1, h2').first().text();
       if (topPage.find('.guide-detail, .news-detail').length) {
         this.$history.addArticle(location.hash, title);
       }
       topPage
         .find('.navbar h2').text(title || model.get('name') || model.get('app_name')).end()
         .find('.fa-spin').remove();
-
-      // 给load进来的页面增加mediator
-      var map = this.$context.mediatorMap;
-      setTimeout(function () {
-        map.check(topPage[0]);
-      }, 0);
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)
@@ -148,7 +141,12 @@
         return target.removeClass('animated slideInLeft slideInRight');
       }
       if (/scaleup/i.test(classes)) {
-        return target.removeClass('animated fadeInScaleUp fast');
+        target.removeClass('animated fadeInScaleUp fast');
+        // 给load进来的页面增加mediator
+        var map = this.$context.mediatorMap;
+        setTimeout(function () {
+          map.check(topPage[0]);
+        }, 100);
       }
       if (/scaledown/i.test(classes)) {
         return target.remove();
