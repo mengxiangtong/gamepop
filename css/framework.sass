@@ -19,23 +19,33 @@
   background-size: 28px 23px
   font-size: 16px
 
-#main-nav
-  background-color: $nav-background-color
+#homepage-search
+  background-color: $topbar-background-color
+  -webkit-transtion: all 0.3s
+  transition: all 0.3s
 
-  a
-    font-size: 15px
-    text-align: center
+  #search-form
+    [type=search]
+      background-color: $list-background-color
+      color: $topbar-background-color
+      font-size: 16px
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1)
 
-    &.active
-      color: $active-color
+    button
+      background: transparent
+      border: none
+      border-left: 1px solid $smoke
+      font-size: 20px
+      color: $topbar-background-color
 
-    &:active
-      background-color: lighten($active-color, 50%)
+    ul
+      @extend .ul
+      background-color: $list-background-color
+      border-radius: 0 0 6px 6px
 
-  .badge
-    border: 1px solid #FFF
-    font-size: 12px
-    background-color: #dd514c
+.apps-title
+  text-align: center
+  color: $mute
 
 #apps
   position: relative
@@ -116,7 +126,6 @@
     @extend #header
 
     h2
-      @extend #logo
       @extend .fa-angle-left
 
       &:before

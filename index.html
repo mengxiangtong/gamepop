@@ -10,129 +10,62 @@
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/media.css">
+<script type="text/x-handlebars-template" id="css" class="template">
+  .app-container,
+  .page-container {
+    width: {{width}}px;
+    height: {{height}}px;
+  }
+  #apps-container .item {
+    width: {{itemWidth}}px;
+  }
+  #apps-container img {
+    width: {{imgWidth}}px;
+  }
+</script>
 <title>游戏泡泡</title>
 
-<header id="header">
-  <h1 id="logo">游戏泡泡</h1>
-  <a href="#/search" class="search-button btn"><i class="fa fa-search"></i></a>
-</header>
-<nav id="main-nav" class="row">
-  <a href="#/all">攻略大全</a>
-  <a href="#/">我的游戏</a>
-  <a href="#/offline">个人中心</a>
-</nav>
-
-<div class="page">
-<div class="app-container out" id="all">
-  <div>
-    <a href="#/search" class="search-button">搜索</a>
-    <ul id="guide-list" class="row one all-guides-list grid-column-4">
-      <script type="text/x-handlebars-template" id="template-all">
+<div id="homepage-search">
+  <form id="search-form">
+    <img src="img/search.png" width="194" height="30" class="dido">
+    <input type="search" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off" autofocus="true">
+    <button><i class="fa fa-search"></i></button>
+    <ul>
+      <script type="text/x-handlebars-template" id="search-tips" class="template">
         {{#each games}}
-        <li class="item" data-href="#/remote/{{guide_name}}">
-          <img src="img/image.png" class="ph" data-src="{{#if icon_path}}{{icon_path}}{{else}}./img/image.png{{/if}}" alt="{{app_name}}">
-          <h3>{{game_name}}</h3>
-        </li>
+        <li data-href="#/remote/{{guide_name}}" class="item"><img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}"> {{game_name}}</li>
         {{/each}}
       </script>
     </ul>
-    <div class="pagination">
-      <button class="btn btn-default prev-button hide"><i class="fa fa-chevron-left"></i> 上一页</button>
-      <button class="btn btn-default next-button pull-right">下一页 <i class="fa fa-chevron-right"></i></button>
-    </div>
-    <div class="more"><i class="fa fa-spin fa-spinner fa-2x"></i></div>
-  </div>
+  </form>
 </div>
-
-<div class="app-container" id="homepage">
-  <div id="apps">
-    <div id="apps-container">
-      <ul>
-        <script type="text/x-handlebars-template">
-          {{#each apps}}
-          <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}" data-href="{{url}}">
-            <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
-          </li>
-          {{/each}}
-        </script>
-      </ul>
-    </div>
-    <div class="indicators">
-      <div class="token"></div>
-    </div>
-  </div>
-  <h2 id="feeds-title">最新资讯</h2>
-  <div id="feeds">
-    <div class="wrapper">
-      <div>
-        <div class="pulldown">
-          <i class="fa fa-spin fa-spinner"></i> 下拉刷新
-        </div>
-        <ul>
-          <script type="text/x-handlebars-template">
-            {{#each feeds}}
-            <li class="item" data-href="#/news/{{id}}">
-              {{#if icon_path}}<img src="img/image.png" data-src="http://r.yxpopo.com/{{icon_path}}" class="ph">{{/if}}
-              <h3>{{topic}}</h3>
-              <p>来源：{{source}} | <time>{{pub_date}}</time></p>
-            </li>
-            {{/each}}
-          </script>
-        </ul>
-        <div class="loading"><i class="fa fa-spin fa-spinner"></i></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="app-container out" id="offline">
-  <div class="btn-group">
-    <button type="button" class="btn active" data-toggle="tab" data-target="#recent-read">最近阅读</button>
-    <button type="button" class="btn" data-toggle="tab" data-target="#offline-list">离线攻略</button>
-  </div>
-  <div class="tab-panes">
-    <ul id="recent-read" class="tab-pane">
-      <script type="text/x-handlebars-template">
-        {{#each list}}
-        <li class="item" id="recent-{{cid}}" data-href="{{hash}}">
-          <h3>{{title}}</h3>
-          <p><span class="{{#if isOffline}}offline{{else}}online{{/if}}"></span> &nbsp; 于 <time datetime="{{timestamp}}">{{ago}}</time> 看过</p>
-        </li>
-        {{/each}}
-      </script>
-    </ul>
-    <ul id="offline-list" class="tab-pane hide">
-      <script type="text/x-handlebars-template">
+<h2 class="apps-title">我的游戏攻略</h2>
+<div id="apps">
+  <div id="apps-container">
+    <ul>
+      <script type="text/x-handlebars-template" class="template" id="installed">
         {{#each apps}}
-        {{#if has-guide}}
-        <li class="item {{id}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}">
-          <a href="{{url}}"><img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}" /></a>
-          <div class="info">
-            <h2><a href="{{url}}">{{name}}</a></h2>
-            {{#if has-offline}}
-            <div class="label label-success"><i class="fa fa-check"></i> 已下载</div>
-            {{else}}
-            <p {{#unless downloading}}class="hide"{{/unless}}><i class="fa fa-download"></i> <span>{{progress}}</span>%</p>
-            {{/if}}
-          </div>
-          {{#if has-offline}}
-          <a href="delete://{{id}}" class="delete-button btn">删除</a>
-          {{else}}
-          <a href="download://{{id}}/{{name}}" class="btn download-button {{#if downloading}}disabled hide{{/if}}">下载</a>
-          {{/if}}
-          {{#if downloading}}
-          <div class="progress"><div class="bar" style="width:{{progress}}%"></div></div>
-          {{/if}}
+        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}" data-href="{{url}}">
+          <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
         </li>
-        {{/if}}
         {{/each}}
       </script>
     </ul>
   </div>
-
+  <div class="indicators">
+    <div class="token"></div>
+  </div>
 </div>
-</div>
 
+<script type="text/x-handlebars-template" class="template" id="search-result">
+  {{#each list}}
+  <li data-href="#/remote/{{guide_name}}" class="item">
+    <img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}" class="thumb-60x60">
+    <h2>{{game_name}}</h2>
+    <p class="hide" id="sr-{{guide_name}}">总计收录{{num}}篇攻略<br>最后更新时间{{update_time}}</p>
+  </li>
+  {{/each}}
+</script>
 
 <div id="page-container" class="page-container out">
   <header class="navbar">
@@ -146,7 +79,7 @@
   </div>
 </div>
 
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/handlebars/handlebars.js"></script>
 <script src="bower_components/hammerjs/hammer.js"></script>
 <script src="bower_components/lodash/dist/lodash.js"></script>
@@ -157,19 +90,13 @@
 <script src="js/component/lazyLoad.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
+<script src="js/controller/Commands.js"></script>
 <script src="js/model/AppsCollection.js"></script>
-<script src="js/model/FeedsCollection.js"></script>
-<script src="js/model/AllGuidesCollection.js"></script>
-<script src="js/model/ReadHistory.js"></script>
+<script src="js/model/SearchCollection.js"></script>
 <script src="js/view/AppsList.js"></script>
-<script src="js/view/FeedsList.js"></script>
 <script src="js/view/GUI.js"></script>
-<script src="js/view/Nav.js"></script>
 <script src="js/view/SearchForm.js"></script>
-<script src="js/view/AllGuides.js"></script>
-<script src="js/view/Offline.js"></script>
-<script src="js/view/RecentArticle.js"></script>
+<script src="js/view/SearchResult.js"></script>
 <script src="js/view/GamePage.js"></script>
-<script src="js/controller/DownloadCommand.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>

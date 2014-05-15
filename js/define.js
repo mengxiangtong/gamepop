@@ -3,6 +3,7 @@
  */
 var DEBUG = true
   , PHONEGAP = false
+  , TEMPLATES = {}
   , gamepop = gamepop || {
     view: {},
     model: {},

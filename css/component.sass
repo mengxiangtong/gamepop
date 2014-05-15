@@ -157,54 +157,37 @@
     background: $active-color
 
 /* ====================================
- * badge
+ * thumb[nail]
  * ==================================*/
-.badge
-  display: inline-block
-  line-height: 1.5em
-  border-radius: 1em
-  background-color: #CCC
-  color: #FFF
-  padding: 0 0.5em
+.thumb-60x60
+  width: 60px
+  height: 60px
 
 /* ====================================
- * search
+ * icon-list
  * ==================================*/
-.search-form
-  margin: $gap
-  position: relative
+.icon-list
+  @extend .ul
+  background-color: $list-background-color
+  border: 1px solid $smoke
+  border-radius: 6px
+  margin: $gap $gap 0
 
-  [type=search]
-    width: 100%
-    line-height: 20px
-    background-color: $list-background-color
-    border: 1px solid #999
-    border-radius: 15px
-    color: $font-color
-    font-size: 14px
-    padding: 4px 0 4px 12px
-    margin: 0
-
-    &:focus
-      border-color: $active-color
-
-    &::-webkit-input-placeholder
-      line-height: 20px
-
-  > .fa-spin
-    position: absolute
-    right: $gap
-    top: $gap-s
-    line-height: 20px
-
-.results
-  @extend .grid-column-4
-
-  .info
+  &:empty
     display: none
-    color: #999
-    text-indent: 17px
-    line-height: 20px
 
-    &:only-child
-      display: block
+  li
+    border-bottom: 1px solid $smoke
+    padding: $gap
+    overflow: hidden
+
+    &:last-child
+      border: none
+
+    img
+      float: left
+      margin-right: $gap
+
+  h2
+    font-size: 16px
+    margin: 0 0 $gap-s

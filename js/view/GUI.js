@@ -3,13 +3,8 @@
  */
 ;(function (ns) {
   var lastTouch
-    , curr = '#homepage'
     , topPage = '#homepage'
     , pages = []
-    , TITLES = {
-        'all': '攻略大全',
-        'offline': '个人中心'
-      }
     , isSliding = false;
 
   //没有暴露事件，只能写到这儿了
@@ -17,8 +12,6 @@
 
   ns.GUI = Backbone.View.extend({
     $apps: null,
-    $all: null,
-    $history: null,
     $router: null,
     $context: null,
     events: {
@@ -39,36 +32,21 @@
         transform: false
       });
       this.template = this.$('#page-container').removeAttr('id').remove();
-      curr = topPage = $(curr);
     },
     setGame: function (game) {
       if (game === this.$context.getValue('game-id')) {
         return;
       }
-      var model = this.$apps.get(game) ? this.$apps.get(game) : this.$all.get(game)
+      var model = this.$apps.get(game)
         , name = '';
       if (model) {
         name = model.get('name') || model.get('app_name');
+        this.$('.game-button').attr('href', 'game://' + game + '/' + name);
+        this.$context.mapValue('game', model, true);
       }
-      this.$('.game-button').attr('href', 'game://' + game + '/' + name);
-      this.$context.mapValue('game', model, true);
       this.$context.mapValue('game-id', game, true);
     },
-    showMainPage: function (target) {
-      if (curr.is('#' + target) || isSliding) {
-        return;
-      }
-      isSliding = true;
-      var page = $('#' + target)
-        , outDir = page.index() < curr.index() ? 'Right' : 'Left'
-        , inDir = outDir === 'Left' ? 'Right' : 'Left';
-      page.removeClass('out').addClass('active fast animated slideIn' + inDir);
-      curr.addClass('fast animated slideOut' + outDir);
-      curr = page;
-      this.$context.mediatorMap.check(page[0]);
-      this.$('h1').text(TITLES[target] || '游戏泡泡');
-    },
-    showPopupPage: function (url, className, data) {
+    showPopupPage: function (url, className, data, title) {
       if (pages.length > 0 && pages[pages.length - 1].data('url') === url) {
         return;
       }
@@ -78,6 +56,7 @@
         .addClass('active animated fast fadeInScaleUp')
         .data('url', url)
         .appendTo('body')
+        .find('h2').text(title).end()
         .find('.content').load(url, data, _.bind(this.page_loadCompleteHandler, this));
       this.$el.attr('class', className);
       pages.push(topPage);
@@ -110,16 +89,12 @@
         return;
       }
 
-      // 增加历史记录，只记录攻略最终页和新闻页
-      var model = this.$context.getValue('game')
-        , content = topPage.find('.content')
+      var content = topPage.find('.content')
         , title = content.find('h1, h2').first().text();
-      if (topPage.find('.guide-detail, .news-detail').length) {
-        this.$history.addArticle(location.hash, title);
+      topPage.find('.fa-spin').remove();
+      if (title) {
+        topPage.find('.navbar h2').text(title).end();
       }
-      topPage
-        .find('.navbar h2').text(title || model.get('name') || model.get('app_name')).end()
-        .find('.fa-spin').remove();
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)
@@ -156,11 +131,13 @@
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
       // 这个函数通过记录touch时的对象，和之后的a对比，如果不等于或者不包含就放弃该次点击
       // 还要避免label和对应的input之间出现click问题
-      var isLabel = lastTouch.tagName.toLowerCase() === 'label'
-        , isLabelControl = isLabel && event.target === lastTouch.control;
-      if (event.target !== lastTouch && !isLabelControl) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (lastTouch) {
+        var isLabel = lastTouch.tagName.toLowerCase() === 'label'
+          , isLabelControl = isLabel && event.target === lastTouch.control;
+        if (event.target !== lastTouch && !isLabelControl) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
       }
     },
     preventDefault: function (event) {

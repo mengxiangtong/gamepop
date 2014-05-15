@@ -35,43 +35,80 @@ body
   margin: 0 0 0 $gap + $gap-s
   text-indent: 35px
 
-#main-nav
-  z-index: 5
-  width: 100%
-  position: relative
-
-  a
-    @extend .one-auto
-    line-height: $nav-height
-    height: $nav-height
-    display: block
-    position: relative
-
-    &.active
-      padding-top: 4px
-      line-height: $nav-height - 8px
-      border-bottom: 4px solid $active-color
-
-  .badge
-    position: absolute
-    right: 5px
-    top: 5px
-
-#all
-
-  .more
-    text-align: center
-    line-height: 2em
-
 #homepage
   @extend .column
+
+#homepage-search
+  @extend .one
+  @extend .all-center
+
+  #search-form
+    width: 90%
+    position: relative
+    padding-bottom: 65px
+
+    .dido
+      display: block
+      margin: 0 auto 33px
+
+    [type=search]
+      width: 100%
+      line-height: 35px
+      border-radius: 28px
+      border: 0
+      padding: 10px 0 10px 20px
+      margin: 0
+
+      &:focus
+        border-color: $active-color
+
+      &::-webkit-input-placeholder
+        line-height: 35px
+
+    > .fa-spin
+      position: absolute
+      right: $gap
+      top: $gap-s
+      line-height: 35px
+
+    button
+      position: absolute
+      right: 0
+      top: 73px
+      width: 46px
+      height: 35px
+      margin: 0
+      padding: 0 4px 1px 0
+
+    ul
+      line-height: 50px
+      margin: 0 25px
+      display: none
+
+      li
+        border-bottom: 1px solid $background-color
+        text-indent: $gap-icon
+
+        &:last-child
+          border: none
+
+      img
+        width: 30px
+        height: 30px
+        margin-right: $gap
+        vertical-align: middle
+
+.apps-title
+  line-height: 45px
+  margin: 0
+  font-size: 1em
 
 #apps
   position: relative
 
   #apps-container
     overflow: hidden
-    padding: $gap + $gap-s 0 $gap-l
+    padding: 0 0 45px
     margin-right: $gap-icon
 
     ul
@@ -80,8 +117,6 @@ body
 
   .item
     @extend .one
-    flex: 1 1 65px
-    -webkit-flex: 1 1 65px
     position: relative
     padding-left: $gap-icon
 
@@ -105,7 +140,7 @@ body
       max-width: 100%
 
   .indicators
-    bottom: 2px
+    bottom: 18px
 
 #feeds-title
   line-height: 20px
@@ -218,17 +253,16 @@ body
     right: 0
 
     h2
-      @extend #logo
       max-width: 75%
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
-      background-position-x: 5px
-      text-indent: 40px
+      text-indent: 25px
+      margin: 0
 
       &:before
         position: absolute
-        left: -35px
+        left: -15px
         font-size: 1.5em
         line-height: $topbar-height
 

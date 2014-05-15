@@ -1,15 +1,3 @@
-<h2 class="hide">搜索游戏</h2>
-<form class="search-form">
-  <input type="search" name="keyword" placeholder="搜索" autocomplete="off" autofocus="true">
-</form>
-<ul class="results grid-column-4">
-  <script type="text/x-handlebars-template">
-    {{#each games}}
-    <li class="item" data-href="#/remote/{{guide_name}}">
-      <img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}./img/image.png{{/if}}">
-      <h3>{{game_name}}</h3>
-    </li>
-    {{/each}}
-  </script>
-  <li class="info">请输入游戏名称</li>
+<ul class="search-result icon-list">
+
 </ul>

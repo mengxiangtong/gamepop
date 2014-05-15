@@ -5,8 +5,7 @@
   ns.AppsList = Backbone.View.extend({
     $context: null,
     initialize: function () {
-      this.template = Handlebars.compile(this.$('script').remove().html().replace(/\s{2,}|\n/g, ''));
-      this.menu = this.$('.no-guide-dialog').remove().removeClass('hide');
+      this.template = TEMPLATES.installed;
 
       this.collection.on('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
@@ -14,7 +13,7 @@
     },
     render: function (collection) {
       var html = this.template({apps: collection.toJSON()})
-        , width = this.$el.width() - 12 >> 2
+        , width = this.$el.width() - 16 >> 2
         , data = collection.toJSON();
       this.$('ul')
         .width(width * Math.ceil(data.length / 4) << 2)

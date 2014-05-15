@@ -3,13 +3,10 @@
  */
 var config = {
   apps: 'apps.json',
-  feeds: 'http://a.yxpopo.com/newslist.php',
-  local: 'local/',
   remote: 'http://a.yxpopo.com/vguide/',
-  news: 'http://a.yxpopo.com/news-detail.php',
   require: 'http://a.yxpopo.com/no_guide_log.php',
-  all: 'http://a.yxpopo.com/vapi/game_list/',
-  search: 'http://s.yxpopo.com/search.do?m=game'
+  search: 'http://s.yxpopo.com/search.do?m=game',
+  info: 'http://a.yxpopo.com/gameinfo.php'
 };
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
@@ -18,4 +15,5 @@ if (DEBUG) {
   config.feeds = 'http://meathill.pc/gamepop-api/newslist.php';
   config.localhost = 'meathill.pc';
   config.all = 'http://meathill.pc/gamepop-api/game_list/';
+  config.info = 'http://meathill.pc/gamepop-api/gameinfo.php';
 }

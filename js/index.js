@@ -8,20 +8,25 @@
   }
   function createCss(width, height) {
     var style = document.createElement('style')
-      , itemWidth = width - 12 >> 2
-      , imgWidth = itemWidth - 12
-      , content = '.app-container{width:' + width + 'px;height:' + (height - 80) + 'px;}';
-    content += '.page-container{width:' + width + 'px;height:' + height + 'px;}';
-    content += '#apps-container{min-height:' + (imgWidth + 35) + 'px;}';
-    content += '#apps-container .item{width:' + itemWidth + 'px;}';
-    content += '#apps-container img{width:' + imgWidth + 'px;}';
-    content += '.grid-column-4 .item{width:' + itemWidth + 'px;height:' + (imgWidth + 40) + 'px;}';
-    content += '.grid-column-4 img{width:' + imgWidth + 'px;height:' + imgWidth + 'px}';
-    content += '.carousel,.carousel .item,#guide-list{width:' + width + 'px;}';
+      , size = {
+        width: width,
+        height: height,
+        itemWidth: width - 16 >> 2,
+        imgWidth: width - 16 * 5 >> 2
+      }
+      , content = TEMPLATES.css(size);
     style.innerHTML = content;
     document.head.appendChild(style);
   }
   function init() {
+    if (DEBUG) {
+      $('.template').each(function () {
+        var key = this.id
+          , content = this.innerHTML.replace(/\s{2,}|\n/g, '');
+        TEMPLATES[key] = Handlebars.compile(content);
+      }).remove();
+    }
+
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
@@ -31,56 +36,33 @@
           el: '#apps',
           collection: appsCollection
         })
-      , feedsCollection = new gamepop.model.FeedsCollection()
-      , feeds = new gamepop.view.FeedsList({
-          el: '#feeds',
-          collection: feedsCollection
-        })
-      , allGuidesCollection = new gamepop.model.AllGuidesCollection()
-      , nav = new gamepop.view.Nav({
-          el: '#main-nav',
-          collection: appsCollection
-        })
-      , history = new gamepop.model.ReadHistory()
-      , results = new (Backbone.Collection.extend({
-        url: config.search
-      }))
+      , results = new gamepop.model.SearchCollection()
+      , search = new gamepop.view.SearchForm({
+        el: '#search-form',
+        collection: results
+      })
       , router = new gamepop.Router();
 
-    context.mapValue('gui', gui);
-    context.mapValue('list', list);
-    context.mapValue('nav', nav);
-    context.mapValue('router', router);
-    context.mapValue('all', allGuidesCollection);
-    context.mapValue('apps', appsCollection);
-    context.mapValue('history', history);
-    context.mediatorMap.isBackbone = true;
+    context
+      .mapValue('gui', gui)
+      .mapValue('list', list)
+      .mapValue('router', router)
+      .mapValue('apps', appsCollection)
+      .mapValue('result', results)
+      .mediatorMap.isBackbone = true;
     context
       .inject(gui)
-      .inject(nav)
-      .inject(feeds)
       .inject(router)
+      .inject(search)
+      .inject(results)
       .mediatorMap
-        .map('#all', gamepop.view.AllGuides, {
-          isSingle: true,
-          collection: allGuidesCollection
-        })
-        .map('#offline-list', gamepop.view.Offline, {
-          isSingle: true,
-          collection: appsCollection
-        })
-        .map('#recent-read', gamepop.view.RecentArticle, {
-          isSingle: true,
-          collection: history
-        })
         .map('.game-page', gamepop.view.GamePage, {
           collection: appsCollection
         })
-        .map('.search-form', gamepop.view.SearchForm, {
-          isSingle: true,
+        .map('.search-result', gamepop.view.SearchResult, {
           collection: results
         });
-    context.mapEvent('download', gamepop.controller.DownloadCommand);
+
 
     // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
     // 所以只能用JS算出宽度

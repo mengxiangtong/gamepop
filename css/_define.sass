@@ -4,18 +4,20 @@ $nav-height: 35px
 $gap-s: 5px
 $gap: 10px
 $gap-l: 20px
-$gap-icon: 12px
+$gap-icon: 16px
 $icon-radius: 12px
 
-$topbar-background-color: #3EAFE9
+$topbar-background-color: #4ABDCC
 $nav-background-color: #FFF
-$background-color: #E4E4E4
+$background-color: #F3F3F3
+$shadow-color: #43A9B6
 $list-background-color: #FFF
 $indicator-color: #FFF
 
-$active-color: #3EAFE9
+$active-color: #4BBCCB
 $font-color: #333
 $mute: #999
+$smoke: #CCC
 
 .ul
   list-style: none
@@ -72,14 +74,23 @@ $mute: #999
   vertical-align: top
   flex: auto
 
-.vcenter
+.hcenter
   display: -webkit-box
   display: box
   display: flex
   -webkit-box-align: center
   justify-content: center
+
+.vcenter
+  display: -webkit-box
+  display: box
+  display: flex
   -webkit-box-pack: center
   align-items: center
+
+.all-center
+  @extend .hcenter
+  @extend .vcenter
 
 .grid-column-4
   @extend .ul

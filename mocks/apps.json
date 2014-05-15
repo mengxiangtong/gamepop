@@ -63,5 +63,6 @@
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
     }
-  ]
+  ],
+  "deviceid": "meathill-develop"
 }
