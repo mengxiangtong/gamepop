@@ -14,10 +14,12 @@
     render: function (collection) {
       var html = this.template({apps: collection.toJSON()})
         , width = this.$el.width() - 16 >> 2
-        , data = collection.toJSON();
+        , data = collection.toJSON()
+        , space = (4 - data.length % 4);
+      space = space > 3 ? 0 : space;
       this.$('ul')
         .width(width * Math.ceil(data.length / 4) << 2)
-        .css('padding-right', width * (4 - data.length % 4))
+        .css('padding-right', width * space)
         .html(html);
       var indicators = this.$('.indicators');
       if (data.length > 0) {
