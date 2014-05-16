@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/media.css">
-<script type="text/x-handlebars-template" id="css" class="template">
+<script type="text/x-handlebars-template" class="template" id="css">
   .app-container,
   .page-container {
     width: {{width}}px;
@@ -22,16 +22,19 @@
   #apps-container img {
     width: {{imgWidth}}px;
   }
+  .home-page .item {
+    width: {{hpItemWidth}}px;
+  }
 </script>
 <title>游戏泡泡</title>
 
 <div id="homepage-search">
   <form id="search-form">
-    <img src="img/search.png" width="194" height="30" class="dido">
-    <input type="search" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off" autofocus="true">
+    <img src="img/search.png" width="161" height="34" class="dido">
+    <input type="search" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
     <ul>
-      <script type="text/x-handlebars-template" id="search-tips" class="template">
+      <script type="text/x-handlebars-template" class="template" id="search-tips">
         {{#each games}}
         <li data-href="#/remote/{{guide_name}}" class="item"><img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}"> {{game_name}}</li>
         {{/each}}
@@ -62,7 +65,7 @@
   <li data-href="#/remote/{{guide_name}}" class="item">
     <img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}" class="thumb-60x60">
     <h2>{{game_name}}</h2>
-    <p class="hide" id="sr-{{guide_name}}">总计收录{{num}}篇攻略<br>最后更新时间{{update_time}}</p>
+    <p class="hide" id="sr-{{guide_name}}">总计收录${num}篇攻略<br>最后更新时间${update_time}</p>
   </li>
   {{/each}}
 </script>
@@ -70,6 +73,7 @@
 <div id="page-container" class="page-container out">
   <header class="navbar">
     <h2 class="back-button">游戏泡泡</h2>
+    <a href="#" class="btn game-button hide">打开游戏</a>
     <i class="fa fa-spin fa-spinner"></i>
   </header>
   <div class="content">
@@ -80,17 +84,15 @@
 </div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/handlebars/handlebars.js"></script>
-<script src="bower_components/hammerjs/hammer.js"></script>
-<script src="bower_components/lodash/dist/lodash.js"></script>
-<script src="bower_components/backbone/backbone.js"></script>
-<script src="bower_components/nervenet/nervenet.js"></script>
-<script src="bower_components/iscroll/build/iscroll-probe.js"></script>
-<script src="js/component/ago.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script src="bower_components/hammerjs/hammer.min.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script src="bower_components/backbone/backbone-min.js"></script>
+<script src="bower_components/nervenet/nervenet.min.js"></script>
+<script src="bower_components/iscroll/dist/iscroll-min.js"></script>
 <script src="js/component/lazyLoad.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
-<script src="js/controller/Commands.js"></script>
 <script src="js/model/AppsCollection.js"></script>
 <script src="js/model/SearchCollection.js"></script>
 <script src="js/view/AppsList.js"></script>

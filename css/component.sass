@@ -190,4 +190,60 @@
 
   h2
     font-size: 16px
+    margin: $gap-s 0
+
+  p
+    font-size: 12px
+    line-height: 1.25
+    margin: 0
+    color: $mute
+
+/* ====================================
+ * article-list
+ * ==================================*/
+.article-list
+  @extend .ul
+  padding: 0 $gap-icon
+  margin: 0
+
+  .loading
+    text-align: center
+    line-height: $topbar-height
+
+  .load-more
+    font-size: 12px
+    text-align: center
+    color: #666
+
+  .pulldown
+    text-align: center
+    padding: 5px 10px
+    font-weight: bold
+    color: #888
+    line-height: 40px
+
+  li
+    padding: $gap
+    overflow: hidden
+    background-color: $list-background-color
+    border-radius: 4px
+
+    + li
+      margin-top: $gap
+
+  img
+    width: 120px
+    height: 80px
+    display: block
+    float: left
+    margin-right: $gap
+    border-radius: 4px
+
+  h3
+    font-size: 14px
     margin: 0 0 $gap-s
+
+  p
+    margin: 0
+    color: $mute
+    font-size: 10px

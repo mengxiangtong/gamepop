@@ -1,33 +1,29 @@
 @charset "utf-8"
 @import "define"
-@import "../bower_components/font-awesome/scss/font-awesome"
+@import "compass/css3/box-shadow"
 @import "../bower_components/colors/sass/variables"
+@import "../bower_components/font-awesome/scss/variables"
+@import "../bower_components/font-awesome/scss/core"
 
 #header
-  background-color: $topbar-background-color
-  color: $white
+  background-color: $background-color
+  color: $active-color
 
   .btn
-    color: $white
+    color: $active-color
     background: transparent
 
     &:active
-      background: rgba(255, 255, 255, 0.6)
-
-#logo
-  background: url(../img/logo.png) no-repeat 0 11px
-  background-size: 28px 23px
-  font-size: 16px
+      background: rgba(0, 0, 0, 0.2)
 
 #homepage-search
+  @extend .transition
   background-color: $topbar-background-color
-  -webkit-transtion: all 0.3s
-  transition: all 0.3s
 
   #search-form
     [type=search]
       background-color: $list-background-color
-      color: $topbar-background-color
+      color: $active-color
       font-size: 16px
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1)
 
@@ -36,7 +32,7 @@
       border: none
       border-left: 1px solid $smoke
       font-size: 20px
-      color: $topbar-background-color
+      color: $active-color
 
     ul
       @extend .ul
@@ -48,9 +44,8 @@
   color: $mute
 
 #apps
+  @extend .transition
   position: relative
-  -webkit-transition: all .4s
-  transition: all .4s
 
   .item
     text-align: center
@@ -83,51 +78,15 @@
     text-decoration: none
     font-size: 14px
 
-#feeds-title
-  font-size: 14px
-  font-weight: normal
-  color: #999
-
-#feeds,
-#recent-read,
-.guide-index .top-article,
-.guide-index .article-list,
-.guide-group .list
-
-  li
-    background-color: $list-background-color
-    border-radius: 4px
-
-  a
-    text-decoration: none
-    font-size: 16px
-    font-weight: normal
-    line-height: 25px
-
-    &:visited
-      color: #CCC
-
-  img
-    border-radius: 4px
-
-  p
-    color: #999
-    font-size: 12px
-
-  .load-more
-    font-size: 12px
-    text-align: center
-    color: #666
-
 .page-container
-  background-color: $background-color
+  background-color: $topbar-background-color
 
   .navbar
     @extend #header
 
     h2
-      @extend .fa-angle-left
 
       &:before
         @extend .fa
+        content: $fa-var-angle-left
         display: inline

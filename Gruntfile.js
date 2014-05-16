@@ -1,6 +1,9 @@
 /**
  * Created by meathill on 14-1-24.
  */
+
+var $ = require('jquery');
+
 module.exports = function (grunt) {
   var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
     , config = grunt.file.readJSON('grunt-config.json')
@@ -9,6 +12,7 @@ module.exports = function (grunt) {
     , target = isSingle ? 'single.html' : 'index.html'
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
+    , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
     , csses = []
     , libs = []
     , jses = [];
@@ -101,6 +105,29 @@ module.exports = function (grunt) {
         }]
       }
     },
+    handlebars: {
+      compile: {
+        options: {
+          partialsUseNamespace: true,
+          namespace: 'TEMPLATES',
+          compilerOptions:{
+            knownHelpers: {
+              'if': true,
+              'each': true,
+              'unless': true
+            },
+            knownHelpersOnly: true
+          },
+          processName: function (filePath) {
+            console.log(filePath);
+            return filePath.slice(filePath.lastIndexOf('/') + 1, filePath.lastIndexOf('.'));
+          }
+        },
+        files: {
+          'js/templates.js': [TEMP + 'handlebars/*.hbs']
+        }
+      }
+    },
     concat: {
       js: {
         options: {
@@ -161,8 +188,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-replace');
-
   grunt.registerMultiTask('index', 'make index html', function () {
     var html = grunt.file.read(this.data);
     // 取CSS
@@ -175,10 +202,17 @@ module.exports = function (grunt) {
       if (src.indexOf('define.js') !== -1) {
         return '';
       }
+      src = src.replace('handlebars.min', 'handlebars.runtime.min');
       isLib ? libs.push(src) : jses.push(src);
       return /index|single\.js/.test(src) ? match : '';
     });
     libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
+    libs.push('js/templates.js');
+    html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
+      content = content.replace(/\s{2,}|\n|\r/g, '');
+      grunt.file.write(TEMP + 'handlebars/' + id + '.hbs', content);
+      return '';
+    });
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
     grunt.file.write(TEMP + this.data, html);
   });
@@ -198,6 +232,7 @@ module.exports = function (grunt) {
     'imagemin',
     'uglify',
     'replace',
+    'handlebars',
     'concat',
     'htmlmin',
     'compress',

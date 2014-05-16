@@ -5,14 +5,14 @@
   'use strict';
 
   var timeout = 0
-    , autoDelay = 1500;
+    , autoDelay = 500;
 
   ns.SearchForm = Backbone.View.extend({
     $router: null,
     events: {
-      'keydown': 'keydownHandler',
+      'keydown input': 'keydownHandler',
       'submit': 'submitHandler',
-      'textInput': 'textInputHandler'
+      'textInput input': 'textInputHandler'
     },
     initialize: function () {
       this.template = TEMPLATES['search-tips'];
@@ -20,8 +20,9 @@
       this.collection.on('reset', this.collection_resetHandler, this);
     },
     render: function () {
+      console.log('search end');
       this.result.html(this.template({games: this.collection.toJSON().slice(0, 4)}));
-      this.$('.fa-spin').remove();
+      this.$('.fa-spin').removeClass('fa-spin fa-spinner');
       this.$('input').prop('disabled', false);
 
       var result = this.result;
@@ -30,6 +31,7 @@
       }, 0);
     },
     countDown: function () {
+      console.log('count down');
       clearTimeout(timeout);
       timeout = setTimeout(_.bind(this.search, this), autoDelay);
     },
@@ -38,6 +40,7 @@
       if (!keyword || keyword === this.last || keyword.length < 2) {
         return;
       }
+      console.log('search start');
       this.collection.fetch({
         reset: true,
         data: {
@@ -45,15 +48,19 @@
           refer: 'homepage'
         }
       });
+      this.last = keyword;
       this.$('input').prop('disabled', true);
-      this.$el.append('<i class="fa fa-spin fa-spinner"></i>');
+      this.$('button i').addClass('fa-spin fa-spinner');
     },
     collection_resetHandler: function () {
       this.render();
     },
-    keydownHandler: function () {
+    keydownHandler: function (event) {
       if (event.keyCode === 8 || event.keyCode === 46) {
         this.countDown();
+      }
+      if (event.keyCode === 13) {
+        this.$el.submit();
       }
     },
     submitHandler: function (event) {

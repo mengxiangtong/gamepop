@@ -33,20 +33,33 @@
       });
       this.template = this.$('#page-container').removeAttr('id').remove();
     },
+    initMediator: function () {
+      // 如果还在动画中或者没有完成加载则不初始化
+      if (topPage.hasClass('animated') || topPage.find('.alert-error').length) {
+        return;
+      }
+      // 给load进来的页面增加mediator
+      var map = this.$context.mediatorMap;
+      setTimeout(function () {
+        map.check(topPage[0]);
+      }, 50);
+      // game-button
+      var game = this.$context.getValue('game-id')
+        , model = this.$apps.get(game)
+        , name = '';
+      if (model) {
+        name = model.get('name');
+        this.$('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
+      }
+    },
     setGame: function (game) {
       if (game === this.$context.getValue('game-id')) {
         return;
       }
-      var model = this.$apps.get(game)
-        , name = '';
-      if (model) {
-        name = model.get('name') || model.get('app_name');
-        this.$('.game-button').attr('href', 'game://' + game + '/' + name);
-        this.$context.mapValue('game', model, true);
-      }
       this.$context.mapValue('game-id', game, true);
     },
     showPopupPage: function (url, className, data, title) {
+      console.log(url, className);
       if (pages.length > 0 && pages[pages.length - 1].data('url') === url) {
         return;
       }
@@ -57,8 +70,9 @@
         .data('url', url)
         .appendTo('body')
         .find('h2').text(title).end()
-        .find('.content').load(url, data, _.bind(this.page_loadCompleteHandler, this));
-      this.$el.attr('class', className);
+        .find('.content')
+          .addClass(className)
+          .load(url, data, _.bind(this.page_loadCompleteHandler, this));
       pages.push(topPage);
     },
     backButton_tapHandler: function () {
@@ -95,6 +109,7 @@
       if (title) {
         topPage.find('.navbar h2').text(title).end();
       }
+      this.initMediator();
     },
     toggleButton_tapHandler: function (event) {
       var button = $(event.currentTarget)
@@ -117,11 +132,7 @@
       }
       if (/scaleup/i.test(classes)) {
         target.removeClass('animated fadeInScaleUp fast');
-        // 给load进来的页面增加mediator
-        var map = this.$context.mediatorMap;
-        setTimeout(function () {
-          map.check(topPage[0]);
-        }, 100);
+        this.initMediator();
       }
       if (/scaledown/i.test(classes)) {
         return target.remove();

@@ -12,7 +12,8 @@
         width: width,
         height: height,
         itemWidth: width - 16 >> 2,
-        imgWidth: width - 16 * 5 >> 2
+        imgWidth: width - 16 * 5 >> 2,
+        hpItemWidth: (width - 20) / 3
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;
@@ -84,8 +85,4 @@
   } else {
     $(init);
   }
-
 }());
-
-// for duoshuo
-var duoshuoQuery = {short_name: "yxpopo"};

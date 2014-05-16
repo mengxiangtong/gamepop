@@ -3,273 +3,81 @@
 @import "compass/css3/transition"
 @import "define"
 @import "../bower_components/colors/sass/variables"
+@import "../bower_components/font-awesome/scss/variables"
+@import "../bower_components/font-awesome/scss/core"
 
-/* ====================================
- * all
- * ==================================*/
-#all
-  > div
-    padding-top: $gap-l
-
-  .search-button
-    line-height: 28px
-    border-radius: 15px
-    background-color: $list-background-color
-    margin: 0 $gap $gap
-    border: 1px solid #999
-    text-indent: 15px
-    color: #999
-    position: relative
-    display: block
-
-    &:after
-      content: '\f002'
-      font-family: 'FontAwesome'
-      color: #CCC
-      position: absolute
-      right: 15px
-
-  .load
-    color: $blue
-    text-align: center
-
-#guide-list
-  @extend .grid-column-4
-
-  .more
-    padding: $gap 0
-    text-align: center
-
-.pagination
-  padding: $gap $gap-icon
-  display: none
-  overflow: hidden
-
-  .btn
-    line-height: 24px
-    width: 90px
-
-/* ====================================
- * offline
- * ==================================*/
-#offline
-  @extend .column
-
-  .btn-group
-    margin: $gap $gap-l
-    border: 1px solid #999
-    border-radius: 4px
-    padding: 5px
-
-    .btn
-      line-height: 30px
-      border: 0
-      padding: 0
-      background: none
-
-      &.active
-        color: #FFF
-        background-image: none
-        background-color: $topbar-background-color
-        border-radius: 3px
-
-  .tab-panes
-    @extend .one
-    border-top: 1px solid $nav-background-color
-    padding: $gap 0
-    overflow: auto
-
-#recent-read
-
-  .online,
-  .offline
-    border-radius: 3px
-    color: $white
-    padding: 0.2em 0.5em
-
-  .online
-    background-color: $blue
-
-    &:before
-      content: '在线'
-
-  .offline
-    background-color: $olive
-
-    &:before
-      content: '已下载'
-
-#offline-list
-  @extend .ul
-  padding: 0 $gap
-
-  .item
-    @extend .row
-    background-color: $list-background-color
-    border-radius: 4px
-    padding: $gap-s
-    position: relative
-    @include single-transition(all, 0.3s)
-
-    + .item
-      margin-top: $gap-s
-
-    &.downloading
-      padding-bottom: 20px
-
-    img
-      display: block
-      height: 60px
-      margin-right: $gap
-      border-radius: $icon-radius
-
-    .info
-      @extend .one-auto
-
-    h2
-      @extend .one
-      font-size: 15px
-      line-height: 30px
-      margin: 0 0 $gap-s
-
-    p
-      line-height: 30px
-      margin: 0
-
-      .label
-        padding: .3em .6em
-
-    .download-button
-      display: none
-
-    .btn
-      width: 60px
-      height: 30px
-      line-height: 30px
-      margin: 15px 0
-      padding: 0
-
-    .progress
-      position: absolute
-      left: 10px
-      right: 10px
-      bottom: 10px
-      height: 5px
-      line-height: 5px
-      background: #DDD
-      overflow: hidden
-
-      .bar
-        width: 1px
-        height: 5px
-        line-height: 5px
-        background: #2db817
-        overflow: hidden
-
-/* ====================================
- * guide
- * ==================================*/
-.single
-  .download-button
-    display: none
-
-  .game-index .back-button
-    display: none
+.game-page
+  h2
+    text-indent: $gap-l
+    font-size: 12px
+    margin: $gap 0
 
 /* ----------------
  * index
  * --------------*/
 .guide-index
 
-  h2
-    text-indent: $gap-l
-    font-size: 1.17em
-    margin: $gap-s + $gap 0 $gap
+  > header
+    background-color: #ef9393
+    color: $white
 
-.carousel
-  max-height: 250px
+    .game-info
+      padding: $gap + $gap-s $gap + $gap-s 0
+      overflow: hidden
+
+      &:last-child
+        padding-bottom: $gap + $gap-s
+
+    .icon
+      display: block
+      float: left
+      margin-right: 15px
+      width: 60px
+      height: 60px
+      border: 1px solid #FFF
+      border-radius: 12px
+
+    h1
+      font-size: 16px
+      margin: 0 0 5px
+
+    p
+      @extend .transition
+      font-size: 12px
+      margin: 0
+      height: 3em
+      overflow: auto
+      position: relative
+      text-overflow: clip
+
+.home-page
+  margin: $gap + $gap-s $gap + $gap-s 0 $gap-s
+  padding-bottom: $gap-l + $gap
   overflow: hidden
   position: relative
 
   ul
     @extend .ul
-    min-height: 100px
-    overflow: hidden
+    @extend .row
 
-  .item
-    height: 100%
-    float: left
+  li
+    @extend .one
+    margin-left: $gap
 
   img
+    border-radius: 8px
     width: 100%
-    display: block
 
-.game-header
-  background: $topbar-background-color
-  line-height: 50px
-  position: relative
-  color: #FFF
-
-  h1
-    font-size: 1.5em
+  h3
     margin: 0
-    text-indent: 10px
+    font-size: 14px
+    text-align: center
 
-  .download-button
-    position: absolute
-    top: 10px
-    right: 10px
-    display: none // 因为离线包还不能用，暂时隐藏
-
-  + .article-list
-    padding-top: $gap
-
-.local .game-header .btn-success
-  display: none
-
-.home-page
-  @extend .wrap-container
-  margin: 5px
-
-  .item
-    display: block
-    float: left
-    width: 50%
-    padding: 5px
-
-    a,
-    div
-      display: block
-      height: 80px
-      position: relative
-      border-radius: 6px
-      -webkit-background-size: cover
-      background-size: cover
-      box-shadow: inset 0 0 2px 2px $blue
-
-    span
-      position: absolute
-      left: 2px
-      right: 2px
-      bottom: 2px
-      background: rgba(33, 33, 33, 0.8)
-      font-size: 14px
-      line-height: 1.8em
-      color: #FFF
-      text-indent: 0.5em
-      border-radius: 0 0 4px 4px
-
-  .btn
-    font-size: 20px
-    background-color: $blue
-    width: 90%
-    margin: $gap 5%
-    color: #FFF
 
 /* ----------------
  * list
  * --------------*/
-.guide-group
+.guide-list
   padding-top: $gap-icon
 
 /* ----------------

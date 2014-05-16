@@ -13,7 +13,7 @@
           reset: true,
           data: {
             refer: 'search',
-            w: location.hash.substr(location.hash.lastIndexOf('/') + 1)
+            w: decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1))
           }
         });
       }
@@ -34,11 +34,12 @@
         dataType: 'json',
         method: 'post',
         success: function (response) {
-          this.$('p').text(function (i, text) {
-            return text.replace(/{{(\w+)}}/g, function (matches) {
-              return response[i][matches[1]];
+          this.$('p').html(function (i, html) {
+            var guide_name = this.id.substr(3);
+            return html.replace(/\${(\w+)}/g, function (matches, key) {
+              return response[guide_name][key];
             });
-          });
+          }).removeClass('hide');
         }
       })
     },

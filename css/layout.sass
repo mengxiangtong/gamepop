@@ -21,22 +21,15 @@ body
 
   .btn
     position: absolute
-    font-size: 1.5em
     top: 0
-    line-height: $topbar-height - 3px
+    right: $gap
+    line-height: $topbar-height
     border: 0
-    padding: 0 0 3px
     min-width: 40px
+    padding: 0
 
   .search-button
     right: $gap-s
-
-#logo
-  margin: 0 0 0 $gap + $gap-s
-  text-indent: 35px
-
-#homepage
-  @extend .column
 
 #homepage-search
   @extend .one
@@ -55,7 +48,7 @@ body
       width: 100%
       line-height: 35px
       border-radius: 28px
-      border: 0
+      border: 1px solid $active-color
       padding: 10px 0 10px 20px
       margin: 0
 
@@ -63,6 +56,7 @@ body
         border-color: $active-color
 
       &::-webkit-input-placeholder
+        line-height: normal
         line-height: 35px
 
     > .fa-spin
@@ -142,83 +136,6 @@ body
   .indicators
     bottom: 18px
 
-#feeds-title
-  line-height: 20px
-  text-indent: $gap
-  margin: 0
-
-#feeds,
-#recent-read,
-.guide-index .top-article,
-.guide-index .article-list,
-.guide-group .list
-  @extend .one
-  overflow: auto
-  position: relative
-  padding: 0 $gap-icon
-  margin: 0
-
-  .loading
-    text-align: center
-    line-height: $topbar-height
-
-  .iScrollVerticalScrollbar
-    top: 50px !important
-    width: 5px !important
-
-  .wrapper
-    position: absolute
-    top: -45px
-    left: 0
-    bottom: 0
-    z-index: 1
-    width: 100%
-    overflow: hidden
-
-  .pulldown
-    text-align: center
-    padding: 5px 10px
-    font-weight: bold
-    color: #888
-    line-height: 40px
-
-  ul
-    @extend .ul
-    padding: 0 10px
-
-  li
-    padding: $gap
-    overflow: hidden
-    list-style: none
-
-    + li
-      margin-top: $gap-s
-
-  img
-    width: 120px
-    height: 80px
-    display: block
-    float: left
-    margin-right: $gap
-
-  h3
-    margin: 0
-
-  p
-    margin: 10px 0 0
-
-.page
-  @extend .column
-  @extend .one
-  position: relative
-
-.app-container
-  top: 0
-  bottom: 0
-
-  &.active
-    position: absolute
-
 .out
   display: none !important
 
@@ -259,11 +176,12 @@ body
       text-overflow: ellipsis
       text-indent: 25px
       margin: 0
+      font-size: 16px
 
       &:before
         position: absolute
         left: -15px
-        font-size: 1.5em
+        font-size: 2em
         line-height: $topbar-height
 
     .fa-spinner
