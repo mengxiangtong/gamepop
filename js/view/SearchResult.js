@@ -6,16 +6,11 @@
     initialize: function () {
       this.template = TEMPLATES['search-result'];
       this.collection.on('reset', this.collection_resetHandler, this);
-      if (this.collection.length) {
+      var keyword = decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1));
+      if (this.collection.length && this.collection.keyword === keyword) {
         this.render();
       } else if (!this.collection.loading) {
-        this.collection.fetch({
-          reset: true,
-          data: {
-            refer: 'search',
-            w: decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1))
-          }
-        });
+        this.collection.search(keyword, 'search');
       }
     },
     render: function () {

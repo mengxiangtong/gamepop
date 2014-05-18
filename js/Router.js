@@ -23,10 +23,12 @@
       ga.pageview('remote/' + game + '/' + path);
     },
     showSearch: function (keyword) {
+      this.$gui.setGame(null);
       this.$gui.showPopupPage('template/search.html', 'search', null, '搜索：' + keyword);
       ga.pageview('search');
     },
     showNoGuidePage: function (game, name) {
+      this.$gui.setGame(game);
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide');
       ga.pageview('no-guide/' + game + '/' + name);
     }

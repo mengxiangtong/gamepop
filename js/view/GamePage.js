@@ -9,7 +9,7 @@
   // TODO: 下一版先把这里的game和model重构了
   ns.GamePage = Backbone.View.extend({
     events: {
-      'tap .game-info p': 'p_tapHandler'
+      'tap .game-info p': 'gameInfo_tapHandler'
     },
     initialize: function () {
       // 初始化carousel
@@ -47,7 +47,7 @@
 
       lazyload(this.el);
     },
-    p_tapHandler: function (event) {
+    gameInfo_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , collapse = target.hasClass('active');
       target.toggleClass('active')

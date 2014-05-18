@@ -25,6 +25,8 @@
       background-color: $list-background-color
       color: $active-color
       font-size: 16px
+      -webkit-appearance: none
+      -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1)
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1)
 
     button
@@ -33,6 +35,10 @@
       border-left: 1px solid $smoke
       font-size: 20px
       color: $active-color
+
+      &:active
+        background-color: $topbar-background-color
+        border: none
 
     ul
       @extend .ul

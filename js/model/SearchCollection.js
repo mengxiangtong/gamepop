@@ -4,22 +4,22 @@
 ;(function (ns) {
   ns.SearchCollection = Backbone.Collection.extend({
     $apps: null,
-    loading: false,
     url: config.search,
+    keyword: '',
     model: Backbone.Model.extend({idAttribute: 'guide_name'}),
-    fetch: function (options) {
-      if (this.loading) {
+    search: function (keyword, refer) {
+      if (!keyword || keyword === this.keyword || keyword.length < 2) {
         return;
       }
-      this.loading = true;
-      if ('data' in options) {
-        options.data.deviceid = this.$apps.deviceid;
-      }
-      Backbone.Collection.prototype.fetch.call(this, options);
-    },
-    parse: function (response) {
-      this.loading = false;
-      return response;
+      this.keyword = keyword;
+      this.fetch({
+        reset: true,
+        data: {
+          w: keyword,
+          refer: refer,
+          deviceid: this.$apps.deviceid
+        }
+      })
     }
   });
 }(Nervenet.createNameSpace('gamepop.model')));

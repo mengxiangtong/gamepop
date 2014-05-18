@@ -181,7 +181,7 @@
     padding: $gap
     overflow: hidden
 
-    &:last-child
+    &:last-of-type
       border: none
 
     img
@@ -197,6 +197,14 @@
     line-height: 1.25
     margin: 0
     color: $mute
+
+  .no-result
+    display: none
+    text-align: center
+    color: $mute
+
+    &:only-child
+      display: list-item
 
 /* ====================================
  * article-list

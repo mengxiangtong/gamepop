@@ -10,20 +10,22 @@
   ns.SearchForm = Backbone.View.extend({
     $router: null,
     events: {
-      'keydown input': 'keydownHandler',
+      'tap input': 'input_tapHandler',
+      'keydown': 'keydownHandler',
       'submit': 'submitHandler',
-      'textInput input': 'textInputHandler'
+      'textInput': 'textInputHandler'
     },
     initialize: function () {
       this.template = TEMPLATES['search-tips'];
       this.result = this.$('ul');
       this.collection.on('reset', this.collection_resetHandler, this);
+      this.collection.on('request', this.collection_requestHandler, this);
     },
     render: function () {
       console.log('search end');
       this.result.html(this.template({games: this.collection.toJSON().slice(0, 4)}));
       this.$('.fa-spin').removeClass('fa-spin fa-spinner');
-      this.$('input').prop('disabled', false);
+      this.$('input, button').prop('disabled', false);
 
       var result = this.result;
       setTimeout(function () {
@@ -35,25 +37,26 @@
       clearTimeout(timeout);
       timeout = setTimeout(_.bind(this.search, this), autoDelay);
     },
+    getKeyword: function (encode) {
+      var keyword = this.$('input').val().toLowerCase();
+      keyword = keyword.replace(/\/|^\s+|\s+|\\$/g, '', keyword);
+      keyword = encode ? encodeURIComponent(keyword) : keyword;
+      return keyword;
+    },
     search: function () {
-      var keyword = this.$('input').val();
-      if (!keyword || keyword === this.last || keyword.length < 2) {
-        return;
-      }
+      var keyword = this.getKeyword();
       console.log('search start');
-      this.collection.fetch({
-        reset: true,
-        data: {
-          w: keyword,
-          refer: 'homepage'
-        }
-      });
-      this.last = keyword;
-      this.$('input').prop('disabled', true);
+      this.collection.search(keyword, 'homepage');
+    },
+    collection_requestHandler: function () {
+      this.$('input, button').prop('disabled', true);
       this.$('button i').addClass('fa-spin fa-spinner');
     },
     collection_resetHandler: function () {
       this.render();
+    },
+    input_tapHandler: function (event) {
+      $(event.currentTarget).select();
     },
     keydownHandler: function (event) {
       if (event.keyCode === 8 || event.keyCode === 46) {
@@ -64,7 +67,7 @@
       }
     },
     submitHandler: function (event) {
-      this.$router.navigate('#/search/' + this.$('input').val());
+      this.$router.navigate('#/search/' + this.getKeyword(true));
       event.preventDefault();
     },
     textInputHandler: function () {

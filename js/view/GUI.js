@@ -3,9 +3,8 @@
  */
 ;(function (ns) {
   var lastTouch
-    , topPage = '#homepage'
-    , pages = []
-    , isSliding = false;
+    , topPage = null
+    , pages = [];
 
   //没有暴露事件，只能写到这儿了
   var lazyLoad = gamepop.component.lazyLoad;
@@ -21,7 +20,6 @@
       'tap .item': 'item_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler',
-      'tap [data-toggle]': 'toggleButton_tapHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
     },
@@ -51,6 +49,8 @@
         name = model.get('name');
         this.$('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
       }
+      // lazyload
+      lazyLoad(topPage[0]);
     },
     setGame: function (game) {
       if (game === this.$context.getValue('game-id')) {
@@ -65,10 +65,11 @@
       }
       topPage = this.template.clone();
       topPage
-        .removeClass('out')
-        .addClass('active animated fast fadeInScaleUp')
         .data('url', url)
         .appendTo('body')
+        .removeClass('out')
+        .addClass('active animated fast fadeInScaleUp')
+        .on('scroll', function () { lazyLoad(this, 800); })
         .find('h2').text(title).end()
         .find('.content')
           .addClass(className)
@@ -82,7 +83,9 @@
       } else {
         history.back();
         if (pages.length > 0) {
-          pages.pop().addClass('animated fast fadeOutScaleDown');
+          pages.pop()
+            .addClass('animated fast fadeOutScaleDown')
+            .off('scroll');
         }
       }
     },
@@ -111,25 +114,9 @@
       }
       this.initMediator();
     },
-    toggleButton_tapHandler: function (event) {
-      var button = $(event.currentTarget)
-        , target = $(button.data('target'));
-      button.addClass('active')
-        .siblings('.active').removeClass('active');
-      target.removeClass('hide')
-        .siblings('.tab-pane').addClass('hide');
-    },
     animationEndHandler: function (event) {
       var target = $(event.target)
         , classes = event.target.className;
-      lazyLoad(event.target);
-      if (/slideout/i.test(classes)) {
-        return target.removeClass('animated slideOutLeft slideOutRight active').addClass('out');
-      }
-      if (/slidein/i.test(classes)){
-        isSliding = false;
-        return target.removeClass('animated slideInLeft slideInRight');
-      }
       if (/scaleup/i.test(classes)) {
         target.removeClass('animated fadeInScaleUp fast');
         this.initMediator();

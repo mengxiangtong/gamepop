@@ -16,7 +16,7 @@
     );
   }
 
-  ns.lazyLoad = function(el){
+  ns.lazyLoad = function(el, delay){
     function check() {
       var imgs = el.getElementsByClassName('ph');
       for (var i = 0, len = imgs.length, img; i < len; i++) {
@@ -28,7 +28,13 @@
         }
       }
     }
-    check();
+    if (delay !== null) {
+      clearTimeout(el.timeout);
+      el.timeout = setTimeout(check, delay);
+    } else {
+      check();
+    }
+
     //export check method
     return check;
   };
