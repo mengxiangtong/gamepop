@@ -45,6 +45,9 @@
       background-color: $list-background-color
       border-radius: 0 0 6px 6px
 
+      li:active
+        background-color: $background-color
+
 .apps-title
   text-align: center
   color: $mute
@@ -62,13 +65,17 @@
     &.guide:after
       content: ''
       background-image: url(../img/icon.png)
-      background-size: auto 30px
+      background-size: auto 50px
 
     &.offline:after
       background-position: -37px 0
 
     &.downloading:after
       background-position: -75px 0
+
+    &.no-game:after
+      background-position: -100px 0
+      background-size: auto 44px
 
     &.no-guide
       -webkit-filter: grayscale(100%)

@@ -138,30 +138,37 @@
   color: #a94442
 
 /* ====================================
- * indicators
+ * icon-list & article-list
  * ==================================*/
-.indicators
-  position: absolute
-  left: 50%
-  bottom: 10px
-  font: 10px/10px Airal
-  background-image: url(../img/indicator.svg)
-  min-width: 10px
-  height: 10px
+.icon-list,
+.article-list
 
-  div
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    overflow: hidden
-    background: $active-color
+  .loading
+    text-align: center
+    line-height: 30px
 
-/* ====================================
- * thumb[nail]
- * ==================================*/
-.thumb-60x60
-  width: 60px
-  height: 60px
+  .load-more
+    font-size: 12px
+    text-align: center
+    color: #666
+
+  .pulldown
+    text-align: center
+    padding: 5px 10px
+    font-weight: bold
+    color: #888
+    line-height: 40px
+
+  .item:active
+    background-color: $topbar-background-color
+
+  .no-result
+    display: none
+    text-align: center
+    color: $mute
+
+    &:only-child
+      display: list-item
 
 /* ====================================
  * icon-list
@@ -185,6 +192,8 @@
       border: none
 
     img
+      width: 60px
+      height: 60px
       float: left
       margin-right: $gap
 
@@ -198,14 +207,6 @@
     margin: 0
     color: $mute
 
-  .no-result
-    display: none
-    text-align: center
-    color: $mute
-
-    &:only-child
-      display: list-item
-
 /* ====================================
  * article-list
  * ==================================*/
@@ -213,22 +214,6 @@
   @extend .ul
   padding: 0 $gap-icon
   margin: 0
-
-  .loading
-    text-align: center
-    line-height: $topbar-height
-
-  .load-more
-    font-size: 12px
-    text-align: center
-    color: #666
-
-  .pulldown
-    text-align: center
-    padding: 5px 10px
-    font-weight: bold
-    color: #888
-    line-height: 40px
 
   li
     padding: $gap
@@ -255,3 +240,48 @@
     margin: 0
     color: $mute
     font-size: 10px
+
+/* ====================================
+ * carousel
+ * ==================================*/
+.carousel
+  overflow: hidden
+  -webkit-backface-visibility: hidden
+  -webkit-transform: translate3d(0,0,0) scale3d(1,1,1)
+  -webkit-transform-style: preserve-3d
+
+  ul
+    -webkit-transform: translate3d(0%,0,0) scale3d(1,1,1)
+    transform: translate3d(0%,0,0) scale3d(1,1,1)
+    overflow: hidden
+    -webkit-backface-visibility: hidden
+    -webkit-transform-style: preserve-3d
+
+    &.animate
+      @extend .transition
+
+  li
+    -webkit-transform-style: preserve-3d
+    -webkit-transform: translate3d(0,0,0)
+
+/* ----------------
+ * indicators
+ * --------------*/
+.indicators
+  position: absolute
+  left: 50%
+  bottom: 10px
+  font: 10px/10px Airal
+  background-image: url(../img/indicator.svg)
+  min-width: 10px
+  height: 10px
+
+  .token
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    overflow: hidden
+    background: $active-color
+
+    &.animate
+      @extend .transition

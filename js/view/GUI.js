@@ -25,7 +25,6 @@
     },
     initialize: function () {
       Hammer(this.el, {
-        drag: false,
         hold: false,
         transform: false
       });
@@ -45,7 +44,7 @@
       var game = this.$context.getValue('game-id')
         , model = this.$apps.get(game)
         , name = '';
-      if (model) {
+      if (model && !model.get('is_local')) {
         name = model.get('name');
         this.$('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
       }

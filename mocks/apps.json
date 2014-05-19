@@ -23,11 +23,11 @@
     },
     {
       "id": "bilibili1",
-      "url": "#/local/hdppl/",
+      "url": "#/remote/qmfjdz/",
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
-      "has-offline": true
+      "is_local": true
     },
     {
       "id": "zhihu1",

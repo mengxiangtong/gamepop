@@ -13,6 +13,7 @@ spec
 
 # compiled
 css/*.css
+js/templates.js
 
 # mocks
 local

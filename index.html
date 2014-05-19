@@ -30,7 +30,7 @@
 
 <div id="homepage-search">
   <form id="search-form">
-    <img src="img/search.png" width="161" height="34" class="dido">
+    <img src="img/search.png" width="161" height="34" class="doodle">
     <input type="search" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
     <ul>
@@ -44,11 +44,11 @@
 </div>
 <h2 class="apps-title">我的游戏攻略</h2>
 <div id="apps">
-  <div id="apps-container">
+  <div id="apps-container" class="carousel">
     <ul>
       <script type="text/x-handlebars-template" class="template" id="installed">
         {{#each apps}}
-        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}}" data-href="{{url}}">
+        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#if is_local}}no-game{{/if}}" data-href="{{url}}">
           <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
         </li>
         {{/each}}
@@ -63,7 +63,7 @@
 <script type="text/x-handlebars-template" class="template" id="search-result">
   {{#each list}}
   <li data-href="#/remote/{{guide_name}}" class="item">
-    <img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}" class="thumb-60x60">
+    <img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}">
     <h2>{{game_name}}</h2>
     <p class="hide" id="sr-{{guide_name}}">总计收录${num}篇攻略<br>最后更新时间${update_time}</p>
   </li>
@@ -92,8 +92,8 @@
 <script src="bower_components/lodash/dist/lodash.min.js"></script>
 <script src="bower_components/backbone/backbone-min.js"></script>
 <script src="bower_components/nervenet/nervenet.min.js"></script>
-<script src="bower_components/iscroll/dist/iscroll-min.js"></script>
 <script src="js/component/lazyLoad.js"></script>
+<script src="js/component/Carousel.js"></script>
 <script src="js/define.js"></script>
 <script src="js/config.js"></script>
 <script src="js/model/AppsCollection.js"></script>

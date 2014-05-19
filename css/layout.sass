@@ -40,7 +40,7 @@ body
     position: relative
     padding-bottom: 65px
 
-    .dido
+    .doodle
       display: block
       margin: 0 auto 33px
 
@@ -86,7 +86,7 @@ body
       display: none
 
       li
-        border-bottom: 1px solid $background-color
+        border-bottom: 1px solid $topbar-background-color
         text-indent: $gap-icon
 
         &:last-child
@@ -134,6 +134,12 @@ body
     &.downloading:after
       width: 37px
       height: 27px
+
+    &.no-game:after
+      width: 44px
+      height: 44px
+      top: 0
+      left: 16px
 
     img
       display: block

@@ -13,10 +13,6 @@
     },
     initialize: function () {
       // 初始化carousel
-      if (this.iscroll) {
-        this.iscroll.destroy();
-        this.iscroll = null;
-      }
       var carousel = this.$('.home-page');
       if (carousel.length) {
         var length = Math.ceil(carousel.find('.item').length / 3)
@@ -24,24 +20,10 @@
           , space = (3 - carousel.find('.item').length % 3);
         space = space > 2 ? 0 : space;
         carousel.find('ul').width((document.body.clientWidth - 20) * length)
-          .css('padding-right', width * space)
-          .end().find('.indicators').css({
-            width: (length * 20) - 10,
-            'margin-left': 10 - (length * 10)
-          });
-        this.iscroll = new IScroll(carousel[0], {
-          scrollX: true,
-          scrollY: false,
-          scrollbars: false,
-          momentum: false,
-          mouseWheel: false,
-          disableMouse: true,
-          disablePointer: true,
-          snap: true,
-          indicators: {
-            el: carousel.find('.indicators')[0],
-            resize: false
-          }
+          .css('padding-right', width * space);
+        this.carousel = new gamepop.component.Carousel({
+          el: carousel[0],
+          indicator: this.$('.indicators')
         });
       }
 

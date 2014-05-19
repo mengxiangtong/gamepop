@@ -21,36 +21,20 @@
         .width(width * Math.ceil(data.length / 4) << 2)
         .css('padding-right', width * space)
         .html(html);
-      var indicators = this.$('.indicators');
+      var indicator = this.$('.indicators');
       if (data.length > 0) {
-        var width = Math.ceil(data.length / 4) * 20 - 10;
-        indicators.css({
-          width: width + 'px',
-          'margin-left': (-width >> 1) + 'px'
-        }).show();
-        if (this.iscroll) {
-          this.iscroll.refresh();
+        if (this.carousel) {
+          this.carousel.refresh();
           return;
         }
-        this.iscroll = new IScroll('#apps-container', {
-          scrollX: true,
-          scrollY: false,
-          scrollbars: false,
-          momentum: false,
-          mouseWheel: false,
-          disableMouse: true,
-          disablePointer: true,
-          snap: true,
-          indicators: {
-            el: indicators[0],
-            resize: false,
-            listenY: false
-          }
+        this.carousel = new gamepop.component.Carousel({
+          el: '#apps-container',
+          indicator: indicator
         });
       } else {
-        if (this.iscroll) {
-          this.iscroll.destroy();
-          this.iscroll = null;
+        if (this.carousel) {
+          this.carousel.remove();
+          this.carousel = null;
         }
         indicators.hide();
       }

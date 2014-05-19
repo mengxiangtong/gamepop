@@ -10,7 +10,6 @@
   ns.SearchForm = Backbone.View.extend({
     $router: null,
     events: {
-      'tap input': 'input_tapHandler',
       'keydown': 'keydownHandler',
       'submit': 'submitHandler',
       'textInput': 'textInputHandler'
@@ -26,6 +25,7 @@
       this.result.html(this.template({games: this.collection.toJSON().slice(0, 4)}));
       this.$('.fa-spin').removeClass('fa-spin fa-spinner');
       this.$('input, button').prop('disabled', false);
+      this.$('input').focus();
 
       var result = this.result;
       setTimeout(function () {
@@ -54,9 +54,6 @@
     },
     collection_resetHandler: function () {
       this.render();
-    },
-    input_tapHandler: function (event) {
-      $(event.currentTarget).select();
     },
     keydownHandler: function (event) {
       if (event.keyCode === 8 || event.keyCode === 46) {

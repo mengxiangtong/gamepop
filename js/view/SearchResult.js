@@ -9,7 +9,7 @@
       var keyword = decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1));
       if (this.collection.length && this.collection.keyword === keyword) {
         this.render();
-      } else if (!this.collection.loading) {
+      } else {
         this.collection.search(keyword, 'search');
       }
     },
