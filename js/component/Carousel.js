@@ -4,10 +4,12 @@
 ;(function (ns) {
   'use strict';
 
-  var is3d = (function (target) {
-    target.style.WebkitTransform = 'translate3D(0, 0, 0) scale(1, 1, 1)';
-    return window.getComputedStyle(target, null).getPropertyValue('-webkit-transform');
-  }(document.createElement('div')));
+  var is3d = (function () {
+    var div = document.createElement('div')
+      , before = div.style.webkitPerspective;
+    div.style.webkitPerspective = '1px';
+    return div.style.webkitPerspective != before;
+  }());
 
   ns.Carousel = Backbone.View.extend({
     width: 360,
@@ -21,6 +23,10 @@
       'release': 'releaseHandler'
     },
     initialize: function (options) {
+      Hammer(this.el, {
+        dragLockToAxis: true,
+        preventDefault: true
+      });
       this.container = this.$el.children();
       this.indicator = options.indicator;
       this.indicatorWidth = options.indicator.width();

@@ -26,8 +26,7 @@
     initialize: function () {
       Hammer(this.el, {
         hold: false,
-        transform: false,
-        prevent_default: true
+        transform: false
       });
       this.template = this.$('#page-container').removeAttr('id').remove();
     },
