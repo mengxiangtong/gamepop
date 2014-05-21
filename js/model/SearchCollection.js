@@ -8,7 +8,7 @@
     keyword: '',
     model: Backbone.Model.extend({idAttribute: 'guide_name'}),
     search: function (keyword, refer) {
-      if (!keyword || keyword === this.keyword || keyword.length < 2) {
+      if (!keyword || keyword === this.keyword || keyword.length === 0) {
         return;
       }
       this.keyword = keyword;
@@ -16,8 +16,8 @@
         reset: true,
         data: {
           w: keyword,
-          refer: refer,
-          deviceid: this.$apps.deviceid
+          re: refer,
+          did: this.$apps.deviceid
         }
       })
     }

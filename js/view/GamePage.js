@@ -4,7 +4,10 @@
 ;(function (ns) {
   'use strict';
 
-  var lazyload = gamepop.component.lazyLoad;
+  var lazyload = gamepop.component.lazyLoad
+    , width = document.body.clientWidth
+    , gap = width > 320 ? 15 : 10
+    , allGaps = width > 320 ? 60 : 50;
 
   // TODO: 下一版先把这里的game和model重构了
   ns.GamePage = Backbone.View.extend({
@@ -15,11 +18,11 @@
       // 初始化carousel
       var carousel = this.$('.home-page');
       if (carousel.length) {
-        var length = Math.ceil(carousel.find('.item').length / 3)
-          , width = (document.body.clientWidth - 20) / 3
-          , space = (3 - carousel.find('.item').length % 3);
+        var width = (document.body.clientWidth - allGaps) / 3 + gap
+          , length = carousel.find('.item').length
+          , space = 3 - length % 3;
         space = space > 2 ? 0 : space;
-        carousel.find('ul').width((document.body.clientWidth - 20) * length)
+        carousel.find('ul').width(width * length)
           .css('padding-right', width * space);
         this.carousel = new gamepop.component.Carousel({
           el: carousel[0],

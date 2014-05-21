@@ -109,7 +109,6 @@ body
   #apps-container
     overflow: hidden
     padding: 0 0 45px
-    margin-right: $gap-icon
 
     ul
       @extend .ul
@@ -118,7 +117,7 @@ body
   .item
     @extend .one
     position: relative
-    padding-left: $gap-icon
+    margin-left: $gap-icon
 
     &:after
       position: absolute
@@ -139,7 +138,8 @@ body
       width: 44px
       height: 44px
       top: 0
-      left: 16px
+      left: 0
+      right: auto
 
     img
       display: block

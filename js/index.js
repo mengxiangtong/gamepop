@@ -8,12 +8,12 @@
   }
   function createCss(width, height) {
     var style = document.createElement('style')
+      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 50) / 3
       , size = {
         width: width,
         height: height,
-        itemWidth: width - 16 >> 2,
-        imgWidth: width - 16 * 5 >> 2,
-        hpItemWidth: (width - 20) / 3
+        itemWidth: width - 16 * 5 >> 2,
+        hpItemWidth: hpItemWidth
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;
