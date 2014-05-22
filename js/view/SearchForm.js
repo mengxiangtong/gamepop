@@ -4,15 +4,11 @@
 ;(function (ns) {
   'use strict';
 
-  var timeout = 0
-    , autoDelay = 500;
-
   ns.SearchForm = Backbone.View.extend({
     $router: null,
     events: {
       'keydown': 'keydownHandler',
-      'submit': 'submitHandler',
-      'textInput': 'textInputHandler'
+      'submit': 'submitHandler'
     },
     initialize: function () {
       this.template = TEMPLATES['search-tips'];
@@ -32,14 +28,9 @@
         result.slideDown('fast');
       }, 0);
     },
-    countDown: function () {
-      console.log('count down');
-      clearTimeout(timeout);
-      timeout = setTimeout(_.bind(this.search, this), autoDelay);
-    },
     getKeyword: function (encode) {
       var keyword = this.$('input').val().toLowerCase();
-      keyword = keyword.replace(/\/|^\s+|\s+|\\$/g, '', keyword);
+      keyword = keyword.replace(/\/|\s+|\\/g, '', keyword);
       keyword = encode ? encodeURIComponent(keyword) : keyword;
       return keyword;
     },
@@ -56,9 +47,6 @@
       this.render();
     },
     keydownHandler: function (event) {
-      if (event.keyCode === 8 || event.keyCode === 46) {
-        this.countDown();
-      }
       if (event.keyCode === 13) {
         this.$el.submit();
       }
@@ -66,9 +54,6 @@
     submitHandler: function (event) {
       this.$router.navigate('#/search/' + this.getKeyword(true));
       event.preventDefault();
-    },
-    textInputHandler: function () {
-      this.countDown();
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

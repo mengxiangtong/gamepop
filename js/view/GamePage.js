@@ -22,7 +22,7 @@
           , length = carousel.find('.item').length
           , space = 3 - length % 3;
         space = space > 2 ? 0 : space;
-        carousel.find('ul').width(width * length)
+        carousel.find('ul').width(width * (length + space))
           .css('padding-right', width * space);
         this.carousel = new gamepop.component.Carousel({
           el: carousel[0],
