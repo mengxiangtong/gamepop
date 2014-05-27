@@ -16,7 +16,7 @@
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
       var isIndex = !path
-        , isList = /\/list\./.test(path)
+        , isList = /\/list/.test(path)
         , type = isIndex ? 'index' : (isList ? 'list' : 'detail');
       this.$gui.setGame(game);
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type);

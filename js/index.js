@@ -86,3 +86,8 @@
     $(init);
   }
 }());
+
+// 判断平台类型
+if (/iPhone OS/.test(navigator.userAgent)) {
+  document.body.className = 'ios';
+}
