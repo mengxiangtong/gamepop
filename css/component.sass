@@ -252,6 +252,8 @@
   -webkit-transform-style: preserve-3d
 
   ul
+    @extend .ul
+    @extend .row
     -webkit-transform: translate3d(0%,0,0) scale3d(1,1,1)
     transform: translate3d(0%,0,0) scale3d(1,1,1)
     overflow: hidden
@@ -262,6 +264,7 @@
       @extend .transition
 
   li
+    @extend .one
     -webkit-transform-style: preserve-3d
     -webkit-transform: translate3d(0,0,0)
 

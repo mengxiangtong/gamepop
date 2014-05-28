@@ -12,6 +12,7 @@
       , size = {
         width: width,
         height: height,
+        'content-height': height - 45,
         itemWidth: width - 16 * 5 >> 2,
         hpItemWidth: hpItemWidth
       }
@@ -88,6 +89,6 @@
 }());
 
 // 判断平台类型
-if (/iPhone OS/.test(navigator.userAgent)) {
-  document.body.className = 'ios';
+if (/iPhone OS 7/.test(navigator.userAgent)) {
+  document.body.className = 'ios7';
 }

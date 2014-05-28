@@ -46,7 +46,7 @@
         , name = '';
       if (model && !model.get('is_local')) {
         name = model.get('name');
-        this.$('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
+        topPage.find('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
       }
       // lazyload
       lazyLoad(topPage[0]);
@@ -68,7 +68,6 @@
         .appendTo('body')
         .removeClass('out')
         .addClass('active animated fast fadeInScaleUp')
-        .on('scroll', function () { lazyLoad(this, 800); })
         .find('h2').text(title).end()
         .find('.content')
           .addClass(className)
@@ -111,6 +110,7 @@
       if (title) {
         topPage.find('.navbar h2').text(title).end();
       }
+      content.on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     },
     animationEndHandler: function (event) {

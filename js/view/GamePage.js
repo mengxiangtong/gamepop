@@ -16,18 +16,23 @@
     },
     initialize: function () {
       // 初始化carousel
-      var carousel = this.$('.home-page');
-      if (carousel.length) {
-        var width = (document.body.clientWidth - allGaps) / 3 + gap
-          , length = carousel.find('.item').length
+      var carousel = this.$('.carousel');
+      if (carousel.length > 0) {
+        var length = carousel.find('.item').length
+          , width = (document.body.clientWidth - allGaps) / 3 + gap
           , space = 3 - length % 3;
         space = space > 2 ? 0 : space;
         carousel.find('ul').width(width * (length + space))
           .css('padding-right', width * space);
-        this.carousel = new gamepop.component.Carousel({
-          el: carousel[0],
-          indicator: this.$('.indicators')
-        });
+        if (length > 3) {
+          this.carousel = new gamepop.component.Carousel({
+            el: carousel[0],
+            indicator: this.$('.indicators')
+          });
+        } else {
+          this.$('.indicators').remove();
+          carousel.addClass('stoned');
+        }
       }
 
       lazyload(this.el);

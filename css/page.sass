@@ -49,27 +49,25 @@
       height: 3em
       overflow: auto
 
-.home-page
-  margin: $gap + $gap-s $gap 0
-  padding-bottom: $gap-l + $gap
-  overflow: hidden
+  .carousel
+    margin: $gap + $gap-s $gap 0
+    padding-bottom: $gap-l + $gap
+    overflow: hidden
 
-  ul
-    @extend .ul
-    @extend .row
+    &.stoned
+      padding-bottom: $gap
 
-  li
-    @extend .one
-    margin-left: $gap
+    li
+      margin-left: $gap
 
-  img
-    border-radius: 8px
-    width: 100%
+    img
+      border-radius: 8px
+      width: 100%
 
-  h3
-    margin: 0
-    font-size: 14px
-    text-align: center
+    h3
+      margin: 0
+      font-size: 14px
+      text-align: center
 
 
 /* ----------------

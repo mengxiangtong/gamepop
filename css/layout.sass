@@ -107,15 +107,12 @@ body
   position: relative
 
   #apps-container
-    overflow: hidden
     padding: 0 0 45px
 
-    ul
-      @extend .ul
-      @extend .row
+    &.stoned
+      padding-bottom: 15px
 
   .item
-    @extend .one
     position: relative
     margin-left: $gap-icon
 
@@ -124,7 +121,7 @@ body
       right: 0
       bottom: 0
       width: 30px
-      height: 29px
+      height: 28px
 
     &.guide:after
       width: 28px
@@ -132,7 +129,7 @@ body
     &.offline:after,
     &.downloading:after
       width: 37px
-      height: 27px
+      height: 26px
 
     &.no-game:after
       width: 44px
@@ -156,9 +153,7 @@ body
   top: 0
   left: 0
   z-index: 10
-  padding: $topbar-height 0 $gap
-  overflow: auto
-  -webkit-overflow-scrolling: touch
+  padding: 0 0 $gap
   display: none
 
   &.active
@@ -177,11 +172,6 @@ body
 
   .navbar
     @extend #header
-    position: fixed
-    position: -webkit-sticky
-    top: 0
-    left: 0
-    right: 0
 
     h2
       max-width: 75%
@@ -205,3 +195,6 @@ body
       right: $gap
       font-size: 1.5em
 
+  .content
+    overflow: auto
+    -webkit-overflow-scrolling: touch

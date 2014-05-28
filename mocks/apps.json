@@ -7,9 +7,9 @@
       "icon": "./mocks/images/skype.jpg"
     },
     {
-      "id": "bilibili",
-      "url": "#/local/hdppl/",
-      "name": "哔哩哔哩动画",
+      "id": "ttpk",
+      "url": "#/remote/ttpk/",
+      "name": "天天酷跑",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
       "has-offline": true
