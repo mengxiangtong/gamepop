@@ -107,7 +107,8 @@
       }
 
       var content = topPage.find('.content')
-        , title = content.find('h1, h2').first().text();
+        , title = content.find('h1, h2').first().html();
+      title = title ? title.replace(/<\w+>.*<\/\w+>/, '') : '';
       topPage.find('.navbar .fa-spin').remove();
       if (title) {
         topPage.find('.navbar h2').text(title).end();
