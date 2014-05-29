@@ -15,7 +15,8 @@ body
   margin: 0
 
 #header
-  line-height: $topbar-height
+  line-height: $topbar-height - 1px
+  border-bottom: 1px solid $border-color
   position: relative
   z-index: 5
 
@@ -23,7 +24,7 @@ body
     position: absolute
     top: 0
     right: $gap
-    line-height: $topbar-height
+    line-height: $topbar-height - 1px
     border: 0
     min-width: 40px
     padding: 0
@@ -31,14 +32,19 @@ body
   .search-button
     right: $gap-s
 
+.homepage-logo
+  position: absolute
+  left: $gap-icon
+  top: $gap-icon
+
 #homepage-search
   @extend .one
   @extend .all-center
 
   #search-form
-    width: 90%
     position: relative
-    padding-bottom: 65px
+    width: 100%
+    padding: 0 $gap-icon
 
     .doodle
       display: block
@@ -73,8 +79,8 @@ body
 
     button
       position: absolute
-      right: 0
-      top: 77px
+      right: $gap-icon
+      top: 11px
       width: 46px
       height: 35px
       margin: 0
@@ -162,10 +168,6 @@ body
   &.animated
     .content
       display: none
-
-  .loading
-    text-align: center
-    padding: 40px 0
 
   img
     max-width: 100%

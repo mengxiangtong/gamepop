@@ -145,19 +145,6 @@
 
   .loading
     text-align: center
-    line-height: 30px
-
-  .load-more
-    font-size: 12px
-    text-align: center
-    color: #666
-
-  .pulldown
-    text-align: center
-    padding: 5px 10px
-    font-weight: bold
-    color: #888
-    line-height: 40px
 
   .item:active
     background-color: $topbar-background-color
@@ -169,6 +156,20 @@
 
     &:only-child
       display: list-item
+
+  &:after
+    display: block
+    text-align: center
+    margin-top: $gap
+
+  &.auto-load:after
+    content: '加载更多'
+
+  &.loading:after
+    content: '加载中...'
+
+  &.no-more:after
+    content: '没有其它文章了。收集进行中，常来哟~'
 
 /* ====================================
  * icon-list
@@ -241,6 +242,9 @@
     margin: 0
     color: $mute
     font-size: 10px
+
+  &:last-child
+    padding-bottom: $gap-icon
 
 /* ====================================
  * carousel

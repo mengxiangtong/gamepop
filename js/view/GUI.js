@@ -83,7 +83,9 @@
         if (pages.length > 0) {
           pages.pop()
             .addClass('animated fast fadeOutScaleDown')
-            .off('scroll');
+            .find('.content')
+              .trigger('remove')
+              .off('scroll');
         }
       }
     },
@@ -106,7 +108,7 @@
 
       var content = topPage.find('.content')
         , title = content.find('h1, h2').first().text();
-      topPage.find('.fa-spin').remove();
+      topPage.find('.navbar .fa-spin').remove();
       if (title) {
         topPage.find('.navbar h2').text(title).end();
       }

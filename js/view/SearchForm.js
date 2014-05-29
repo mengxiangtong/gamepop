@@ -12,9 +12,6 @@
     },
     initialize: function () {
       this.template = TEMPLATES['search-tips'];
-      this.result = this.$('ul');
-      this.collection.on('reset', this.collection_resetHandler, this);
-      this.collection.on('request', this.collection_requestHandler, this);
     },
     render: function () {
       console.log('search end');

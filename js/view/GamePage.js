@@ -9,14 +9,15 @@
     , gap = width > 320 ? 15 : 10
     , allGaps = width > 320 ? 60 : 50;
 
-  // TODO: 下一版先把这里的game和model重构了
   ns.GamePage = Backbone.View.extend({
+    page: 1,
     events: {
+      'remove': 'remove',
       'tap .game-info p': 'gameInfo_tapHandler'
     },
     initialize: function () {
       // 初始化carousel
-      var carousel = this.$('.carousel');
+      var carousel = this.carousel = this.$('.carousel');
       if (carousel.length > 0) {
         var length = carousel.find('.item').length
           , width = (document.body.clientWidth - allGaps) / 3 + gap
@@ -35,13 +36,53 @@
         }
       }
 
-      lazyload(this.el);
+      if (this.$('.auto-load').length > 0) {
+        this.$el.on('scroll', _.bind(this.scrollHandler, this));
+      }
+    },
+    remove: function () {
+      this.carousel.remove();
+      this.carousel = null;
+      this.$el.off('scroll');
+      Backbone.View.prototype.remove.call(this);
+    },
+    fetch: function () {
+      this.page += 1;
+      var list = this.$('.auto-load');
+      if (list.length === 0) {
+        return;
+      }
+      $.get(config.remote + list.data('src').replace('{page}', this.page), function (response) {
+        if (response) {
+          list.append(response).removeClass('loading');
+        } else {
+          list.removeClass('loading auto-load').addClass('no-more');
+          setTimeout(function () {
+            list.removeClass('no-more');
+          }, 3000);
+          this.$el.off('scroll');
+        }
+      });
     },
     gameInfo_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , collapse = target.hasClass('active');
       target.toggleClass('active')
         .height(collapse ? '3em' : target[0].scrollHeight);
+    },
+    scrollHandler: function () {
+      clearTimeout(this.timeout);
+      var self = this
+        , list = this.$('.auto-load');
+      if (this.el.scrollHeight - this.el.scrollTop - this.el.clientHeight < 10) {
+        this.timeout = setTimeout(function () {
+          if (list.length === 0 || list.hasClass('loading')) {
+            return;
+          }
+          list.addClass('loading');
+          self.fetch();
+        }, 100);
+      }
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));
