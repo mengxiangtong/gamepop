@@ -143,11 +143,26 @@
 .icon-list,
 .article-list
 
+  .item
+    background-color: $list-background-color
+    border: 1px solid $smoke
+    overflow: hidden
+    padding: $gap
+
+    &:active
+      @extend .tap-active
+
+  img
+    display: blok
+    float: left
+    margin-right: $gap
+
+  p
+    margin: 0
+    color: $mute
+
   .loading
     text-align: center
-
-  .item:active
-    background-color: $topbar-background-color
 
   .no-result
     display: none
@@ -157,7 +172,9 @@
     &:only-child
       display: list-item
 
-  &:after
+  &.auto-load:after,
+  &.loading:after,
+  &.no-more:after
     display: block
     text-align: center
     margin-top: $gap
@@ -169,34 +186,29 @@
     content: '加载中...'
 
   &.no-more:after
-    content: '没有其它文章了。收集进行中，常来哟~'
+    content: '没有其它文章了。努力收集中，常来看哟~'
 
 /* ====================================
  * icon-list
  * ==================================*/
 .icon-list
   @extend .ul
-  background-color: $list-background-color
-  border: 1px solid $smoke
-  border-radius: 6px
-  margin: $gap
+  padding: $gap
 
-  &:empty
-    display: none
+  .item
 
-  li
-    border-bottom: 1px solid $smoke
-    padding: $gap
-    overflow: hidden
+    + .item
+      border-top: none
+
+    &:first-child
+      border-radius: 6px 6px 0 0
 
     &:last-of-type
-      border: none
+      border-radius: 0 0 6px 6px
 
     img
       width: 60px
       height: 60px
-      float: left
-      margin-right: $gap
 
   h2
     font-size: 16px
@@ -205,8 +217,6 @@
   p
     font-size: 12px
     line-height: 1.25
-    margin: 0
-    color: $mute
 
 /* ====================================
  * article-list
@@ -214,13 +224,8 @@
 .article-list
   @extend .ul
   padding: 0 $gap-icon
-  margin: 0
 
   li
-    padding: $gap
-    overflow: hidden
-    background-color: $list-background-color
-    border: 1px solid $border-color
     border-radius: 4px
 
     + li
@@ -229,9 +234,6 @@
   img
     width: 120px
     height: 80px
-    display: block
-    float: left
-    margin-right: $gap
     border-radius: 4px
 
   h3
@@ -239,8 +241,6 @@
     margin: 0 0 $gap-s
 
   p
-    margin: 0
-    color: $mute
     font-size: 10px
 
   &:last-child
@@ -252,14 +252,11 @@
 .carousel
   overflow: hidden
   -webkit-backface-visibility: hidden
-  -webkit-transform: translate3d(0,0,0) scale3d(1,1,1)
   -webkit-transform-style: preserve-3d
 
   ul
     @extend .ul
     @extend .row
-    -webkit-transform: translate3d(0%,0,0) scale3d(1,1,1)
-    transform: translate3d(0%,0,0) scale3d(1,1,1)
     overflow: hidden
     -webkit-backface-visibility: hidden
     -webkit-transform-style: preserve-3d
@@ -271,6 +268,17 @@
     @extend .one
     -webkit-transform-style: preserve-3d
     -webkit-transform: translate3d(0,0,0)
+
+.stoned
+  width: 100%
+  overflow: hidden
+
+  ul
+    @extend .ul
+    @extend .row
+
+  li
+    @extend .one
 
 /* ----------------
  * indicators

@@ -89,6 +89,15 @@
 }());
 
 // 判断平台类型
-if (/iPhone OS 7/.test(navigator.userAgent)) {
-  document.body.className = 'ios7';
+var platform = navigator.userAgent.match(/iPhone OS (\d+)/);
+if (platform) {
+  var ga = {
+    event: function (type, target, label, value) {
+      console.log(type, target, label, value)
+    },
+    pageview: function (url) {
+      console.log(url);
+    }
+  };
+  document.body.className = 'ios' + platform[1];
 }

@@ -13,7 +13,7 @@
     page: 1,
     events: {
       'remove': 'remove',
-      'tap .game-info p': 'gameInfo_tapHandler'
+      'tap .collapse': 'gameInfo_tapHandler',
     },
     initialize: function () {
       // 初始化carousel
@@ -30,9 +30,11 @@
             el: carousel[0],
             indicator: this.$('.indicators')
           });
+          this.$el.on('touch', _.bind(this.touchHandler, this));
+          this.$el.on('release', _.bind(this.releaseHandler, this));
         } else {
           this.$('.indicators').remove();
-          carousel.addClass('stoned');
+          carousel.removeClass('carousel').addClass('stoned');
         }
       }
 
@@ -43,7 +45,7 @@
     remove: function () {
       this.carousel.remove();
       this.carousel = null;
-      this.$el.off('scroll');
+      this.$el.off('scroll touch release');
       Backbone.View.prototype.remove.call(this);
     },
     fetch: function () {
@@ -83,6 +85,15 @@
           self.fetch();
         }, 100);
       }
+    },
+    touchHandler: function (event) {
+      var carousel = this.$('.carousel')[0];
+      if (carousel && !$.contains(carousel, event.target)) {
+        this.$('.carousel').removeClass('carousel').addClass('stoned');
+      }
+    },
+    releaseHandler: function () {
+      this.$('.stoned').removeClass('stoned').addClass('carousel');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

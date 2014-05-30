@@ -11,9 +11,10 @@
   .btn
     color: $active-color
     background: transparent
+    font-size: 16px
 
     &:active
-      background: rgba(0, 0, 0, 0.2)
+      @extend .tap-active
 
 #homepage-search
   @extend .transition
@@ -28,11 +29,10 @@
       box-shadow: 0 5px 0 rgba(0, 0, 0, 0.5)
 
     button
-      background: transparent
+      background: $active-color
       border: none
-      border-left: 1px solid $smoke
       font-size: 20px
-      color: $active-color
+      color: $white
 
       &:active
         background-color: $topbar-background-color
@@ -60,7 +60,7 @@
     text-align: center
 
     &:active
-      background: rgba(255, 255, 255, 0.4)
+      @extend .tap-active
 
     &.guide:after
       content: ''
@@ -98,10 +98,13 @@
     @extend #header
 
     h2
-      background: url(../img/logo.png) no-repeat $gap + $gap-s ($topbar-height - 25px) / 2
-      background-size: 25px
+      background: url(../img/logo.png) no-repeat $gap + $gap-s ($topbar-height - 32px) / 2
+      background-size: 32px
 
       &:before
         @extend .fa
         content: $fa-var-angle-left
         display: inline
+
+    .back-button:active
+      @extend .tap-active

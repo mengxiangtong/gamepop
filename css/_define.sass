@@ -81,15 +81,19 @@ $smoke: #CCC
 .hcenter
   display: -webkit-box
   display: box
+  display: -webkit-flex
   display: flex
   -webkit-box-align: center
+  -webkit-justify-content: center
   justify-content: center
 
 .vcenter
   display: -webkit-box
   display: box
+  display: -webkit-flex
   display: flex
   -webkit-box-pack: center
+  -webkit-align-items: center
   align-items: center
 
 .all-center
@@ -100,35 +104,5 @@ $smoke: #CCC
   -webkit-transition: all 0.3s
   transition: all 0.3s
 
-.grid-column-4
-  @extend .ul
-  @extend .wrap-container
-  padding: 0 $gap-icon / 2
-
-  .item
-    @extend .wrap
-    padding: $gap-icon / 2
-    text-align: center
-    width: 25%
-    max-width: 25%
-
-    &:active
-      background-color: #E7E7E7
-
-  img
-    max-width: 100%
-    border-radius: $icon-radius
-
-  h3
-    margin: 0
-    font-size: 14px
-    font-weight: normal
-    line-height: 30px
-    height: 30px
-    overflow: hidden
-
-  .loading
-    width: 100%
-    font-size: 50px
-    padding: 1em
-    text-align: center
+.tap-active
+  background: rgba(0, 0, 0, 0.2)

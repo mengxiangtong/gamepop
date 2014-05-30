@@ -27,7 +27,7 @@
         dragLockToAxis: true,
         preventDefault: true
       });
-      this.container = this.$el.children();
+      this.container = this.$('ul');
       this.indicator = options.indicator;
       this.indicatorWidth = options.indicator.width();
       this.token = this.indicator.children();

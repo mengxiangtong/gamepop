@@ -24,7 +24,7 @@
     },
     showSearch: function (keyword) {
       this.$gui.setGame(null);
-      this.$gui.showPopupPage('template/search.html', 'search', null, '搜索：' + keyword);
+      this.$gui.showPopupPage('template/search.html', 'search-result', null, '搜索：' + keyword);
       ga.pageview('search');
     },
     showNoGuidePage: function (game, name) {

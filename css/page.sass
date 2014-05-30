@@ -17,46 +17,45 @@
  * --------------*/
 .guide-index
 
-  > header
+  .game-info
     background-color: #226b75
     color: $white
-    position: relative
+    padding: $gap + $gap-s $gap + $gap-s 0
+    overflow: hidden
 
-    .game-info
-      padding: $gap + $gap-s $gap + $gap-s 0
-      overflow: hidden
+    &:last-child
+      padding-bottom: $gap + $gap-s
 
-      &:last-child
-        padding-bottom: $gap + $gap-s
+  .icon
+    display: block
+    float: left
+    margin-right: 15px
+    width: 60px
+    height: 60px
+    border: 1px solid #FFF
+    border-radius: 15px
 
-    .icon
-      display: block
-      float: left
-      margin-right: 15px
-      width: 60px
-      height: 60px
-      border: 1px solid #FFF
-      border-radius: 12px
+  h1
+    font-size: 16px
+    margin: 0 0 5px
 
-    h1
-      font-size: 16px
-      margin: 0 0 5px
+    small
+      font-size: 10px
 
-      small
-        font-size: 10px
+  p
+    font-size: 12px
+    margin: 0 0 0 80px
 
-    p
+    &.collapse
       @extend .transition
-      font-size: 12px
-      margin: 0 0 0 90px
       height: 3em
 
-  .carousel
-    margin: $gap + $gap-s $gap 0
-    padding-bottom: $gap-l + $gap
-
-    &.stoned
-      padding-bottom: $gap
+  .carousel,
+  .stoned
+    background-color: #226b75
+    color: $white
+    padding: $gap + $gap-s 0 $gap-l + $gap
+    position: relative
 
     li
       margin-left: $gap
@@ -69,7 +68,6 @@
       margin: 0
       font-size: 14px
       text-align: center
-
 
 /* ----------------
  * list
@@ -148,9 +146,19 @@
     color: #999
 
   .btn
-    background-color: $blue
+    background-color: $active-color
     width: 165px
     line-height: 45px
     font-size: 14px
     color: $white
     margin-top: 50px
+
+/* ====================================
+ * search
+ * ==================================*/
+.search-result
+  .alert
+    display: none
+
+  .no-result + .alert
+    display: block

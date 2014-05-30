@@ -23,14 +23,11 @@ body
   .btn
     position: absolute
     top: 0
-    right: $gap
+    right: 0
     line-height: $topbar-height - 1px
     border: 0
     min-width: 40px
-    padding: 0
-
-  .search-button
-    right: $gap-s
+    padding: 0 $gap
 
 .homepage-logo
   position: absolute
@@ -79,12 +76,13 @@ body
 
     button
       position: absolute
-      right: $gap-icon
-      top: 11px
-      width: 40px
-      height: 35px
+      right: $gap-icon + $gap-s
+      top: 5px
+      width: 45px
+      height: 45px
       margin: 0
-      padding: 0 4px 1px 0
+      padding: 0 0 1px 2px
+      border-radius: 23px
 
     ul
       line-height: 50px
@@ -180,13 +178,13 @@ body
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
-      text-indent: 45px
+      text-indent: 50px
       margin: 0
       font-size: 16px
 
       &:before
         position: absolute
-        left: -40px
+        left: -46px
         font-size: 1.5em
         line-height: $topbar-height
 
