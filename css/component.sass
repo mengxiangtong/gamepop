@@ -251,31 +251,16 @@
  * ==================================*/
 .carousel
   overflow: hidden
-  -webkit-backface-visibility: hidden
-  -webkit-transform-style: preserve-3d
 
   ul
     @extend .ul
     @extend .row
     overflow: hidden
     -webkit-backface-visibility: hidden
-    -webkit-transform-style: preserve-3d
+    -webkit-transform-style: flat
 
     &.animate
       @extend .transition
-
-  li
-    @extend .one
-    -webkit-transform-style: preserve-3d
-    -webkit-transform: translate3d(0,0,0)
-
-.stoned
-  width: 100%
-  overflow: hidden
-
-  ul
-    @extend .ul
-    @extend .row
 
   li
     @extend .one

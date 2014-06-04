@@ -55,12 +55,15 @@
       @extend .transition
       height: 3em
 
-  .carousel,
-  .stoned
-    padding: $gap + $gap-s 0 $gap-l + $gap
-    position: relative
+  .home-page
+    padding: $gap + $gap-s 0 $gap
+
+    ul
+      @extend .ul
+      @extend .row
 
     li
+      @extend .one
       margin-left: $gap + $gap-s
 
     img
@@ -71,6 +74,10 @@
       margin: 0
       font-size: 14px
       text-align: center
+
+  .carousel,
+  .stoned
+    padding-bottom: $gap + $gap-l
 
 /* ----------------
  * list

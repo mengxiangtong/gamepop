@@ -12,6 +12,9 @@
       this.template = TEMPLATES['search-result'];
       this.list = this.$('ul');
       var keyword = decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1));
+      if (keyword === this.collection.keyword) {
+        return this.render();
+      }
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.search(keyword, 'search');
     },

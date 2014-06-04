@@ -2,8 +2,6 @@
  * Created by meathill on 14-1-24.
  */
 
-var $ = require('jquery');
-
 module.exports = function (grunt) {
   var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
     , config = grunt.file.readJSON('grunt-config.json')
@@ -206,8 +204,8 @@ module.exports = function (grunt) {
       isLib ? libs.push(src) : jses.push(src);
       return /index|single\.js/.test(src) ? match : '';
     });
-    libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
     libs.push('js/templates.js');
+    libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
     html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
       content = content.replace(/\s{2,}|\n|\r/g, '');
       grunt.file.write(TEMP + 'handlebars/' + id + '.hbs', content);

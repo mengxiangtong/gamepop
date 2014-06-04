@@ -91,11 +91,13 @@
   }
 }());
 
-ga = ga || {
-  event: function (type, target, label, value) {
-    console.log(type, target, label, value)
-  },
-  pageview: function (url) {
-    console.log(url);
-  }
-};
+if (!ga) {
+  var ga = {
+    event: function (type, target, label, value) {
+      console.log(type, target, label, value)
+    },
+    pageview: function (url) {
+      console.log(url);
+    }
+  };
+}

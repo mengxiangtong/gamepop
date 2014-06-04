@@ -12,7 +12,7 @@
     page: 1,
     events: {
       'remove': 'remove',
-      'tap .collapse': 'gameInfo_tapHandler',
+      'tap .collapse': 'gameInfo_tapHandler'
     },
     initialize: function () {
       // 初始化carousel
@@ -29,11 +29,9 @@
             el: carousel[0],
             indicator: this.$('.indicators')
           });
-          this.$el.on('touch', _.bind(this.touchHandler, this));
-          this.$el.on('release', _.bind(this.releaseHandler, this));
         } else {
           this.$('.indicators').remove();
-          carousel.removeClass('carousel').addClass('stoned');
+          carousel.removeClass('carousel');
         }
       }
 
@@ -84,15 +82,6 @@
           self.fetch();
         }, 100);
       }
-    },
-    touchHandler: function (event) {
-      var carousel = this.$('.carousel')[0];
-      if (carousel && !$.contains(carousel, event.target)) {
-        this.$('.carousel').removeClass('carousel').addClass('stoned');
-      }
-    },
-    releaseHandler: function () {
-      this.$('.stoned').removeClass('stoned').addClass('carousel');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

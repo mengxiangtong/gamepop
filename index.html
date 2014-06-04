@@ -41,13 +41,6 @@
   <form id="search-form" action="">
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
-    <ul>
-      <script type="text/x-handlebars-template" class="template" id="search-tips">
-        {{#each games}}
-        <li data-href="#/remote/{{guide_name}}" class="item"><img src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.png{{/if}}"> {{game_name}}</li>
-        {{/each}}
-      </script>
-    </ul>
   </form>
 </div>
 <h2 class="apps-title">我的游戏攻略</h2>
