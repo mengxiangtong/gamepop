@@ -16,35 +16,40 @@
  * index
  * --------------*/
 .guide-index
-
-  .game-info
+  header
+    position: relative
     background-color: #226b75
     color: $white
+
+  .game-info
     padding: $gap + $gap-s $gap + $gap-s 0
     overflow: hidden
 
     &:last-child
       padding-bottom: $gap + $gap-s
 
+    p
+      margin: 0 0 0 85px
+
   .icon
     display: block
     float: left
     margin-right: 15px
-    width: 60px
-    height: 60px
+    width: 70px
+    height: 70px
     border: 1px solid #FFF
     border-radius: 15px
 
   h1
-    font-size: 16px
-    margin: 0 0 5px
+    font-size: 18px
+    margin: 5px 0
 
     small
       font-size: 10px
 
   p
     font-size: 12px
-    margin: 0 0 0 80px
+    line-height: 1.6em
 
     &.collapse
       @extend .transition
@@ -52,13 +57,11 @@
 
   .carousel,
   .stoned
-    background-color: #226b75
-    color: $white
     padding: $gap + $gap-s 0 $gap-l + $gap
     position: relative
 
     li
-      margin-left: $gap
+      margin-left: $gap + $gap-s
 
     img
       border-radius: 8px
@@ -83,6 +86,10 @@
 .guide-detail
   padding: 0 $gap-l $gap-l
 
+  .guide-info
+    font-size: 12px
+    color: $mute
+
   a
     color: $blue
     text-decoration: underline
@@ -97,7 +104,8 @@
     height: auto
 
   h1
-    line-height: 1.6em
+    line-height: 1.5em
+    margin: $gap 0
 
   h2
     text-indent: 20px

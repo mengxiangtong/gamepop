@@ -6,13 +6,13 @@
   function onDeviceReady() {
     init();
   }
-  function createCss(width, height) {
+  function createCss(width, height, isIOS7) {
     var style = document.createElement('style')
-      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 50) / 3
+      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 44) / 3
       , size = {
         width: width,
         height: height,
-        'content-height': height - 45,
+        'content-height': height - (isIOS7 ? 65 : 45),
         itemWidth: width - 16 * 5 >> 2,
         hpItemWidth: hpItemWidth
       }
@@ -29,7 +29,9 @@
       }).remove();
     }
 
-    var context = Nervenet.createContext()
+    var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
+      , isIOS7 = iOS && iOS[1] == 7
+      , context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
         })
@@ -65,10 +67,11 @@
           collection: results
         });
 
-
-    // 对于Android Webview，不支持标准的display: flex，只能使用display: inline-block
-    // 所以只能用JS算出宽度
-    createCss(document.body.clientWidth, document.body.clientHeight);
+    // 判断平台类型
+    if (iOS) {
+      document.body.className = 'ios' + iOS[1];
+    }
+    createCss(document.body.clientWidth, document.body.clientHeight, isIOS7);
 
     // 分析路径
     Backbone.history.start();
@@ -88,16 +91,11 @@
   }
 }());
 
-// 判断平台类型
-var platform = navigator.userAgent.match(/iPhone OS (\d+)/);
-if (platform) {
-  var ga = {
-    event: function (type, target, label, value) {
-      console.log(type, target, label, value)
-    },
-    pageview: function (url) {
-      console.log(url);
-    }
-  };
-  document.body.className = 'ios' + platform[1];
-}
+ga = ga || {
+  event: function (type, target, label, value) {
+    console.log(type, target, label, value)
+  },
+  pageview: function (url) {
+    console.log(url);
+  }
+};

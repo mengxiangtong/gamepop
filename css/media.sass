@@ -1,23 +1,46 @@
 @charset "utf-8"
 @import "define"
 
-@media (min-width: 360px)
+$gap3: 11px
+$gap4: 12px
+
+@media (max-width: 320px)
   .guide-index
+    .game-info
+      padding: $gap3 $gap3 0
+
+      p
+        margin-left: 71px
+
     .icon
-      width: 70px
-      height: 70px
+      width: 60px
+      height: 60px
+      margin-right: $gap3
 
     h1
-      font-size: 18px
-      margin-top: $gap-s
+      font-size: 16px
+      margin-top: 0
 
     p
-      margin: 0 0 0 90px
+      font-size: 10px
 
-    .home-page
+    .carousel,
+    .stoned
+      padding: $gap3 0 25px
 
-      .item
-        margin-left: 15px
+      li
+        margin-left: $gap3
+
+  .game-page
+    h2
+      text-indent: $gap + $gap-s
+
+  .article-list
+    padding: 0 $gap3
+
+  .news-detail,
+  .guide-detail
+    padding: 0 $gap + $gap-s $gap
 
 @media (min-width: 480px)
   #apps,
@@ -37,7 +60,12 @@
     display: none
 
 body.ios7
-  padding-top: 20px
+  .homepage-logo
+    top: 36px
 
-  .page-container
-    top: 20px
+  .page-container .navbar
+    padding-top: 20px
+
+    .btn,
+    .fa-spinner
+      top: 20px
