@@ -8,6 +8,9 @@
 
   ns.SearchResult = Backbone.View.extend({
     fragment: '',
+    events: {
+      'tap .item': 'item_tapHandler'
+    },
     initialize: function () {
       this.template = TEMPLATES['search-result'];
       this.list = this.$('ul');
@@ -59,6 +62,9 @@
           list.removeClass('no-more');
         }, 3000);
       }
+    },
+    item_tapHandler: function (event) {
+      ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

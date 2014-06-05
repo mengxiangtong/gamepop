@@ -4,12 +4,13 @@
 ;(function (ns) {
   ns.AppsList = Backbone.View.extend({
     $context: null,
+    events: {
+      'tap .no-game': 'noGame_tapHandler'
+    },
     initialize: function () {
       this.template = TEMPLATES.installed;
 
       this.collection.on('reset', this.render, this);
-      this.collection.on('add', this.collection_addHandler, this);
-      this.collection.on('change', this.collection_changeHandler, this);
     },
     render: function (collection) {
       var html = this.template({apps: collection.toJSON()})
@@ -39,11 +40,8 @@
         indicators.hide();
       }
     },
-    collection_addHandler: function () {
-      this.render(this.collection);
-    },
-    collection_changeHandler: function (model) {
-      this.$('.' + model.id).replaceWith(this.template({apps: [model.toJSON()]}));
+    noGame_tapHandler: function (event) {
+      ga.event(['view', 'recommended', $(event.currentTarget).data('href')].join(','));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

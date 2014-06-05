@@ -25,8 +25,8 @@
       color: $active-color
       font-size: 16px
       -webkit-appearance: none
-      -webkit-box-shadow: 0 5px 0 rgba(0, 0, 0, 0.5)
-      box-shadow: 0 5px 0 rgba(0, 0, 0, 0.5)
+      -webkit-box-shadow: 0 3px 0 rgba(0, 0, 0, 0.5)
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.5)
 
     button
       background: $active-color
@@ -35,8 +35,7 @@
       color: $white
 
       &:active
-        background-color: $topbar-background-color
-        border: none
+        background-color: darken($active-color, 10%)
 
     ul
       @extend .ul
@@ -48,7 +47,7 @@
 
 .apps-title
   text-align: center
-  color: $mute
+  color: #666
   background-color: rgba(255, 255, 255, .9)
 
 #apps
@@ -107,4 +106,4 @@
         display: inline
 
     .back-button:active
-      @extend .tap-active
+      background-color: rgba(0, 0, 0, 0.2)

@@ -14,8 +14,8 @@ var DEBUG = true
     EmbedThread: function (dom) {}
   }
   , ga = {
-    event: function (type, target, label, value) {
-      console.log(type, target, label, value)
+    event: function () {
+      console.log(arguments.join(','))
     },
     pageview: function (url) {
       console.log(url);
