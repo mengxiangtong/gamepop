@@ -8,9 +8,19 @@
 
 .game-page
   h2
-    text-indent: $gap-l
+    text-indent: $gap-s
     font-size: 12px
-    margin: $gap 0
+    line-height: 1em
+    margin: $gap + $gap-s $gap + $gap-s
+    border-left: 2px solid
+
+    &.hot
+      color: $hot
+      border-left-color: $hot
+
+    &.news
+      color: $latest
+      border-left-color: $latest
 
 /* ----------------
  * index
@@ -67,12 +77,13 @@
       margin-left: $gap + $gap-s
 
     img
-      border-radius: 8px
+      border-radius: $gap-s
       width: 100%
 
     h3
       margin: 0
-      font-size: 14px
+      font-size: 12px
+      line-height: 2em
       text-align: center
 
   .carousel,

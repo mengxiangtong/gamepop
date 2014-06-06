@@ -1,42 +1,38 @@
 @charset "utf-8"
 @import "define"
 
-$gap3: 11px
 $gap4: 12px
 
 @media (max-width: 320px)
-  .guide-index
-    .game-info
-      padding: $gap3 $gap3 0
+  .page-container .navbar h2
+    font: 17px
 
-      p
-        margin-left: 71px
+  .guide-index
+    .game-info p
+      margin-left: 75px
 
     .icon
       width: 60px
       height: 60px
-      margin-right: $gap3
 
     h1
-      font-size: 16px
+      font-size: 17px
       margin-top: 0
 
-    p
-      font-size: 10px
+      small
+        font-size: 9px
 
     .carousel,
     .stoned
-      padding: $gap3 0 25px
+      margin: 0 $gap-s
 
       li
-        margin-left: $gap3
-
-  .game-page
-    h2
-      text-indent: $gap + $gap-s
+        margin-left: $gap
 
   .article-list
-    padding: 0 $gap3
+
+    p
+      font-size: 9px
 
   .news-detail,
   .guide-detail

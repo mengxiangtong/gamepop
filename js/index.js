@@ -8,7 +8,7 @@
   }
   function createCss(width, height, isIOS7) {
     var style = document.createElement('style')
-      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 44) / 3
+      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 50) / 3
       , size = {
         width: width,
         height: height,

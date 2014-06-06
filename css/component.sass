@@ -147,7 +147,7 @@
     background-color: $list-background-color
     border: 1px solid $smoke
     overflow: hidden
-    padding: $gap
+    padding: $gap-s
 
     &:active
       @extend .tap-active
@@ -223,7 +223,7 @@
  * ==================================*/
 .article-list
   @extend .ul
-  padding: 0 $gap-icon
+  padding: 0 $gap
 
   li
     border-radius: 4px
@@ -271,7 +271,7 @@
 .indicators
   position: absolute
   left: 50%
-  bottom: 10px
+  bottom: $gap + $gap-s
   font: 10px/10px Airal
   background-image: url(../img/indicator.svg)
   min-width: 10px

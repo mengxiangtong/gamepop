@@ -5,8 +5,8 @@
   'use strict';
 
   var width = document.body.clientWidth
-    , gap = width > 320 ? 15 : 11
-    , allGaps = width > 320 ? 60 : 44;
+    , gap = width > 320 ? 15 : 10
+    , allGaps = width > 320 ? 60 : 50;
 
   ns.GamePage = Backbone.View.extend({
     page: 1,
