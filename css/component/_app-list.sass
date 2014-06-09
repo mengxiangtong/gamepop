@@ -1,0 +1,81 @@
+@charset "utf-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+.apps-title
+  text-align: center
+  color: #666
+  line-height: 43px
+  margin: 0
+  font-size: 1em
+  background-color: rgba(255, 255, 255, .9)
+
+#apps
+  @extend .transition
+  position: relative
+  background-color: rgba(255, 255, 255, .9)
+
+  #apps-container
+    padding: 0 0 45px
+
+    &.stoned
+      padding-bottom: 15px
+
+  .item
+    position: relative
+    margin-left: $gap-icon
+    text-align: center
+
+    &:active
+      @extend .tap-active
+
+    &:after
+      position: absolute
+      right: 0
+      bottom: 0
+      width: 30px
+      height: 28px
+
+    &.guide:after
+      width: 28px
+      content: ''
+      background-image: url(../img/icon.png)
+      background-size: auto 50px
+
+    &.offline:after,
+    &.downloading:after
+      width: 37px
+      height: 26px
+
+    &.downloading:after
+      background-position: -75px 0
+
+    &.offline:after
+      background-position: -37px 0
+
+    &.no-game:after
+      background-position: -102px 0
+      background-size: auto 44px
+      width: 44px
+      height: 44px
+      top: 0
+      left: 0
+      right: auto
+
+    &.no-guide
+      -webkit-filter: grayscale(100%)
+      -moz-filter: grayscale(100%)
+      -ms-filter: grayscale(100%)
+      filter: grayscale(100%)
+
+    img
+      display: block
+      max-width: 100%
+      border-radius: 15px
+
+  h3
+    color: $white
+    font-size: 1em
+
+  .indicators
+    bottom: 18px

@@ -93,8 +93,8 @@
 
 if (!ga) {
   var ga = {
-    event: function (type, target, label, value) {
-      console.log(type, target, label, value)
+    event: function (info) {
+      console.log(info);
     },
     pageview: function (url) {
       console.log(url);
