@@ -89,3 +89,30 @@
         height: 30px
         margin-right: $gap
         vertical-align: middle
+
+  .entrance
+    position: absolute
+    right: $gap-icon
+    bottom: $gap
+    overflow: hidden
+
+    img
+      display: block
+      float: right
+      padding-bottom: $gap-s
+
+    &:after
+      content: '点击进入>>>'
+      display: block
+      color: $white
+      background-color: $active-color
+      padding: 0 4px
+      font-size: 12px
+      line-height: 20px
+      border-radius: 3px
+      float: right
+      clear: both
+
+    &:active
+      border-radius: 4px
+      background-color: rgba(255, 255, 255, 0.2)

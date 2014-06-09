@@ -29,6 +29,8 @@
         transform: false
       });
       this.template = this.$('#page-container').removeAttr('id').remove();
+      this.model.once('sync', this.model_syncHandler, this);
+      this.model.fetch();
     },
     initMediator: function () {
       // 如果还在动画中或者没有完成加载则不初始化
@@ -99,6 +101,13 @@
         return;
       }
       this.$router.navigate(href);
+    },
+    model_syncHandler: function (model) {
+      if (!model.get('big_pic')) {
+        return;
+      }
+      $('#homepage-search').append(TEMPLATES.entrance(model.toJSON()));
+      this.$el.css('background-image', 'url(' + model.get('big_pic') + ')');
     },
     page_loadCompleteHandler: function (response, status) {
       if (status === 'error') {

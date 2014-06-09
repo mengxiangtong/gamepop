@@ -33,7 +33,10 @@
       , isIOS7 = iOS && iOS[1] == 7
       , context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
-          el: document.body
+          el: document.body,
+          model: new (Backbone.Model.extend({
+            urlRoot: config.topgame
+          }))
         })
       , appsCollection = new gamepop.model.AppsCollection()
       , list = new gamepop.view.AppsList({
