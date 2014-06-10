@@ -28,7 +28,7 @@ $latest: #33CF14
   margin: 0
   padding: 0
 
-.row
+.flex-row
   display: -webkit-box
   display: box
 
@@ -45,8 +45,8 @@ $latest: #33CF14
   text-rendering: optimizespeed
   font-family: FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif
 
-.column
-  @extend .row
+.flex-column
+  @extend .flex-row
   -webkit-box-orient: vertical
   box-orient: vertical
   -webkit-flex-flow: column
