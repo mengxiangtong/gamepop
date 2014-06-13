@@ -13,6 +13,7 @@ spec
 
 # compiled
 css/*.css
+css/component/*.css
 js/templates.js
 
 # mocks

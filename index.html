@@ -9,20 +9,13 @@
 <link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/media.css">
 <script type="text/x-handlebars-template" class="template" id="css">
-  .app-container,
+  #homepage,
   .page-container {
     width: {{width}}px;
     height: {{height}}px;
   }
   .content {
     height: {{content-height}}px;
-  }
-  #apps-container .item {
-    width: {{itemWidth}}px;
-  }
-  #apps-container img {
-    width: {{itemWidth}}px;
-    height: {{itemWidth}}px;
   }
   .home-page .item {
     width: {{hpItemWidth}}px;
@@ -34,32 +27,25 @@
 </script>
 <title>游戏泡泡</title>
 
-<div id="homepage-search">
+<div id="homepage">
   <img src="img/logo1.png" width="38" height="37" class="homepage-logo">
   <form id="search-form" action="">
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
   </form>
+  <h2 id="my-apps-title">我的攻略</h2>
+  <ul id="my-apps">
+    <script type="text/x-handlebars-template" class="template" id="installed">
+      {{#each apps}}
+      <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#if is_local}}no-game{{/if}}" data-href="{{url}}">
+        <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
+      </li>
+      {{/each}}
+    </script>
+  </ul>
   <script type="text/x-handlebars-template" class="template" id="entrance">
     <a href="#/remote/{{guide_name}}" class="entrance"><img src="{{logo}}" width="{{logo_width}}"></a>
   </script>
-</div>
-<h2 class="apps-title">我的游戏攻略</h2>
-<div id="apps">
-  <div id="apps-container" class="carousel">
-    <ul>
-      <script type="text/x-handlebars-template" class="template" id="installed">
-        {{#each apps}}
-        <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#if is_local}}no-game{{/if}}" data-href="{{url}}">
-          <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
-        </li>
-        {{/each}}
-      </script>
-    </ul>
-  </div>
-  <div class="indicators">
-    <div class="token"></div>
-  </div>
 </div>
 
 <script type="text/x-handlebars-template" class="template" id="search-result">
@@ -99,6 +85,7 @@
 <script src="js/model/SearchCollection.js"></script>
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/GUI.js"></script>
+<script src="js/view/Homepage.js"></script>
 <script src="js/view/SearchForm.js"></script>
 <script src="js/view/SearchResult.js"></script>
 <script src="js/view/GamePage.js"></script>

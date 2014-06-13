@@ -33,14 +33,14 @@
       , isIOS7 = iOS && iOS[1] == 7
       , context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
-          el: document.body,
-          model: new (Backbone.Model.extend({
-            urlRoot: config.topgame
-          }))
+          el: document.body
         })
+      , homepage = new gamepop.view.Homepage({
+        el: '#homepage'
+      })
       , appsCollection = new gamepop.model.AppsCollection()
       , list = new gamepop.view.AppsList({
-          el: '#apps',
+          el: '#my-apps',
           collection: appsCollection
         })
       , results = new gamepop.model.SearchCollection()

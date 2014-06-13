@@ -2,29 +2,34 @@
 @import "../define"
 @import "../../bower_components/colors/sass/variables"
 
-.apps-title
+#my-apps-title
   text-align: center
-  color: #666
-  line-height: 43px
+  color: $white
+  background-color: $active-color
+  font-size: 12px
+  line-height: 14px
   margin: 0
-  font-size: 1em
-  background-color: rgba(255, 255, 255, .9)
+  padding: 2px 0
+  width: 20px
+  height: 60px
+  position: absolute
+  left: $gap-l
+  bottom: 42%
+  border-radius: 4px
 
-#apps
-  @extend .transition
-  position: relative
-  background-color: rgba(255, 255, 255, .9)
-
-  #apps-container
-    padding: 0 0 45px
-
-    &.stoned
-      padding-bottom: 15px
+#my-apps
+  @extend .ul
+  @extend .flex-row
+  position: absolute
+  left: $gap-l + 20px
+  right: $gap-l
+  bottom: 42%
 
   .item
+    width: 60px
+    height: 60px
     position: relative
     margin-left: $gap-icon
-    text-align: center
 
     &:active
       @extend .tap-active
@@ -34,30 +39,30 @@
       right: 0
       bottom: 0
       width: 30px
-      height: 28px
+      height: 23px
 
     &.guide:after
-      width: 28px
+      width: 23px
       content: ''
       background-image: url(../img/icon.png)
-      background-size: auto 50px
+      background-size: auto 40px
 
     &.offline:after,
     &.downloading:after
-      width: 37px
-      height: 26px
+      width: 29px
+      height: 22px
 
     &.downloading:after
       background-position: -75px 0
 
     &.offline:after
-      background-position: -37px 0
+      background-position: -31px 0
 
     &.no-game:after
-      background-position: -102px 0
-      background-size: auto 44px
-      width: 44px
-      height: 44px
+      background-position: -76px 0
+      background-size: auto 33px
+      width: 33px
+      height: 33px
       top: 0
       left: 0
       right: auto
@@ -71,11 +76,5 @@
     img
       display: block
       max-width: 100%
+      max-height: 100%
       border-radius: 15px
-
-  h3
-    color: $white
-    font-size: 1em
-
-  .indicators
-    bottom: 18px
