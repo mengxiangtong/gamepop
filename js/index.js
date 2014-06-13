@@ -12,8 +12,6 @@
       , size = {
         width: width,
         height: height,
-        'content-height': height - (isIOS7 ? 65 : 45),
-        itemWidth: width - 16 * 5 >> 2,
         hpItemWidth: hpItemWidth
       }
       , content = TEMPLATES.css(size);

@@ -13,12 +13,14 @@
     $apps: null,
     $router: null,
     $context: null,
+    $result: null,
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
+      'tap .download-button': 'downloadButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
@@ -40,22 +42,23 @@
       setTimeout(function () {
         map.check(topPage[0]);
       }, 50);
-      // game-button
-      var game = this.$context.getValue('game-id')
-        , model = this.$apps.get(game)
-        , name = '';
-      if (model && !model.get('is_local')) {
-        name = model.get('name');
-        topPage.find('.game-button').attr('href', 'game://' + game + '/' + name).removeClass('hide');
-      }
       // lazyload
       lazyLoad(topPage[0]);
+      // 功能按钮
+      topPage.find('.navbar-btn-group').removeClass('hide');
     },
     setGame: function (game) {
       if (game === this.$context.getValue('game-id')) {
         return;
       }
+
+      // game-button
       this.$context.mapValue('game-id', game, true);
+      var model = this.$apps.get(game)
+        , name = model ? model.get('name') : (this.$result.get(game) ? this.$result.get('game_name') : '');
+      topPage.find('.game-button').attr('href', 'game://' + game + '/' + name)
+        .toggleClass('game-button', model)
+        .toggleClass('download-button', model);
     },
     showPopupPage: function (url, className, data, title) {
       console.log(url, className);
@@ -88,6 +91,10 @@
               .off('scroll');
         }
       }
+    },
+    downloadButton_tapHandler: function (event) {
+      ga.event(['game', 'download', this.$context.getValue('game-id')].join(','));
+      location.href = event.currentTarget.href;
     },
     gameButton_tapHandler: function (event) {
       ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));

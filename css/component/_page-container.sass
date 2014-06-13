@@ -13,46 +13,84 @@
   display: none
 
   .navbar
-    background-color: $background-color
-    color: $active-color
-    line-height: $topbar-height - 1px
-    border-bottom: 1px solid $border-color
-    position: relative
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 5
+    height: $topbar-height
+    padding: $gap $gap 0 $gap-icon
+
+    .navbar-btn-group
+      float: right
 
     .btn
-      color: $active-color
-      background: transparent
-      font-size: 16px
-      position: absolute
-      top: 0
-      right: 0
-      line-height: $topbar-height - 1px
-      border: 0
-      min-width: 40px
-      padding: 0 $gap
+      color: $white
+      font-size: 20px
+      line-height: $topbar-height - $gap
+      width: $topbar-height - $gap
+      height: $topbar-height - $gap
+      padding: 0
+      margin: 0
+      border: none
+      border-radius: 50%
+      background-color: #333
+      text-align: center
+      vertical-align: top
+
+      + .btn
+        margin-left: $gap-s
+
+    .back-button
+      padding-right: 4px
 
       &:active
-        @extend .tap-active
+        background-color: #222
 
-    h2
-      background: url(../img/logo.png) no-repeat $gap + $gap-s ($topbar-height - 32px) / 2
-      background-size: 32px
-      max-width: 75%
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
-      text-indent: 50px
-      margin: 0
-      font-size: 16px
+    .game-button,
+    .download-button,
+    .fav-button,
+    .search-button
+      @extend .fa
+
+    .game-button
+      background-color: $game-color
 
       &:before
-        @extend .fa
-        content: $fa-var-angle-left
-        display: inline
-        position: absolute
-        left: -46px
-        font-size: 1.5em
-        line-height: $topbar-height
+        content: $fa-var-gamepad
+
+      &:active
+        background-color: darken($game-color, 15%)
+
+    .download-button
+      background-color: $game-color
+
+      &:before
+        content: $fa-var-download
+
+      &:active
+        background-color: darken($game-color, 15%)
+
+    .fav-button
+      background-color: $fav-color
+
+      &.active:before
+        content: $fa-var-heart
+
+      &:before
+        content: $fa-var-heart-o
+
+      &:active
+        background-color: darken($game-color, 15%)
+
+    .search-button
+      background-color: $search-color
+
+      &:before
+        content: $fa-var-search
+
+      &:active
+        background-color: darken($search-color, 15%)
 
     .fa-spinner
       position: absolute
@@ -67,6 +105,9 @@
   .content
     overflow: auto
     -webkit-overflow-scrolling: touch
+
+    > *:first-child
+      padding-top: $topbar-height
 
   img
     max-width: 100%
