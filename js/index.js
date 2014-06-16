@@ -46,14 +46,28 @@
         el: '#search-form',
         collection: results
       })
+      , recent = new gamepop.model.LocalHistory(null, {
+        key: 'recent',
+        max: 10
+      })
+      , fav = new gamepop.model.LocalHistory(null, {
+        key: 'fav'
+      })
+      , sidebar = new gamepop.view.Sidebar({
+        el: '#sidebar',
+        collection: fav,
+        recent: recent
+      })
       , router = new gamepop.Router();
 
     context
       .mapValue('gui', gui)
-      .mapValue('list', list)
+      .mapValue('sidebar', sidebar)
       .mapValue('router', router)
       .mapValue('apps', appsCollection)
       .mapValue('result', results)
+      .mapValue('recent', recent)
+      .mapValue('fav', fav)
       .mediatorMap.isBackbone = true;
     context
       .inject(gui)

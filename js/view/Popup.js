@@ -12,6 +12,7 @@
     $router: null,
     $apps: null,
     $result: null,
+    $recent: null,
     tagName: 'div',
     className: 'page-container active animated fast fadeInScaleUp',
     events: {
@@ -90,6 +91,11 @@
       if (status === 'error') {
         this.$('.alert').removeClass('hide');
         return;
+      }
+
+      // 阅读记录
+      if (/-detail/.test(this.$('.content').attr('class'))) {
+        this.$recent.add({url: location.hash, title: this.$('h1').text()});
       }
 
       this.$('.navbar .fa-spin').remove();

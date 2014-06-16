@@ -9,13 +9,19 @@
   ns.GUI = Backbone.View.extend({
     $router: null,
     $context: null,
+    $sidebar: null,
+    $fav: null,
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
+      'swipeleft': 'swipeLeftHandler',
+      'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
+      'tap .sidebar-toggle': 'sidebarToggle_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
+      'tap .fav-button': 'favButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
@@ -35,6 +41,10 @@
       }, options));
       pages.push(topPage);
     },
+    toggleSidebar: function () {
+      $('#homepage').toggleClass('back');
+      $('#sidebar').toggleClass('hide');
+    },
     backButton_tapHandler: function () {
       var hash = location.hash.substr(2);
       if (hash === '' || history.length === 1) {
@@ -50,6 +60,15 @@
       ga.event(['game', 'download', this.$context.getValue('game-id')].join(','));
       location.href = event.currentTarget.href;
     },
+    favButton_tapHandler: function (event) {
+      var button = $(event.currentTarget);
+      if (button.hasClass('active')) {
+        this.$fav.remove(this.$fav.get(location.hash));
+      } else {
+        this.$fav.add({url: location.hash, title: $('.content h1').text()});
+      }
+      button.toggleClass('active');
+    },
     gameButton_tapHandler: function (event) {
       ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
       location.href = event.currentTarget.href;
@@ -60,6 +79,9 @@
         return;
       }
       this.$router.navigate(href);
+    },
+    sidebarToggle_tapHandler: function () {
+      this.toggleSidebar();
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
@@ -76,6 +98,16 @@
     },
     preventDefault: function (event) {
       event.preventDefault();
+    },
+    swipeLeftHandler: function () {
+      if (pages.length === 0 && !$('#homepage').hasClass('back')) {
+        this.toggleSidebar();
+      }
+    },
+    swipeRightHandler: function () {
+      if (pages.length === 0 && $('#homepage').hasClass('back')) {
+        this.toggleSidebar();
+      }
     },
     touchHandler: function (event) {
       lastTouch = event.target;
