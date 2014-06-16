@@ -56,14 +56,23 @@
   {{/each}}
 </script>
 
-<div id="page-container" class="page-container out">
+<script type="text/x-handlebars-template" class="template" id="popup">
   <header class="navbar">
     <button type="button" class="btn back-button"><i class="fa fa-chevron-left"></i></button>
+    {{#if guide_name}}
     <div class="navbar-btn-group hide">
+      {{#if is-detail}}
       <button type="button" class="btn fav-button"></button>
-      <button type="button" class="btn search-button"></button>
-      <a href="#" class="btn game-button"></a>
+      {{/if}}
+      {{#if has-game}}
+      <a href="game://{{guide_name}}/{{game_name}}" class="btn game-button"></a>
+      {{else}}
+      <a href="download://{{guide_name}}/{{game_name}}" class="btn download-button"></a>
+      {{/if}}
     </div>
+    {{else}}
+    <div class="navbar-text keyword">搜索：{{keyword}}</div>
+    {{/if}}
     <i class="fa fa-spin fa-spinner"></i>
   </header>
   <div class="content">
@@ -71,7 +80,7 @@
       <i class="fa fa-frown-o"></i> 加载失败
     </div>
   </div>
-</div>
+</script>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
@@ -85,9 +94,12 @@
 <script src="js/config.js"></script>
 <script src="js/model/AppsCollection.js"></script>
 <script src="js/model/SearchCollection.js"></script>
+<script src="js/model/MyFavorite.js"></script>
+<script src="js/model/ReadHistory.js"></script>
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/GUI.js"></script>
 <script src="js/view/Homepage.js"></script>
+<script src="js/view/Popup.js"></script>
 <script src="js/view/SearchForm.js"></script>
 <script src="js/view/SearchResult.js"></script>
 <script src="js/view/GamePage.js"></script>

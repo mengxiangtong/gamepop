@@ -4,6 +4,8 @@
 ;(function (ns) {
   ns.Router = Backbone.Router.extend({
     $gui: null,
+    game: '',
+    type: '',
     routes: {
       "": 'backHome',
       "search(/:keyword)": "showSearch",
@@ -18,17 +20,19 @@
       var isIndex = !path
         , isList = /\/list/.test(path)
         , type = isIndex ? 'index' : (isList ? 'list' : 'detail');
+      this.type = 'game';
+      this.game = game;
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type);
-      this.$gui.setGame(game);
       ga.pageview('remote/' + game + '/' + path);
     },
     showSearch: function (keyword) {
-      this.$gui.setGame(null);
-      this.$gui.showPopupPage('template/search.html', 'search-result', null, '搜索：' + keyword);
+      this.type = 'search';
+      this.$gui.showPopupPage('template/search.html', 'search-result', {keyword: keyword});
       ga.pageview('search');
     },
     showNoGuidePage: function (game, name) {
-      this.$gui.setGame(game);
+      this.type = 'no-game';
+      this.game = game;
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide');
       ga.pageview('no-guide/' + game + '/' + name);
     }

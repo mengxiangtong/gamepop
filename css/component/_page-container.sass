@@ -21,6 +21,11 @@
     height: $topbar-height
     padding: $gap $gap 0 $gap-icon
 
+    .navbar-text
+      display: inline-block
+      line-height: $topbar-height - $gap
+      text-indent: $gap
+
     .navbar-btn-group
       float: right
 
@@ -72,6 +77,8 @@
         background-color: darken($game-color, 15%)
 
     .fav-button
+      padding-top: 2px
+      line-height: $topbar-height - $gap - 2px
       background-color: $fav-color
 
       &.active:before
@@ -84,6 +91,8 @@
         background-color: darken($game-color, 15%)
 
     .search-button
+      padding: 0 0 2px 2px
+      line-height: $topbar-height - $gap - 2px
       background-color: $search-color
 
       &:before

@@ -6,14 +6,9 @@
     , topPage = null
     , pages = [];
 
-  //没有暴露事件，只能写到这儿了
-  var lazyLoad = gamepop.component.lazyLoad;
-
   ns.GUI = Backbone.View.extend({
-    $apps: null,
     $router: null,
     $context: null,
-    $result: null,
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
@@ -21,60 +16,23 @@
       'tap .item': 'item_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
-      'tap .game-button': 'gameButton_tapHandler',
-      'webkitAnimationEnd': 'animationEndHandler',
-      'animationEnd': 'animationEndHandler'
+      'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
         hold: false,
         transform: false
       });
-      this.template = this.$('#page-container').removeAttr('id').remove();
     },
-    initMediator: function () {
-      // 如果还在动画中或者没有完成加载则不初始化
-      if (topPage.hasClass('animated') || topPage.find('.alert-error').length) {
-        return;
-      }
-      // 给load进来的页面增加mediator
-      var map = this.$context.mediatorMap;
-      setTimeout(function () {
-        map.check(topPage[0]);
-      }, 50);
-      // lazyload
-      lazyLoad(topPage[0]);
-      // 功能按钮
-      topPage.find('.navbar-btn-group').removeClass('hide');
-    },
-    setGame: function (game) {
-      if (game === this.$context.getValue('game-id')) {
-        return;
-      }
-
-      // game-button
-      this.$context.mapValue('game-id', game, true);
-      var model = this.$apps.get(game)
-        , name = model ? model.get('name') : (this.$result.get(game) ? this.$result.get('game_name') : '');
-      topPage.find('.game-button').attr('href', 'game://' + game + '/' + name)
-        .toggleClass('game-button', model)
-        .toggleClass('download-button', model);
-    },
-    showPopupPage: function (url, className, data, title) {
+    showPopupPage: function (url, className, options) {
       console.log(url, className);
-      if (pages.length > 0 && pages[pages.length - 1].data('url') === url) {
+      if (pages.length > 0 && pages[pages.length - 1].url === url) {
         return;
       }
-      topPage = this.template.clone();
-      topPage
-        .data('url', url)
-        .appendTo('body')
-        .removeClass('out')
-        .addClass('active animated fast fadeInScaleUp')
-        .find('h2').text(title).end()
-        .find('.content')
-          .addClass(className)
-          .load(url, data, _.bind(this.page_loadCompleteHandler, this));
+      topPage = this.$context.createInstance(gamepop.view.Popup, _.extend({
+        url: url,
+        classes: className
+      }, options));
       pages.push(topPage);
     },
     backButton_tapHandler: function () {
@@ -84,11 +42,7 @@
       } else {
         history.back();
         if (pages.length > 0) {
-          pages.pop()
-            .addClass('animated fast fadeOutScaleDown')
-            .find('.content')
-              .trigger('remove')
-              .off('scroll');
+          pages.pop().fadeOut();
         }
       }
     },
@@ -106,33 +60,6 @@
         return;
       }
       this.$router.navigate(href);
-    },
-    page_loadCompleteHandler: function (response, status) {
-      if (status === 'error') {
-        topPage.find('.alert').removeClass('hide');
-        return;
-      }
-
-      var content = topPage.find('.content')
-        , title = content.find('h1, h2').first().html();
-      title = title ? title.replace(/<\w+>.*<\/\w+>/, '') : '';
-      topPage.find('.navbar .fa-spin').remove();
-      if (title) {
-        topPage.find('.navbar h2').text(title).end();
-      }
-      content.on('scroll', function () { lazyLoad(this, 800); });
-      this.initMediator();
-    },
-    animationEndHandler: function (event) {
-      var target = $(event.target)
-        , classes = event.target.className;
-      if (/scaleup/i.test(classes)) {
-        target.removeClass('animated fadeInScaleUp fast');
-        this.initMediator();
-      }
-      if (/scaledown/i.test(classes)) {
-        return target.remove();
-      }
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
