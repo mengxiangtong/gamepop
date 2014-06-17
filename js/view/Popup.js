@@ -13,6 +13,7 @@
     $apps: null,
     $result: null,
     $recent: null,
+    $fav: null,
     tagName: 'div',
     className: 'page-container active animated fast fadeInScaleUp',
     events: {
@@ -39,12 +40,14 @@
           var guide_name = this.$router.game
             , hasGame = !!this.$apps.get(guide_name)
             , game_name = hasGame ? this.$apps.get(guide_name).get('name') : (this.$result.get(guide_name) ? this.$result.get(guide_name).get('game_name') : '')
-            , isDetail = /-detail/.test(this.options.classes);
+            , isDetail = /-detail/.test(this.options.classes)
+            , fav = isDetail && this.$fav.get(location.hash);
           init = {
             game_name: game_name,
             guide_name: guide_name,
             'has-game': hasGame,
-            'is-detail': isDetail
+            'is-detail': isDetail,
+            fav: fav
           };
           break;
 

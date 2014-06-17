@@ -4,23 +4,26 @@
 ;(function (ns) {
   ns.Sidebar = Backbone.View.extend({
     events: {
-      'tap .panel-heading': 'heading_tapHandler'
+      'tap .panel-heading': 'heading_tapHandler',
+      'tap .edit-button': 'editButton_tapHandler',
+      'tap .delete-button': 'deleteButton_tapHandler'
     },
     initialize: function (options) {
       this.template = TEMPLATES['my-fav'];
 
-      this.collection.once('reset', this.render, this);
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('change', this.collection_changeHandler, this);
       this.collection.on('remove', this.collection_removeHandler, this);
-      options.recent.once('reset', this.render, this);
+      this.render(this.collection);
       options.recent.on('add', this.collection_addHandler, this);
       options.recent.on('change', this.collection_changeHandler, this);
       options.recent.on('remove', this.collection_removeHandler, this);
+      this.render(options.recent)
+      this.recent = options.recent;
     },
     render: function (collection) {
       var target = collection === this.collection ? 'my-fav' : 'recent';
-      this.$('.' + target).html(this.template(collection.toJSON()));
+      this.$('.' + target).html(this.template({list: collection.toJSON()}));
     },
     createItem: function (model) {
       return this.template({list: [model.toJSON()]});
@@ -35,6 +38,21 @@
     collection_removeHandler: function (model) {
       this.$('#' + model.cid).remove();
     },
+    deleteButton_tapHandler: function (event) {
+      var id = $(event.currentTarget).parent().attr('id');
+      if (this.collection.get(id)) {
+        this.collection.remove(id);
+      } else {
+        this.recent.remove(id);
+      }
+      event.stopPropagation();
+    },
+    editButton_tapHandler: function (event) {
+      var btn = $(event.currentTarget)
+        , ul = this.$('.in');
+      btn.toggleClass('fa-edit fa-check');
+      ul.toggleClass('edit');
+    },
     heading_tapHandler: function (event) {
       var btn = $(event.currentTarget)
         , collapse = this.$('.in');
@@ -42,7 +60,9 @@
         return;
       }
       collapse.removeClass('in');
-      btn.next().addClass('in');
+      btn.addClass('active')
+        .next().addClass('in')
+        .end().siblings('.panel-heading').removeClass('active');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

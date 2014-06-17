@@ -47,6 +47,8 @@
         margin-left: $gap-s
 
     .back-button
+      padding-top: 2px
+      line-height: $topbar-height - $gap - 2px
       padding-right: 4px
 
       &:active
@@ -60,6 +62,8 @@
 
     .game-button
       background-color: $game-color
+      line-height: $topbar-height - $gap - 3px
+      font-size: 22px
 
       &:before
         content: $fa-var-gamepad
@@ -77,12 +81,14 @@
         background-color: darken($game-color, 15%)
 
     .fav-button
-      padding-top: 2px
-      line-height: $topbar-height - $gap - 2px
+      padding-top: 3px
+      line-height: $topbar-height - $gap - 3px
       background-color: $fav-color
 
       &.active:before
         content: $fa-var-heart
+        color: #ffd511
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)
 
       &:before
         content: $fa-var-heart-o

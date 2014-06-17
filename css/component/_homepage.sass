@@ -15,6 +15,7 @@
     -webkit-transform: translate(-80%, 0) scale(0.9, 0.9)
     -webkit-transform: translate3d(-80%, 0, 0) scale3d(0,9, 0.9, 1)
     transform: translate3d(-80%, 0, 0) scale3d(0,9, 0.9, 1)
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
 .homepage-logo
   position: absolute
@@ -26,15 +27,17 @@
   right: $gap-icon
   top: 12px
   border: none
-  background: none
+  background: transparent
   color: #FFF
   font-size: 2em
   padding: 0
   margin: 0
+  width: 30px
+  height: 30px
   line-height: 1
 
   &:active
-    background-color: rgba(0, 0, 0, 0.2)
+    background-color: rgba(255, 255, 255, 0.2)
 
 .entrance
   position: absolute
@@ -66,7 +69,82 @@
 #sidebar
   z-index: 5
   position: absolute
-  top: 10%
-  left: 20%
-  right: 0
+  top: 5%
+  left: 22%
+  right: 7%
   bottom: 5%
+  color: $white
+
+  .panel-group
+    height: 100%
+
+  h4
+    font-size: 1em
+    line-height: 50px
+    height: 50px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4)
+    margin: 0
+
+    .fa-clock-o,
+    .fa-heart-o
+      width: 30px
+
+    .edit-button
+      display: none
+
+    &.active
+      font-size: 1.5em
+      border-bottom-width: 2px
+      position: relative
+
+      .edit-button
+        display: block
+        position: absolute
+        top: 0
+        right: -10px
+        width: 40px
+        height: 50px
+        text-align: center
+        line-height: 50px
+
+  ul
+    @extend .transition
+    margin: 0
+    padding: 0
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+
+    .delete-button
+      display: none
+
+    &.collapse
+      height: 0
+
+    &.in
+      height: 250px
+
+    &.edit
+      li
+        padding-right: 20px
+
+      .delete-button
+        display: block
+        position: absolute
+        top: 5px
+        right: -10px
+        width: 35px
+        height: 35px
+        line-height: 35px
+        text-align: center
+        font-size: 1.5em
+        background: transparent
+
+  li
+    font-size: 12px
+    line-height: 45px
+    list-style-position: inside
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4)
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    position: relative

@@ -18,6 +18,7 @@
       'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
+      'tap #homepage': 'homepage_tapHandler',
       'tap .sidebar-toggle': 'sidebarToggle_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
@@ -63,7 +64,7 @@
     favButton_tapHandler: function (event) {
       var button = $(event.currentTarget);
       if (button.hasClass('active')) {
-        this.$fav.remove(this.$fav.get(location.hash));
+        this.$fav.remove(location.hash);
       } else {
         this.$fav.add({url: location.hash, title: $('.content h1').text()});
       }
@@ -73,6 +74,12 @@
       ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
       location.href = event.currentTarget.href;
     },
+    homepage_tapHandler: function (event) {
+      if ($(event.currentTarget).hasClass('back')) {
+        this.toggleSidebar();
+        event.preventDefault();
+      }
+    },
     item_tapHandler: function (event) {
       var href = $(event.currentTarget).data('href');
       if (!href) {
@@ -80,8 +87,9 @@
       }
       this.$router.navigate(href);
     },
-    sidebarToggle_tapHandler: function () {
+    sidebarToggle_tapHandler: function (event) {
       this.toggleSidebar();
+      event.stopPropagation();
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件

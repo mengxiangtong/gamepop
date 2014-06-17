@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="css/general.css">
 <link rel="stylesheet" href="css/media.css">
 <script type="text/x-handlebars-template" class="template" id="css">
-  #homepage,
   .page-container,
   .content {
     width: {{width}}px;
@@ -26,7 +25,7 @@
 <title>游戏泡泡</title>
 
 <div id="homepage">
-  <img src="img/logo1.png" width="38" height="37" class="homepage-logo">
+  <img src="img/logo.png" width="38" height="37" class="homepage-logo">
   <button type="button" class="btn sidebar-toggle"><i class="fa fa-bars"></i></button>
   <form id="search-form" action="">
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
@@ -48,19 +47,15 @@
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">
-    <div class="panel-heading">
-      <h4><i class="fa fa-heart"></i> 我的收藏</h4>
-    </div>
+    <h4 class="panel-heading"><i class="fa fa-heart-o"></i> 我的收藏 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse my-fav">
       <script type="text/x-handlebars-template" class="template" id="my-fav">
         {{#each list}}
-        <li data-href="{{url}}" id="{{cid}}" class="item">{{title}}</li>
+        <li data-href="{{url}}" id="{{cid}}" class="item">{{title}} <i class="fa fa-times delete-button"></i></li>
         {{/each}}
       </script>
     </ul>
-    <div class="panel-heading">
-      <h4><i class="fa fa-history"></i> 最近阅读</h4>
-    </div>
+    <h4 class="panel-heading active"><i class="fa fa-clock-o"></i> 最近阅读 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse in recent">
 
     </ul>
@@ -83,7 +78,7 @@
     {{#if guide_name}}
     <div class="navbar-btn-group hide">
       {{#if is-detail}}
-      <button type="button" class="btn fav-button"></button>
+      <button type="button" class="btn fav-button {{#if fav}}active{{/if}}"></button>
       {{/if}}
       {{#if has-game}}
       <a href="game://{{guide_name}}/{{game_name}}" class="btn game-button"></a>

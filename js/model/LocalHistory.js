@@ -19,7 +19,7 @@
       var store = localStorage.getItem(this.key);
       if (store) {
         store = JSON.parse(store);
-        this.set(store);
+        this.reset(store);
       }
     },
     sync: function () {
@@ -40,7 +40,7 @@
       }, 500);
     },
     remove: function (models, options) {
-      Backbone.Collection.prototype.remove.remove(this, models, options);
+      Backbone.Collection.prototype.remove.call(this, models, options);
       var self = this;
       setTimeout(function () {
         self.sync()
