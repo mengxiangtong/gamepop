@@ -6,7 +6,8 @@
     events: {
       'tap .panel-heading': 'heading_tapHandler',
       'tap .edit-button': 'editButton_tapHandler',
-      'tap .delete-button': 'deleteButton_tapHandler'
+      'tap .delete-button': 'deleteButton_tapHandler',
+      'tap .item': 'item_tapHandler'
     },
     initialize: function (options) {
       this.template = TEMPLATES['my-fav'];
@@ -63,6 +64,9 @@
       btn.addClass('active')
         .next().addClass('in')
         .end().siblings('.panel-heading').removeClass('active');
+    },
+    item_tapHandler: function (event) {
+      ga.event(['view', 'sidebar', $(event.currentTarget).data('href')].join(','));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

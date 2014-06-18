@@ -28,8 +28,42 @@
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
       "is_local": true
+    },
+    {
+      "id": "zhihu1",
+      "url": "#/remote/zhihu/",
+      "name": "知乎日报",
+      "icon": "./mocks/images/zhihu.jpg",
+      "has-guide": true
+    },
+    {
+      "id": "skype1",
+      "url": "#/no-guide/skype",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    },
+    {
+      "id": "bilibili2",
+      "url": "#/local/hdppl/",
+      "name": "哔哩哔哩动画",
+      "icon": "./mocks/images/bilibili.jpg",
+      "has-guide": true,
+      "has-offline": true
+    },
+    {
+      "id": "skype2",
+      "url": "#/no-guide/skype",
+      "name": "Skype",
+      "icon": "./mocks/images/skype.jpg"
+    },
+    {
+      "id": "zhihu2",
+      "url": "#/remote/zhihu/",
+      "name": "知乎日报",
+      "icon": "./mocks/images/zhihu.jpg",
+      "has-guide": true
     }
   ],
-  "deviceid": "meathill-develop",
-  "has_download": true
+  "device_id": "meathill-develop",
+  "channel_show": true
 }

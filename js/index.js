@@ -93,7 +93,7 @@
 
     // for native
     gamepop.back = _.bind(gui.backButton_tapHandler, gui);
-    gamepop.refresh = _.bind(appsCollection.fetch, appsCollection);
+    gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
 
     // stat
     ga.pageview('/');

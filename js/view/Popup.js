@@ -23,7 +23,7 @@
     initialize: function (options) {
       this.options = options;
       this.url = options.url;
-      if (this.$apps.deviceid) {
+      if (this.$apps.device_id) {
         this.render();
       } else {
         this.$apps.once('reset', this.render, this);
@@ -46,6 +46,7 @@
             game_name: game_name,
             guide_name: guide_name,
             'has-game': hasGame,
+            'has-download': this.$apps.channel_show,
             'is-detail': isDetail,
             fav: fav
           };

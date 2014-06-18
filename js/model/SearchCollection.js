@@ -18,7 +18,7 @@
           w: this.keyword,
           re: this.refer,
           p: this.page,
-          did: this.$apps.deviceid
+          did: this.$apps.device_id
         }
       }, options);
       Backbone.Collection.prototype.fetch.call(this, options);

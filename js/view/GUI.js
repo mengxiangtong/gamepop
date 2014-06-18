@@ -32,7 +32,6 @@
       });
     },
     showPopupPage: function (url, className, options) {
-      console.log(url, className);
       if (pages.length > 0 && pages[pages.length - 1].url === url) {
         return;
       }
@@ -45,8 +44,12 @@
     toggleSidebar: function () {
       $('#homepage').toggleClass('back');
       $('#sidebar').toggleClass('hide');
+      ga.event(['toggle', 'sidebar'].join(','));
     },
-    backButton_tapHandler: function () {
+    backButton_tapHandler: function (event) {
+      if ($('#homepage').hasClass('back') && !event) {
+        return this.toggleSidebar();
+      }
       var hash = location.hash.substr(2);
       if (hash === '' || history.length === 1) {
         location.href = 'popo:return';
@@ -65,8 +68,10 @@
       var button = $(event.currentTarget);
       if (button.hasClass('active')) {
         this.$fav.remove(location.hash);
+        ga.event(['fav', 'remove', location.hash]);
       } else {
         this.$fav.add({url: location.hash, title: $('.content h1').text()});
+        ga.event(['fav', 'add', location.hash]);
       }
       button.toggleClass('active');
     },

@@ -83,10 +83,13 @@
       {{#if has-game}}
       <a href="game://{{guide_name}}/{{game_name}}" class="btn game-button"></a>
       {{else}}
+      {{#if has-download}}
       <a href="download://{{guide_name}}/{{game_name}}" class="btn download-button"></a>
       {{/if}}
+      {{/if}}
     </div>
-    {{else}}
+    {{/if}}
+    {{#if keyword}}
     <div class="navbar-text keyword">搜索：{{keyword}}</div>
     {{/if}}
     <i class="fa fa-spin fa-spinner"></i>
