@@ -12,7 +12,8 @@
       "name": "天天酷跑",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
-      "has-offline": true
+      "has-offline": true,
+      "is_local": true
     },
     {
       "id": "qqdzpk",
@@ -27,7 +28,7 @@
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
-      "is_local": true
+      "is_local": false
     },
     {
       "id": "zhihu1",

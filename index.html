@@ -35,7 +35,7 @@
   <ul id="my-apps">
     <script type="text/x-handlebars-template" class="template" id="installed">
       {{#each apps}}
-      <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#if is_local}}no-game{{/if}}" data-href="{{url}}">
+      <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#unless is_local}}no-game{{/unless}}" data-href="{{url}}">
         <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
       </li>
       {{/each}}
@@ -82,10 +82,6 @@
       {{/if}}
       {{#if has-game}}
       <a href="game://{{guide_name}}/{{game_name}}" class="btn game-button"></a>
-      {{else}}
-      {{#if has-download}}
-      <a href="download://{{guide_name}}/{{game_name}}" class="btn download-button"></a>
-      {{/if}}
       {{/if}}
     </div>
     {{/if}}
