@@ -84,6 +84,7 @@
     height: 50px
     border-bottom: 1px solid rgba(255, 255, 255, 0.4)
     margin: 0
+    position: relative
 
     .fa-clock-o,
     .fa-heart-o
@@ -95,7 +96,6 @@
     &.active
       font-size: 1.5em
       border-bottom-width: 2px
-      position: relative
 
       .edit-button
         display: block
@@ -121,7 +121,7 @@
       height: 0
 
     &.in
-      height: 250px
+      height: 360px
 
     &.edit
       li
@@ -141,10 +141,14 @@
 
   li
     font-size: 12px
-    line-height: 45px
+    line-height: 44px
     list-style-position: inside
     border-bottom: 1px solid rgba(255, 255, 255, 0.4)
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
     position: relative
+    padding-left: 4px
+
+    &:active
+      background-color: rgba(255, 255, 255, 0.4)

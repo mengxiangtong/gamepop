@@ -46,6 +46,7 @@ module.exports = function (grunt) {
     compass: {
       css: {
         options: {
+          environment: 'production',
           outputStyle: 'compressed'
         },
         files: [{
@@ -87,6 +88,16 @@ module.exports = function (grunt) {
           src: jses,
           dest: TEMP + (isSingle ? 'single' : 'index') + '.js'
         }]
+      }
+    },
+    cssmin: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        report: 'gzip'
+      },
+      css: {
+        src: csses,
+        dest: BUILD + 'css/style.css'
       }
     },
     replace: {
@@ -133,10 +144,6 @@ module.exports = function (grunt) {
         },
         src: libs,
         dest: BUILD + 'js/' + (isSingle ? 'single' : 'index') + '.js'
-      },
-      css: {
-        src: csses,
-        dest: BUILD + 'css/style.css'
       }
     },
     htmlmin: {
@@ -181,6 +188,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -229,6 +237,7 @@ module.exports = function (grunt) {
     'compass',
     'imagemin',
     'uglify',
+    'cssmin',
     'replace',
     'handlebars',
     'concat',
