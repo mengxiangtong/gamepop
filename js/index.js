@@ -6,9 +6,9 @@
   function onDeviceReady() {
     init();
   }
-  function createCss(width, height, isIOS7) {
+  function createCss(width, height) {
     var style = document.createElement('style')
-      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 50) / 3
+      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
       , size = {
         width: width,
         height: height,
@@ -86,7 +86,7 @@
     if (iOS) {
       document.body.className = 'ios' + iOS[1];
     }
-    createCss(document.body.clientWidth, document.body.clientHeight, isIOS7);
+    createCss(document.body.clientWidth, document.body.clientHeight);
 
     // 分析路径
     Backbone.history.start();

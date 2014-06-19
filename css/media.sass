@@ -20,12 +20,19 @@
       margin-left: 13px
 
   .guide-index
-    .game-info p
-      margin-left: 75px
+    .game-info
+      padding: $gap $gap 0
+
+      &:last-child
+        padding-bottom: $gap
+
+      p
+        margin-left: 70px
 
     .icon
       width: 60px
       height: 60px
+      margin-right: $gap
 
     h1
       font-size: 17px
@@ -34,12 +41,16 @@
       small
         font-size: 9px
 
+    .home-page
+      padding: $gap 0 $gap
+
     .carousel,
     .stoned
-      margin: 0 $gap-s
+      margin: 0 1px
+      padding-bottom: $gap-l + $gap-s
 
       li
-        margin-left: $gap
+        margin-left: $gap - 1px
 
   .article-list
 
@@ -75,12 +86,16 @@ body.ios7
   .sidebar-toggle
     top: 32px
 
-  .page-container .navbar
-    padding-top: 20px
+  .page-container
+    .navbar
+      padding-top: 20px
 
-    .btn,
-    .fa-spinner
-      top: 20px
+      .btn,
+      .fa-spinner
+        top: 20px
+
+    .content > *:first-child
+      padding-top: 55px
 
   .game-button
     display: none
