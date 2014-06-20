@@ -5,12 +5,14 @@
   'use strict';
 
   // 给backbone添加历史记录的功能，以便正确弹出
-  ns.history = [];
+  ns.history = [''];
   var loadUrl = Backbone.history.loadUrl;
   Backbone.history.loadUrl = function (fragment) {
     fragment = fragment || Backbone.history.getFragment();
-    ns.history.push(fragment);
-    console.log(ns.history);
+    if (fragment && fragment !== ns.history[ns.history.length - 1]) {
+      ns.history.push(fragment);
+      console.log(ns.history);
+    }
     loadUrl.call(Backbone.history, fragment);
   }
 

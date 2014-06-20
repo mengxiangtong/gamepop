@@ -21,6 +21,9 @@
     &:focus
       border-color: $active-color
 
+    &:disabled
+      color: $mute
+
     &::-webkit-input-placeholder
       line-height: normal
       line-height: 21px
@@ -55,6 +58,9 @@
 
     &:active
       background-color: darken($active-color, 10%)
+
+    &:disabled
+      background-color: $mute
 
   ul
     @extend .ul

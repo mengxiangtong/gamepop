@@ -32,9 +32,11 @@
       } else {
         this.$apps.once('reset', this.render, this);
       }
+      this.$result.on('reset', this.searchResult_resetHandler, this);
     },
     remove: function () {
       this.$('.content').off('scroll');
+      this.$result.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
     render: function () {
@@ -110,7 +112,11 @@
         return false;
       }
       this.$router.navigate('#/search/' + this.$router.game + '/' + this.getKeyword(true));
+      this.$('.search-form').find('input, button').prop('disabled', true);
       event.preventDefault();
+    },
+    searchResult_resetHandler: function () {
+      this.$('.search-form').find('input, button').prop('disabled', false);
     },
     animationEndHandler: function () {
       if (/scaleup/i.test(this.el.className)) {

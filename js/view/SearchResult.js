@@ -9,20 +9,14 @@
   ns.SearchResult = Backbone.View.extend({
     fragment: '',
     events: {
+      'refresh': 'refreshHandler',
       'tap .item': 'item_tapHandler'
     },
     initialize: function () {
       this.template = TEMPLATES['search-result'];
       this.list = this.$('ul');
-      var options = {refer: 'search'}
-        , path = location.hash.substr(9).split('/')
-        , keyword = decodeURIComponent(path.length > 1 ? path[1] : path[0]);
-      options.guide_name = path.length > 1 ? path[0] : '';
-      if (keyword === this.collection.keyword && options.guide_name === this.collection.guide_name) {
-        return this.render();
-      }
-      this.collection.on('reset', this.collection_resetHandler, this);
-      this.collection.search(keyword, options);
+      this.loading = this.$('.loading');
+      this.search();
     },
     remove: function () {
       this.$el.off('scroll');
@@ -41,6 +35,18 @@
         this.collection.on('sync', this.collection_syncHandler, this);
       }
       lazyload(this.el);
+    },
+    search: function () {
+      var options = {refer: 'search'}
+        , path = location.hash.substr(9).split('/')
+        , keyword = decodeURIComponent(path.length > 1 ? path[1] : path[0]);
+      options.guide_name = path.length > 1 ? path[0] : '';
+      if (keyword === this.collection.keyword && options.guide_name === this.collection.guide_name) {
+        return this.render();
+      }
+      this.collection.once('reset', this.collection_resetHandler, this);
+      this.collection.search(keyword, options);
+      this.list.prepend(this.loading);
     },
     collection_addHandler: function (model) {
       this.fragment += this.template({list: [model.toJSON()]});
@@ -67,6 +73,9 @@
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));
+    },
+    refreshHandler: function () {
+      this.search();
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

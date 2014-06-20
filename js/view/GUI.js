@@ -33,6 +33,9 @@
     },
     showPopupPage: function (url, className, options) {
       if (pages.length > 0 && pages[pages.length - 1].url === url) {
+        if (topPage.$('.search-result').length) {
+          topPage.$('.search-result').trigger('refresh');
+        }
         return;
       }
       topPage = this.$context.createInstance(gamepop.view.Popup, _.extend({
