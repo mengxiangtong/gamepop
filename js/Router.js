@@ -8,11 +8,13 @@
     type: '',
     routes: {
       "": 'backHome',
-      "search(/:keyword)": "showSearch",
+      "search/:keyword": "showSearch",
+      "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
       'no-guide/:game(/:name)': 'showNoGuidePage'
     },
     backHome: function () {
+      this.game = '';
       ga.pageview('home');
     },
     showRemoteGuide: function (game, path) {
@@ -25,7 +27,8 @@
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type);
       ga.pageview('remote/' + game + '/' + path);
     },
-    showSearch: function (keyword) {
+    showSearch: function (game, keyword) {
+      keyword = keyword || game;
       this.type = 'search';
       this.$gui.showPopupPage('template/search.html', 'search-result', {keyword: keyword});
       ga.pageview('search');

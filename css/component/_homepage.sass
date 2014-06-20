@@ -35,6 +35,7 @@
   width: 40px
   height: 40px
   line-height: 1
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4)
 
   &:active
     background-color: rgba(255, 255, 255, 0.2)
@@ -50,17 +51,22 @@
     float: right
     padding-bottom: $gap-s
 
-  &:after
-    content: '点击进入>>>'
-    display: block
+  span
+    clear: both
     color: $white
+    display: block
     background-color: $active-color
-    padding: 0 4px
+    padding: 0 8px
     font-size: 12px
     line-height: 20px
     border-radius: 3px
-    float: right
-    clear: both
+
+    &:after
+      display: inline-block
+      font-family: 'FontAwesome'
+      content: '\f04b'
+      font-size: 0.6em
+      margin-left: 0.5em
 
   &:active
     border-radius: 4px

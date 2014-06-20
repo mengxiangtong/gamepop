@@ -34,7 +34,7 @@
     color: $white
 
   .game-info
-    padding: $gap + $gap-s $gap + $gap-s 0
+    padding: 0 $gap + $gap-s
     overflow: hidden
 
     &:last-child
@@ -154,7 +154,19 @@
     p
       margin: 0 0 10px
 
-.game-card
+    table
+      border-collapse: collapse
+      border-spacing: 0
+
+      th
+        border-bottom-width: 2px
+        font-weight: bold
+
+      th,
+      td
+        border: 1px solid 1px
+
+.gae-card
   padding: $gap-s
   background-color: $list-background-color
   position: relative

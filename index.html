@@ -42,7 +42,10 @@
     </script>
   </ul>
   <script type="text/x-handlebars-template" class="template" id="entrance">
-    <a href="#/remote/{{guide_name}}" class="entrance"><img src="{{logo}}" width="{{logo_width}}"></a>
+    <a href="#/remote/{{guide_name}}" class="entrance">
+      <img src="{{logo}}" width="{{logo_width}}">
+      <span>点击进入</span>
+    </a>
   </script>
 </div>
 <div id="sidebar" class="hide">
@@ -64,11 +67,21 @@
 
 <script type="text/x-handlebars-template" class="template" id="search-result">
   {{#each list}}
+  {{#if title}}
+  <li data-href="#/remote/{{guide_name}}/{{category}}/{{aid}}/detail.html" class="item article">
+    <h2>{{{title}}}</h2>
+    {{#if icon_path}}
+    <img src="./img/image.gif" data-src="http://r.yxpopo.com/{{icon_path}}" class="ph">
+    {{/if}}
+    <p>{{{content}}}</p>
+  </li>
+  {{else}}
   <li data-href="#/remote/{{guide_name}}" class="item">
     <img src="./img/image.gif" data-src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.gif{{/if}}" class="ph">
     <h2>{{game_name}}</h2>
     <p>总计收录{{article_num}}篇攻略<br>最后更新时间{{update_time}}</p>
   </li>
+  {{/if}}
   {{/each}}
 </script>
 
@@ -77,6 +90,7 @@
     <button type="button" class="btn back-button"><i class="fa fa-chevron-left"></i></button>
     {{#if guide_name}}
     <div class="navbar-btn-group hide">
+      <button type="button" class="btn search-button"></button>
       {{#if is-detail}}
       <button type="button" class="btn fav-button {{#if fav}}active{{/if}}"></button>
       {{/if}}
@@ -85,11 +99,13 @@
       {{/if}}
     </div>
     {{/if}}
-    {{#if keyword}}
-    <div class="navbar-text keyword">搜索：{{keyword}}</div>
-    {{/if}}
     <i class="fa fa-spin fa-spinner"></i>
   </header>
+  <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
+    <button type="button" class="cancel-button">取消</button>
+    <input type="text" name="keyword" placeholder="在{{game_name}}中搜索" autocomplete="off" value="{{keyword}}">
+    <button><i class="fa fa-search"></i></button>
+  </form>
   <div class="content">
     <div class="alert alert-error hide">
       <i class="fa fa-frown-o"></i> 加载失败

@@ -14,12 +14,15 @@
     initialize: function () {
       this.template = TEMPLATES['search-result'];
       this.list = this.$('ul');
-      var keyword = decodeURIComponent(location.hash.substr(location.hash.lastIndexOf('/') + 1));
-      if (keyword === this.collection.keyword) {
+      var options = {refer: 'search'}
+        , path = location.hash.substr(9).split('/')
+        , keyword = decodeURIComponent(path.length > 1 ? path[1] : path[0]);
+      options.guide_name = path.length > 1 ? path[0] : '';
+      if (keyword === this.collection.keyword && options.guide_name === this.collection.guide_name) {
         return this.render();
       }
       this.collection.on('reset', this.collection_resetHandler, this);
-      this.collection.search(keyword, 'search');
+      this.collection.search(keyword, options);
     },
     remove: function () {
       this.$el.off('scroll');

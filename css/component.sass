@@ -1,5 +1,6 @@
 @charset "UTF-8"
 @import "define"
+@import "../bower_components/colors/sass/variables"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/labels"
@@ -209,6 +210,20 @@
     img
       width: 60px
       height: 60px
+
+    &.article
+      padding: $gap
+
+      img
+        width: 90px
+        border-radius: 4px
+
+      p
+        max-height: 5em
+        overflow: hidden
+
+      .match
+        color: $red
 
   h2
     font-size: 16px

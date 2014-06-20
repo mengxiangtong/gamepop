@@ -1,5 +1,6 @@
 @charset "utf-8"
 @import "../define"
+@import "homepage-search"
 @import "../../bower_components/colors/sass/variables"
 @import "../../bower_components/font-awesome/scss/variables"
 @import "../../bower_components/font-awesome/scss/core"
@@ -19,7 +20,7 @@
     right: 0
     z-index: 20
     height: $topbar-height
-    padding: $gap $gap 0 $gap-icon
+    padding: $gap $gap 0
 
     .navbar-text
       display: inline-block
@@ -39,7 +40,6 @@
       margin: 0
       border: none
       border-radius: $topbar-height
-      background-color: #333
       text-align: center
       vertical-align: top
 
@@ -50,6 +50,7 @@
       padding-top: 2px
       line-height: $topbar-height - $gap - 2px
       padding-right: 4px
+      background-color: rgba(0, 0, 0, 0.6)
 
       &:active
         background-color: #222
@@ -117,12 +118,58 @@
     .back-button:active
       background-color: rgba(0, 0, 0, 0.2)
 
+  .search-form
+    @extend #search-form
+    position: absolute
+    top: 0
+    left: $topbar-height
+    right: 0
+    z-index: 25
+    padding: $gap $gap
+
+    input
+      box-shadow: none
+      padding: $gap - 3px $gap-icon
+      line-height: 20px
+      font-size: 14px
+      border: 1px solid $border-color
+
+    button
+      width: 30px
+      height: 30px
+      top: $gap + 3px
+      right: $gap + 3px
+      font-size: 16px
+
+      i
+        line-height: 30px
+
+    .cancel-button
+      display: none
+      width: 14%
+      position: static
+      height: 36px
+      background: transparent
+      font-size: 14px
+      color: $active-color
+
+    &.cover
+      left: 0
+      bottom: 0
+      background-color: rgba(0, 0, 0, 0.75)
+
+      .cancel-button
+        display: inline-block
+
+      input
+        width: 86%
+
   .content
     overflow: auto
     -webkit-overflow-scrolling: touch
 
     > *:first-child
-      padding-top: $topbar-height
+      padding-top: $topbar-height + $gap
 
   &.active
     display: block

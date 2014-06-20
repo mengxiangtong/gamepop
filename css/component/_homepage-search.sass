@@ -3,11 +3,6 @@
 @import "../../bower_components/colors/sass/variables"
 
 #search-form
-  position: absolute
-  top: 60%
-  left: 0
-  right: 0
-  padding: 0 $gap-icon
 
   input
     width: 100%
@@ -48,12 +43,15 @@
     width: 45px
     height: 45px
     margin: 0
-    padding: 0 0 1px 2px
+    padding: 0
     border-radius: 23px
     background: $active-color
     border: none
     font-size: 20px
     color: $white
+
+    i
+      line-height: 45px
 
     &:active
       background-color: darken($active-color, 10%)
@@ -79,3 +77,10 @@
       height: 30px
       margin-right: $gap
       vertical-align: middle
+
+#homepage #search-form
+  position: absolute
+  top: 60%
+  left: 0
+  right: 0
+  padding: 0 $gap-icon

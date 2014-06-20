@@ -5,7 +5,7 @@ var config = {
   apps: 'apps.json',
   remote: 'http://a.yxpopo.com/vguide/',
   topgame: 'http://a.yxpopo.com/topgame.php',
-  search: 'http://s.yxpopo.com/search.do?m=game'
+  search: 'http://s.yxpopo.com/search.do'
 };
 if (DEBUG) {
   config.apps = 'mocks/apps.json';

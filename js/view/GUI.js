@@ -60,9 +60,8 @@
         }
       }
     },
-    downloadButton_tapHandler: function (event) {
+    downloadButton_tapHandler: function () {
       ga.event(['game', 'download', this.$context.getValue('game-id')].join(','));
-      location.href = event.currentTarget.href;
     },
     favButton_tapHandler: function (event) {
       var button = $(event.currentTarget);
@@ -75,9 +74,8 @@
       }
       button.toggleClass('active');
     },
-    gameButton_tapHandler: function (event) {
+    gameButton_tapHandler: function () {
       ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
-      location.href = event.currentTarget.href;
     },
     homepage_tapHandler: function (event) {
       if ($(event.currentTarget).hasClass('back')) {

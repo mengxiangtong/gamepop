@@ -17,6 +17,10 @@
     tagName: 'div',
     className: 'page-container active animated fast fadeInScaleUp',
     events: {
+      'tap .cancel-button': 'cancelButton_tapHandler',
+      'tap .search-button': 'searchButton_tapHandler',
+      'keydown input': 'input_keyDownHandler',
+      'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
     },
@@ -40,7 +44,7 @@
           var guide_name = this.$router.game
             , model = this.$apps.get(guide_name)
             , hasGame = model && model.get('is_local')
-            , game_name = model ? model.get('name') : (this.$result.get(guide_name) ? this.$result.get(guide_name).get('game_name') : '')
+            , game_name = model ? model.get('name') : (this.$result.get(guide_name) ? this.$result.get(guide_name).get('game_name') : '游戏')
             , isDetail = /-detail/.test(this.options.classes)
             , fav = isDetail && this.$fav.get(location.hash);
           init = {
@@ -66,6 +70,12 @@
     fadeOut: function () {
       this.$el.addClass('animated fast fadeOutScaleDown');
     },
+    getKeyword: function (encode) {
+      var keyword = this.$('[name=keyword]').val().toLowerCase();
+      keyword = keyword.replace(/\/|\s+|\\/g, '', keyword);
+      keyword = encode ? encodeURIComponent(keyword) : keyword;
+      return keyword;
+    },
     initMediator: function () {
       // 如果还在动画中或者没有完成加载则不初始化
       if (this.$el.hasClass('animated') || this.$el.find('.alert-error').length) {
@@ -81,6 +91,26 @@
       lazyLoad(this.el);
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
+    },
+    cancelButton_tapHandler: function () {
+      this.$('.search-form').fadeOut('fast');
+      this.$('.navbar-btn-group,.back-button').removeClass('hide');
+    },
+    input_keyDownHandler: function (event) {
+      if (event.keyCode === 13 && event.target.value !== '') {
+        $(event.target).closest('form').submit();
+      }
+    },
+    searchButton_tapHandler: function () {
+      this.$('.navbar-btn-group,.back-button').addClass('hide');
+      this.$('.search-form').fadeIn('fast');
+    },
+    searchForm_submitHandler: function (event) {
+      if (event.currentTarget.elements.keyword.value === '') {
+        return false;
+      }
+      this.$router.navigate('#/search/' + this.$router.game + '/' + this.getKeyword(true));
+      event.preventDefault();
     },
     animationEndHandler: function () {
       if (/scaleup/i.test(this.el.className)) {
