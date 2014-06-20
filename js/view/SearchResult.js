@@ -50,7 +50,6 @@
     },
     collection_syncHandler: function () {
       if (this.fragment) {
-        console.log(this.fragment);
         this.list.append(this.fragment).removeClass('loading');
         this.fragment = '';
       } else {

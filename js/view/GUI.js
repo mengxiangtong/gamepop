@@ -51,10 +51,11 @@
         return this.toggleSidebar();
       }
       var hash = location.hash.substr(2);
-      if (hash === '' || history.length === 1) {
+      if (hash === '' || gamepop.history.length === 1) {
         location.href = 'popo:return';
       } else {
         history.back();
+        gamepop.history.pop();
         if (pages.length > 0) {
           pages.pop().fadeOut();
         }

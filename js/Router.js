@@ -2,6 +2,18 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
+  'use strict';
+
+  // 给backbone添加历史记录的功能，以便正确弹出
+  ns.history = [];
+  var loadUrl = Backbone.history.loadUrl;
+  Backbone.history.loadUrl = function (fragment) {
+    fragment = fragment || Backbone.history.getFragment();
+    ns.history.push(fragment);
+    console.log(ns.history);
+    loadUrl.call(Backbone.history, fragment);
+  }
+
   ns.Router = Backbone.Router.extend({
     $gui: null,
     game: '',
