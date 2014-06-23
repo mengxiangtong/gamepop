@@ -5,7 +5,9 @@
   'use strict';
 
   //没有暴露事件，只能写到这儿了
-  var lazyLoad = gamepop.component.lazyLoad;
+  var lazyLoad = gamepop.component.lazyLoad
+    , fadeOutPage
+    , pages = [];
 
   ns.Popup = Backbone.View.extend({
     $context: null,
@@ -13,7 +15,6 @@
     $apps: null,
     $result: null,
     $recent: null,
-    $fav: null,
     tagName: 'div',
     className: 'page-container active animated fast fadeInScaleUp',
     events: {
@@ -33,6 +34,7 @@
         this.$apps.once('reset', this.render, this);
       }
       this.$result.on('reset', this.searchResult_resetHandler, this);
+      pages.push(this);
     },
     remove: function () {
       this.$('.content').off('scroll');
@@ -40,43 +42,28 @@
       Backbone.View.prototype.remove.call(this);
     },
     render: function () {
-      var init;
-      switch (this.$router.type) {
-        case 'game':
-          var guide_name = this.$router.game
-            , model = this.$apps.get(guide_name)
-            , hasGame = model && model.get('is_local')
-            , game_name = model ? model.get('name') : (this.$result.get(guide_name) ? this.$result.get(guide_name).get('game_name') : '游戏')
-            , isDetail = /-detail/.test(this.options.classes)
-            , fav = isDetail && this.$fav.get(location.hash);
-          init = {
-            game_name: game_name,
-            guide_name: guide_name,
-            'has-game': hasGame,
-            'is-detail': isDetail,
-            fav: fav
-          };
-          break;
-
-        case 'search':
-          init = this.options;
-          break;
-      }
-      this.$el.html(TEMPLATES.popup(init));
+      this.options['has-game'] = this.$apps.get(this.options.guide_name);
+      this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
       this.$('.content')
         .addClass(this.options.classes)
         .load(this.options.url, _.bind(this.loadCompleteHandler, this));
-      this.options = null;
     },
     fadeOut: function () {
+      if (pages.length > 0) {
+        pages[pages.length - 1].show();
+      }
       this.$el.addClass('animated fast fadeOutScaleDown');
+      return this;
     },
     getKeyword: function (encode) {
       var keyword = this.$('[name=keyword]').val().toLowerCase();
       keyword = keyword.replace(/\/|\s+|\\/g, '', keyword);
       keyword = encode ? encodeURIComponent(keyword) : keyword;
       return keyword;
+    },
+    hide: function () {
+      this.$el.hide();
     },
     initMediator: function () {
       // 如果还在动画中或者没有完成加载则不初始化
@@ -93,6 +80,9 @@
       lazyLoad(this.el);
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
+    },
+    show: function () {
+      this.$el.show();
     },
     cancelButton_tapHandler: function () {
       this.$('.search-form').fadeOut('fast');
@@ -111,8 +101,15 @@
       if (event.currentTarget.elements.keyword.value === '') {
         return false;
       }
-      this.$router.navigate('#/search/' + this.$router.game + '/' + this.getKeyword(true));
-      this.$('.search-form').find('input, button').prop('disabled', true);
+      if (this.options.type === 'search') {
+        var options = {replace: true};
+      }
+      var path = this.options.guide_name ? this.options.guide_name + '/' : '';
+      this.$router.navigate('#/search/' + path + this.getKeyword(true), options);
+      if (this.options.type === 'game') {
+        this.$('.search-form').hide();
+        this.$('.navbar-btn-group,.back-button').removeClass('hide');
+      }
       event.preventDefault();
     },
     searchResult_resetHandler: function () {
@@ -122,9 +119,13 @@
       if (/scaleup/i.test(this.el.className)) {
         this.$el.removeClass('animated fadeInScaleUp fast');
         this.initMediator();
+        if (pages.length > 1) {
+          pages[pages.length - 2].hide();
+        }
       }
       if (/scaledown/i.test(this.el.className)) {
         this.remove();
+        fadeOutPage = null;
       }
     },
     loadCompleteHandler: function (response, status) {
@@ -137,10 +138,31 @@
       if (/-detail/.test(this.$('.content').attr('class'))) {
         this.$recent.add({url: location.hash, title: this.$('h1').text()});
       }
+      // 修改game-button
+      if (this.options.type === 'no-game') {
+        this.$('.content .game-button').attr('href', 'game://' + this.options.guide_name + '/' + this.options.game_name);
+      }
 
       this.$('.navbar .fa-spin').remove();
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     }
   });
+
+  ns.Popup.removeLast = function () {
+    if (pages.length > 0) {
+      fadeOutPage = pages.pop().fadeOut();
+    }
+  };
+  ns.Popup.search = function (url) {
+    var page = pages[pages.length - 1];
+    if (page && page.url === url) {
+      if (page.options.type === 'search' && !fadeOutPage) {
+        page.$result.search();
+      }
+      return true;
+    }
+    return false;
+  };
+  ns.Popup.pages = pages;
 }(Nervenet.createNameSpace('gamepop.view')));

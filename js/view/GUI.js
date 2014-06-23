@@ -2,9 +2,10 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
+  'use strict';
+
   var lastTouch
-    , topPage = null
-    , pages = [];
+    , Popup = gamepop.view.Popup;
 
   ns.GUI = Backbone.View.extend({
     $router: null,
@@ -32,17 +33,13 @@
       });
     },
     showPopupPage: function (url, className, options) {
-      if (pages.length > 0 && pages[pages.length - 1].url === url) {
-        if (topPage.$('.search-result').length) {
-          topPage.$('.search-result').trigger('refresh');
-        }
+      if (Popup.search(url)) {
         return;
       }
-      topPage = this.$context.createInstance(gamepop.view.Popup, _.extend({
+      this.$context.createInstance(Popup, _.extend({
         url: url,
         classes: className
       }, options));
-      pages.push(topPage);
     },
     toggleSidebar: function () {
       $('#homepage').toggleClass('back');
@@ -59,9 +56,7 @@
       } else {
         history.back();
         gamepop.history.pop();
-        if (pages.length > 0) {
-          pages.pop().fadeOut();
-        }
+        Popup.removeLast();
       }
     },
     downloadButton_tapHandler: function () {
@@ -115,12 +110,12 @@
       event.preventDefault();
     },
     swipeLeftHandler: function () {
-      if (pages.length === 0 && !$('#homepage').hasClass('back')) {
+      if (Popup.pages.length === 0 && !$('#homepage').hasClass('back')) {
         this.toggleSidebar();
       }
     },
     swipeRightHandler: function () {
-      if (pages.length === 0 && $('#homepage').hasClass('back')) {
+      if (Popup.pages.length === 0 && $('#homepage').hasClass('back')) {
         this.toggleSidebar();
       }
     },

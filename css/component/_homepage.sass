@@ -17,28 +17,38 @@
     transform: translate3d(-80%, 0, 0) scale3d(0,9, 0.9, 1)
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
+  .btn
+    position: absolute
+    padding: 0
+    margin: 0
+    width: 40px
+    height: 40px
+    border: none
+    background: transparent
+    font-size: 2em
+    line-height: 1
+    color: $white
+
+    &:active
+      background-color: rgba(255, 255, 255, 0.2)
+
 .homepage-logo
   position: absolute
   left: $gap-icon
   top: $gap-icon
 
 .sidebar-toggle
-  position: absolute
   right: $gap
   top: 7px
-  border: none
-  background: transparent
-  color: #FFF
-  font-size: 2em
-  padding: 0
-  margin: 0
-  width: 40px
-  height: 40px
-  line-height: 1
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.4)
 
+.history-button
+  opacity: 0.5
+  left: $gap
+  bottom: 7px
+
   &:active
-    background-color: rgba(255, 255, 255, 0.2)
+    opacity: 1
 
 .entrance
   position: absolute
@@ -67,6 +77,7 @@
       content: '\f04b'
       font-size: 0.6em
       margin-left: 0.5em
+      line-height: 20px
 
   &:active
     border-radius: 4px

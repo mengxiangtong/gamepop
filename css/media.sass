@@ -21,7 +21,7 @@
 
   .guide-index
     .game-info
-      padding: $gap $gap 0
+      padding: 0 $gap
 
       &:last-child
         padding-bottom: $gap
@@ -76,10 +76,15 @@
 @media (max-height: 450px)
   .apps-title,
   #apps,
-  .entrance
+  .entrance,
+  .history-button
     display: none
 
-body.ios7
+.ios
+  .game-info small
+    display: none
+
+.ios7
   .homepage-logo
     top: 36px
 
@@ -94,8 +99,14 @@ body.ios7
       .fa-spinner
         top: 20px
 
+    .search-form
+      padding-top: 20px
+
+      button
+        top: 23px
+
     .content > *:first-child
-      padding-top: 55px
+      padding-top: 65px
 
   .game-button
     display: none

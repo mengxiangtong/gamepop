@@ -7,19 +7,23 @@
   var lazyload = gamepop.component.lazyLoad;
 
   ns.SearchResult = Backbone.View.extend({
+    $router: null,
     fragment: '',
     events: {
-      'refresh': 'refreshHandler',
       'tap .item': 'item_tapHandler'
     },
     initialize: function () {
       this.template = TEMPLATES['search-result'];
       this.list = this.$('ul');
       this.loading = this.$('.loading');
-      this.search();
+      this.guide_name = this.$router.data.guide_name;
+      this.collection.on('request', this.collection_requestHandler, this);
+      this.collection.on('reset', this.collection_resetHandler, this);
+      this.collection.search();
     },
     remove: function () {
       this.$el.off('scroll');
+      this.collection.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
     render: function () {
@@ -36,22 +40,24 @@
       }
       lazyload(this.el);
     },
-    search: function () {
-      var options = {refer: 'search'}
-        , path = location.hash.substr(9).split('/')
-        , keyword = decodeURIComponent(path.length > 1 ? path[1] : path[0]);
-      options.guide_name = path.length > 1 ? path[0] : '';
-      if (keyword === this.collection.keyword && options.guide_name === this.collection.guide_name) {
-        return this.render();
-      }
-      this.collection.once('reset', this.collection_resetHandler, this);
-      this.collection.search(keyword, options);
-      this.list.prepend(this.loading);
-    },
     collection_addHandler: function (model) {
+      if (this.collection.guide_name !== this.guide_name) {
+        return;
+      }
       this.fragment += this.template({list: [model.toJSON()]});
     },
+    collection_requestHandler: function () {
+      if (this.collection.guide_name !== this.guide_name) { // 搜索范围不一致
+        return;
+      }
+      this.list
+        .removeClass('no-result')
+        .prepend(this.loading);
+    },
     collection_resetHandler: function () {
+      if (this.collection.guide_name !== this.guide_name) { // 搜索范围不一致
+        return;
+      }
       this.render();
     },
     collection_syncHandler: function () {
@@ -73,9 +79,6 @@
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));
-    },
-    refreshHandler: function () {
-      this.search();
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

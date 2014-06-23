@@ -5,8 +5,10 @@
   'use strict';
 
   var GameModel = Backbone.Model.extend({idAttribute: 'guide_name'});
+
   ns.SearchCollection = Backbone.Collection.extend({
     $apps: null,
+    $router: null,
     keyword: '',
     size: 12,
     url: config.search,
@@ -37,11 +39,16 @@
       this.page += 1;
       this.fetch();
     },
-    search: function (keyword, options) {
-      this.keyword = keyword;
+    search: function () {
+      var data = this.$router.data;
+      if (data.keyword === this.keyword && data.guide_name === this.guide_name) {
+        this.trigger('reset');
+        return;
+      }
+      this.keyword = data.keyword;
       this.page = 1;
-      this.refer = options.refer;
-      this.guide_name = options.guide_name;
+      this.refer = '';
+      this.guide_name = data.guide_name;
       this.fetch({reset: true});
     }
   });

@@ -14,12 +14,13 @@
       console.log(ns.history);
     }
     loadUrl.call(Backbone.history, fragment);
-  }
+  };
 
   ns.Router = Backbone.Router.extend({
     $gui: null,
-    game: '',
-    type: '',
+    $apps: null,
+    $result: null,
+    $fav: null,
     routes: {
       "": 'backHome',
       "search/:keyword": "showSearch",
@@ -34,23 +35,41 @@
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
       var isIndex = !path
+        , model = this.$apps.get(game)
+        , hasGame = model && model.get('is_local')
+        , game_name = model ? model.get('name') : (this.$result.get(game) ? this.$result.get(game).get('game_name') : '游戏')
         , isList = /\/list/.test(path)
-        , type = isIndex ? 'index' : (isList ? 'list' : 'detail');
-      this.type = 'game';
-      this.game = game;
-      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type);
+        , type = isIndex ? 'index' : (isList ? 'list' : 'detail')
+        , fav = type === 'detail' && this.$fav.get(location.hash);
+      this.data = {
+        type: 'game',
+        guide_name: game,
+        game_name: game_name,
+        'has-guide': true,
+        'has-game': hasGame,
+        'is-detail': type === 'detail',
+        fav: fav
+      };
+      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type, this.data);
       ga.pageview('remote/' + game + '/' + path);
     },
     showSearch: function (game, keyword) {
-      keyword = keyword || game;
-      this.type = 'search';
-      this.$gui.showPopupPage('template/search.html', 'search-result', {keyword: keyword});
+      this.data = {
+        type: 'search',
+        guide_name: keyword ? game: '',
+        keyword: decodeURIComponent(keyword || game)
+      };
+      this.$gui.showPopupPage('template/search.html', 'search-result', this.data);
       ga.pageview('search');
     },
     showNoGuidePage: function (game, name) {
-      this.type = 'no-game';
-      this.game = game;
-      this.$gui.showPopupPage('template/no-guide.html', 'no-guide');
+      this.data = {
+        type: 'no-game',
+        guide_name: game,
+        game_name: name || '',
+        'has-game': true
+      };
+      this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga.pageview('no-guide/' + game + '/' + name);
     }
   });

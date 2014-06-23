@@ -84,7 +84,7 @@
 
     // 判断平台类型
     if (iOS) {
-      document.body.className = 'ios' + iOS[1];
+      document.body.className = 'ios ios' + iOS[1];
     }
     createCss(document.body.clientWidth, document.body.clientHeight);
 

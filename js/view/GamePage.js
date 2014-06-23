@@ -42,7 +42,7 @@
     remove: function () {
       this.carousel.remove();
       this.carousel = null;
-      this.$el.off('scroll touch release');
+      this.$el.off('scroll');
       Backbone.View.prototype.remove.call(this);
     },
     fetch: function () {
