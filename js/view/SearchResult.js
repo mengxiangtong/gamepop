@@ -76,6 +76,7 @@
           list.removeClass('no-more');
         }, 3000);
       }
+      this.loading.remove();
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));

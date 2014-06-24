@@ -88,8 +88,8 @@
     }
     createCss(document.body.clientWidth, document.body.clientHeight);
 
-    // 分析路径
-    Backbone.history.start();
+    // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
+    router.start(Backbone.history.start());
 
     // for native
     gamepop.back = _.bind(gui.backButton_tapHandler, gui);

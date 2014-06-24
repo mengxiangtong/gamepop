@@ -4,23 +4,14 @@
 ;(function (ns) {
   'use strict';
 
-  // 给backbone添加历史记录的功能，以便正确弹出
-  ns.history = [''];
-  var loadUrl = Backbone.history.loadUrl;
-  Backbone.history.loadUrl = function (fragment) {
-    fragment = fragment || Backbone.history.getFragment();
-    if (fragment && fragment !== ns.history[ns.history.length - 1]) {
-      ns.history.push(fragment);
-      console.log(ns.history);
-    }
-    loadUrl.call(Backbone.history, fragment);
-  };
+  var history = ns.history = [];
 
   ns.Router = Backbone.Router.extend({
     $gui: null,
     $apps: null,
     $result: null,
     $fav: null,
+    from: '',
     routes: {
       "": 'backHome',
       "search/:keyword": "showSearch",
@@ -71,6 +62,17 @@
       };
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga.pageview('no-guide/' + game + '/' + name);
+    },
+    start: function (fromGame) {
+      this.from = fromGame ? Backbone.history.fragment : '';
+      this.on('route', this.routeHandler, this);
+    },
+    routeHandler: function () {
+      var fragment = Backbone.history.fragment;
+      if (fragment && this.from !== fragment && fragment !== history[history.length - 1]) {
+        history.push(fragment);
+        console.log(history);
+      }
     }
   });
 }(Nervenet.createNameSpace('gamepop')));

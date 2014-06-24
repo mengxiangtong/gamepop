@@ -37,11 +37,12 @@
     },
     next: function () {
       this.page += 1;
-      this.fetch();
+      this.fetch({remove: false});
     },
     search: function () {
       var data = this.$router.data;
       if (data.keyword === this.keyword && data.guide_name === this.guide_name) {
+        this.page = this.length / this.size;
         this.trigger('reset');
         return;
       }

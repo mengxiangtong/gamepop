@@ -47,7 +47,8 @@
     },
     fetch: function () {
       this.page += 1;
-      var list = this.$('.auto-load');
+      var list = this.$('.auto-load')
+        , $el = this.$el;
       if (list.length === 0) {
         return;
       }
@@ -59,7 +60,7 @@
           setTimeout(function () {
             list.removeClass('no-more');
           }, 3000);
-          this.$el.off('scroll');
+          $el.off('scroll');
         }
       });
     },
