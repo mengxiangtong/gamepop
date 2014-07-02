@@ -12,7 +12,8 @@
       , size = {
         width: width,
         height: height,
-        hpItemWidth: hpItemWidth
+        hpItemWidth: hpItemWidth,
+        sidebarHeight: height * .9 - 100
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;
@@ -28,7 +29,6 @@
     }
 
     var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
-      , isIOS7 = iOS && iOS[1] == 7
       , context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body

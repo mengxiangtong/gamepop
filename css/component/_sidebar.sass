@@ -1,3 +1,8 @@
+@charset "utf-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+
 #sidebar
   z-index: 5
   position: absolute
@@ -6,6 +11,7 @@
   right: 7%
   bottom: 5%
   color: $white
+  overflow: hidden
 
   .panel-group
     height: 100%
@@ -51,9 +57,6 @@
 
     &.collapse
       height: 0
-
-    &.in
-      height: 360px
 
     &.edit
       li
