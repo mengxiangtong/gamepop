@@ -10,21 +10,6 @@
       'keydown': 'keydownHandler',
       'submit': 'submitHandler'
     },
-    initialize: function () {
-      this.template = TEMPLATES['search-tips'];
-    },
-    render: function () {
-      console.log('search end');
-      this.result.html(this.template({games: this.collection.toJSON().slice(0, 4)}));
-      this.$('.fa-spin').removeClass('fa-spin fa-spinner');
-      this.$('input, button').prop('disabled', false);
-      this.$('input').focus();
-
-      var result = this.result;
-      setTimeout(function () {
-        result.slideDown('fast');
-      }, 0);
-    },
     getKeyword: function (encode) {
       var keyword = this.$('input').val().toLowerCase();
       keyword = keyword.replace(/\/|\s+|\\/g, '', keyword);
@@ -35,13 +20,6 @@
       var keyword = this.getKeyword();
       console.log('search start');
       this.collection.search(keyword, 'homepage');
-    },
-    collection_requestHandler: function () {
-      this.$('input, button').prop('disabled', true);
-      this.$('button i').addClass('fa-spin fa-spinner');
-    },
-    collection_resetHandler: function () {
-      this.render();
     },
     keydownHandler: function (event) {
       if (event.keyCode === 13) {

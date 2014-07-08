@@ -9,7 +9,7 @@
     , fadeOutPage
     , pages = [];
 
-  ns.Popup = Backbone.View.extend({
+  var Popup = ns.Popup = Backbone.View.extend({
     $context: null,
     $router: null,
     $apps: null,
@@ -20,7 +20,8 @@
     events: {
       'tap .cancel-button': 'cancelButton_tapHandler',
       'tap .search-button': 'searchButton_tapHandler',
-      'keydown input': 'input_keyDownHandler',
+      'keydown .search-form input': 'input_keyDownHandler',
+      'blur .search-form input': 'input_blurHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
@@ -48,6 +49,13 @@
       this.$('.content')
         .addClass(this.options.classes)
         .load(this.options.url, _.bind(this.loadCompleteHandler, this));
+    },
+    checkSearchStatus: function () {
+      if (this.isSearch) {
+        this.toggleSearchForm(false)
+        return true;
+      }
+      return false;
     },
     fadeOut: function () {
       if (pages.length > 0) {
@@ -84,9 +92,13 @@
     show: function () {
       this.$el.show();
     },
+    toggleSearchForm: function (isShow) {
+      this.isSearch = isShow = isShow === undefined ? !this.isSearch : isShow;
+      this.$('.search-form')[isShow ? 'fadeIn' : 'fadeOut']('fast');
+      this.$('.navbar-btn-group,.back-button').toggleClass('hide', isShow);
+    },
     cancelButton_tapHandler: function () {
-      this.$('.search-form').fadeOut('fast');
-      this.$('.navbar-btn-group,.back-button').removeClass('hide');
+      this.toggleSearchForm(false);
     },
     input_keyDownHandler: function (event) {
       if (event.keyCode === 13 && event.target.value !== '') {
@@ -94,8 +106,7 @@
       }
     },
     searchButton_tapHandler: function () {
-      this.$('.navbar-btn-group,.back-button').addClass('hide');
-      this.$('.search-form').fadeIn('fast');
+      this.toggleSearchForm(true);
     },
     searchForm_submitHandler: function (event) {
       if (event.currentTarget.elements.keyword.value === '') {
@@ -149,12 +160,12 @@
     }
   });
 
-  ns.Popup.removeLast = function () {
+  Popup.removeLast = function () {
     if (pages.length > 0) {
       fadeOutPage = pages.pop().fadeOut();
     }
   };
-  ns.Popup.search = function (url) {
+  Popup.search = function (url) {
     var page = pages[pages.length - 1];
     if (page && page.url === url) {
       if (page.options.type === 'search' && !fadeOutPage) {
@@ -164,5 +175,13 @@
     }
     return false;
   };
-  ns.Popup.pages = pages;
+  /**
+   * 判断当前popup是否处于搜索状态，如果是则取消搜索
+   * @returns {boolean}
+   */
+  Popup.isSearch = function () {
+    var page = pages[pages.length - 1];
+    return page.checkSearchStatus();
+  };
+  Popup.pages = pages;
 }(Nervenet.createNameSpace('gamepop.view')));

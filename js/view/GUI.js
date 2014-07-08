@@ -15,6 +15,7 @@
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
+      'click .item': 'item_clickHandler',
       'swipeleft': 'swipeLeftHandler',
       'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
@@ -53,7 +54,7 @@
       var hash = location.hash.substr(2);
       if (hash === '' || gamepop.history.length === 0) {
         location.href = 'popo:return';
-      } else {
+      } else if (!Popup.isSearch()) {
         history.back();
         gamepop.history.pop();
         Popup.removeLast();
@@ -82,8 +83,13 @@
         event.preventDefault();
       }
     },
+    item_clickHandler: function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    },
     item_tapHandler: function (event) {
-      var href = $(event.currentTarget).data('href');
+      var target = $(event.currentTarget)
+        , href = target.data('href') || target.find('a').attr('href');
       if (!href) {
         return;
       }
