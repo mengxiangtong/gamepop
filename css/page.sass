@@ -9,19 +9,30 @@
 .game-page
 
   > h2
-    text-indent: $gap-s
     font-size: 12px
-    line-height: 1em
-    margin: $gap + $gap-s
-    border-left: 2px solid
+    line-height: 14px
+    margin: $gap
+
+    i
+      color: $white
+      border-radius: 7px
+      font-size: 10px
+      width: 14px
+      line-height: 14px
+      text-align: center
+      vertical-align: top
 
     &.hot
       color: $hot-color
-      border-left-color: $hot-color
+
+      i
+        background-color: $hot-color
 
     &.news
       color: $latest-color
-      border-left-color: $latest-color
+
+      i
+        background-color: $latest-color
 
 /* ----------------
  * index
