@@ -146,7 +146,6 @@
 
   .item
     background-color: $list-background-color
-    border: 1px solid $smoke
     overflow: hidden
     padding: $gap-s
 
@@ -157,6 +156,7 @@
     display: blok
     float: left
     margin-right: $gap
+    border-radius: 4px
 
   h2 a:visited,
   h3 a:visited
@@ -164,7 +164,6 @@
 
   p
     margin: 0
-    color: $mute
 
   .loading
     text-align: center
@@ -199,8 +198,11 @@
 .icon-list
   @extend .ul
   padding: $gap
+  color: $white
 
   .item
+    background: none
+    padding: $gap $gap-s $gap-s
 
     + .item
       border-top: none
@@ -214,6 +216,7 @@
     img
       width: 60px
       height: 60px
+      border-radius: 10px
 
     &.article
       padding: $gap
@@ -231,11 +234,15 @@
 
   h2
     font-size: 16px
-    margin: $gap-s 0
+    line-height: 1.25em
+    margin: 0 0 $gap-s
 
   p
     font-size: 12px
     line-height: 1.25
+    padding-bottom: $gap-icon
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+    margin-left: 70px
 
 /* ====================================
  * article-list
@@ -244,16 +251,16 @@
   @extend .ul
   padding: 0 $gap
 
-  li
+  .item
+    border: 1px solid $smoke
     border-radius: 4px
 
-    + li
+    + .item
       margin-top: $gap-s
 
   img
     width: 120px
     height: 80px
-    border-radius: 4px
 
   h3
     font-size: 1em
@@ -267,6 +274,7 @@
 
   p
     font-size: 10px
+    color: $mute
 
   &:last-child
     padding-bottom: $gap

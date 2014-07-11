@@ -37,6 +37,7 @@
         el: '#homepage'
       })
       , appsCollection = new gamepop.model.AppsCollection()
+      , rss = new gamepop.model.RSSCollection(null, {apps: appsCollection})
       , list = new gamepop.view.AppsList({
           el: '#my-apps',
           collection: appsCollection
@@ -65,6 +66,7 @@
       .mapValue('sidebar', sidebar)
       .mapValue('router', router)
       .mapValue('apps', appsCollection)
+      .mapValue('rss', rss)
       .mapValue('result', results)
       .mapValue('recent', recent)
       .mapValue('fav', fav)

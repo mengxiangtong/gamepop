@@ -57,7 +57,8 @@
     .game-button,
     .download-button,
     .fav-button,
-    .search-button
+    .search-button,
+    .bookmark-button
       @extend .fa
 
     .game-button
@@ -106,6 +107,20 @@
 
       &:active
         background-color: darken($search-color, 15%)
+
+    .bookmark-button
+      background-color: $bookmark-color
+
+      &.active:before
+        content: $fa-var-bookmark
+        color: #FFD511
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)
+
+      &:before
+        content: $fa-var-bookmark-o
+
+      &:active
+        background: darken($bookmark-color, 15%)
 
     .fa-spinner
       position: absolute
@@ -175,6 +190,11 @@
 
   &.active
     display: block
+
+  &.search
+    background-repeat: no-repeat
+    background-image: url(../img/bg.jpg)
+    background-size: cover
 
   &.animated
     .content

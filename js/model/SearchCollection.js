@@ -35,6 +35,13 @@
       options.data = _.extend(data, options.data);
       Backbone.Collection.prototype.fetch.call(this, options);
     },
+    toJSON: function () {
+      var json = Backbone.Collection.prototype.toJSON.call(this);
+      for (var i = 0, len = json.length; i < len; i++) {
+        json[i].update_time = json[i].update_time.substr(0, 10);
+      }
+      return json;
+    },
     next: function () {
       this.page += 1;
       this.fetch({remove: false});

@@ -5,10 +5,12 @@ var config = {
   apps: 'apps.json',
   remote: 'http://a.yxpopo.com/vguide/',
   topgame: 'http://a.yxpopo.com/topgame.php',
-  search: 'http://s.yxpopo.com/search.do'
+  search: 'http://s.yxpopo.com/search.do',
+  rss: 'http://a.yxpopo.com/rss'
 };
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
-  //config.remote ='http://meathill.pc/gamepop-api/vguide/';
+  config.remote ='http://meathill.pc/gamepop-api/vguide/';
+  config.rss = 'http://meathill.pc/gamepop-api/rss.php';
   //config.topgame = 'http://meathill.pc/gamepop-api/topgame.php';
 }

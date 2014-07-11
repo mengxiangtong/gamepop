@@ -49,6 +49,10 @@
       this.$('.content')
         .addClass(this.options.classes)
         .load(this.options.url, _.bind(this.loadCompleteHandler, this));
+      // 搜索界面需要特殊背景
+      if (/search/.test(this.options.classes)) {
+        this.$el.addClass('search');
+      }
     },
     checkSearchStatus: function () {
       if (this.isSearch) {

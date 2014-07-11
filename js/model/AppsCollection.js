@@ -2,6 +2,8 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
+  'use strict';
+
   ns.AppsCollection = Backbone.Collection.extend({
     device_id: '',
     channel_show: '',

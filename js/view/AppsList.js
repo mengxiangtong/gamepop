@@ -2,6 +2,8 @@
  * Created by meathill on 14-1-21.
  */
 ;(function (ns) {
+  'use strict';
+
   ns.AppsList = Backbone.View.extend({
     events: {
       'tap .no-game': 'noGame_tapHandler'
