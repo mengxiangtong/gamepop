@@ -8,8 +8,10 @@
 
   ns.SearchResult = Backbone.View.extend({
     $router: null,
+    $rss: null,
     fragment: '',
     events: {
+      'tap .bookmark-button': 'bookmarkButton_tapHandler',
       'tap .item': 'item_tapHandler'
     },
     initialize: function () {
@@ -39,6 +41,20 @@
         this.collection.on('sync', this.collection_syncHandler, this);
       }
       lazyload(this.el);
+    },
+    bookmarkButton_tapHandler: function (event) {
+      var target = $(event.currentTarget)
+        , id = target.closest('li').attr('id');
+      if (target.hasClass('active')) {
+        this.$rss.remove(id);
+      } else {
+        this.$rss.add({
+          guide_name: id,
+          time: Date.now()
+        });
+      }
+      target.toggleClass('active');
+      event.stopPropagation();
     },
     collection_addHandler: function (model) {
       if (this.collection.guide_name !== this.guide_name) {

@@ -8,6 +8,7 @@
 
   ns.SearchCollection = Backbone.Collection.extend({
     $apps: null,
+    $rss: null,
     $router: null,
     keyword: '',
     size: 12,
@@ -39,6 +40,7 @@
       var json = Backbone.Collection.prototype.toJSON.call(this);
       for (var i = 0, len = json.length; i < len; i++) {
         json[i].update_time = json[i].update_time.substr(0, 10);
+        json[i].bookmark = !!this.$rss.get(json[i].guide_name);
       }
       return json;
     },

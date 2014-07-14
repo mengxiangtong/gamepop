@@ -13,11 +13,13 @@
     $context: null,
     $router: null,
     $apps: null,
+    $rss: null,
     $result: null,
     $recent: null,
     tagName: 'div',
     className: 'page-container active animated fast fadeInScaleUp',
     events: {
+      'tap .bookmark-button': 'bookmarkButton_tapHandler',
       'tap .cancel-button': 'cancelButton_tapHandler',
       'tap .search-button': 'searchButton_tapHandler',
       'keydown .search-form input': 'input_keyDownHandler',
@@ -43,7 +45,7 @@
       Backbone.View.prototype.remove.call(this);
     },
     render: function () {
-      this.options['has-game'] = this.$apps.get(this.options.guide_name);
+      this.options['has-game'] = this.options['bookmark'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
       this.$('.content')
@@ -100,6 +102,18 @@
       this.isSearch = isShow = isShow === undefined ? !this.isSearch : isShow;
       this.$('.search-form')[isShow ? 'fadeIn' : 'fadeOut']('fast');
       this.$('.navbar-btn-group,.back-button').toggleClass('hide', isShow);
+    },
+    bookmarkButton_tapHandler: function (event) {
+      var button = $(event.currentTarget);
+      if (button.hasClass('active')) {
+        this.$rss.remove(this.options.guide_name);
+      } else {
+        this.$rss.add({
+          guide_name: this.options.guide_name,
+          time: Date.now()
+        });
+      }
+      button.toggleClass('active');
     },
     cancelButton_tapHandler: function () {
       this.toggleSearchForm(false);

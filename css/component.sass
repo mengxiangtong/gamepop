@@ -1,6 +1,7 @@
 @charset "UTF-8"
 @import "define"
 @import "../bower_components/colors/sass/variables"
+@import "../bower_components/font-awesome/scss/variables"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/mixins"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/variables"
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/labels"
@@ -203,20 +204,48 @@
   .item
     background: none
     padding: $gap $gap-s $gap-s
+    position: relative
 
     + .item
       border-top: none
-
-    &:first-child
-      border-radius: 6px 6px 0 0
-
-    &:last-of-type
-      border-radius: 0 0 6px 6px
 
     img
       width: 60px
       height: 60px
       border-radius: 10px
+
+    .bookmark-button
+      position: absolute
+      top: 20px
+      right: 0
+      font-size: 20px
+      width: 30px
+      height: 30px
+      color: $white
+      background: none
+      border: none
+
+      .fa
+        line-height: 30px
+
+      .fa-circle,
+      .fa-check
+        display: none
+
+      .fa-check
+        font-size: 10px
+
+      .fa-circle
+        color: $hot-color
+
+      &.active
+        .fa-circle,
+        .fa-check
+          top: 5px
+          display: inline-block
+
+        .fa-circle-thin
+          display: none
 
     &.article
       padding: $gap

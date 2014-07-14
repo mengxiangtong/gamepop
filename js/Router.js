@@ -10,6 +10,7 @@
     $gui: null,
     $apps: null,
     $result: null,
+    $rss: null,
     $fav: null,
     from: '',
     routes: {
@@ -31,7 +32,8 @@
         , game_name = model ? model.get('name') : (this.$result.get(game) ? this.$result.get(game).get('game_name') : '游戏')
         , isList = /\/list/.test(path)
         , type = isIndex ? 'index' : (isList ? 'list' : 'detail')
-        , fav = type === 'detail' && this.$fav.get(location.hash);
+        , fav = type === 'detail' && !!this.$fav.get(location.hash)
+        , bookmark = type === 'index' && !!this.$rss.get(game);
       this.data = {
         type: 'game',
         guide_name: game,
@@ -39,7 +41,8 @@
         'has-guide': true,
         'has-game': hasGame,
         'is-detail': type === 'detail',
-        fav: fav
+        fav: fav,
+        bookmark: bookmark
       };
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type, this.data);
       ga.pageview('remote/' + game + '/' + path);

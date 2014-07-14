@@ -4,12 +4,28 @@
 ;(function (ns) {
   'use strict';
 
-  var KEY = 'rss';
+  var KEY = 'rss'
+    , Model = Backbone.Model.extend({
+      idAttribute: 'guide_name'
+    });
 
   ns.RSSCollection = Backbone.Collection.extend({
+    model: Model,
     initialize: function (models, options) {
       this.url = config.rss;
       options.apps.once('reset', this.apps_resetHandler, this);
+    },
+    add: function (models, options) {
+      Backbone.Collection.prototype.add.call(this, models, options);
+      this.save();
+    },
+    remove: function (models, options) {
+      Backbone.Collection.prototype.remove.call(this, models, options);
+      this.save();
+    },
+    save: function () {
+      var json = JSON.stringify(this.toJSON());
+      localStorage.setItem(KEY, json);
     },
     apps_resetHandler: function (collection) {
       var top4 = collection.toJSON()
@@ -31,6 +47,6 @@
         type: 'post',
         reset: true
       });
-    }
+    },
   });
 }(Nervenet.createNameSpace('gamepop.model')));
