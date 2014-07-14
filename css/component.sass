@@ -203,11 +203,14 @@
 
   .item
     background: none
-    padding: $gap $gap-s $gap-s
+    padding: $gap + $gap-s $gap-s 0
     position: relative
 
     + .item
       border-top: none
+
+    &:first-child
+      padding-top: $gap
 
     img
       width: 60px
@@ -216,24 +219,23 @@
 
     .bookmark-button
       position: absolute
-      top: 20px
-      right: 0
-      font-size: 20px
-      width: 30px
-      height: 30px
+      top: 25px
+      right: -$gap-s
+      font-size: 30px
+      width: 40px
+      height: 40px
       color: $white
       background: none
       border: none
+      padding: 0
 
       .fa
-        line-height: 30px
+        display: block
+        line-height: 40px
 
       .fa-circle,
       .fa-check
         display: none
-
-      .fa-check
-        font-size: 10px
 
       .fa-circle
         color: $hot-color
@@ -241,8 +243,11 @@
       &.active
         .fa-circle,
         .fa-check
-          top: 5px
-          display: inline-block
+          top: 0
+          display: block
+
+        .fa-check
+          font-size: 0.6em
 
         .fa-circle-thin
           display: none
@@ -264,12 +269,12 @@
   h2
     font-size: 16px
     line-height: 1.25em
-    margin: 0 0 $gap-s
+    margin: 0 0 7px
 
   p
     font-size: 12px
     line-height: 1.25
-    padding-bottom: $gap-icon
+    padding-bottom: 17px
     border-bottom: 1px solid rgba(255, 255, 255, 0.2)
     margin-left: 70px
 

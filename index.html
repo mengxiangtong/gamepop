@@ -39,7 +39,7 @@
   <ul id="my-apps">
     <script type="text/x-handlebars-template" class="template" id="installed">
       {{#each apps}}
-      <li class="item {{id}} {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#unless is_local}}no-game{{/unless}}" data-href="{{url}}">
+      <li class="item {{#if has-guide}}guide{{/if}} {{#if has-offline}}offline{{/if}} {{#if downloading}}downloading{{/if}} {{#unless has-guide}}no-guide{{/unless}} {{#unless is_local}}no-game{{/unless}}" data-href="{{url}}" id="app-{{id}}">
         <img src="{{#if icon}}{{icon}}{{else}}./img/image.png{{/if}}">
       </li>
       {{/each}}
@@ -54,9 +54,15 @@
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">
-    <h4 class="panel-heading"><i class="fa fa-bookmark-o"></i> 我的订阅</h4>
+    <h4 class="panel-heading"><i class="fa fa-bookmark-o"></i> 我的订阅 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse rss">
-
+      <script type="text/x-handlebars-template" class="template" id="my-bookmark">
+        <li id="rss-{{guide_name}}" class="item" data-href="#/remote/{{guide_name}}">
+          <img src="{{icon_path}}">
+          <h3>{{game_name}}</h3>
+          <span>{{NUM}}</span>
+        </li>
+      </script>
     </ul>
     <h4 class="panel-heading"><i class="fa fa-heart-o"></i> 我的收藏 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse my-fav">
@@ -84,7 +90,7 @@
     <p>{{{content}}}</p>
   </li>
   {{else}}
-  <li class="item" data-href="#/remote/{{guide_name}}" id="{{guide_name}}">
+  <li class="item" data-href="#/remote/{{guide_name}}" id="search-{{guide_name}}">
     <img src="./img/image.gif" data-src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.gif{{/if}}" class="ph">
     <h2>{{game_name}}</h2>
     <p>总计收录{{article_num}}篇攻略<br>最后更新时间{{update_time}}</p>

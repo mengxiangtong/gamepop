@@ -13,7 +13,7 @@
         width: width,
         height: height,
         hpItemWidth: hpItemWidth,
-        sidebarHeight: height * .9 - 100
+        sidebarHeight: height * .9 - 150
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;
@@ -40,7 +40,8 @@
       , rss = new gamepop.model.RSSCollection(null, {apps: appsCollection})
       , list = new gamepop.view.AppsList({
           el: '#my-apps',
-          collection: appsCollection
+          collection: appsCollection,
+          rss: rss
         })
       , results = new gamepop.model.SearchCollection()
       , search = new gamepop.view.SearchForm({
@@ -57,7 +58,8 @@
       , sidebar = new gamepop.view.Sidebar({
         el: '#sidebar',
         collection: fav,
-        recent: recent
+        recent: recent,
+        rss: rss
       })
       , router = new gamepop.Router();
 

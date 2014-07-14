@@ -21,6 +21,10 @@
       options.recent.on('remove', this.collection_removeHandler, this);
       this.render(options.recent)
       this.recent = options.recent;
+      options.rss.once('reset', this.rss_resetHandler, this);
+      options.rss.on('add', this.rss_addHandler, this);
+      options.rss.on('remove', this.rss_removeHandler, this);
+      this.rss = options.rss;
     },
     render: function (collection) {
       var target = collection === this.collection ? 'my-fav' : 'recent';
@@ -67,6 +71,15 @@
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'sidebar', $(event.currentTarget).data('href')].join(','));
+    },
+    rss_resetHandler: function (collection) {
+
+    },
+    rss_addHandler: function (model) {
+
+    },
+    rss_removeHandler: function (model) {
+
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

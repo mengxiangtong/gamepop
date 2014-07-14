@@ -44,6 +44,16 @@
         fav: fav,
         bookmark: bookmark
       };
+      // 记录下最近访问的时间
+      if (isIndex && this.$rss.get(game)) {
+        this.$rss.get(game).set('time', Date.now() / 1000);
+      }
+      if (isList && this.$rss.get(game)) {
+        var cate = parseInt(path.substr(0, path.indexOf('/')));
+        if (cate) {
+          this.$rss.get(game).set('cate' + cate, Date.now() / 1000);
+        }
+      }
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type, this.data);
       ga.pageview('remote/' + game + '/' + path);
     },

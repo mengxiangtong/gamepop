@@ -12,7 +12,7 @@
     },
     getKeyword: function (encode) {
       var keyword = this.$('input').val().toLowerCase();
-      keyword = keyword.replace(/\/|\s+|\\/g, '', keyword);
+      keyword = keyword.replace(/\/|\\/g, '', keyword);
       keyword = encode ? encodeURIComponent(keyword) : keyword;
       return keyword;
     },

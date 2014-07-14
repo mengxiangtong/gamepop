@@ -45,7 +45,7 @@
       Backbone.View.prototype.remove.call(this);
     },
     render: function () {
-      this.options['has-game'] = this.options['bookmark'] = this.$apps.get(this.options.guide_name);
+      this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
       this.$('.content')
@@ -105,14 +105,7 @@
     },
     bookmarkButton_tapHandler: function (event) {
       var button = $(event.currentTarget);
-      if (button.hasClass('active')) {
-        this.$rss.remove(this.options.guide_name);
-      } else {
-        this.$rss.add({
-          guide_name: this.options.guide_name,
-          time: Date.now()
-        });
-      }
+      this.$rss.toggle(this.options.guide_name, button.hasClass('active'), this.$('h1').text(), this.$('.icon').attr('src'));
       button.toggleClass('active');
     },
     cancelButton_tapHandler: function () {
