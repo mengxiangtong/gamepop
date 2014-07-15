@@ -10,8 +10,10 @@
       'tap .item': 'item_tapHandler'
     },
     initialize: function (options) {
-      this.template = TEMPLATES['my-fav'];
+      this.template = TEMPLATES['sidebar-tpl'];
 
+      this.recent = options.recent;
+      this.rss = options.rss;
       this.collection.on('add', this.collection_addHandler, this);
       this.collection.on('change', this.collection_changeHandler, this);
       this.collection.on('remove', this.collection_removeHandler, this);
@@ -19,22 +21,33 @@
       options.recent.on('add', this.collection_addHandler, this);
       options.recent.on('change', this.collection_changeHandler, this);
       options.recent.on('remove', this.collection_removeHandler, this);
-      this.render(options.recent)
-      this.recent = options.recent;
-      options.rss.once('reset', this.rss_resetHandler, this);
-      options.rss.on('add', this.rss_addHandler, this);
-      options.rss.on('remove', this.rss_removeHandler, this);
-      this.rss = options.rss;
+      this.render(options.recent);
+      options.rss.on('add', this.collection_addHandler, this);
+      options.rss.on('change', this.collection_changeHandler, this);
+      options.rss.on('remove', this.collection_removeHandler, this);
+      this.render(options.rss);
     },
     render: function (collection) {
-      var target = collection === this.collection ? 'my-fav' : 'recent';
+      var target = this.getTarget(collection);
       this.$('.' + target).html(this.template({list: collection.toJSON()}));
     },
     createItem: function (model) {
       return this.template({list: [model.toJSON()]});
     },
+    getTarget: function (collection) {
+      switch (collection) {
+        case this.collection:
+          return 'my-fav';
+
+        case this.recent:
+          return 'recent';
+
+        case this.rss:
+          return 'rss';
+      }
+    },
     collection_addHandler: function (model) {
-      var target = model.collection === this.collection ? 'my-fav' : 'recent';
+      var target = this.getTarget(model.collection);
       this.$('.' + target).prepend(this.createItem(model));
     },
     collection_changeHandler: function (model) {
@@ -71,15 +84,6 @@
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'sidebar', $(event.currentTarget).data('href')].join(','));
-    },
-    rss_resetHandler: function (collection) {
-
-    },
-    rss_addHandler: function (model) {
-
-    },
-    rss_removeHandler: function (model) {
-
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

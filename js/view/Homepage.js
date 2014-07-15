@@ -14,16 +14,13 @@
       }));
       this.model.on('sync', this.model_syncHandler, this);
       this.model.fetch();
+
+      this.collection.once('sync', this.collection_syncHandler, this);
     },
-    model_syncHandler: function (model) {
-      if (!model.get('big_pic')) {
-        return;
+    collection_syncHandler: function (collection) {
+      if (collection.hasOtherUpdate()) {
+        this.$('.sidebar-toggle').addClass('reminder');
       }
-      this.$('.entrance').remove();
-      this.$el.append(this.template(model.toJSON()));
-      this.$el.css('background-image', 'url(' + model.get('big_pic') + ')');
-      this.$('.history-button').prop('disabled', false)
-        .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
     },
     entrance_tapHandler: function () {
       ga.event(['view', 'homepage', this.model.get('guide_name')].join(','));
@@ -37,6 +34,16 @@
         .find('i').removeClass('fa-history').addClass('fa-spinner fa-spin');
       this.model.id = this.model.get('prev');
       this.model.fetch();
+    },
+    model_syncHandler: function (model) {
+      if (!model.get('big_pic')) {
+        return;
+      }
+      this.$('.entrance').remove();
+      this.$el.append(this.template(model.toJSON()));
+      this.$el.css('background-image', 'url(' + model.get('big_pic') + ')');
+      this.$('.history-button').prop('disabled', false)
+        .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

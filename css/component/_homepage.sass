@@ -41,6 +41,18 @@
 .sidebar-toggle
   right: $gap
   top: 7px
+  position: relative
+
+  &.reminder:after
+    content: ' '
+    position: absolute
+    top: 2px
+    right: 2px
+    width: $gap
+    height: $gap
+    font-size: 0
+    background-color: $update-color
+    border-radius: $gap-s
 
 .history-button
   opacity: 0.5

@@ -48,16 +48,23 @@
 
   ul
     @extend .transition
-    margin: 0
-    padding: 0
+    @extend .ul
     overflow: auto
     -webkit-overflow-scrolling: touch
 
-    .delete-button
-      display: none
-
     &.collapse
       height: 0
+
+    li
+      font-size: 12px
+      white-space: nowrap
+      text-overflow: ellipsis
+      position: relative
+
+  .my-fav,
+  .recent
+    .delete-button
+      display: none
 
     &.edit
       li
@@ -75,16 +82,40 @@
         font-size: 1.5em
         background: transparent
 
-  li
-    font-size: 12px
-    line-height: 44px
-    list-style-position: inside
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4)
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-    position: relative
-    padding-left: 4px
+    li
+      line-height: 44px
+      list-style-position: inside
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4)
+      padding-left: 4px
+      overflow: hidden
 
-    &:active
-      background-color: rgba(255, 255, 255, 0.4)
+      &:active
+        background-color: rgba(255, 255, 255, 0.4)
+
+  .rss
+    @extend .wrap-container
+    padding-top: $gap
+
+    .item
+      width: 70px
+      margin-top: $gap
+
+      + .item
+        margin-left: 23px
+
+        &:nth-child(3n)
+          margin-left: 0
+
+    h3
+      line-height: 25px
+      font-weight: normal
+      margin: 0
+      overflow: hidden
+
+    img
+      width: 70px
+      height: 70px
+      border-radius: 13px
+
+    span
+      @extend .update-number

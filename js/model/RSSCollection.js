@@ -9,9 +9,18 @@
     , MAX = 9
     , Model = Backbone.Model.extend({
       idAttribute: 'guide_name',
-      toJSON: function () {
+      fetched: false,
+      parse: function (response) {
+        this.fetched = true;
+        return response;
+      },
+      toJSON: function (options) {
         var data = Backbone.Model.prototype.toJSON.call(this);
-        delete data.NUM;
+        if (!options) {
+          data.cid = this.cid;
+        } else {
+          delete data.NUM;
+        }
         return data;
       }
     })
@@ -31,7 +40,7 @@
       this.load();
     },
     add: function (models, options) {
-      if (!options.remove && this.length >= MAX) {
+      if ((!options || !options.remove) && this.length >= MAX) {
         this.remove(this.find(function (model) { return model.installed; }));
       }
       Backbone.Collection.prototype.add.call(this, models, options);
@@ -46,6 +55,21 @@
       Backbone.Collection.prototype.remove.call(this, models, options);
       this.save();
     },
+    toJSON: function (options) {
+      if (options) {
+        return Backbone.Collection.prototype.toJSON.call(this, options);
+      }
+      return this.chain().filter(function (model) {
+        return !model.get('installed');
+      }).map(function (model) {
+        return model.toJSON(options);
+      }).value();
+    },
+    hasOtherUpdate: function () {
+      return this.find(function (model) {
+        return !model.get('installed') && model.get('NUM');
+      });
+    },
     load: function () {
       var store = localStorage.getItem(KEY);
       if (store) {
@@ -59,7 +83,7 @@
       }
     },
     save: function () {
-      var json = JSON.stringify(this.toJSON());
+      var json = JSON.stringify(this.toJSON(true));
       localStorage.setItem(KEY, json);
     },
     toggle: function (isActive, id, name, icon_path) {
@@ -99,7 +123,7 @@
       if (this.length > 0) {
         this.fetch({
           data: {
-            list: this.toJSON()
+            list: this.toJSON(true)
           },
           remove: false,
           type: 'post'

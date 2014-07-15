@@ -41,20 +41,37 @@
         'has-guide': true,
         'has-game': hasGame,
         'is-detail': type === 'detail',
+        'is-index': isIndex,
         fav: fav,
         bookmark: bookmark
       };
       // 记录下最近访问的时间
       if (isIndex && this.$rss.get(game)) {
-        this.$rss.get(game).set('time', Date.now() / 1000);
+        // 利用model的save方法从服务器端取各栏目的更新数量
+        var model = this.$rss.get(game);
+        if (model.has('NUM') && model.get('NUM') > 0) {
+          model.fetch({
+            type: 'post',
+            data: {
+              attr: model.attributes
+            }
+          });
+          model.set({
+            time: Date.now() / 1000 >> 0,
+            NUM: 0
+          });
+        }
       }
       if (isList && this.$rss.get(game)) {
         var cate = parseInt(path.substr(0, path.indexOf('/')));
         if (cate) {
-          this.$rss.get(game).set('cate' + cate, Date.now() / 1000);
+          var attr = {};
+          attr['cate' + cate] = Date.now() / 1000 >> 0;
+          attr['cate' + cate + '_num'] = 0;
+          this.$rss.get(game).set(attr);
         }
       }
-      this.$gui.showPopupPage(config.remote + game + '/' + path, 'remote game-page guide-' + type, this.data);
+      this.$gui.showPopupPage(config.remote + game + '/' + path, 'game-page guide-' + type + ' ' + game, this.data);
       ga.pageview('remote/' + game + '/' + path);
     },
     showSearch: function (game, keyword) {

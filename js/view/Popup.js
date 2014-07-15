@@ -105,7 +105,7 @@
     },
     bookmarkButton_tapHandler: function (event) {
       var button = $(event.currentTarget);
-      this.$rss.toggle(this.options.guide_name, button.hasClass('active'), this.$('h1').text(), this.$('.icon').attr('src'));
+      this.$rss.toggle(button.hasClass('active'), this.options.guide_name, this.$('h1').text(), this.$('.icon').attr('src'));
       button.toggleClass('active');
     },
     cancelButton_tapHandler: function () {

@@ -9,6 +9,7 @@
     , allGaps = width > 320 ? 60 : 38;
 
   ns.GamePage = Backbone.View.extend({
+    $rss: null,
     page: 1,
     events: {
       'remove': 'remove',
@@ -33,17 +34,40 @@
           this.$('.indicators').remove();
           carousel.removeClass('carousel');
         }
+
+        // 看看是不是要增加更新数量
+        var guide_name = this.guide_name = this.el.className.split(' ').pop();
+        if (this.$rss.get(guide_name)) {
+          this.model = this.$rss.get(guide_name);
+          if (this.model.fetched) {
+            this.render(this.model);
+          } else {
+            this.model.once('sync', this.render, this);
+          }
+        }
       }
 
       if (this.$('.auto-load').length > 0) {
         this.$el.on('scroll', _.bind(this.scrollHandler, this));
       }
+
     },
     remove: function () {
       this.carousel.remove();
       this.carousel = null;
       this.$el.off('scroll');
+      this.model.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
+    },
+    render: function (model) {
+      var guide_name = this.guide_name;
+      $('.carousel .item').each(function () {
+        var attr = this.id.substr(guide_name.length + 1) + '_num';
+        if (model.has(attr) && model.get(attr) > 0) {
+          $(this).append('<span>' + model.get(attr) + '</span>');
+        }
+      });
+      this.model.on('change', this.model_changeHandler, this);
     },
     fetch: function () {
       this.page += 1;
@@ -69,6 +93,11 @@
         , collapse = target.hasClass('active');
       target.toggleClass('active')
         .height(collapse ? '3em' : target[0].scrollHeight);
+    },
+    model_changeHandler: function (model) {
+      for (var prop in model.changed) {
+        this.$('#' + this.guide_name + '-' + prop + ' span').remove();
+      }
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

@@ -96,6 +96,7 @@
       this.$router.navigate(href);
     },
     sidebarToggle_tapHandler: function (event) {
+      $(event.currentTarget).removeClass('reminder');
       this.toggleSidebar();
       event.stopPropagation();
     },

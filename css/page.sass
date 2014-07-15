@@ -79,14 +79,16 @@
       height: 3em
 
   .home-page
-    padding: $gap + $gap-s 0 $gap
+    padding: 0 0 $gap
 
     ul
       @extend .ul
       @extend .flex-row
+      padding-top: $gap + $gap-s
 
     li
       margin-left: $gap + $gap-s
+      position: relative
 
     img
       border-radius: $gap-s
@@ -97,6 +99,9 @@
       font-size: 12px
       line-height: 2em
       text-align: center
+
+    span
+      @extend .update-number
 
   .carousel,
   .stoned

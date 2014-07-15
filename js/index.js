@@ -33,11 +33,12 @@
       , gui = new gamepop.view.GUI({
           el: document.body
         })
-      , homepage = new gamepop.view.Homepage({
-        el: '#homepage'
-      })
       , appsCollection = new gamepop.model.AppsCollection()
       , rss = new gamepop.model.RSSCollection(null, {apps: appsCollection})
+      , homepage = new gamepop.view.Homepage({
+        el: '#homepage',
+        collection: rss
+      })
       , list = new gamepop.view.AppsList({
           el: '#my-apps',
           collection: appsCollection,
@@ -53,7 +54,8 @@
         max: 10
       })
       , fav = new gamepop.model.LocalHistory(null, {
-        key: 'fav'
+        key: 'fav',
+        max: 128
       })
       , sidebar = new gamepop.view.Sidebar({
         el: '#sidebar',
