@@ -13,7 +13,7 @@
         width: width,
         height: height,
         hpItemWidth: hpItemWidth,
-        sidebarHeight: height * .9 - 150
+        sidebarHeight: height * .9 - 150 >> 0
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;

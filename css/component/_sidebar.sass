@@ -94,9 +94,9 @@
 
   .rss
     @extend .wrap-container
-    padding-top: $gap
 
     .item
+      @extend .wrap
       width: 70px
       margin-top: $gap
 
@@ -105,6 +105,9 @@
 
         &:nth-child(3n)
           margin-left: 0
+
+    &:first-child
+      margin-top: $gap
 
     h3
       line-height: 25px

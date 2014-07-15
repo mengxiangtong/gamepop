@@ -105,8 +105,9 @@
     apps_resetHandler: function (collection) {
       // 合并apps的4个游戏
       var apps = collection.toJSON()
+        , len = Math.min(apps.length, 4)
         , tops = [];
-      for (var i = 0, len = 4; i < len; i ++) {
+      for (var i = 0; i < len; i ++) {
         // 之前有，被取消关注了，不自动关注；仍在关注中，也不自动关注
         if (removed.get(apps[i].id) || this.get(apps[i].id)) {
           continue;
