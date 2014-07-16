@@ -61,7 +61,7 @@
         return;
       }
       this.list
-        .removeClass('no-result')
+        .removeClass('auto-load no-result')
         .prepend(this.loading);
     },
     collection_resetHandler: function () {

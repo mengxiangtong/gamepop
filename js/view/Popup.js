@@ -134,8 +134,11 @@
       }
       event.preventDefault();
     },
-    searchResult_resetHandler: function () {
-      this.$('.search-form').find('input, button').prop('disabled', false);
+    searchResult_resetHandler: function (collection) {
+      this.$('.search-form')
+        .toggleClass('success', collection.length > 0)
+        .toggleClass('failed', collection.length === 0)
+        .find('input, button').prop('disabled', false);
     },
     animationEndHandler: function () {
       if (/scaleup/i.test(this.el.className)) {
