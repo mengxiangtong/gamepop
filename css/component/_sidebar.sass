@@ -94,6 +94,7 @@
 
   .rss
     @extend .wrap-container
+    overflow: auto
 
     .item
       @extend .wrap
@@ -101,9 +102,9 @@
       margin-top: $gap
 
       + .item
-        margin-left: 23px
+        margin-left: 22px
 
-        &:nth-child(3n)
+        &:nth-child(3n + 1)
           margin-left: 0
 
     &:first-child
@@ -114,6 +115,7 @@
       font-weight: normal
       margin: 0
       overflow: hidden
+      text-align: center
 
     img
       width: 70px
