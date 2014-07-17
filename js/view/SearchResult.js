@@ -22,9 +22,11 @@
       this.collection.on('request', this.collection_requestHandler, this);
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.search();
+      this.$rss.on('add remove', this.rss_changeHandler, this);
     },
     remove: function () {
       this.$el.off('scroll');
+      this.$rss.off(null, null, this);
       this.collection.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
@@ -90,6 +92,9 @@
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));
+    },
+    rss_changeHandler: function (model) {
+      this.$('#search-' + model.id).find('.bookmark-button').toggleClass('active', model.collection);
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

@@ -77,10 +77,11 @@
       if (btn.next().is(collapse)) {
         return;
       }
-      collapse.removeClass('in');
+      collapse.removeClass('in edit');
       btn.addClass('active')
         .next().addClass('in')
-        .end().siblings('.panel-heading').removeClass('active');
+        .end().siblings('.panel-heading').removeClass('active')
+          .find('.fa-check').toggleClass('fa-edit fa-check');
     },
     item_tapHandler: function (event) {
       ga.event(['view', 'sidebar', $(event.currentTarget).data('href')].join(','));
