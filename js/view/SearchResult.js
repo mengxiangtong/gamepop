@@ -49,7 +49,6 @@
         , li = target.closest('li')
         , id = li.attr('id').substr(7);
       this.$rss.toggle(target.hasClass('active'), id, li.find('h2').text(), li.find('img').attr('src'));
-      target.toggleClass('active');
       event.stopPropagation();
     },
     collection_addHandler: function (model) {

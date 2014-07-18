@@ -58,11 +58,10 @@
     },
     deleteButton_tapHandler: function (event) {
       var id = $(event.currentTarget).parent().attr('id');
-      if (this.collection.get(id)) {
-        this.collection.remove(id);
-      } else {
-        this.recent.remove(id);
-      }
+      // 反正cid是唯一的
+      this.collection.remove(id);
+      this.recent.remove(id);
+      this.rss.remove(id);
       event.stopPropagation();
     },
     editButton_tapHandler: function (event) {

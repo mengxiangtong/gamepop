@@ -1,6 +1,6 @@
 {
   "name": "GamePop",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "a mobile game guide application",
   "main": "index.html",
   "scripts": {
@@ -26,15 +26,14 @@
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-compass": "^0.8.0",
-    "grunt-contrib-compress": "~0.9.1",
+    "grunt-contrib-compass": "~0.9.0",
+    "grunt-contrib-compress": "~0.10.0",
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-handlebars": "^0.8.0",
     "grunt-contrib-htmlmin": "~0.3.0",
-    "grunt-contrib-imagemin": "~0.5.0",
-    "grunt-contrib-sass": "~0.7.3",
+    "grunt-contrib-imagemin": "~0.7.1",
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-replace": "~0.7.8"
   }

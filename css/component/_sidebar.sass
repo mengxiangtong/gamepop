@@ -7,8 +7,8 @@
   z-index: 5
   position: absolute
   top: 5%
-  left: 22%
-  right: 7%
+  left: 20% // 为了能将“我的订阅”中的删除按钮显示在左上角
+  right: 5% // 同上，为了显示更新数量
   bottom: 5%
   color: $white
   overflow: hidden
@@ -21,7 +21,7 @@
     line-height: 50px
     height: 50px
     border-bottom: 1px solid rgba(255, 255, 255, 0.4)
-    margin: 0
+    margin: 0 7px // 为了能将“我的订阅”中的删除按钮显示在左上角
     position: relative
 
     .fa-clock-o,
@@ -62,10 +62,15 @@
       position: relative
 
   .my-fav,
-  .recent
+  .recent,
+  .rss
+    padding: 0 7px // 为了能将“我的订阅”中的删除按钮显示在左上角
+
     .delete-button
       display: none
 
+  .my-fav,
+  .recent
     &.edit
       li
         padding-right: 20px
@@ -96,6 +101,9 @@
     @extend .wrap-container
     overflow: auto
 
+    &.in
+      padding-top: $gap
+
     .item
       @extend .wrap
       width: 70px
@@ -106,9 +114,6 @@
 
         &:nth-child(3n + 1)
           margin-left: 0
-
-    &:first-child
-      margin-top: $gap
 
     h3
       line-height: 25px
@@ -124,3 +129,22 @@
 
     span
       @extend .update-number
+
+    .delete-button
+      display: none
+
+    &.edit
+      span
+        display: none
+
+      .delete-button
+        display: block
+        position: absolute
+        top: -$gap-s
+        left: -$gap-s
+        background-color: $topbar-background-color
+        color: $mute
+        line-height: $gap-l
+        width: $gap-l
+        text-align: center
+        border-radius: $gap
