@@ -16,17 +16,13 @@
     total: 0,
     current: 0,
     events: {
-      'dragright': 'dragHandler',
-      'dragleft': 'dragHandler',
+      'panright': 'dragHandler',
+      'panleft': 'dragHandler',
       'swipeleft': 'swipeLeftHandler',
       'swiperight': 'swipeRightHandler',
       'release': 'releaseHandler'
     },
     initialize: function (options) {
-      Hammer(this.el, {
-        dragLockToAxis: true,
-        preventDefault: true
-      });
       this.container = this.$('ul');
       this.indicator = options.indicator;
       this.indicatorWidth = options.indicator.width();
@@ -97,13 +93,11 @@
         this.showPane(this.current, true);
       }
     },
-    swipeLeftHandler: function (event) {
+    swipeLeftHandler: function () {
       this.next();
-      event.originalEvent.gesture.stopDetect();
     },
-    swipeRightHandler: function (event) {
+    swipeRightHandler: function () {
       this.prev();
-      event.originalEvent.gesture.stopDetect();
     }
   });
 }(Nervenet.createNameSpace('gamepop.component')));

@@ -28,9 +28,13 @@
       'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
-      Hammer(this.el, {
-        hold: false,
-        transform: false
+      var hammer = new Hammer(this.el, {
+        domEvents: true,
+        recognizers: [
+          [Hammer.Tap],
+          [Hammer.Pan, {direction: Hammer.DIRECTION_HORIZONTAL}],
+          [Hammer.Swipe, {direction: Hammer.DIRECTION_HORIZONTAL}]
+        ]
       });
     },
     showPopupPage: function (url, className, options) {
