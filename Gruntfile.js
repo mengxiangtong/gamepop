@@ -188,6 +188,17 @@ module.exports = function (grunt) {
     }
   });
 
+  if (isWeb) {
+    grunt.config.merge({
+      'copy' : {
+        web: {
+          src: 'mocks/web.json',
+          dest: BUILD + '/apps.json'
+        }
+      }
+    });
+  }
+
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
