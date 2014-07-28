@@ -52,7 +52,7 @@
       var data = this.$router.data;
       if (data.keyword === this.keyword && data.guide_name === this.guide_name) {
         this.page = this.length / this.size;
-        this.trigger('reset');
+        this.trigger('reset', this);
         return;
       }
       this.keyword = data.keyword;

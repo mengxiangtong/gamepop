@@ -158,6 +158,7 @@
         this.$('.alert').removeClass('hide');
         return;
       }
+      this.$('.navbar .fa-spin').remove();
 
       // 阅读记录
       if (/-detail/.test(this.$('.content').attr('class'))) {
@@ -166,9 +167,11 @@
       // 修改game-button
       if (this.options.type === 'no-game') {
         this.$('.content .game-button').attr('href', 'game://' + this.options.guide_name + '/' + this.options.game_name);
+        return;
       }
+      // 修改title
+      $('title').text('游戏宝典 ' + this.$('.content').find('h1, h2').first().text());
 
-      this.$('.navbar .fa-spin').remove();
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     }
@@ -177,6 +180,9 @@
   Popup.removeLast = function () {
     if (pages.length > 0) {
       fadeOutPage = pages.pop().fadeOut();
+      if (pages.length > 0) {
+        $('title').text('游戏宝典 ' + pages[pages.length - 1].$('.content').find('h1, h2').first().text());
+      }
     }
   };
   Popup.search = function (url) {
