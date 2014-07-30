@@ -113,6 +113,9 @@
         history.push(fragment);
         console.log(history);
       }
+      if (WEB) {
+        $('#apple-app').attr('content', "app-id=892347556, app-argument=" + fragment);
+      }
     }
   });
 
