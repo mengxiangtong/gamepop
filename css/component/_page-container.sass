@@ -58,7 +58,8 @@
     .download-button,
     .fav-button,
     .search-button,
-    .bookmark-button
+    .bookmark-button,
+    .shortcut-button
       @extend .fa
 
     .game-button
@@ -121,6 +122,34 @@
 
       &:active
         background: darken($bookmark-color, 15%)
+
+    .shortcut-button
+      background-color: $green
+      position: relative
+
+      &:before
+        content: $fa-var-tablet
+
+      &:after
+        content: ''
+        background: $white
+        width: 4px
+        height: 4px
+        position: absolute
+        top: 11px
+        left: 14px
+
+      &:active
+        background: darken($green, 15%)
+
+    .share-button
+      background-color: $yellow
+
+      &:before
+        content: $fa-var-share
+
+      &:active
+        background-color: darken($yellow, 15%)
 
     .fa-spinner
       position: absolute

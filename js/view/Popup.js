@@ -22,8 +22,9 @@
       'tap .bookmark-button': 'bookmarkButton_tapHandler',
       'tap .cancel-button': 'cancelButton_tapHandler',
       'tap .search-button': 'searchButton_tapHandler',
+      'tap .share-button': 'shareButton_tapHandler',
+      'tap .shortcut-button': 'shortcutButton_tapHandler',
       'keydown .search-form input': 'input_keyDownHandler',
-      'blur .search-form input': 'input_blurHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
       'animationEnd': 'animationEndHandler'
@@ -141,6 +142,12 @@
         .toggleClass('failed', collection.length === 0)
         .find('input, button').prop('disabled', false);
     },
+    shareButton_tapHandler: function () {
+      device.share();
+    },
+    shortcutButton_tapHandler: function () {
+      device.addShortCut(this.options.game_name, this.options.guide_name, this.$('.icon').attr('src'));
+    },
     animationEndHandler: function () {
       if (/scaleup/i.test(this.el.className)) {
         this.$el.removeClass('animated fadeInScaleUp fast');
@@ -171,6 +178,9 @@
         return;
       }
       // 修改title
+      if (this.options.game_name === '游戏') {
+        this.options.game_name = this.$('h1').contents()[0];
+      }
       $('title').text('游戏宝典 ' + this.$('.content').find('h1, h2').first().text());
 
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
