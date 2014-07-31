@@ -132,6 +132,7 @@
         this.$('.search-form').hide();
         this.$('.navbar-btn-group,.back-button').removeClass('hide');
       }
+      event.target.elements.keyword.blur();
       event.preventDefault();
     },
     searchResult_resetHandler: function (collection) {

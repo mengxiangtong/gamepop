@@ -27,6 +27,7 @@
       }
     },
     submitHandler: function (event) {
+      this.$('input').blur();
       this.$router.navigate('#/search/' + this.getKeyword(true));
       event.preventDefault();
     }
