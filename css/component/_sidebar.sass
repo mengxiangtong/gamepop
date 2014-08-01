@@ -1,14 +1,14 @@
 @charset "utf-8"
 @import "../define"
 @import "../../bower_components/colors/sass/variables"
-
+@import "../../bower_components/font-awesome/scss/variables"
 
 #sidebar
   z-index: 5
   position: absolute
   top: 5%
-  left: 20% // 为了能将“我的订阅”中的删除按钮显示在左上角
-  right: 5% // 同上，为了显示更新数量
+  left: 22% // 为了能将“我的订阅”中的删除按钮显示在左上角
+  right: 2% // 同上，为了显示更新数量
   bottom: 5%
   color: $white
   overflow: hidden
@@ -20,8 +20,8 @@
     font-size: 1em
     line-height: 50px
     height: 50px
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4)
-    margin: 0 7px // 为了能将“我的订阅”中的删除按钮显示在左上角
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+    margin: 0 $gap-icon 0 0 // 为了能将“我的订阅”中的删除按钮显示在左上角
     position: relative
 
     .fa-clock-o,
@@ -34,7 +34,13 @@
 
     &.active
       font-size: 1.5em
-      border-bottom-width: 2px
+      border-bottom: 2px solid $white
+
+      .fa-bookmark-o:before
+        content: $fa-var-bookmark
+
+      .fa-heart-o:before
+        content: $fa-var-heart
 
       .edit-button
         display: block
@@ -64,7 +70,7 @@
   .my-fav,
   .recent,
   .rss
-    padding: 0 7px // 为了能将“我的订阅”中的删除按钮显示在左上角
+    padding: 0 $gap-icon 0 0 // 为了能将“我的订阅”中的删除按钮显示在左上角
 
     .delete-button
       display: none
