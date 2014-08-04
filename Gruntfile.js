@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'img/',
-          src: ['**/*.{png,jpg,gif}'],
+          src: ['*.{png,jpg,gif}'],
           dest: BUILD + 'img/'
         }]
       }
@@ -194,6 +194,16 @@ module.exports = function (grunt) {
         web: {
           src: 'mocks/web.json',
           dest: BUILD + '/apps.json'
+        }
+      },
+      'imagemin': {
+        img: {
+          files: [{
+            expand: true,
+            cwd: 'img/',
+            src: ['**/*.{png,jpg,gif}'],
+            dest: BUILD + 'img/'
+          }]
         }
       }
     });
