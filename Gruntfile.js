@@ -183,6 +183,9 @@ module.exports = function (grunt) {
           cwd: BUILD,
           src: ['**'],
           dest: ''
+        }, {
+          src: config.version,
+          dest: 'VERSION'
         }]
       }
     }
@@ -272,8 +275,8 @@ module.exports = function (grunt) {
     'handlebars',
     'concat',
     'htmlmin',
-    'compress',
     'version',
+    'compress',
     'clean:end'
   ]);
   grunt.registerTask('single', [
@@ -286,8 +289,8 @@ module.exports = function (grunt) {
     'replace',
     'concat',
     'htmlmin',
-    'compress',
     'version',
+    'compress',
     'clean:end'
   ]);
   grunt.registerTask('web', [
