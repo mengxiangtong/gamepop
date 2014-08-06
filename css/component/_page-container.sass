@@ -59,7 +59,8 @@
     .fav-button,
     .search-button,
     .bookmark-button,
-    .shortcut-button
+    .mobile-button,
+    .ellipsis-v-button
       @extend .fa
 
     .game-button
@@ -122,22 +123,27 @@
 
       &:active
         background: darken($bookmark-color, 15%)
+    .ellipsis-v-button
+      background-color: $green
 
-    .shortcut-button
+      &:before
+        content: $fa-var-ellipsis-v
+
+    .mobile-button
       background-color: $green
       position: relative
 
       &:before
-        content: $fa-var-tablet
+        content: $fa-var-mobile
 
       &:after
         content: ''
         background: $white
-        width: 4px
-        height: 4px
+        width: 3px
+        height: 3px
         position: absolute
-        top: 11px
-        left: 14px
+        top: 15px
+        left: 16px
 
       &:active
         background: darken($green, 15%)
