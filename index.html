@@ -86,7 +86,7 @@
     </script>
   </ul>
   <script type="text/x-handlebars-template" class="template" id="entrance">
-    <a href="#/remote/{{guide_name}}" class="entrance">
+    <a href="{{#if link}}{{link}}{{else}}#/remote/{{guide_name}}{{/if}}" class="entrance">
       {{#if logo}}<img src="{{logo}}" width="{{logo_width}}">{{/if}}
       <span>点击进入</span>
     </a>
