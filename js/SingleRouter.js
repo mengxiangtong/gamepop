@@ -11,17 +11,13 @@
     },
     backHome: function () {
       this.$gui.showPage('index.html');
-      ga.pageview('home');
+      ga('send', 'pageview');
     },
     showLocalGuide: function (game, path) {
       path = path ? path : '';
       this.$gui.showPage(path, 'local game game-' + game);
       this.$gui.setGame(game);
-      ga.pageview('single/' + game + '/' + path);
-    },
-    showNewsById: function (id) {
-      this.$gui.showPage(config.news, 'news news-' + id, {id: id});
-      ga.pageview('news/' + id);
+      ga('send', 'pageview', 'single/' + game + '/' + path);
     }
   });
 }(Nervenet.createNameSpace('gamepop')));

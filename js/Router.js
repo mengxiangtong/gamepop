@@ -23,7 +23,7 @@
     backHome: function () {
       this.game = '';
       this.$gui.backHome();
-      ga.pageview('home');
+      ga && ga('send', 'pageview', 'home');
     },
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
@@ -73,7 +73,7 @@
         }
       }
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'game-page guide-' + type + ' ' + game, this.data);
-      ga.pageview('remote/' + game + '/' + path);
+      ga('send', 'pageview', 'remote/' + game + '/' + path);
     },
     showSearch: function (game, keyword) {
       this.data = {
@@ -82,7 +82,7 @@
         keyword: decodeURIComponent(keyword || game)
       };
       this.$gui.showPopupPage('template/search.html', 'search-result', this.data);
-      ga.pageview('search');
+      ga('send', 'pageview', 'search');
     },
     showNoGuidePage: function (game, name) {
       this.data = {
@@ -92,7 +92,7 @@
         'has-game': true
       };
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
-      ga.pageview('no-guide/' + game + '/' + name);
+      ga('send', 'pageview', 'no-guide/' + game + '/' + name);
     },
     /**
      * 记录首次访问时的地址
@@ -119,7 +119,7 @@
     }
   });
 
-  // 放在最后吧，浏览器当中无法侦听历史事件，所以只能在认出来后再处理
+  // 放在最后吧，浏览器当中无法侦听历史事件，所以无法得知用户是否按下后退按钮，只能自行判断处理
   if (WEB) {
     ns.Router = ns.Router.extend({
       execute: function (callback, args) {

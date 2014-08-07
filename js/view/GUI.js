@@ -74,7 +74,7 @@
     toggleSidebar: function () {
       $('#homepage').toggleClass('back');
       $('#sidebar').toggleClass('hide');
-      ga.event(['toggle', 'sidebar'].join(','));
+      ga('send', 'event', 'toggle', 'sidebar');
     },
     backButton_tapHandler: function (event) {
       if ($('#homepage').hasClass('back') && !event) {
@@ -83,21 +83,21 @@
       this.back();
     },
     downloadButton_tapHandler: function () {
-      ga.event(['game', 'download', this.$context.getValue('game-id')].join(','));
+      ga('send', 'event', 'game', 'download', this.$context.getValue('game-id'));
     },
     favButton_tapHandler: function (event) {
       var button = $(event.currentTarget);
       if (button.hasClass('active')) {
         this.$fav.remove(location.hash);
-        ga.event(['fav', 'remove', location.hash]);
+        ga('send', 'event', 'fav', 'remove', location.hash);
       } else {
         this.$fav.add({url: location.hash, title: $('.content h1').text()});
-        ga.event(['fav', 'add', location.hash]);
+        ga('send', 'event', 'fav', 'add', location.hash);
       }
       button.toggleClass('active');
     },
     gameButton_tapHandler: function () {
-      ga.event(['game', 'play', this.$context.getValue('game-id')].join(','));
+      ga('send', 'event', 'game', 'play', this.$context.getValue('game-id'));
     },
     homepage_tapHandler: function (event) {
       if ($(event.currentTarget).hasClass('back')) {

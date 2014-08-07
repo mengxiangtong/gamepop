@@ -97,12 +97,25 @@
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
     router.start(Backbone.history.start());
 
-    // for native
-    gamepop.back = _.bind(gui.backButton_tapHandler, gui);
-    gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
+    // for android native
+    if (!WEB) {
+      gamepop.back = _.bind(gui.backButton_tapHandler, gui);
+      gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
+    }
 
     // stat
-    ga.pageview('/');
+    if (WEB) {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=Array.prototype.pop.call(s.getElementsByTagName(o));
+        a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-35957679-14', 'auto');
+      ga('send', 'pageview');
+    } else {
+      ga('send', 'pageview');
+    }
   }
 
   if (PHONEGAP) {
@@ -111,14 +124,3 @@
     $(init);
   }
 }());
-
-if (!ga) {
-  var ga = {
-    event: function (info) {
-      console.log(info);
-    },
-    pageview: function (url) {
-      console.log(url);
-    }
-  };
-}

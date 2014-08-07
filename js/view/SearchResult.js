@@ -90,7 +90,7 @@
       this.loading.remove();
     },
     item_tapHandler: function (event) {
-      ga.event(['view', 'search', $(event.currentTarget).data('href')].join(','));
+      ga('send', 'event', 'view', 'search', $(event.currentTarget).data('href'));
     },
     rss_changeHandler: function (model) {
       this.$('#search-' + model.id).find('.bookmark-button').toggleClass('active', model.collection);

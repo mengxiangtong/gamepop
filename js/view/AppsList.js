@@ -19,7 +19,7 @@
       this.$el.html(this.template({apps: collection.toJSON()}));
     },
     noGame_tapHandler: function (event) {
-      ga.event(['view', 'recommended', $(event.currentTarget).data('href')].join(','));
+      ga('send', 'event', 'view', 'recommended', $(event.currentTarget).data('href'));
     },
     rss_syncHandler: function (collection) {
       this.$('.item').each(function () {
