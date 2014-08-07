@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: {
+    clean: {   //用于删除文件或目录
       start: [BUILD, '../popo.<%= pkg.version %>.zip', '../single.<%= pkg.version %>.zip'],
       end: [TEMP]
     },
@@ -27,14 +27,14 @@ module.exports = function (grunt) {
       index: 'index.html',
       single: 'single.html'
     },
-    copy: {
+    copy: {    //复制文件
       font: {
-        files: [{
-          expand: true,
-          cwd: 'bower_components/font-awesome/fonts/',
-          src: ['*.svg'],
-          dest: BUILD + 'fonts/'
-        }]
+          files: [{
+            expand: true,
+            cwd: 'bower_components/font-awesome/fonts/',
+            src: ['*.svg'],
+            dest: BUILD + 'fonts/'
+          }]
       },
       svg: {
         files: [{
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compass: {
+    compass: {   //使用compass编译sass文件
       css: {
         options: {
           environment: 'production',
@@ -55,13 +55,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'css/',
           src: ['*.sass'],
-          dest: 'css/',
-          ext: '.css'
+          dest: 'css/',   //所在的目录
+          ext: '.css'   //处理后的文件后双缀名
         }]
       }
 
     },
-    imagemin: {
+    imagemin: {  //图像压缩模块
       img: {
         files: [{
           expand: true,
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    uglify: {
+    uglify: {   //压缩以及合并javascript文件  压缩代码，用于减少文件体积
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         compress: {
@@ -93,13 +93,13 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {
+    cssmin: {   //minify用于压缩css文件，combine用于将多个css文件合并一个文件
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip'
       },
       css: {
-        src: csses,
+        src: csses,   //需要处理的文件
         dest: BUILD + 'css/style.css'
       }
     },
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    handlebars: {
+    handlebars: {   //模板
       compile: {
         options: {
           partialsUseNamespace: true,
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
+    concat: {   //合并文件，不仅可以合并JS文件，还可以合并CSS文件
       js: {
         options: {
           separator: ';\n'
@@ -171,7 +171,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compress: {
+    compress: {  //压缩打包
       app: {
         options: {
           archive: '../' + (isSingle ? 'single' : 'popo') + '.<%= pkg.version %>.zip',
@@ -187,7 +187,26 @@ module.exports = function (grunt) {
           src: config.version,
           dest: 'VERSION'
         }]
+      },
+
+      android: {
+        options: {
+          archive: '../' + (isSingle ? 'single' : 'android') + '.<%= pkg.version %>.zip',
+
+          mode: 'zip',
+          pretty: true
+        },
+        files: [{
+          expand: true,
+          cwd: BUILD,
+          src: ['**'],
+          dest: ''
+        }, {
+          src: config.version,
+          dest: 'VERSION'
+        }]
       }
+
     }
   });
 

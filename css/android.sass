@@ -76,6 +76,15 @@
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
       border-right: 1px solid $yellow
+    input
+      box-shadow: none
+      padding: $gap - 5px $gap-icon + 20px
+      color: $white
+      background-color: rgba(0,0,0,0)
+      border-radius: 0
+      border: 0
+      &:active
+        background-color: rgba(0,0,0,0)
     button
       width: 30px
       height: 30px
@@ -145,14 +154,7 @@
       heigth: $topbar-height
       line-height: $topbar-height
 
-    input
-      box-shadow: none
-      padding: $gap - 5px $gap-icon + 20px
-      color: $white
-      background-color: rgba(0,0,0,0)
-      border-radius: 0
-      &:active
-        color: $yellow
+
 
     .cancel-button
       display: none
