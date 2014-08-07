@@ -70,43 +70,73 @@
     &:after
       content: ''
       position: absolute
+      top: 32px
+      width: 80%
       height: 5px
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
       border-right: 1px solid $yellow
+    button
+      width: 30px
+      height: 30px
+      top: $gap - 2px
+      left: 0
+      font-size: 16px
+      background-color: rgba(0,0,0,0)
+      &:disabled
+        background-color: rgba(0,0,0,0)
+      &:active
+        display: none
+      i
+        line-height: 30px
 
     &.cover
       &:after
         top: 32px
         left: 50px
-        width: 80%
+      button
+        left: $gap + 40px
 
     &.success
       &:after
         top: 33px
         left: 0
-        width: 90%
+      button
+        left: 0
+      input
+        color: $green
+
     &.failed
       &:after
         top: 33px
         left: 0
-        width: 90%
+      button
+        left: 0
+      input
+        color: $red
 
     &.cover
       &.success
         &:after
           left: 50px
-          width: 80%
+
         button
-          left: 50px
+          left: $gap + 40px
+
+        input
+          color: $green
 
     &.cover
       &.failed
         &:after
           left: 50px
-          width: 80%
+
         button
-          left: 50px
+          left: $gap + 40px
+
+        input
+          color: $red
+
     .search
       background-color: $navbar-background-color
       heigth: $topbar-height
@@ -118,21 +148,8 @@
       color: $white
       background-color: rgba(0,0,0,0)
       border-radius: 0
-
       &:active
-        color: yellow
-    button
-      width: 30px
-      height: 30px
-      top: $gap - 2px
-      left: $gap + 40px
-      font-size: 16px
-      background-color: rgba(0,0,0,0)
-      &:disabled
-        background-color: rgba(0,0,0,0)
-
-      i
-        line-height: 30px
+        color: $yellow
 
     .cancel-button
       display: none
