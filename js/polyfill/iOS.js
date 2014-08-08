@@ -3,7 +3,8 @@
  */
 
 (function () {
-  var iframe;
+  var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
+    , iframe;
   function createIframe() {
     var iframe = $('<iframe id="app-bridge">');
     iframe.appendTo('body');
@@ -34,4 +35,6 @@
       });
     }
   };
+  // 将平台类型标注在body上
+  document.body.className = 'ios ios' + iOS[1];
 }());

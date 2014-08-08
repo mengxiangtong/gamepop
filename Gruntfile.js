@@ -3,12 +3,11 @@
  */
 
 module.exports = function (grunt) {
-  var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
-    , isWeb = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'web'
+  var isWeb = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'web'
     , config = grunt.file.readJSON('grunt-config.json')
-    , BUILD =  config[isSingle ?  'single': 'build']
+    , BUILD =  config.build
     , TEMP = config.temp
-    , target = isSingle ? 'single.html' : 'index.html'
+    , target = 'index.html'
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
@@ -20,12 +19,11 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      start: [BUILD, '../popo.<%= pkg.version %>.zip', '../single.<%= pkg.version %>.zip'],
+      start: [BUILD, '../popo.<%= pkg.version %>.zip'],
       end: [TEMP]
     },
     index: {
-      index: 'index.html',
-      single: 'single.html'
+      index: 'index.html'
     },
     copy: {
       font: {
@@ -71,52 +69,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        compress: {
-          global_defs: {
-            'DEBUG': false,
-            'PHONEGAP': false,
-            'WEB': isWeb
-          },
-          dead_code: true,
-          unused: true,
-          drop_console: true
-        },
-        report: 'gzip'
-      },
-      js: {
-        files: [{
-          src: jses,
-          dest: TEMP + (isSingle ? 'single' : 'index') + '.js'
-        }]
-      }
-    },
-    cssmin: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        report: 'gzip'
-      },
-      css: {
-        src: csses,
-        dest: BUILD + 'css/style.css'
-      }
-    },
-    replace: {
-      version: {
-        options: {
-          patterns: [{
-            match: 'version',
-            replacement: '<%= pkg.version %>'
-          }]
-        },
-        files: [{
-          src: [TEMP + 'index.js'],
-          dest: TEMP + 'index.js'
-        }]
-      }
-    },
     handlebars: {
       compile: {
         options: {
@@ -140,13 +92,73 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
-      js: {
-        options: {
-          separator: ';\n'
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        compress: {
+          global_defs: {
+            'DEBUG': false,
+            'PHONEGAP': false,
+            'WEB': isWeb
+          },
+          dead_code: true,
+          unused: true,
+          drop_console: true
         },
+        report: 'gzip'
+      },
+      web: {
+        files: [{
+          src: jses,
+          dest: TEMP + 'index.js'
+        }]
+      },
+      ios: {
+        files: [{
+          src: jses.concat('js/polyfill/iOS.js'),
+          dest: TEMP + 'ios.js'
+        }]
+      }
+    },
+    cssmin: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        report: 'gzip'
+      },
+      web: {
+        src: csses,
+        dest: BUILD + 'css/style.css'
+      },
+      ios: {
+        src: csses.concat('css/iOS.css'),
+        dest: TEMP + 'css/ios/style.css'
+      }
+    },
+    replace: {
+      version: {
+        options: {
+          patterns: [{
+            match: 'version',
+            replacement: '<%= pkg.version %>'
+          }]
+        },
+        files: [{
+          src: [TEMP + 'index.js'],
+          dest: TEMP + 'index.js'
+        }]
+      }
+    },
+    concat: {
+      options: {
+        separator: ';\n'
+      },
+      web: {
         src: libs,
-        dest: BUILD + 'js/' + (isSingle ? 'single' : 'index') + '.js'
+        dest: BUILD + 'js/index.js'
+      },
+      ios: {
+        src: [libs, 'js/polyfill/iOS.js'],
+        dest: TEMP + 'js/ios/index.js'
       }
     },
     htmlmin: {
@@ -172,9 +184,9 @@ module.exports = function (grunt) {
       }
     },
     compress: {
-      app: {
+      ios: {
         options: {
-          archive: '../' + (isSingle ? 'single' : 'popo') + '.<%= pkg.version %>.zip',
+          archive: '../popo.<%= pkg.version %>.ios.zip',
           mode: 'zip',
           pretty: true
         },
@@ -186,6 +198,12 @@ module.exports = function (grunt) {
         }, {
           src: config.version,
           dest: 'VERSION'
+        }, {
+          src: TEMP + 'css/ios/style.css',
+          dest: 'css'
+        }, {
+          src: TEMP + 'js/ios/index.js',
+          dest: 'js'
         }]
       }
     }
@@ -238,10 +256,10 @@ module.exports = function (grunt) {
       }
       src = src.replace('handlebars.min', 'handlebars.runtime.min');
       isLib ? libs.push(src) : jses.push(src);
-      return /index|single\.js/.test(src) ? match : '';
+      return /index\.js/.test(src) ? match : '';
     });
-    libs.push('js/templates.js'); // 预编译的模板
-    libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
+    jses.unshift('js/templates.js'); // 预编译的模板
+    libs.push(TEMP + 'index.js');
     // 取模板
     html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
       content = content.replace(/\s{2,}|\n|\r/g, '');
@@ -265,27 +283,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean:start',
-    'index:index',
+    'index',
     'copy',
     'compass',
     'imagemin',
+    'handlebars',
     'uglify',
     'cssmin',
-    'replace',
-    'handlebars',
-    'concat',
-    'htmlmin',
-    'version',
-    'compress',
-    'clean:end'
-  ]);
-  grunt.registerTask('single', [
-    'clean:start',
-    'index:single',
-    'copy',
-    'compass',
-    'imagemin',
-    'uglify',
     'replace',
     'concat',
     'htmlmin',
@@ -295,14 +299,14 @@ module.exports = function (grunt) {
   ]);
   grunt.registerTask('web', [
     'clean:start',
-    'index:index',
+    'index',
     'copy',
     'compass',
     'imagemin',
+    'handlebars',
     'uglify',
     'cssmin',
     'replace',
-    'handlebars',
     'concat',
     'htmlmin',
     'version',

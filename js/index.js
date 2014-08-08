@@ -28,8 +28,7 @@
       }).remove();
     }
 
-    var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
-      , context = Nervenet.createContext()
+    var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
         })
@@ -88,10 +87,6 @@
           collection: results
         });
 
-    // 判断平台类型
-    if (iOS) {
-      document.body.className = 'ios ios' + iOS[1];
-    }
     createCss(document.body.clientWidth, document.body.clientHeight);
 
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
