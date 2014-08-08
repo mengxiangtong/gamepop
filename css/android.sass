@@ -6,7 +6,6 @@
 @import "../bower_components/font-awesome/scss/core"
 
 .page-container
-
   .navbar
     background-color: $navbar-background-color
 
@@ -14,7 +13,6 @@
       background-color: rgba(0,0,0,0)
 
     .back-button
-
       &:active
         background-color: #222
 
@@ -23,28 +21,24 @@
     .fav-button,
     .search-button,
     .bookmark-button,
+    .shortcut-button,
     .mobile-button,
     .ellipsis-v-button
       @extend .fa
 
     .game-button
-
       &:active
         background-color: rgba(0,0,0,0)
 
     .fav-button
-
       &:active
         background-color: rgba(0,0,0,0)
 
     .bookmark-button
-
       &:active
         background-color: rgba(0,0,0,0)
 
-
     .mobile-button
-
       &:active
         background-color: rgba(0,0,0,0)
 
@@ -57,9 +51,7 @@
       &:active
         background-color: darken($yellow, 15%)
 
-
   .search-form
-    //@extend #search-form
     position: fixed
     top: 0
     left: $topbar-height
@@ -76,6 +68,7 @@
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
       border-right: 1px solid $yellow
+
     input
       box-shadow: none
       padding: $gap - 5px $gap-icon + 20px
@@ -83,8 +76,10 @@
       background-color: rgba(0,0,0,0)
       border-radius: 0
       border: 0
+
       &:active
         background-color: rgba(0,0,0,0)
+
     button
       width: 30px
       height: 30px
@@ -92,6 +87,7 @@
       left: 0
       font-size: 20px
       background-color: rgba(0,0,0,0)
+
       &:disabled
         disabled: disabled
         background-color: rgba(0,0,0,0)
@@ -103,9 +99,9 @@
       &:after
         top: 32px
         left: 50px
+
       button
         left: $gap + 40px
-
 
     &.success
       &:after
@@ -114,6 +110,7 @@
 
       button
         left: 0
+
       input
         color: $navy
 
@@ -124,6 +121,7 @@
 
       button
         left: 0
+
       input
         color: $red
 
@@ -154,8 +152,6 @@
       heigth: $topbar-height
       line-height: $topbar-height
 
-
-
     .cancel-button
       display: none
       width: 14%
@@ -176,7 +172,6 @@
     &.failed input
       color: $mute
       width: 90%
-
 
     &.cover
       left: 0

@@ -26,8 +26,9 @@
           , content = this.innerHTML.replace(/\s{2,}|\n/g, '');
         TEMPLATES[key] = Handlebars.compile(content);
       }).remove();
+    }
 
-
+    if (WEB) {
       var android = /android/i
         , isAndroid = android.test(navigator.userAgent);
 
@@ -36,7 +37,6 @@
         var android_css = $('<link href="' + cssURL + '" rel="stylesheet" />');
         $($('head')[0]).append(android_css);
       }
-
     }
 
     var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)

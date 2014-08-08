@@ -30,7 +30,6 @@
     .navbar-btn-group
       float: right
 
-
     .btn
       color: $white
       font-size: 20px
@@ -48,10 +47,8 @@
         margin-left: $gap
 
     .back-button
-      //padding-top: 2px
       line-height: $topbar-height - $gap - 2px
       padding-right: 4px
-
       background-color: rgba(0, 0, 0, 0.6)
 
       &:active
@@ -62,6 +59,7 @@
     .fav-button,
     .search-button,
     .bookmark-button,
+    .shortcut-button,
     .mobile-button,
     .ellipsis-v-button
       @extend .fa
@@ -69,7 +67,6 @@
     .game-button
       background-color: $game-color
       line-height: $topbar-height - $gap - 3px
-
 
       &:before
         content: $fa-var-gamepad
@@ -126,6 +123,7 @@
 
       &:active
         background: darken($bookmark-color, 15%)
+
     .ellipsis-v-button
       background-color: $green
 
@@ -185,7 +183,6 @@
       padding: $gap - 3px $gap-icon
       line-height: 20px
       font-size: 14px
-
 
     button
       width: 30px
