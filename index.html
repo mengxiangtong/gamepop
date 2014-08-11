@@ -166,11 +166,9 @@
     <i class="fa fa-spin fa-spinner"></i>
   </header>
   <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
-    <div class="search">
-      <button type="button" class="cancel-button">取消</button>
-      <input type="text" name="keyword" placeholder="搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
-      <button {{#if keyword}}disabled{{/if}} disabled="disabled"><i class="fa fa-search"></i></button>
-    </div>
+    <button type="button" class="cancel-button">取消</button>
+    <input type="text" name="keyword" placeholder="搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
+    <button {{#if keyword}}disabled{{/if}} disabled="disabled"><i class="fa fa-search"></i></button>
   </form>
   <div class="content">
     <div class="alert alert-error hide">

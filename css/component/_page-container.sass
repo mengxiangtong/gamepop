@@ -19,8 +19,7 @@
     left: 0
     right: 0
     z-index: 20
-    padding: $gap - 4px $gap 0
-    height: $topbar-height
+    padding: $gap $gap 0
 
     .navbar-text
       display: inline-block
@@ -47,6 +46,7 @@
         margin-left: $gap
 
     .back-button
+      padding-top: 2px
       line-height: $topbar-height - $gap - 2px
       padding-right: 4px
       background-color: rgba(0, 0, 0, 0.6)
@@ -60,7 +60,8 @@
     .search-button,
     .bookmark-button,
     .shortcut-button,
-    .ellipsis-v-button
+    .ellipsis-v-button,
+    .share-button
       @extend .fa
 
     .game-button
@@ -153,7 +154,7 @@
       background-color: $yellow
 
       &:before
-        content: $fa-var-share
+        content: $fa-var-share-alt
 
       &:active
         background-color: darken($yellow, 15%)

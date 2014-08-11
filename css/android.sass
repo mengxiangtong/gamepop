@@ -8,11 +8,24 @@
 .page-container
   .navbar
     background-color: $navbar-background-color
+    padding: 0  $gap 0
+    padding-right: 0
+    height: $topbar-height
 
     .btn
       background-color: rgba(0,0,0,0)
+      border-radius: 0
+      height: $topbar-height
+      width: $topbar-height
+
+      + .btn
+        margin-left: 0
 
     .back-button
+      padding-top: 0
+      margin-left: -15px
+      width: 50px
+
       &:active
         background-color: #222
 
@@ -22,40 +35,41 @@
     .search-button,
     .bookmark-button,
     .shortcut-button,
-    .ellipsis-v-button
+    .ellipsis-v-button,
+    .share-button
       @extend .fa
 
     .game-button
       background-color: rgba(0,0,0,0)
-      padding-top: 5px
+      padding-top: $gap
 
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.2)
 
     .fav-button
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.2)
 
     .bookmark-button
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.2)
 
     .shortcut-button
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.2)
 
       &:after
-        top: 14px
-        left: 16px
+        top: 20px
+        left: 21px
 
     .share-button
       background-color: rgba(0,0,0,0)
 
       &:before
-        content: $fa-var-share
+        content: $fa-var-share-alt
 
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.2)
 
   .search-form
     position: fixed
@@ -65,19 +79,44 @@
     z-index: 25
     padding: 0 0
 
+    &:before
+      content: ''
+      position: absolute
+      top: 45px
+      left: 0
+      right: 0
+      bottom: 0
+      background-color: rgba(0,0,0,0.75)
+
     &:after
       content: ''
       position: absolute
-      top: 32px
-      width: 80%
+      top: 30px
+      right: $gap
       height: 5px
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
       border-right: 1px solid $yellow
+      display: block
+      clear: both
+
+    .cancel-button
+      display: none
+      width: $topbar-height
+      height: $topbar-height
+      line-height: $topbar-height
+      position: static
+      padding-left: 5px
+      background: transparent
+      font-size: 14px
+      color: $white
+
+      &:active
+        background: transparent
 
     input
       box-shadow: none
-      padding: $gap - 5px $gap-icon + 20px
+      padding: $gap + 2px $gap-icon + 30px
       color: $white
       background-color: rgba(0,0,0,0)
       border-radius: 0
@@ -89,7 +128,7 @@
     button
       width: 30px
       height: 30px
-      top: $gap - 2px
+      top: $gap - 3px
       left: 0
       font-size: 20px
       background-color: rgba(0,0,0,0)
@@ -102,33 +141,40 @@
         line-height: 30px
 
     &.cover
+      left: 0
+      bottom: 0
+      background-color: rgba(0,0,0,0)
+
       &:after
-        top: 32px
         left: 50px
 
       button
-        left: $gap + 40px
+        left: $gap + 43px
+
+      input
+        width: 80%
+        color: $yellow
 
     &.success
       &:after
-        top: 33px
         left: 0
 
       button
         left: 0
 
       input
+        padding: $gap + 2px $gap-icon + 20px
         color: $navy
 
     &.failed
       &:after
-        top: 33px
         left: 0
 
       button
         left: 0
 
       input
+        padding: $gap + 2px $gap-icon + 20px
         color: $red
 
     &.cover
@@ -153,42 +199,17 @@
         input
           color: $red
 
-    .search
-      background-color: $navbar-background-color
-      heigth: $topbar-height
-      line-height: $topbar-height
-
-    .cancel-button
-      display: none
-      width: 14%
-      position: static
-      height: 36px
-      background: transparent
-      font-size: 14px
-      color: $white
-
-      &:active
-        background: transparent
-
     &.success input
       color: $navy
-      width: 90%
-
 
     &.failed input
       color: $mute
-      width: 90%
-
-    &.cover
-      left: 0
-      bottom: 0
-      background-color: rgba(0, 0, 0, 0.75)
 
       .cancel-button
         display: inline-block
 
       input
-        width: 82%
+        width: 80%
 
   .content
     overflow: auto
