@@ -60,13 +60,13 @@
     .search-button,
     .bookmark-button,
     .shortcut-button,
-    .mobile-button,
     .ellipsis-v-button
       @extend .fa
 
     .game-button
       background-color: $game-color
       line-height: $topbar-height - $gap - 3px
+      font-size: 22px
 
       &:before
         content: $fa-var-gamepad
@@ -100,7 +100,7 @@
         background-color: darken($game-color, 15%)
 
     .search-button
-      padding: 0 0 0 2px
+      padding: 0 0 2px 2px
       line-height: $topbar-height - $gap - 2px
       background-color: $search-color
 
@@ -130,13 +130,12 @@
       &:before
         content: $fa-var-ellipsis-v
 
-    .mobile-button
+    .shortcut-button
       background-color: $green
       position: relative
-      font-size: 26px
 
       &:before
-        content: $fa-var-mobile
+        content: $fa-var-tablet
 
       &:after
         content: ''
@@ -144,8 +143,8 @@
         width: 4px
         height: 4px
         position: absolute
-        top: 16px
-        left: 16px
+        top: 11px
+        left: 14px
 
       &:active
         background: darken($green, 15%)
@@ -183,6 +182,7 @@
       padding: $gap - 3px $gap-icon
       line-height: 20px
       font-size: 14px
+      border: 1px solid $border-color
 
     button
       width: 30px

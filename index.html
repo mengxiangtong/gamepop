@@ -149,18 +149,18 @@
       {{#if has-guide}}
       {{#if is-detail}}
       <button type="button" class="btn fav-button {{#if fav}}active{{/if}}"></button>
+      <button type="button" class="btn share-button"></button>
+      {{else}}
+      <button type="button" class="btn search-button"></button>
       {{/if}}
       {{#if is-index}}
-      <button type="button" class="btn mobile-button"></button>
       <button type="button" class="btn bookmark-button {{#if bookmark}}active{{/if}}"></button>
+      <button type="button" class="btn shortcut-button"></button>
       {{/if}}
       {{/if}}
-
-      <button type="button" class="btn search-button"></button>
-      <button type="button" class="btn game-button"></button>
-      <button type="button" class="btn ellipsis-v-button">
-        <i class="fa fa-ellipsis-v"></i>
-      </button>
+      {{#if has-game}}
+      <a href="game://{{guide_name}}/{{game_name}}" class="btn game-button"></a>
+      {{/if}}
     </div>
     {{/unless}}
     <i class="fa fa-spin fa-spinner"></i>
@@ -183,7 +183,7 @@
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script src="bower_components/hammerjs/hammer.min.js"></script>
 <script src="bower_components/lodash/dist/lodash.underscore.min.js"></script>
-<script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/backbone/backbone-min.js"></script>
 <script src="bower_components/nervenet/nervenet.min.js"></script>
 <script src="js/component/lazyLoad.js"></script>
 <script src="js/component/Carousel.js"></script>

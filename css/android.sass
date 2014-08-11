@@ -22,11 +22,13 @@
     .search-button,
     .bookmark-button,
     .shortcut-button,
-    .mobile-button,
     .ellipsis-v-button
       @extend .fa
 
     .game-button
+      background-color: rgba(0,0,0,0)
+      padding-top: 5px
+
       &:active
         background-color: rgba(0,0,0,0)
 
@@ -38,18 +40,22 @@
       &:active
         background-color: rgba(0,0,0,0)
 
-    .mobile-button
+    .shortcut-button
       &:active
         background-color: rgba(0,0,0,0)
 
+      &:after
+        top: 14px
+        left: 16px
+
     .share-button
-      background-color: $yellow
+      background-color: rgba(0,0,0,0)
 
       &:before
         content: $fa-var-share
 
       &:active
-        background-color: darken($yellow, 15%)
+        background-color: rgba(0,0,0,0)
 
   .search-form
     position: fixed
@@ -63,7 +69,7 @@
       content: ''
       position: absolute
       top: 32px
-      width: 250px
+      width: 80%
       height: 5px
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
