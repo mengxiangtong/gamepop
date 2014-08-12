@@ -57,6 +57,9 @@
         key: 'fav',
         max: 128
       })
+      , cards = new gamepop.view.Cards({
+        el: '#cards'
+      })
       , sidebar = new gamepop.view.Sidebar({
         el: '#sidebar',
         collection: fav,

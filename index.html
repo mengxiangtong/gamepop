@@ -50,7 +50,8 @@
 <link rel="stylesheet" href="css/media.css">
 <script type="text/x-handlebars-template" class="template" id="css">
   .page-container,
-  .content {
+  .content,
+  #cards {
     width: {{width}}px;
     height: {{height}}px;
   }
@@ -91,6 +92,9 @@
       <span>点击进入</span>
     </a>
   </script>
+</div>
+<div id="cards">
+  <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">
@@ -194,6 +198,7 @@
 <script src="js/model/RSSCollection.js"></script>
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/Homepage.js"></script>
+<script src="js/view/Cards.js"></script>
 <script src="js/view/Sidebar.js"></script>
 <script src="js/view/Popup.js"></script>
 <script src="js/view/SearchForm.js"></script>
