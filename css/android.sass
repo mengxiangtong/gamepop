@@ -74,7 +74,7 @@
   .search-form
     position: fixed
     top: 0
-    left: $topbar-height
+    left: $topbar-height + 5px
     right: 0
     z-index: 25
     padding: 0 0
@@ -93,6 +93,7 @@
       position: absolute
       top: 30px
       right: $gap
+      left: 0
       height: 5px
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
@@ -116,7 +117,7 @@
 
     input
       box-shadow: none
-      padding: $gap + 2px $gap-icon + 30px
+      padding: $gap + 2px $gap + 30px
       color: $white
       background-color: rgba(0,0,0,0)
       border-radius: 0
@@ -149,7 +150,7 @@
         left: 50px
 
       button
-        left: $gap + 43px
+        left: $gap + 40px
 
       input
         width: 80%
@@ -163,7 +164,7 @@
         left: 0
 
       input
-        padding: $gap + 2px $gap-icon + 20px
+        padding: $gap + 2px $gap + 30px
         color: $navy
 
     &.failed
@@ -174,7 +175,7 @@
         left: 0
 
       input
-        padding: $gap + 2px $gap-icon + 20px
+        padding: $gap + 2px $gap + 30px
         color: $red
 
     &.cover
@@ -188,6 +189,9 @@
         input
           color: $navy
 
+        &:active
+          color: $navy
+
     &.cover
       &.failed
         &:after
@@ -199,11 +203,14 @@
         input
           color: $red
 
+          &:active
+            color: $red
+
     &.success input
       color: $navy
 
     &.failed input
-      color: $mute
+      color: $red
 
       .cancel-button
         display: inline-block
