@@ -18,7 +18,7 @@
       'click .item': 'item_clickHandler',
       'swipeleft': 'swipeLeftHandler',
       'swiperight': 'swipeRightHandler',
-      'touch': 'touchHandler',
+      'touchstart': 'touchHandler',
       'tap .item': 'item_tapHandler',
       'tap #homepage': 'homepage_tapHandler',
       'tap .sidebar-toggle': 'sidebarToggle_tapHandler',
@@ -26,6 +26,9 @@
       'tap .download-button': 'downloadButton_tapHandler',
       'tap .fav-button': 'favButton_tapHandler',
       'tap .game-button': 'gameButton_tapHandler'
+    },
+    gestures: {
+
     },
     initialize: function () {
       var hammer = new Hammer(this.el, {
@@ -36,6 +39,8 @@
           [Hammer.Swipe, {direction: Hammer.DIRECTION_HORIZONTAL}]
         ]
       });
+      hammer.on('panleft', this.panLeftHandler);
+      hammer.on('panright', this.panRightHandler);
     },
     back: function (isRouter) {
       if (WEB) {
@@ -138,6 +143,12 @@
           event.stopPropagation();
         }
       }
+    },
+    panLeftHandler: function (event) {
+      console.log(event);
+    },
+    panRightHandler: function (event) {
+      console.log(event);
     },
     preventDefault: function (event) {
       event.preventDefault();
