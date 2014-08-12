@@ -156,13 +156,13 @@
         color: $yellow
 
       input::-webkit-input-placeholder
-        color: #464444
+        color: $placeholder-color
 
       input::-moz-placeholder
-        color: #464444
+        color: $placeholder-color
 
       input::-ms-placeholder
-        color: #464444
+        color: $placeholder-color
 
 
     &.success
@@ -174,7 +174,7 @@
 
       input
         padding: $gap + 2px $gap + 25px
-        color: $navy
+        color: $search-success
 
     &.failed
       &:after
@@ -185,7 +185,7 @@
 
       input
         padding: $gap + 2px $gap + 25px
-        color: $red
+        color: $mute
 
     &.cover
       &.success
@@ -196,10 +196,10 @@
           left: $gap + 40px
 
         input
-          color: $navy
+          color: $search-success
 
         &:active
-          color: $navy
+          color: $search-success
 
     &.cover
       &.failed
@@ -210,16 +210,16 @@
           left: $gap + 40px
 
         input
-          color: $red
+          color: $mute
 
           &:active
-            color: $red
+            color: $mute
 
     &.success input
-      color: $navy
+      color: $search-success
 
     &.failed input
-      color: $red
+      color: $mute
 
       .cancel-button
         display: inline-block
