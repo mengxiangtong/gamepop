@@ -22,6 +22,7 @@
     },
     backHome: function () {
       this.game = '';
+      this.$gui.backHome();
       ga.pageview('home');
     },
     showRemoteGuide: function (game, path) {
@@ -93,16 +94,42 @@
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga.pageview('no-guide/' + game + '/' + name);
     },
+    /**
+     * 记录首次访问时的地址
+     * @param fromGame 是否从游戏的浮窗进入的，如果开始位置不为空，则认为是从游戏进来的
+     */
     start: function (fromGame) {
-      this.from = fromGame ? Backbone.history.fragment : '';
+      if (WEB) {
+        this.from = '';
+      } else {
+        this.from = fromGame ? Backbone.history.fragment : '';
+      }
       this.on('route', this.routeHandler, this);
     },
     routeHandler: function () {
       var fragment = Backbone.history.fragment;
-      if (fragment && this.from !== fragment && fragment !== history[history.length - 1]) {
+      if (fragment && this.from !== fragment && fragment !== history[history.length - 1]
+          && fragment !== history[history.length - 2]) {
         history.push(fragment);
         console.log(history);
       }
+      if (WEB) {
+        $('#apple-app').attr('content', "app-id=892347556, app-argument=" + fragment);
+      }
     }
   });
+
+  // 放在最后吧，浏览器当中无法侦听历史事件，所以只能在认出来后再处理
+  if (WEB) {
+    ns.Router = ns.Router.extend({
+      execute: function (callback, args) {
+        var fragment = Backbone.history.fragment;
+        if (history[history.length - 2] === fragment) {
+          // 可以认为是用户点了后退按钮
+          return this.$gui.back(true);
+        }
+        Backbone.Router.prototype.execute.call(this, callback, args);
+      }
+    });
+  }
 }(Nervenet.createNameSpace('gamepop')));

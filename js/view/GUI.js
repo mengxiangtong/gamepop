@@ -37,6 +37,35 @@
         ]
       });
     },
+    back: function (isRouter) {
+      if (WEB) {
+        // Web模式下，不存在Android的Back键，所以都是后退，也就直接后退就行了
+        if (gamepop.history.length === 0) {
+          return this.$router.navigate('#/');
+        }
+        gamepop.history.pop();
+        Popup.removeLast();
+        if (!isRouter) {
+          history.back();
+        }
+      } else {
+        var hash = location.hash.substr(2);
+        if (hash === '' || gamepop.history.length === 0) {
+          location.href = 'popo:return';
+        } else if (!Popup.isSearch()) {
+          gamepop.history.pop();
+          Popup.removeLast();
+          if (!isRouter) {
+            history.back();
+          }
+        }
+      }
+    },
+    backHome: function () {
+      if (Popup.pages.length) {
+        Popup.removeLast();
+      }
+    },
     showPopupPage: function (url, className, options) {
       if (Popup.search(url)) {
         return;
@@ -55,14 +84,7 @@
       if ($('#homepage').hasClass('back') && !event) {
         return this.toggleSidebar();
       }
-      var hash = location.hash.substr(2);
-      if (hash === '' || gamepop.history.length === 0) {
-        location.href = 'popo:return';
-      } else if (!Popup.isSearch()) {
-        history.back();
-        gamepop.history.pop();
-        Popup.removeLast();
-      }
+      this.back();
     },
     downloadButton_tapHandler: function () {
       ga.event(['game', 'download', this.$context.getValue('game-id')].join(','));

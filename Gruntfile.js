@@ -4,6 +4,7 @@
 
 module.exports = function (grunt) {
   var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
+    , isWeb = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'web'
     , config = grunt.file.readJSON('grunt-config.json')
     , BUILD =  config[isSingle ?  'single': 'build']
     , TEMP = config.temp
@@ -11,6 +12,7 @@ module.exports = function (grunt) {
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
+    , WEB_REG = /<!-- .* begin -->[\S\s]+<!-- .* end -->/g
     , csses = []
     , libs = []
     , jses = [];
@@ -64,7 +66,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'img/',
-          src: ['**/*.{png,jpg,gif}'],
+          src: ['*.{png,jpg,gif}'],
           dest: BUILD + 'img/'
         }]
       }
@@ -75,7 +77,8 @@ module.exports = function (grunt) {
         compress: {
           global_defs: {
             'DEBUG': false,
-            'PHONEGAP': false
+            'PHONEGAP': false,
+            'WEB': isWeb
           },
           dead_code: true,
           unused: true,
@@ -185,6 +188,27 @@ module.exports = function (grunt) {
     }
   });
 
+  if (isWeb) {
+    grunt.config.merge({
+      'copy' : {
+        web: {
+          src: 'mocks/web.json',
+          dest: BUILD + '/apps.json'
+        }
+      },
+      'imagemin': {
+        img: {
+          files: [{
+            expand: true,
+            cwd: 'img/',
+            src: ['**/*.{png,jpg,gif}'],
+            dest: BUILD + 'img/'
+          }]
+        }
+      }
+    });
+  }
+
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -203,6 +227,7 @@ module.exports = function (grunt) {
       csses.push(src);
       return '';
     });
+    // 取JS
     html = html.replace(JS_REG, function (match, src) {
       var isLib = src.substr(0, 2) !== 'js';
       if (src.indexOf('define.js') !== -1) {
@@ -212,13 +237,18 @@ module.exports = function (grunt) {
       isLib ? libs.push(src) : jses.push(src);
       return /index|single\.js/.test(src) ? match : '';
     });
-    libs.push('js/templates.js');
+    libs.push('js/templates.js'); // 预编译的模板
     libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
+    // 取模板
     html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
       content = content.replace(/\s{2,}|\n|\r/g, '');
       grunt.file.write(TEMP + 'handlebars/' + id + '.hbs', content);
       return '';
     });
+    // 为client导出时，不需要各种适配
+    if (!isWeb) {
+      html = html.replace(WEB_REG, '');
+    }
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
     grunt.file.write(TEMP + this.data, html);
   });
@@ -257,6 +287,21 @@ module.exports = function (grunt) {
     'concat',
     'htmlmin',
     'compress',
+    'version',
+    'clean:end'
+  ]);
+  grunt.registerTask('web', [
+    'clean:start',
+    'index:index',
+    'copy',
+    'compass',
+    'imagemin',
+    'uglify',
+    'cssmin',
+    'replace',
+    'handlebars',
+    'concat',
+    'htmlmin',
     'version',
     'clean:end'
   ]);
