@@ -8,11 +8,11 @@
 .page-container
   .navbar
     background-color: $navbar-background-color
-    padding: 0 0
+    padding: 0
     height: $topbar-height
 
     .btn
-      background-color: rgba(0,0,0,0)
+      background: none
       border-radius: 0
       height: $topbar-height
       width: $topbar-height
@@ -29,7 +29,8 @@
     .fav-button,
     .game-button,
     .shortcut-button,
-    .share-button
+    .share-button,
+    .ellipsis-v-button
       &:active
         background-color: rgba(0,0,0,0.2)
 
@@ -48,7 +49,7 @@
         left: $gap-l + 1px
 
   .search-form
-    padding: 0 0
+    padding: 0
 
     &:after
       content: ''
@@ -64,30 +65,27 @@
     input
       padding: $gap + 2px $gap + 25px
       color: $white
-      background-color: rgba(0,0,0,0)
+      background: none
       border-radius: 0
       border: 0
 
-      &:active
-        background-color: rgba(0,0,0,0.0)
-
     input::-webkit-input-placeholder
-      color: lighten($smoke, 6%)
+      color: $smoke
 
     input::-moz-placeholder
-      color: lighten($smoke, 6%)
-
-    input::-ms-placeholder
-      color: lighten($smoke, 6%)
+      color: $smoke
 
     button
       top: $gap - 3px
       left: 0
       font-size: 20px
-      background-color: rgba(0,0,0,0)
+      background: none
 
       &:disabled
-        background-color: rgba(0,0,0,0)
+        background: none
+
+      &:active
+        background: none
 
     .cancel-button
       width: $topbar-height + 5px
@@ -96,7 +94,7 @@
       color: $white
 
     &.cover
-      background-color: rgba(0,0,0,0)
+      background: none
 
       &:before
         content: ''
@@ -129,15 +127,9 @@
         input
           color: $search-success
 
-          &:active
-            color: $search-success
-
       &.failed
         input
           color: $mute
-
-          &:active
-            color: $mute
 
     &.success,
     &.failed
