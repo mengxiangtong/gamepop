@@ -167,7 +167,7 @@
   </header>
   <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
     <button type="button" class="cancel-button">取消</button>
-    <input type="text" name="keyword" placeholder="搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
+    <input type="text" name="keyword" placeholder="在{{guide_name}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
     <button {{#if keyword}}disabled{{/if}} disabled="disabled"><i class="fa fa-search"></i></button>
   </form>
   <div class="content">

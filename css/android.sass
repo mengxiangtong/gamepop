@@ -8,8 +8,7 @@
 .page-container
   .navbar
     background-color: $navbar-background-color
-    padding: 0  $gap 0
-    padding-right: 0
+    padding: 0 0
     height: $topbar-height
 
     .btn
@@ -17,105 +16,52 @@
       border-radius: 0
       height: $topbar-height
       width: $topbar-height
+      line-height: $topbar-height
 
       + .btn
         margin-left: 0
 
     .back-button
-      padding-top: 0
-      margin-left: -15px
-      width: 50px
+      padding-right: $gap
 
-      &:active
-        background-color: #222
-
-    .game-button,
-    .download-button,
-    .fav-button,
-    .search-button,
+    .back-button,
     .bookmark-button,
+    .fav-button,
+    .game-button,
     .shortcut-button,
-    .ellipsis-v-button,
     .share-button
-      @extend .fa
-
-    .game-button
-      background-color: rgba(0,0,0,0)
-      padding-top: $gap
-
       &:active
         background-color: rgba(0,0,0,0.2)
 
-    .fav-button
-      &:active
-        background-color: rgba(0,0,0,0.2)
-
-    .bookmark-button
-      &:active
-        background-color: rgba(0,0,0,0.2)
-
-    .shortcut-button
-      &:active
-        background-color: rgba(0,0,0,0.2)
-
-      &:after
-        top: 20px
-        left: 21px
-
-    .share-button
-      background-color: rgba(0,0,0,0)
+    .ellipsis-v-button
+      background-color: $green
 
       &:before
-        content: $fa-var-share-alt
+        content: $fa-var-ellipsis-v
 
-      &:active
-        background-color: rgba(0,0,0,0.2)
+    .share-button
+      padding-top: 3px
+
+    .shortcut-button
+      &:after
+        top: $gap-l - 1px
+        left: $gap-l + 1px
 
   .search-form
-    position: fixed
-    top: 0
-    left: $topbar-height + 5px
-    right: 0
-    z-index: 25
     padding: 0 0
-
-    &:before
-      content: ''
-      position: absolute
-      top: 45px
-      left: 0
-      right: 0
-      bottom: 0
-      background-color: rgba(0,0,0,0.75)
 
     &:after
       content: ''
       position: absolute
-      top: 30px
+      top: $gap-l + $gap
       right: $gap
       left: 0
-      height: 5px
+      height: $gap-s
       border-bottom: 1px solid $yellow
       border-left: 1px solid $yellow
       border-right: 1px solid $yellow
-      display: block
-      clear: both
-
-    .cancel-button
-      display: none
-      width: $topbar-height + 5px
-      height: $topbar-height
-      line-height: $topbar-height
-      position: static
-      background: transparent
-      font-size: 14px
-      color: $white
-
-      &:active
-        background: transparent
 
     input
-      box-shadow: none
       padding: $gap + 2px $gap + 25px
       color: $white
       background-color: rgba(0,0,0,0)
@@ -123,85 +69,55 @@
       border: 0
 
       &:active
-        background-color: rgba(0,0,0,0)
+        background-color: rgba(0,0,0,0.0)
+
+    input::-webkit-input-placeholder
+      color: lighten($smoke, 6%)
+
+    input::-moz-placeholder
+      color: lighten($smoke, 6%)
+
+    input::-ms-placeholder
+      color: lighten($smoke, 6%)
 
     button
-      width: 30px
-      height: 30px
       top: $gap - 3px
       left: 0
       font-size: 20px
       background-color: rgba(0,0,0,0)
 
       &:disabled
-        disabled: disabled
         background-color: rgba(0,0,0,0)
 
-      i
-        line-height: 30px
+    .cancel-button
+      width: $topbar-height + 5px
+      height: $topbar-height
+      line-height: $topbar-height
+      color: $white
 
     &.cover
-      left: 0
-      bottom: 0
       background-color: rgba(0,0,0,0)
+
+      &:before
+        content: ''
+        position: absolute
+        top: $topbar-height
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: rgba(0,0,0,0.75)
 
       &:after
         left: 50px
-
-      button
-        left: $gap + 40px
 
       input
         width: 80%
         color: $yellow
 
-      input::-webkit-input-placeholder
-        color: $placeholder-color
-
-      input::-moz-placeholder
-        color: $placeholder-color
-
-      input::-ms-placeholder
-        color: $placeholder-color
-
-
-    &.success
-      &:after
-        left: 0
-
       button
-        left: 0
+        left: $gap + 40px
 
-      input
-        padding: $gap + 2px $gap + 25px
-        color: $search-success
-
-    &.failed
-      &:after
-        left: 0
-
-      button
-        left: 0
-
-      input
-        padding: $gap + 2px $gap + 25px
-        color: $mute
-
-    &.cover
-      &.success
-        &:after
-          left: 50px
-
-        button
-          left: $gap + 40px
-
-        input
-          color: $search-success
-
-        &:active
-          color: $search-success
-
-    &.cover
+      &.success,
       &.failed
         &:after
           left: 50px
@@ -209,42 +125,32 @@
         button
           left: $gap + 40px
 
+      &.success
+        input
+          color: $search-success
+
+          &:active
+            color: $search-success
+
+      &.failed
         input
           color: $mute
 
           &:active
             color: $mute
 
-    &.success input
-      color: $search-success
+    &.success,
+    &.failed
+      &:after
+        left: 0
 
-    &.failed input
-      color: $mute
+      button
+        left: 0
 
-      .cancel-button
-        display: inline-block
-
+    &.success
       input
-        width: 80%
+        color: $search-success
 
-  .content
-    overflow: auto
-    -webkit-overflow-scrolling: touch
-
-    > *:first-child
-      padding-top: $topbar-height + $gap
-
-  &.active
-    display: block
-
-  &.search
-    background-repeat: no-repeat
-    background-image: url(../img/bg.jpg)
-    background-size: cover
-
-  &.animated
-    .content
-      display: none
-
-.out
-  display: none !important
+    &.failed
+      input
+        color: $mute
