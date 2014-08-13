@@ -75,7 +75,6 @@
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
   </form>
-  <h2 id="my-apps-title">我的攻略</h2>
   <ul id="my-apps">
     <script type="text/x-handlebars-template" class="template" id="installed">
       {{#each apps}}
@@ -85,6 +84,7 @@
       {{/each}}
     </script>
   </ul>
+  <h2 id="my-apps-title">我的攻略</h2>
   <script type="text/x-handlebars-template" class="template" id="entrance">
     <a href="{{#if link}}{{link}}{{else}}#/remote/{{guide_name}}{{/if}}" class="entrance">
       {{#if logo}}<img src="{{logo}}" width="{{logo_width}}">{{/if}}
