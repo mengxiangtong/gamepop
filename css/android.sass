@@ -22,7 +22,7 @@
         margin-left: 0
 
     .back-button
-      padding-right: $gap
+      padding-top: 0
 
     .back-button,
     .bookmark-button,
@@ -44,8 +44,11 @@
       padding-top: 3px
 
     .shortcut-button
+      font-size: 22px
+      padding-top: 2px
+
       &:after
-        top: $gap-l - 1px
+        top: $gap-l
         left: $gap-l + 1px
 
   .search-form
@@ -110,7 +113,6 @@
 
       input
         width: 80%
-        color: $yellow
 
       button
         left: $gap + 40px
@@ -125,11 +127,11 @@
 
       &.success
         input
-          color: $search-success
+          color: $yellow
 
       &.failed
         input
-          color: $mute
+          color: $smoke
 
     &.success,
     &.failed
@@ -141,8 +143,14 @@
 
     &.success
       input
-        color: $search-success
+        color: $yellow
 
     &.failed
       input
-        color: $mute
+        color: $smoke
+
+.icon-list
+  .item
+    &.article
+      .match
+        color: $yellow
