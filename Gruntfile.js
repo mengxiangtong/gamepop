@@ -115,8 +115,14 @@ module.exports = function (grunt) {
       },
       ios: {
         files: [{
-          src: jses.concat('js/polyfill/iOS.js'),
+          src: [jses, 'js/polyfill/iOS.js'],
           dest: TEMP + 'ios.js'
+        }]
+      },
+      android: {
+        files: [{
+          src: [jses, 'js/polyfill/Android.js'],
+          dest: TEMP + 'android.js'
         }]
       }
     },
@@ -147,8 +153,11 @@ module.exports = function (grunt) {
           }]
         },
         files: [{
-          src: [TEMP + 'index.js'],
-          dest: TEMP + 'index.js'
+          expand: true,
+          cwd: TEMP,
+          src: ['*.js'],
+          dest: TEMP,
+          filter: 'isFile'
         }]
       }
     },
@@ -161,11 +170,11 @@ module.exports = function (grunt) {
         dest: BUILD + 'js/index.js'
       },
       android: {
-        src: [libs, 'js/polyfill/Android.js'],
-        dest: BUILD + 'js/android/index.js'
+        src: [libs, TEMP + 'android.js'],
+        dest: TEMP + 'js/android/index.js'
       },
       ios: {
-        src: [libs, 'js/polyfill/iOS.js'],
+        src: [libs, TEMP + 'ios.js'],
         dest: TEMP + 'js/ios/index.js'
       }
     },
