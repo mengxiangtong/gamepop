@@ -44,8 +44,8 @@ if (DEBUG) {
       openKeyboard: function () {
         console.log('zhima, zhima, open keyboard');
       },
-      share: function () {
-        console.log('share');
+      share: function (url, title) {
+        console.log('share: ', url, title);
       }
     };
   }(window));

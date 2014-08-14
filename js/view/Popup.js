@@ -143,7 +143,7 @@
         .find('input, button').prop('disabled', false);
     },
     shareButton_tapHandler: function () {
-      device.share();
+      device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + $('title').text());
     },
     shortcutButton_tapHandler: function () {
       device.addShortCut(this.options.game_name, this.options.guide_name, this.$('.icon').attr('src'));
