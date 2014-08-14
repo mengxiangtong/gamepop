@@ -8,6 +8,7 @@
     },
     handle_tapHandler: function () {
       this.$el.toggleClass('active');
+      $('#homepage').toggleClass('blur', this.$el.hasClass('active'));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

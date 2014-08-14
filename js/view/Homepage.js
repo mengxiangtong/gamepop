@@ -2,6 +2,8 @@
  * Created by meathill on 14-6-13.
  */
 ;(function (ns) {
+  var KEY = 'homepage';
+
   ns.Homepage = Backbone.View.extend({
     events: {
       'tap .entrance': 'entrance_tapHandler',
@@ -9,13 +11,29 @@
     },
     initialize: function () {
       this.template = TEMPLATES.entrance;
+      // 取上一次的记录
+      var store = localStorage.getItem(KEY);
+      if (store) {
+        store = JSON.parse(store);
+      }
       this.model = new (Backbone.Model.extend({
         urlRoot: config.topgame
-      }));
-      this.model.on('sync', this.model_syncHandler, this);
+      }))(store);
+      this.model.on('change', this.model_changeHandler, this);
       this.model.fetch();
+      this.render();
 
       this.collection.once('sync', this.collection_syncHandler, this);
+    },
+    render: function () {
+      if (!this.model.get('big_pic')) {
+        return;
+      }
+      this.$('.entrance').remove();
+      this.$el.append(this.template(this.model.toJSON()));
+      this.$el.addClass('ready');
+      this.$('.history-button').prop('disabled', false)
+        .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
     },
     collection_syncHandler: function (collection) {
       if (collection.hasOtherUpdate()) {
@@ -35,15 +53,10 @@
       this.model.id = this.model.get('prev');
       this.model.fetch();
     },
-    model_syncHandler: function (model) {
-      if (!model.get('big_pic')) {
-        return;
-      }
-      this.$('.entrance').remove();
-      this.$el.append(this.template(model.toJSON()));
-      this.$el.css('background-image', 'url(' + model.get('big_pic') + ')');
-      this.$('.history-button').prop('disabled', false)
-        .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
+    model_changeHandler: function (model) {
+      this.render();
+
+      localStorage.setItem(KEY, JSON.stringify(model.toJSON()));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

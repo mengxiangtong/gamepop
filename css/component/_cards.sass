@@ -1,12 +1,14 @@
 @charset "UTF-8"
 @import "../define"
+@import "compass/css3/transform"
 
 #cards
   @extend .transition
   position: absolute
   top: 100%
-  margin-top: -40px
   z-index: 15
+  @include translate(0, -40px)
+  @include translate3d(0, -40px)
 
   .handle
     background: transparent
@@ -21,5 +23,7 @@
       opacity: 1
 
   &.active
-    top: 0
-    margin: 0
+    @include translate(0, -100%)
+
+    .handle
+      @include rotate(180deg)

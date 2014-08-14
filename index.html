@@ -94,6 +94,17 @@
 </div>
 <div id="cards">
   <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
+  <h2>我的攻略</h2>
+  <ul>
+    <script type="text/x-handlebars-template" class="template" id="article">
+      <li class="item article">
+        {{#if icon_path}}<img src="./img/image.gif" data-src="{{icon_path}}" class="ph" >{{/if}}
+        <h3><a href="#/remote/{{guide_name}}/{{z}}/{{id}}/detail.html">{{topic}}</a></h3>
+        <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
+      </li>
+    </script>
+
+  </ul>
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">
