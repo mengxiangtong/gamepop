@@ -3,9 +3,6 @@
  */
 ;(function () {
   'use strict';
-  function onDeviceReady() {
-    init();
-  }
   function createCss(width, height) {
     var style = document.createElement('style')
       , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
@@ -122,7 +119,7 @@
   }
 
   if (PHONEGAP) {
-    document.addEventListener('deviceready', onDeviceReady, false);
+    document.addEventListener('deviceready', init, false);
   } else {
     $(init);
   }
