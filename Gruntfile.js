@@ -203,7 +203,7 @@ module.exports = function (grunt) {
     compress: {  //压缩打包
       android: {
         options: {
-          archive: '../<%= pkg.version %>.android.zip',
+          archive: '../android.<%= pkg.version %>.zip',
           mode: 'zip',
           pretty: true
         },
@@ -230,7 +230,7 @@ module.exports = function (grunt) {
       },
       ios: {
         options: {
-          archive: '../popo.<%= pkg.version %>.ios.zip',
+          archive: '../ios.<%= pkg.version %>.zip',
           mode: 'zip',
           pretty: true
         },
