@@ -100,9 +100,6 @@
 
     createCss(document.body.clientWidth, document.body.clientHeight);
 
-    // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
-    router.start(Backbone.history.start());
-
     // for android native
     if (!WEB) {
       gamepop.back = _.bind(gui.backButton_tapHandler, gui);
@@ -118,10 +115,10 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-35957679-14', 'auto');
-      ga('send', 'pageview');
-    } else {
-      ga('send', 'pageview');
     }
+
+    // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
+    router.start(Backbone.history.start());
   }
 
   if (PHONEGAP) {

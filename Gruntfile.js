@@ -261,7 +261,7 @@ module.exports = function (grunt) {
     }
   });
 
-  if (isWeb) {
+  if (isWeb) { // 网页版需要一些特殊的操作
     grunt.config.merge({
       'copy' : {
         web: {
@@ -277,6 +277,12 @@ module.exports = function (grunt) {
             src: ['**/*.{png,jpg,gif}'],
             dest: BUILD + 'img/'
           }]
+        }
+      },
+      'cssmin': {
+        'android': {
+          src: 'css/android.css',
+          dest: BUILD + 'css/android.css'
         }
       }
     });

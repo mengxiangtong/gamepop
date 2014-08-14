@@ -23,7 +23,7 @@
     backHome: function () {
       this.game = '';
       this.$gui.backHome();
-      ga && ga('send', 'pageview', 'home');
+      ga && ga('send', 'pageview');
     },
     showRemoteGuide: function (game, path) {
       path = path ? path : '';
