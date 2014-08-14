@@ -114,7 +114,7 @@
         console.log(history);
       }
       if (WEB) {
-        $('#apple-app').attr('content', "app-id=892347556, app-argument=" + fragment);
+        $('[name=apple-itunes-app]').attr('content', "app-id=892347556, app-argument=gamemaster://" + fragment);
       }
     }
   });
