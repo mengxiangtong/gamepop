@@ -28,6 +28,17 @@
       }).remove();
     }
 
+    if (WEB) {    //通过浏览器浏览
+      var android = /android/i
+        , isAndroid = android.test(navigator.userAgent);
+
+      if (isAndroid) {
+        var cssURL = 'css/android.css';
+        var android_css = $('<link href="' + cssURL + '" rel="stylesheet" />');
+        $('head').append(android_css);
+      }
+    }
+
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body

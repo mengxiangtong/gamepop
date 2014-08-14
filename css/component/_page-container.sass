@@ -59,7 +59,9 @@
     .fav-button,
     .search-button,
     .bookmark-button,
-    .shortcut-button
+    .shortcut-button,
+    .ellipsis-v-button,
+    .share-button
       @extend .fa
 
     .game-button
@@ -146,7 +148,7 @@
       background-color: $yellow
 
       &:before
-        content: $fa-var-share
+        content: $fa-var-share-alt
 
       &:active
         background-color: darken($yellow, 15%)
