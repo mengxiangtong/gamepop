@@ -14,14 +14,13 @@ var DEBUG = true
   , DUOSHUO = {
     EmbedThread: function (dom) {}
   }
-  , ga = {
-    event: function (info) {
-      console.log(info);
-    },
-    pageview: function (url) {
-      console.log(url);
-    }
+  , ga = null;
+
+if (!WEB) {
+  ga = function (method, type, category, action, label, value) {
+    console.log(method, type, category, action, label, value);
   };
+}
 
 if (DEBUG) {
   (function (window) {

@@ -23,7 +23,7 @@
       }
     },
     entrance_tapHandler: function () {
-      ga.event(['view', 'homepage', this.model.get('guide_name')].join(','));
+      ga('send', 'event', 'view', 'homepage', this.model.get('guide_name'));
     },
     historyButton_tapHandler: function (event) {
       var button = $(event.currentTarget);

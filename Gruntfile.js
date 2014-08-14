@@ -3,12 +3,11 @@
  */
 
 module.exports = function (grunt) {
-  var isSingle = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'single'
-    , isWeb = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'web'
+  var isWeb = this.cli.tasks.length === 1 && this.cli.tasks[0] === 'web'
     , config = grunt.file.readJSON('grunt-config.json')
-    , BUILD =  config[isSingle ?  'single': 'build']
+    , BUILD =  config.build
     , TEMP = config.temp
-    , target = isSingle ? 'single.html' : 'index.html'
+    , target = 'index.html'
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
@@ -20,14 +19,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      start: [BUILD, '../popo.<%= pkg.version %>.zip', '../single.<%= pkg.version %>.zip'],
+      start: [BUILD, '../popo.<%= pkg.version %>.zip'],
       end: [TEMP]
     },
     index: {
-      index: 'index.html',
-      single: 'single.html'
+      index: 'index.html'
     },
-    copy: {
+    copy: {   //复制
       font: {
         files: [{
           expand: true,
@@ -45,7 +43,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compass: {
+    compass: {   //将sass文件编译compass成css
       css: {
         options: {
           environment: 'production',
@@ -55,65 +53,19 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'css/',
           src: ['*.sass'],
-          dest: 'css/',
-          ext: '.css'
+          dest: 'css/',   //压缩最终目录
+          ext: '.css'    //更改后缀名
         }]
       }
 
     },
-    imagemin: {
+    imagemin: {      //图片压缩模块
       img: {
         files: [{
           expand: true,
           cwd: 'img/',
           src: ['*.{png,jpg,gif}'],
           dest: BUILD + 'img/'
-        }]
-      }
-    },
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        compress: {
-          global_defs: {
-            'DEBUG': false,
-            'PHONEGAP': false,
-            'WEB': isWeb
-          },
-          dead_code: true,
-          unused: true,
-          drop_console: true
-        },
-        report: 'gzip'
-      },
-      js: {
-        files: [{
-          src: jses,
-          dest: TEMP + (isSingle ? 'single' : 'index') + '.js'
-        }]
-      }
-    },
-    cssmin: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        report: 'gzip'
-      },
-      css: {
-        src: csses,
-        dest: BUILD + 'css/style.css'
-      }
-    },
-    replace: {
-      version: {
-        options: {
-          patterns: [{
-            match: 'version',
-            replacement: '<%= pkg.version %>'
-          }]
-        },
-        files: [{
-          src: [TEMP + 'index.js'],
-          dest: TEMP + 'index.js'
         }]
       }
     },
@@ -140,13 +92,90 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
-      js: {
-        options: {
-          separator: ';\n'
+    uglify: {    //压缩以及合并javascript文件  压缩代码，用于减少文件体积
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        compress: {
+          global_defs: {
+            'DEBUG': false,
+            'PHONEGAP': false,
+            'WEB': isWeb
+          },
+          dead_code: true,
+          unused: true,
+          drop_console: true
         },
+        report: 'gzip'
+      },
+      web: {
+        files: [{
+          src: jses,
+          dest: TEMP + 'index.js'
+        }]
+      },
+      ios: {
+        files: [{
+          src: [jses, 'js/polyfill/iOS.js'],
+          dest: TEMP + 'ios.js'
+        }]
+      },
+      android: {
+        files: [{
+          src: [jses, 'js/polyfill/Android.js'],
+          dest: TEMP + 'android.js'
+        }]
+      }
+    },
+    cssmin: {   //minify用于压缩css文件，combine用于将多个css文件合并一个文件
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        report: 'gzip'
+      },
+      web: {
+        src: csses,
+        dest: BUILD + 'css/style.css'
+      },
+      android: {  //android样式
+        src: [csses, 'css/android.css'],
+        dest: TEMP + 'css/android/style.css'
+      },
+      ios: {
+        src: [csses, 'css/iOS.css'],
+        dest: TEMP + 'css/ios/style.css'
+      }
+    },
+    replace: {
+      version: {
+        options: {
+          patterns: [{
+            match: 'version',
+            replacement: '<%= pkg.version %>'
+          }]
+        },
+        files: [{
+          expand: true,
+          cwd: TEMP,
+          src: ['*.js'],
+          dest: TEMP,
+          filter: 'isFile'
+        }]
+      }
+    },
+    concat: { //合并文件，不仅可以合并JS文件，还可以合并CSS文件
+      options: {
+        separator: ';\n'
+      },
+      web: {
         src: libs,
-        dest: BUILD + 'js/' + (isSingle ? 'single' : 'index') + '.js'
+        dest: BUILD + 'js/index.js'
+      },
+      android: {
+        src: [libs, TEMP + 'android.js'],
+        dest: TEMP + 'js/android/index.js'
+      },
+      ios: {
+        src: [libs, TEMP + 'ios.js'],
+        dest: TEMP + 'js/ios/index.js'
       }
     },
     htmlmin: {
@@ -171,10 +200,10 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compress: {
-      app: {
+    compress: {  //压缩打包
+      android: {
         options: {
-          archive: '../' + (isSingle ? 'single' : 'popo') + '.<%= pkg.version %>.zip',
+          archive: '../<%= pkg.version %>.android.zip',
           mode: 'zip',
           pretty: true
         },
@@ -183,12 +212,56 @@ module.exports = function (grunt) {
           cwd: BUILD,
           src: ['**'],
           dest: ''
+        }, {
+          expand: true,
+          cwd: TEMP + 'css/android',
+          flatten: true,
+          src: ['**'],
+          dest: 'css/',
+          filter: 'isFile'
+        }, {
+          expand: true,
+          flatten: true,
+          filter: 'isFile',
+          cwd: TEMP + 'js/android',
+          src: ['**'],
+          dest: 'js'
+        }]
+      },
+      ios: {
+        options: {
+          archive: '../popo.<%= pkg.version %>.ios.zip',
+          mode: 'zip',
+          pretty: true
+        },
+        files: [{
+          expand: true,
+          cwd: BUILD,
+          src: ['**'],
+          dest: ''
+        }, {
+          src: config.version,
+          dest: 'VERSION'
+        }, {
+          expand: true,
+          flatten: true,
+          filter: 'isFile',
+          cwd: TEMP + 'css/ios',
+          src: ['**'],
+          dest: 'css'
+        }, {
+          expand: true,
+          flatten: true,
+          filter: 'isFile',
+          cwd: TEMP + 'js/ios',
+          src: ['**'],
+          dest: 'js'
         }]
       }
     }
   });
 
-  if (isWeb) {
+  if (isWeb) { // 网页版需要一些特殊的操作
     grunt.config.merge({
       'copy' : {
         web: {
@@ -204,6 +277,12 @@ module.exports = function (grunt) {
             src: ['**/*.{png,jpg,gif}'],
             dest: BUILD + 'img/'
           }]
+        }
+      },
+      'cssmin': {
+        'android': {
+          src: 'css/android.css',
+          dest: BUILD + 'css/android.css'
         }
       }
     });
@@ -223,7 +302,7 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('index', 'make index html', function () {
     var html = grunt.file.read(this.data);
     // 取CSS
-    html = html.replace(CSS_REG, function (match, src) {
+    html = html.replace(CSS_REG, function (match, src) {  //页面中含有css
       csses.push(src);
       return '';
     });
@@ -235,10 +314,10 @@ module.exports = function (grunt) {
       }
       src = src.replace('handlebars.min', 'handlebars.runtime.min');
       isLib ? libs.push(src) : jses.push(src);
-      return /index|single\.js/.test(src) ? match : '';
+      return /index\.js/.test(src) ? match : '';
     });
-    libs.push('js/templates.js'); // 预编译的模板
-    libs.push(TEMP + (isSingle ? 'single' : 'index') + '.js');
+    jses.unshift('js/templates.js'); // 预编译的模板
+    libs.push(TEMP + 'index.js');
     // 取模板
     html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
       content = content.replace(/\s{2,}|\n|\r/g, '');
@@ -262,27 +341,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean:start',
-    'index:index',
+    'index',
     'copy',
     'compass',
     'imagemin',
+    'handlebars',
     'uglify',
     'cssmin',
-    'replace',
-    'handlebars',
-    'concat',
-    'htmlmin',
-    'compress',
-    'version',
-    'clean:end'
-  ]);
-  grunt.registerTask('single', [
-    'clean:start',
-    'index:single',
-    'copy',
-    'compass',
-    'imagemin',
-    'uglify',
     'replace',
     'concat',
     'htmlmin',
@@ -292,14 +357,14 @@ module.exports = function (grunt) {
   ]);
   grunt.registerTask('web', [
     'clean:start',
-    'index:index',
+    'index',
     'copy',
     'compass',
     'imagemin',
+    'handlebars',
     'uglify',
     'cssmin',
     'replace',
-    'handlebars',
     'concat',
     'htmlmin',
     'version',

@@ -28,8 +28,18 @@
       }).remove();
     }
 
-    var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
-      , context = Nervenet.createContext()
+    if (WEB) {    //通过浏览器浏览
+      var android = /android/i
+        , isAndroid = android.test(navigator.userAgent);
+
+      if (isAndroid) {
+        var cssURL = 'css/android.css';
+        var android_css = $('<link href="' + cssURL + '" rel="stylesheet" />');
+        $('head').append(android_css);
+      }
+    }
+
+    var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
         })
@@ -91,21 +101,27 @@
           collection: results
         });
 
-    // 判断平台类型
-    if (iOS) {
-      document.body.className = 'ios ios' + iOS[1];
-    }
     createCss(document.body.clientWidth, document.body.clientHeight);
+
+    // for android native
+    if (!WEB) {
+      gamepop.back = _.bind(gui.backButton_tapHandler, gui);
+      gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
+    }
+
+    // stat
+    if (WEB) {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=Array.prototype.pop.call(s.getElementsByTagName(o));
+        a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-35957679-14', 'auto');
+    }
 
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
     router.start(Backbone.history.start());
-
-    // for native
-    gamepop.back = _.bind(gui.backButton_tapHandler, gui);
-    gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
-
-    // stat
-    ga.pageview('/');
   }
 
   if (PHONEGAP) {
@@ -114,14 +130,3 @@
     $(init);
   }
 }());
-
-if (!ga) {
-  var ga = {
-    event: function (info) {
-      console.log(info);
-    },
-    pageview: function (url) {
-      console.log(url);
-    }
-  };
-}

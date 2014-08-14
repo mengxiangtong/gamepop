@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> <!-- 设置状态栏的背景颜色，只有在 `"apple-mobile-web-app-capable" content="yes"` 时生效 -->
 <meta name="apple-touch-fullscreen" content="yes"/>
 <meta name="format-detection" content="telephone=no" /> <!-- 禁止数字识自动别为电话号码 -->
-<meta name="apple-itunes-app" content="app-id=892347556, app-argument={{url}}" id="apple-app"> <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+<meta name="apple-itunes-app" content="app-id=892347556, app-argument=gamemaster://"> <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
 
 
 <!-- iOS 图标 begin -->
@@ -40,7 +40,6 @@
 <!-- WP 设备 end -->
 <!-- remove tap highlight on wp -->
 <meta name="msapplication-tap-highlight" content="no" />
-
 <link rel="shortcut icon" type="image/png" href="img/logo.png" /> <!-- 添加 favicon icon -->
 <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
@@ -76,7 +75,6 @@
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
   </form>
-  <h2 id="my-apps-title">我的攻略</h2>
   <ul id="my-apps">
     <script type="text/x-handlebars-template" class="template" id="installed">
       {{#each apps}}
@@ -86,6 +84,7 @@
       {{/each}}
     </script>
   </ul>
+  <h2 id="my-apps-title">我的攻略</h2>
   <script type="text/x-handlebars-template" class="template" id="entrance">
     <a href="{{#if link}}{{link}}{{else}}#/remote/{{guide_name}}{{/if}}" class="entrance">
       {{#if logo}}<img src="{{logo}}" width="{{logo_width}}">{{/if}}
@@ -154,9 +153,6 @@
       {{#if has-guide}}
       {{#if is-detail}}
       <button type="button" class="btn fav-button {{#if fav}}active{{/if}}"></button>
-      <button type="button" class="btn share-button"></button>
-      {{else}}
-      <button type="button" class="btn search-button"></button>
       {{/if}}
       {{#if is-index}}
       <button type="button" class="btn bookmark-button {{#if bookmark}}active{{/if}}"></button>

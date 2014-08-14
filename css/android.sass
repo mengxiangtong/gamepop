@@ -1,0 +1,156 @@
+@charset "utf-8"
+@import "define"
+@import "component/homepage-search"
+@import "../bower_components/colors/sass/variables"
+@import "../bower_components/font-awesome/scss/variables"
+
+.page-container
+  .navbar
+    background-color: $navbar-background-color
+    color: $white
+    padding: 0
+    height: $topbar-height
+
+    .btn
+      background: none
+      border-radius: 0
+      height: $topbar-height
+      width: $topbar-height
+      line-height: $topbar-height
+
+      + .btn
+        margin-left: 0
+
+    .back-button
+      padding-top: 0
+
+    .back-button,
+    .bookmark-button,
+    .fav-button,
+    .game-button,
+    .shortcut-button,
+    .share-button,
+    .ellipsis-v-button
+      &:active
+        background-color: rgba(0,0,0,0.2)
+
+    .ellipsis-v-button
+      background-color: $green
+
+      &:before
+        content: $fa-var-ellipsis-v
+
+    .share-button
+      padding-top: 3px
+
+    .shortcut-button
+      font-size: 22px
+      padding-top: 2px
+
+      &:after
+        top: $gap-l
+        left: $gap-l + 1px
+
+  .search-form
+    padding: 0
+
+    &:after
+      content: ''
+      position: absolute
+      top: $gap-l + $gap
+      right: $gap
+      left: 0
+      height: $gap-s
+      border-bottom: 1px solid $yellow
+      border-left: 1px solid $yellow
+      border-right: 1px solid $yellow
+
+    input
+      padding: $gap + 2px $gap + 25px
+      color: $white
+      background: none
+      border-radius: 0
+      border: 0
+
+    input::-webkit-input-placeholder
+      color: $smoke
+
+    input::-moz-placeholder
+      color: $smoke
+
+    button
+      top: $gap - 3px
+      left: 0
+      font-size: 20px
+      background: none
+
+      &:disabled
+        background: none
+
+      &:active
+        background: none
+
+    .cancel-button
+      width: $topbar-height + 5px
+      height: $topbar-height
+      line-height: $topbar-height
+      color: $white
+
+    &.cover
+      background: none
+
+      &:before
+        content: ''
+        position: absolute
+        top: $topbar-height
+        left: 0
+        right: 0
+        bottom: 0
+        background-color: rgba(0,0,0,0.75)
+
+      &:after
+        left: 50px
+
+      input
+        width: 80%
+
+      button
+        left: $gap + 40px
+
+      &.success,
+      &.failed
+        &:after
+          left: 50px
+
+        button
+          left: $gap + 40px
+
+      &.success
+        input
+          color: $yellow
+
+      &.failed
+        input
+          color: $smoke
+
+    &.success,
+    &.failed
+      &:after
+        left: 0
+
+      button
+        left: 0
+
+    &.success
+      input
+        color: $yellow
+
+    &.failed
+      input
+        color: $smoke
+
+.icon-list
+  .item
+    &.article
+      .match
+        color: $yellow

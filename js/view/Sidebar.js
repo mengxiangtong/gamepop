@@ -83,7 +83,7 @@
           .find('.fa-check').toggleClass('fa-edit fa-check');
     },
     item_tapHandler: function (event) {
-      ga.event(['view', 'sidebar', $(event.currentTarget).data('href')].join(','));
+      ga('send', 'event', 'view', 'sidebar', $(event.currentTarget).data('href'));
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));
