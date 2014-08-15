@@ -176,6 +176,18 @@ module.exports = function (grunt) {
       ios: {
         src: [libs, TEMP + 'ios.js'],
         dest: TEMP + 'js/ios/index.js'
+      },
+      fix: {
+        options: {
+          separator: '\n'
+        },
+        files: [{
+          src: [BUILD + 'css/style.css', 'css/background-fix.css'],
+          dest: BUILD + 'css/style.css'
+        }, {
+          src: [TEMP + 'css/android/style.css', 'css/background-fix.css'],
+          dest: TEMP + 'css/android/style.css'
+        }]
       }
     },
     htmlmin: {
@@ -280,6 +292,10 @@ module.exports = function (grunt) {
         }
       },
       'cssmin': {
+        web: {
+          src: [csses, 'css/web.css'],
+          dest: BUILD + 'css/style.css'
+        },
         'android': {
           src: 'css/android.css',
           dest: BUILD + 'css/android.css'

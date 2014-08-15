@@ -25,17 +25,6 @@
       }).remove();
     }
 
-    if (WEB) {    //通过浏览器浏览
-      var android = /android/i
-        , isAndroid = android.test(navigator.userAgent);
-
-      if (isAndroid) {
-        var cssURL = 'css/android.css';
-        var android_css = $('<link href="' + cssURL + '" rel="stylesheet" />');
-        $('head').append(android_css);
-      }
-    }
-
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
@@ -104,7 +93,16 @@
     }
 
     // stat
-    if (WEB) {
+    if (WEB) { // 通过浏览器浏览，也可能是
+      var android = /android/i
+        , isAndroid = android.test(navigator.userAgent);
+
+      if (isAndroid) {
+        var css = $('<link href="css/android.css" rel="stylesheet" />');
+        $('head').append(css);
+      }
+      document.body.className = 'web';
+
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=Array.prototype.pop.call(s.getElementsByTagName(o));

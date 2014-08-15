@@ -24,7 +24,7 @@
     if (type === 'pageview') {
       callNative('ga', {
         type: 'pageview',
-        url: category
+        url: category || ''
       });
     } else if (type === 'event') {
       callNative('ga', {
