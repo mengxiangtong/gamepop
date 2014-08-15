@@ -16,7 +16,8 @@
     for (var prop in options) {
       params.push(prop + '=' + options[prop]);
     }
-    iframe.attr('src', 'app://' + method + '/?' + encodeURIComponent(params.join('&')));
+    console.log('call native: app://' + method + '/?' + params.join('&'));
+    iframe.attr('src', 'app://' + method + '/?' + params.join('&'));
   }
 
   var ga = window.ga = function (method, type, category, action, label, value) {
