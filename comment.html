@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
 </head>
 <body>
-<!-- 多说评论框 start -->
+  <!-- 评论框架引用自 多说 http://dev.duoshuo.com/ 具体API文档请参考：http://dev.duoshuo.com/docs-->
+
+  <!-- 多说评论框 start -->
 
   <div class="ds-thread"></div>
-<!--
-key ：key
-    title ：标题
-    url=***.html ：文章url
--->
 
-<!-- 多说评论框 end -->
+  <!-- 多说评论框 end -->
 
-<!-- 多说最新评论 start -->
+  <!-- 多说最新评论 start -->
 
-  <div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1"
-     data-show-admin="1" data-excerpt-length="70"></div>
-<!--tags
-  data-num-items ：最新评论条数；
-  data-show-avatars : 显示头像；
-  data-show-time ： 显示时间；
-  data-show-title ： 显示标题 ；
-  data-show-admin ： 显示管理员评论；
-  data-excerpt-length ：每条评论最多显示的字数 70/10=7个 ；
--->
+  <div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
 
-<!-- 多说最新评论 end -->
+  <!-- 多说最新评论 end -->
 
-<!-- 多说热评文章 start -->
+  <!-- 多说热评文章 start -->
 
   <div class="ds-top-threads" data-range="daily" data-num-items="5"></div>
-<!--tags
-  data-range ：时间统计范围 daily/weekly/monthly;
-  data-num-items : 热门文章条数；
--->
 
-<!-- 多说热评文章 end -->
+  <!-- 多说热评文章 end -->
 <script>
   window.onload = function () {
-    var match,
-      pattern = /\+/g,
-      search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) {
+    var match
+      , pattern = /\+/g
+      , search = /([^&=]+)=?([^&]*)/g
+      , decode = function (s) {
           return decodeURIComponent(s.replace(pattern, " "));
-        },
-      query = window.location.search.substring(1);
+        }
+      , query = window.location.search.substring(1);
       duoshuoQuery = {};
-    while (match = search.exec(query))
+    while (match = search.exec(query)){
       duoshuoQuery[decode(match[1])] = decode(match[2]);
+    }
 
     var thread = document.querySelector('.ds-thread');
     thread.setAttribute('data-thread-key', duoshuoQuery.key);
