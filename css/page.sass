@@ -53,6 +53,12 @@
 
     p
       margin: 0 0 0 85px
+      font-size: 12px
+      line-height: 1.6em
+
+      &.collapse
+        @extend .transition
+        height: 3em
 
   .icon
     display: block
@@ -69,14 +75,6 @@
 
     small
       font-size: 10px
-
-  p
-    font-size: 12px
-    line-height: 1.6em
-
-    &.collapse
-      @extend .transition
-      height: 3em
 
   .home-page
     padding: 0 0 $gap
@@ -116,12 +114,11 @@
 /* ----------------
  * detail
  * --------------*/
-.news-detail,
 .guide-detail
 
   .article-body
     padding: 0 $gap-l $gap-l
-    background-color: rgb(241, 241, 241)
+    background-color: #F1F1F1
     border-bottom: 1px solid #CCC
 
     a
@@ -181,34 +178,13 @@
         img:only-child
           display: block
 
-.gae-card
-  padding: $gap-s
-  background-color: $list-background-color
-  position: relative
-  min-height: $gap-s * 2 + 60px
-  border-radius: 4px
-
-  .icon
-    width: 60px
-    height: 60px
-    margin-right: $gap
-
-  h3, p
-    margin: 0
-
-  .download-button
-    width: 60px
-    line-height: 28px
-    padding: 0
-    margin: $gap + $gap-s $gap 0 0
-
-.game-desc
-  margin: $gap 0
-  border-radius: 4px
-
-  p
-    font-size: 12px
-    margin: 0
+  .comment-bar
+    background-color: #F1F1F1
+    display: block
+    margin: $gap-icon
+    border: 1px solid #CCC
+    line-height: 30px
+    text-align: center
 
 /* ====================================
  * no-guide
