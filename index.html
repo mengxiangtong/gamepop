@@ -91,20 +91,40 @@
       <span>点击进入</span>
     </a>
   </script>
-</div>
-<div id="cards">
-  <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
-  <h2>我的攻略</h2>
-  <ul>
-    <script type="text/x-handlebars-template" class="template" id="article">
-      <li class="item article">
-        {{#if icon_path}}<img src="./img/image.gif" data-src="{{icon_path}}" class="ph" >{{/if}}
-        <h3><a href="#/remote/{{guide_name}}/{{z}}/{{id}}/detail.html">{{topic}}</a></h3>
-        <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
-      </li>
-    </script>
-
-  </ul>
+  <div id="cards">
+    <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
+    <h2>我的攻略</h2>
+    <ul class="guide list">
+      <script type="text/x-handlebars-template" class="template" id="article">
+        {{#each list}}
+        <li class="item article">
+          {{#if icon_path}}<img src="./img/image.gif" data-src="{{icon_path}}" class="ph" >{{/if}}
+          <h3><a href="#/remote/{{guide_name}}/{{z}}/{{id}}/detail.html">{{topic}}</a></h3>
+          <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
+        </li>
+        {{/each}}
+      </script>
+    </ul>
+    <p class="more"><a href="javascript:void(0);">换一换</a></p>
+    <h2>热门游戏</h2>
+    <ul class="games list">
+      <script type="text/x-handlebars-template" class="template" id="hot">
+        {{#each list}}
+        <li class="item game" data-href="#/remote/{{guide_name}}">
+          <img src="./img/image.gif" data-src="{{icon_path}}" class="ph">
+          <h3>{{game_name}}</h3>
+        </li>
+        {{/each}}
+      </script>
+    </ul>
+    <p class="more"><a href="javascript:void(0);">换一换</a> <a href="#/hot">更多</a></p>
+    <h2>福利社</h2>
+    <div class="mm item" data-href="{{url}}">
+      <img src="{{icon_path}}">
+      <h3>{{topic}}</h3>
+    </div>
+    <p class="more"><a href="javascript:void(0);">换一换</a> <a href="#/mm">更多</a></p>
+  </div>
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">

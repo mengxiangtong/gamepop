@@ -20,16 +20,6 @@
   &.ready
     background-image: url(../img/homepage.jpg)
 
-  &.blur
-    background-image: url(../img/blur.jpg)
-
-    #my-apps-title,
-    #my-apps,
-    #search-form,
-    .history-button,
-    .entrance
-      display: none
-
   .btn
     position: absolute
     padding: 0
@@ -50,11 +40,13 @@
   position: absolute
   left: $gap-icon
   top: $gap-icon
+  z-index: 20
 
 .sidebar-toggle
   right: $gap
   top: 7px
-  position: relative
+  position: absolute
+  z-index: 20
 
   &.reminder:after
     content: ' '

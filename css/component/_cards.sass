@@ -4,11 +4,20 @@
 
 #cards
   @extend .transition
+  background-size: cover
+  color: $white
+  overflow: scroll
+  -webkit-touch-scroll: touch
+  padding: $topbar-height $gap-icon 0
   position: absolute
   top: 100%
   z-index: 15
   @include translate(0, -40px)
   @include translate3d(0, -40px)
+
+  &.active
+    @include translate(0, -100%)
+    background-image: url(../img/blur.jpg)
 
   .handle
     background: transparent
@@ -22,8 +31,46 @@
     &:active
       opacity: 1
 
-  &.active
-    @include translate(0, -100%)
-
-    .handle
+    .active &
       @include rotate(180deg)
+
+  a
+    color: $white
+
+  h2
+    font-size: 12px
+    line-height: 25px
+    opacity: .4
+    padding-right: $gap-s
+
+  .list
+    background-color: rgba(255, 255, 255, 0.4)
+    border-radius: 8px
+
+  .more
+    font-size: 14px
+    line-height: 25px
+    text-align: right
+
+    a
+      text-decoration: underline
+
+      &:active
+        text-decoration: none
+
+      + a
+        margin-left: 30px
+
+  .mm
+    position: relative
+
+    img
+      width: 100%
+      border-radius: 8px
+
+    h3
+      position: absolute
+      left: $gap
+      right: $gap
+      bottom: $gap-s
+      font-size: 12px

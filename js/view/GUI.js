@@ -15,7 +15,7 @@
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
-      'click .item': 'item_clickHandler',
+      'click .item': 'preventDefault',
       'swipeleft': 'swipeLeftHandler',
       'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
@@ -104,10 +104,6 @@
         this.toggleSidebar();
         event.preventDefault();
       }
-    },
-    item_clickHandler: function (event) {
-      event.stopPropagation();
-      event.preventDefault();
     },
     item_tapHandler: function (event) {
       var target = $(event.currentTarget)
