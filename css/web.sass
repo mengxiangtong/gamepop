@@ -26,7 +26,7 @@
     background: url(../img/web/114.png) no-repeat 10px center
     background-color: rgba(235,235,235,0.6)
     background-size: 60px 60px
-    height: 75px
+    height: $gap-l + 55px
     width: 100%
     font-size: 14px
     position: fixed
@@ -37,35 +37,31 @@
     .download-button
       display: inline-block
       width: 70px
-      height: 35px
-      line-height: 35px
+      height: $gap-l + 15px
+      line-height: $gap-l + 15px
       text-align: center
-      color: #FFF
+      color: $white
       border-radius: 4px
-      background-color: #00bef2
+      background-color: $navbar-background-color
       float: right
-      margin-right: 10px
-      margin-top: 20px
+      margin-right: $gap
+      margin-top: $gap-l
 
     .download-content
-      width: 100%
-      padding-top: 5px
+      padding-top: $gap - 5px
 
       ul
         list-style: none
-        margin-left: 40px
-        margin-top: 4px
-        letter-spacing: 1px
+        margin-left: $gap-l + 20px
+        margin-top: $gap - 5px
 
         li
-          width: 175px
-          line-height: 17px
-          letter-spacing: 1px
+          line-height: $gap-l - 3px
 
           i
-            color: #ff9014
+            color: $star-color
             font-size: 18px
-            line-height: 30px
+            line-height: $gap-l + 10px
 
 .web
   .game-button,
