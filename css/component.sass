@@ -155,8 +155,6 @@
 
   img
     display: blok
-    float: left
-    margin-right: $gap
     border-radius: 4px
 
   h2 a:visited,
@@ -221,6 +219,8 @@
         width: 60px
         height: 60px
         border-radius: 10px
+        float: left
+        margin-right: $gap
 
       p
         padding-bottom: 17px
@@ -297,22 +297,20 @@
       margin-top: $gap-s
 
   img
-    width: 120px
-    height: 80px
+    width: 75px
+    height: 50px
+    float: right
+    margin-left: $gap
 
   h3
-    font-size: 1em
+    font-size: 14px
+    line-height: 1.2em
     margin: 0 0 $gap-s
 
-    &:first-child
-      padding-left: 3px
-
-      + p
-        padding-left: 3px
-
   p
-    font-size: 10px
     color: $mute
+    font-size: 10px
+    line-height: 1em
 
   &:last-child
     padding-bottom: $gap
