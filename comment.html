@@ -34,17 +34,17 @@
 	-->
 	<!-- 多说热评文章 end -->
 
-<script type="text/javascript">
+<script>
 	var duoshuoQuery;
 	window.onload = function () {
 		var match,
-				pattern = /\+/g,
-				search = /([^&=]+)=?([^&]*)/g,
-				decode = function (s) {
-					return decodeURIComponent(s.replace(pattern, " "));
-				},
-				query = window.location.search.substring(1);
-				duoshuoQuery = {};
+			pattern = /\+/g,
+			search = /([^&=]+)=?([^&]*)/g,
+			decode = function (s) {
+				return decodeURIComponent(s.replace(pattern, " "));
+			},
+			query = window.location.search.substring(1);
+			duoshuoQuery = {};
 		while (match = search.exec(query))
 			duoshuoQuery[decode(match[1])] = decode(match[2]);
 
@@ -62,8 +62,6 @@
 					|| document.getElementsByTagName('body')[0]).appendChild(ds);
 		})()
 	};
-
 </script>
-
 </body>
 </html>
