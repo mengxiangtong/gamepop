@@ -8,7 +8,7 @@
 
   <!-- 多说评论框 start -->
 
-  <div class="ds-thread"></div>
+  <div class="ds-thread" data-thread-key="" data-title="" data-url="" id="ds-thread"></div>
 
   <!-- 多说评论框 end -->
 
@@ -37,7 +37,7 @@
       duoshuoQuery[decode(match[1])] = decode(match[2]);
     }
 
-    var thread = document.querySelector('.ds-thread');
+    var thread = document.getElementById('ds-thread');
     thread.setAttribute('data-thread-key', duoshuoQuery.key);
     thread.setAttribute('data-title', duoshuoQuery.title);
     thread.setAttribute('data-url', duoshuoQuery.url);
