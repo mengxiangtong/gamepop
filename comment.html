@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+	<!-- 多说评论框 start -->
+	<div class="ds-thread"></div>
+	<!--
+		key ：key
+		title ：标题
+		url=***.html ：文章url
+	-->
+	<!-- 多说评论框 end -->
+
+	<!-- 多说最新评论 start -->
+	<div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1"
+			 data-show-admin="1" data-excerpt-length="70"></div>
+	<!--tags
+		data-num-items ：最新评论条数；
+		data-show-avatars : 显示头像；
+		data-show-time ： 显示时间；
+		data-show-title ： 显示标题 ；
+		data-show-admin ： 显示管理员评论；
+		data-excerpt-length ：每条评论最多显示的字数 70/10=7个 ；
+	-->
+	<!-- 多说最新评论 end -->
+
+	<!-- 多说热评文章 start -->
+	<div class="ds-top-threads" data-range="daily" data-num-items="5"></div>
+	<!--tags
+		data-range ：时间统计范围 daily/weekly/monthly;
+		data-num-items : 热门文章条数；
+	-->
+	<!-- 多说热评文章 end -->
+
+<script type="text/javascript">
+	var duoshuoQuery;
+	window.onload = function () {
+		var match,
+				pattern = /\+/g,
+				search = /([^&=]+)=?([^&]*)/g,
+				decode = function (s) {
+					return decodeURIComponent(s.replace(pattern, " "));
+				},
+				query = window.location.search.substring(1);
+				duoshuoQuery = {};
+		while (match = search.exec(query))
+			duoshuoQuery[decode(match[1])] = decode(match[2]);
+
+		var thread = document.querySelector('.ds-thread');
+				thread.setAttribute('data-thread-key',duoshuoQuery.key);
+				thread.setAttribute('data-title',duoshuoQuery.title);
+				thread.setAttribute('data-url',duoshuoQuery.url);
+		(function () {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';
+			ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0]
+					|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		})()
+	};
+
+</script>
+
+</body>
+</html>
