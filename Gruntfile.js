@@ -115,13 +115,13 @@ module.exports = function (grunt) {
       },
       ios: {
         files: [{
-          src: [jses, 'js/polyfill/iOS.js'],
+          src: ['js/polyfill/iOS.js'],
           dest: TEMP + 'ios.js'
         }]
       },
       android: {
         files: [{
-          src: [jses, 'js/polyfill/Android.js'],
+          src: ['js/polyfill/Android.js'],
           dest: TEMP + 'android.js'
         }]
       }
@@ -176,6 +176,18 @@ module.exports = function (grunt) {
       ios: {
         src: [libs, TEMP + 'ios.js'],
         dest: TEMP + 'js/ios/index.js'
+      },
+      fix: {
+        options: {
+          separator: '\n'
+        },
+        files: [{
+          src: [BUILD + 'css/style.css', 'css/background-fix.css'],
+          dest: BUILD + 'css/style.css'
+        }, {
+          src: [TEMP + 'css/android/style.css', 'css/background-fix.css'],
+          dest: TEMP + 'css/android/style.css'
+        }]
       }
     },
     htmlmin: {
@@ -203,14 +215,14 @@ module.exports = function (grunt) {
     compress: {  //压缩打包
       android: {
         options: {
-          archive: '../<%= pkg.version %>.android.zip',
+          archive: '../android.<%= pkg.version %>.zip',
           mode: 'zip',
           pretty: true
         },
         files: [{
           expand: true,
           cwd: BUILD,
-          src: ['**'],
+          src: ['**', '!css/style.css', '!js/index.js'],
           dest: ''
         }, {
           expand: true,
@@ -230,14 +242,14 @@ module.exports = function (grunt) {
       },
       ios: {
         options: {
-          archive: '../popo.<%= pkg.version %>.ios.zip',
+          archive: '../ios.<%= pkg.version %>.zip',
           mode: 'zip',
           pretty: true
         },
         files: [{
           expand: true,
           cwd: BUILD,
-          src: ['**'],
+          src: ['**', '!css/style.css', '!js/index.js'],
           dest: ''
         }, {
           src: config.version,
@@ -280,6 +292,10 @@ module.exports = function (grunt) {
         }
       },
       'cssmin': {
+        web: {
+          src: [csses, 'css/web.css'],
+          dest: BUILD + 'css/style.css'
+        },
         'android': {
           src: 'css/android.css',
           dest: BUILD + 'css/android.css'
