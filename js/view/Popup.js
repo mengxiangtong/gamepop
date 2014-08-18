@@ -49,6 +49,39 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
+
+      if(WEB){ // 在网页版中显示
+        var userAgent = navigator.userAgent;
+        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
+        var reg = /micromessenger/i
+          , ios = /iPhone OS/
+          , isIOS = ios.test(navigator.userAgent)
+          , isWeixin = reg.test(navigator.userAgent);
+        //判断是否是safari浏览器
+        if(isSafari){
+          this.$(".download").remove();
+        }
+        //判断iphone手机，以决定下载地址
+        if(isIOS){
+          this.$(".download-button").attr("href" , config.ios_url);
+        }
+        else{
+          this.$(".download-button").attr("href",  config.android_url);
+        }
+        //微信打开不支持下载
+        if(isWeixin){
+          document.body.addEventListener('click', function(event){
+            if(event.target.className === 'download-button'||
+              event.target.parentNode.className === 'download-button'){
+              document.getElementById('cover').className = 'show';
+            }
+          }, false);
+        }
+
+      }else{ // 在app应用中不显示
+        this.$(".download").remove();
+      }
+
       this.$('.content')
         .addClass(this.options.classes)
         .load(this.options.url, _.bind(this.loadCompleteHandler, this));

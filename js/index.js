@@ -24,7 +24,6 @@
         TEMPLATES[key] = Handlebars.compile(content);
       }).remove();
     }
-
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
           el: document.body
@@ -93,7 +92,11 @@
     }
 
     // stat
-    if (WEB) { // 通过浏览器浏览，也可能是
+    if (WEB) { // 通过浏览器浏览
+      // 添加下载栏条
+      var web_css = $('<link href="css/web.css" rel="stylesheet" />');
+      $('head').append(web_css);
+
       var android = /android/i
         , isAndroid = android.test(navigator.userAgent);
 
@@ -115,7 +118,6 @@
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
     router.start(Backbone.history.start());
   }
-
   if (PHONEGAP) {
     document.addEventListener('deviceready', init, false);
   } else {

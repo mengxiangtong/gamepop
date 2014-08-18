@@ -1,4 +1,71 @@
-@charset "UTF-8"
+@charset "utf-8"
+@import "define"
+@import "component/homepage-search"
+@import "../bower_components/colors/sass/variables"
+@import "../bower_components/font-awesome/scss/variables"
+@import "../bower_components/font-awesome/scss/core"
+
+.page-container
+  #cover
+    background-color: rgba(0, 0, 0, 0.8)
+    background-image: url(../img/jiantou.png)
+    background-repeat: no-repeat
+    background-position: right top
+    position: absolute
+    z-index: 9999
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    display: none
+
+    &.show
+      display: block
+
+  .download
+    background: url(../img/web/114.png) no-repeat 10px center
+    background-color: rgba(235,235,235,0.6)
+    background-size: 60px 60px
+    height: 75px
+    width: 100%
+    font-size: 14px
+    position: fixed
+    bottom: 0
+    left: 0
+    z-index: 0
+
+    .download-button
+      display: inline-block
+      width: 70px
+      height: 35px
+      line-height: 35px
+      text-align: center
+      color: #FFF
+      border-radius: 4px
+      background-color: #00bef2
+      float: right
+      margin-right: 10px
+      margin-top: 20px
+
+    .download-content
+      width: 100%
+      padding-top: 5px
+
+      ul
+        list-style: none
+        margin-left: 40px
+        margin-top: 4px
+        letter-spacing: 1px
+
+        li
+          width: 175px
+          line-height: 17px
+          letter-spacing: 1px
+
+          i
+            color: #ff9014
+            font-size: 18px
+            line-height: 30px
 
 .web
   .game-button,

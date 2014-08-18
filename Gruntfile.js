@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compass: {   //将sass文件编译compass成css
+    compass: { // 将sass文件编译compass成css
       css: {
         options: {
           environment: 'production',
