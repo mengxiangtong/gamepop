@@ -93,7 +93,6 @@
 
     // stat
     if (WEB) { // 通过浏览器浏览
-
       var android = /android/i
         , isAndroid = android.test(navigator.userAgent);
 

@@ -50,6 +50,18 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
+      //使用网页版本浏览
+      if(WEB){
+        var userAgent = navigator.userAgent;
+        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
+        //判断是否是使用safari浏览器打开
+        if(isSafari){
+          $(".download-panel").remove();
+          this.$('.content').css("padding-bottom", "0");
+        }else{
+          $(".download-panel").show();
+        }
+      }
 
       this.$('.content')
         .addClass(this.options.classes)
@@ -164,11 +176,14 @@
       }
     },
     removePanel_tapHandler:function(event){
-      if(event.target.className === 'remove-panel' ||
-        event.target.parentNode.className === 'remove-panel'){
-        $(".download-panel").remove();
-        $(".content").css("padding-bottom", "0");
-      }
+      document.body.addEventListener('tap', function(event){
+        if(event.target.className === 'remove-panel' ||
+          event.target.parentNode.className === 'remove-panel'){
+          $(".download-panel").remove();
+          $(".content").css("padding-bottom", "0");
+        }
+      },false);
+
     },
     loadCompleteHandler: function (response, status) {
       if (status === 'error') {

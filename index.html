@@ -128,10 +128,15 @@
     <i class="fa fa-star"></i>
     <i class="fa fa-star"></i>
   </p>
-  <a class = "download-button" target="_blank">
-    免费下载
-  </a>
-  <a class="remove-panel"> &times; </a>
+  <script type="text/x-handlebars-template" class="template" id="download-url">
+    <a class = "download-url" target="_blank" href="{{url}}">
+      免费下载
+    </a>
+  </script>
+  <script type="text/x-handlebars-template" class="template" id="remove-panel">
+    <a class="remove-panel"> &times; </a>
+  </script>
+
 </div>
 <div id="cover"></div>
 

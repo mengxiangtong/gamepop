@@ -113,6 +113,9 @@
         history.push(fragment);
         console.log(history);
       }
+      if(!fragment){
+        $(".download-panel").hide();
+      }
       if (WEB) {
         $('[name=apple-itunes-app]').attr('content', "app-id=892347556, app-argument=gamemaster://" + fragment);
       }
