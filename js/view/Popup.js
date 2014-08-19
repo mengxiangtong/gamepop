@@ -27,7 +27,8 @@
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
-      'animationEnd': 'animationEndHandler'
+      'animationEnd': 'animationEndHandler',
+      'click .multi-delete-button': 'multideleteButton_tapHandler'
     },
     initialize: function (options) {
       this.options = options;
@@ -60,6 +61,7 @@
         //判断是否是safari浏览器
         if(isSafari){
           this.$(".download").remove();
+          this.$(".content").css("padding-bottom", "0");
         }
         //判断iphone手机，以决定下载地址
         if(isIOS){
@@ -77,7 +79,6 @@
             }
           }, false);
         }
-
       }else{ // 在app应用中不显示
         this.$(".download").remove();
       }
@@ -192,6 +193,13 @@
       if (/scaledown/i.test(this.el.className)) {
         this.remove();
         fadeOutPage = null;
+      }
+    },
+    multideleteButton_tapHandler:function(event){
+      if(event.target.className === 'multi-delete-button' ||
+        event.target.parentNode.className === 'multi-delete-button'){
+        $(".download").remove();
+        $(".content").css("padding-bottom", "0");
       }
     },
     loadCompleteHandler: function (response, status) {
