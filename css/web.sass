@@ -5,84 +5,85 @@
 @import "../bower_components/font-awesome/scss/variables"
 @import "../bower_components/font-awesome/scss/core"
 
+.download-panel
+  width: 100%
+  height: 75px
+  font-size: 14px
+  position: fixed
+  bottom: 0
+  left: 0
+  z-index: 9999
+  background-color: $download-background-color
+  display: none
+
+  img
+    width: 60px
+    height: 60px
+    position: absolute
+    top: 8px
+    left: 10px
+
+  h2
+    font-size: 14px
+    margin-left: 80px
+    width: 165px
+    line-height: 18px
+    margin-top: 10px
+
+  p
+    margin-left: 80px
+    margin-top: -15px
+
+    i
+      color: $star-color
+      font-size: 18px
+      line-height: $gap-l + 10px
+
+  .download-button
+    position: relative
+    float: right
+    width: 70px
+    height: $gap-l + 15px
+    line-height: $gap-l + 15px
+    text-align: center
+    color: $white
+    border-radius: 4px
+    background-color: $navbar-background-color
+    margin-right: $gap-l + $gap + 5px
+    margin-top: -67px
+
+  .remove-panel
+    float: right
+    font-size: 24px
+    border-radius: 50px
+    margin-top: -65px
+    padding-left: 8px
+    padding-top: 2px
+    height: 30px
+    width: 30px
+    line-height: 30px
+    background: rgba(0,0,0,0.1)
+    color: $white
+
+#cover
+  background-color: rgba(0, 0, 0, 0.8)
+  background-image: url(../img/web/jiantou.png)
+  background-repeat: no-repeat
+  background-position: right top
+  position: absolute
+  z-index: 9999
+  top: $topbar-height
+  left: 0
+  right: 0
+  bottom: 0
+  display: none
+
+  &.show
+    display: block
+
 .page-container
   .content
     padding-bottom: 75px
-
-  #cover
-    background-color: rgba(0, 0, 0, 0.8)
-    background-image: url(../img/jiantou.png)
-    background-repeat: no-repeat
-    background-position: right top
-    position: absolute
-    z-index: 9999
-    top: $topbar-height
-    left: 0
-    right: 0
-    bottom: 0
-    display: none
-
-    &.show
-      display: block
-
-  .download
-    background: url(../img/web/114.png) no-repeat 10px center
-    background-color: $download-background-color
-    background-size: 60px 60px
-    height: $gap-l + 55px
-    width: 100%
-    font-size: 14px
-    position: fixed
-    bottom: 0
-    left: 0
-    z-index: 0
-
-    .download-button
-      display: inline-block
-      width: 70px
-      height: $gap-l + 15px
-      line-height: $gap-l + 15px
-      text-align: center
-      color: $white
-      border-radius: 4px
-      background-color: $navbar-background-color
-      float: right
-      margin-right: $gap-l + $gap + 5px
-      margin-top: $gap-l
-
-    .multi-delete-button
-      float: right
-      font-size: 24px
-      border-radius: 50px
-      margin-top: 23px
-      margin-right: -102px
-      padding-left: 8px
-      padding-top: 2px
-      height: 30px
-      width: 30px
-      line-height: 30px
-      background: rgba(0,0,0,0.1)
-      color: $white
-
-      &:hover
-        background: rgba(0,0,0,0.4)
-
-    .download-content
-      padding-top: $gap - 5px
-
-      ul
-        list-style: none
-        margin-left: $gap-l + 20px
-        margin-top: $gap - 5px
-
-        li
-          line-height: $gap-l - 3px
-          width: 165px
-
-          i
-            color: $star-color
-            font-size: 18px
-            line-height: $gap-l + 10px
 
 .web
   .game-button,

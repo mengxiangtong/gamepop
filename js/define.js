@@ -48,6 +48,11 @@ if (DEBUG) {
         console.log('share: ', url, title);
       }
     };
+
+    // 添加下载栏条
+    var web_css = $('<link href="css/web.css" rel="stylesheet" />');
+    $('head').append(web_css);
+
   }(window));
 
 }
