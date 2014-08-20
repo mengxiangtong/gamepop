@@ -10,7 +10,7 @@
         width: width,
         height: height,
         hpItemWidth: hpItemWidth,
-        sidebarHeight: height * .9 - 150 >> 0
+        sidebarHeight: height * .9 - 195 >> 0
       }
       , content = TEMPLATES.css(size);
     style.innerHTML = content;
@@ -82,7 +82,9 @@
         })
         .map('.search-result', gamepop.view.SearchResult, {
           collection: results
-        });
+        })
+        .map('.setting-index', gamepop.view.ConfigPage)
+        .map('.setting-suggustion', gamepop.view.ConfigPage);
 
     createCss(document.body.clientWidth, document.body.clientHeight);
 
