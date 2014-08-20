@@ -27,8 +27,7 @@
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
-      'animationEnd': 'animationEndHandler',
-      'tap .remove-panel': 'removePanel_tapHandler'
+      'animationEnd': 'animationEndHandler'
     },
     initialize: function (options) {
       this.options = options;
@@ -51,13 +50,15 @@
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
       //使用网页版本浏览
+      this.$(".content").css("padding-bottom", localStorage.getItem("padding"));
       if(WEB){
         var userAgent = navigator.userAgent;
         var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
         //判断是否是使用safari浏览器打开
         if(isSafari){
           $(".download-panel").remove();
-          this.$('.content').css("padding-bottom", "0");
+          localStorage.setItem("padding","0");
+          $(".content").css("padding-bottom", localStorage.getItem("padding"));
         }else{
           $(".download-panel").show();
         }
@@ -174,16 +175,6 @@
         this.remove();
         fadeOutPage = null;
       }
-    },
-    removePanel_tapHandler:function(event){
-      document.body.addEventListener('tap', function(event){
-        if(event.target.className === 'remove-panel' ||
-          event.target.parentNode.className === 'remove-panel'){
-          $(".download-panel").remove();
-          $(".content").css("padding-bottom", "0");
-        }
-      },false);
-
     },
     loadCompleteHandler: function (response, status) {
       if (status === 'error') {

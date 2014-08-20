@@ -3,21 +3,27 @@
  */
 ;(function (ns) {
   ns.DownloadPanel = Backbone.View.extend({
-  url: '',
+    nav:[
+      {url: "http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003.ipa", title:"ios"},
+      {url: "http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003_signed.apk",title:"android"}
+    ],
     events: {
       'tap .download-url': 'downloadURL_tapHandler',
       'tap .remove-panel': 'removePanel_tapHandler'
     },
     initialize: function () {
-      this.template = TEMPLATES.download-url;
+      this.template = TEMPLATES.downloadUrl;
+      this.render();
+    },
+    render: function(){
+      //判断手机，以决定下载地址
       if(WEB){
-        var android = /android/i
-          , isAndroid = android.test(navigator.userAgent);
-
-        if (isAndroid) {
-          url = "http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003_signed.apk";
+        var ios = /iPhone OS/
+          , isIOS = ios.test(navigator.userAgent);
+        if(isIOS){
+          //alert("http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003.ipa");
         }else{
-          url = "http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003.ipa";
+          //alert("http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003_signed.apk");
         }
       }
     },

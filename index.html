@@ -118,7 +118,7 @@
     </ul>
   </div>
 </div>
-<div class="download-panel">
+<div id="downloadpanel" class="download-panel">
   <img src="img/web/114.png" alt="">
   <h2>游戏宝典 - 所有游戏攻略在这云集</h2>
   <p>
@@ -128,15 +128,10 @@
     <i class="fa fa-star"></i>
     <i class="fa fa-star"></i>
   </p>
-  <script type="text/x-handlebars-template" class="template" id="download-url">
-    <a class = "download-url" target="_blank" href="{{url}}">
-      免费下载
-    </a>
-  </script>
-  <script type="text/x-handlebars-template" class="template" id="remove-panel">
-    <a class="remove-panel"> &times; </a>
-  </script>
-
+  <a class = "download-url" target="_blank" href="">
+    免费下载
+  </a>
+  <a class="remove-panel"> &times; </a>
 </div>
 <div id="cover"></div>
 
@@ -218,6 +213,7 @@
 <script src="js/view/SearchForm.js"></script>
 <script src="js/view/SearchResult.js"></script>
 <script src="js/view/GamePage.js"></script>
+<script src="js/view/DownloadPanel.js"></script>
 <script src="js/view/GUI.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>

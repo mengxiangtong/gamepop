@@ -115,6 +115,7 @@
       }
       if(!fragment){
         $(".download-panel").hide();
+        $(".content").css("padding-bottom", localStorage.getItem("padding"));
       }
       if (WEB) {
         $('[name=apple-itunes-app]').attr('content', "app-id=892347556, app-argument=gamemaster://" + fragment);
