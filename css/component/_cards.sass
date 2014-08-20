@@ -19,9 +19,19 @@
     @include translate(0, -100%)
     background-image: url(../img/blur.jpg)
 
+    > *
+      display: block
+
+    .handle
+      @include rotate(180deg)
+
+  > *
+    display: none
+
   .handle
     background: transparent
     border: none
+    display: block
     position: absolute
     top: $gap
     left: 50%
@@ -31,17 +41,18 @@
     &:active
       opacity: 1
 
-    .active &
-      @include rotate(180deg)
-
   a
     color: $white
 
   h2
     font-size: 12px
     line-height: 25px
+    margin: 0
     opacity: .4
     padding-right: $gap-s
+
+  img
+    display: block
 
   .list
     background-color: rgba(255, 255, 255, 0.4)
@@ -50,6 +61,7 @@
   .more
     font-size: 14px
     line-height: 25px
+    margin: 0
     text-align: right
 
     a
@@ -61,7 +73,28 @@
       + a
         margin-left: 30px
 
-  .mm
+  .hot-game
+    @extend .ul
+    @extend .flex-row
+    padding: $gap $gap 0 !important
+
+    li
+      @extend .one
+
+      + li
+        margin-left: $gap-s
+
+    img
+      width: 100%
+      border-radius: 20px
+
+    h3
+      font-size: 12px
+      line-height: 25px
+      margin: 0
+      text-align: center
+
+  .girl
     position: relative
 
     img
@@ -72,5 +105,6 @@
       position: absolute
       left: $gap
       right: $gap
-      bottom: $gap-s
-      font-size: 12px
+      bottom: $gap
+      font-size: 14px
+      margin: 0
