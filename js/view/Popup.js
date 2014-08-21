@@ -49,18 +49,25 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
+
       //使用网页版本浏览
-      this.$(".content").css("padding-bottom", localStorage.getItem("padding"));
-      if(WEB){
+      if (WEB) {
         var userAgent = navigator.userAgent;
         var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
+
+        if (localStorage.getItem("no-download-panel")) { // 没有download-panel
+          $(".content").css("padding-bottom", 0); // 没有download-panel时content的padding-bottom值
+        }
         //判断是否是使用safari浏览器打开
-        if(isSafari){
+        if (isSafari) {
           $(".download-panel").remove();
-          localStorage.setItem("padding","0");
-          $(".content").css("padding-bottom", localStorage.getItem("padding"));
-        }else{
+          localStorage.setItem("no-download-panel",true);
+          $(".content").css("padding-bottom", 0);
+        } else { // 不是safari浏览器
           $(".download-panel").show();
+          if (!localStorage.getItem("no-download-panel")) {
+            $(".content").css("padding-bottom", "75px");
+          }
         }
       }
 

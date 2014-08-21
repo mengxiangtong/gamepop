@@ -23,6 +23,10 @@
           , content = this.innerHTML.replace(/\s{2,}|\n/g, '');
         TEMPLATES[key] = Handlebars.compile(content);
       }).remove();
+
+      // 添加下载栏条
+      var web_css = $('<link href="css/web.css" rel="stylesheet" />');
+      $('head').append(web_css);
     }
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
@@ -34,7 +38,6 @@
         el: '#homepage',
         collection: rss
       })
-      ,downloadpanel = new gamepop.view.DownloadPanel()
       , list = new gamepop.view.AppsList({
           el: '#my-apps',
           collection: appsCollection,
@@ -100,10 +103,15 @@
       if (isAndroid) {
         var css = $('<link href="css/android.css" rel="stylesheet" />');
         $('head').append(css);
+        $(".download-url-button").attr("href",config.android_url);
+      }else{
+        $(".download-url-button").attr("href",config.ios_url);
       }
       document.body.className = 'web';
 
-      localStorage.setItem("padding","75px");
+      //用于记录download-panel是否存在
+      localStorage.setItem("no-download-panel",false);
+
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=Array.prototype.pop.call(s.getElementsByTagName(o));

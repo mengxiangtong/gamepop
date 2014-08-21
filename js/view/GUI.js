@@ -25,9 +25,7 @@
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
       'tap .fav-button': 'favButton_tapHandler',
-      'tap .game-button': 'gameButton_tapHandler',
-      'tap .download-url': 'downloadURL_tapHandler',
-      'tap .remove-panel': 'removePanel_tapHandler'
+      'tap .game-button': 'gameButton_tapHandler'
     },
     initialize: function () {
       Hammer(this.el, {
@@ -152,36 +150,28 @@
     },
     touchHandler: function (event) {
       lastTouch = event.target;
-    },
-    downloadURL_tapHandler: function(event){
-      var reg = /micromessenger/i
-        ,ios = /iPhone OS/
-        , isIOS = ios.test(navigator.userAgent)
-        ,isWeixin = reg.test(navigator.userAgent);
-      //微信方式找开不支持下载
-      if(isWeixin){
-        document.body.addEventListener('click', function(event){
-          if(event.target.className === 'download-url'||
-            event.target.parentNode.className === 'download-url'){
-            document.getElementById('cover').className = 'show';
-          }
-        }, false);
-      }
-
-      //获取下载地址
-      if(isIOS){
-        $(".download-url").attr("href",config.ios_url);
-      }else{
-        $(".download-url").attr("href",config.android_url);
-      }
-    },
-    removePanel_tapHandler: function(event){
-      if(event.target.className === 'remove-panel' ||
-        event.target.parentNode.className === 'remove-panel'){
-        $(".download-panel").remove();
-        localStorage.setItem("padding", "0");
-        $(".content").css("padding-bottom", localStorage.getItem("padding"));
-      }
     }
   });
+  if (WEB) {
+    ns.GUI = ns.GUI.extend({
+      events: _.extend(ns.GUI.prototype.events, { // 用于与上一级的GUI中的events属性合并
+        'tap .download-url-button': 'downloadURLButton_tapHandler',
+        'tap .remove-panel': 'removePanel_tapHandler'
+      }),
+      downloadURLButton_tapHandler: function(event) {
+        var reg = /micromessenger/i
+          , ios = /iPhone OS/
+          , isIOS = ios.test(navigator.userAgent)
+          , isWeixin = reg.test(navigator.userAgent);
+        if (isWeixin) {
+          document.getElementById('cover').className = 'show';
+        }
+      },
+      removePanel_tapHandler: function(event) {
+          $(".download-panel").remove();
+          localStorage.setItem("no-download-panel", true);
+          $(".content").css("padding-bottom", 0);
+      }
+    });
+  }
 }(Nervenet.createNameSpace('gamepop.view')));

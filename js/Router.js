@@ -113,10 +113,6 @@
         history.push(fragment);
         console.log(history);
       }
-      if(!fragment){
-        $(".download-panel").hide();
-        $(".content").css("padding-bottom", localStorage.getItem("padding"));
-      }
       if (WEB) {
         $('[name=apple-itunes-app]').attr('content', "app-id=892347556, app-argument=gamemaster://" + fragment);
       }
@@ -131,6 +127,10 @@
         if (history[history.length - 2] === fragment) {
           // 可以认为是用户点了后退按钮
           return this.$gui.back(true);
+        }
+        //返回到主页面时，不显示下载栏
+        if (!fragment) {
+          $(".download-panel").hide();
         }
         Backbone.Router.prototype.execute.call(this, callback, args);
       }
