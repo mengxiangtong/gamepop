@@ -12,7 +12,7 @@
   left: 0
   right: 0
   z-index: 9999
-  padding: 10px 120px 0 10px
+  padding: $gap 120px 0 $gap
   background-color: $download-background-color
   display: none
 
@@ -46,25 +46,19 @@
     position: absolute
     float: right
     top: $gap-l
-    right: 45px
+    right: 35px
 
   .remove-panel
-    height: 30px
-    width: 30px
-    line-height: 30px
-    font-size: 24px
-    background: rgba(0,0,0,0.1)
-    color: $white
-    border-radius: 50px
+    height: 35px
+    width: 35px
+    line-height: 35px
+    font-size: 25px
+    text-align: center
+    color: $black
     position: absolute
     float: right
-    right: $gap
-    top: $gap-l + 3px
-    padding-left: $gap - 2px
-    padding-top: 2px
-
-    &:hover
-      background: rgba(0,0,0,0.3)
+    right: 0
+    top: $gap-l
 
 #cover
   background-color: rgba(0, 0, 0, 0.8)

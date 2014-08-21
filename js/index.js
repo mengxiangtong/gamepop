@@ -109,7 +109,7 @@
       }
       document.body.className = 'web';
 
-      //用于记录download-panel是否存在
+      // 用于记录download-panel是否存在
       localStorage.setItem("no-download-panel",false);
 
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -124,6 +124,7 @@
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点
     router.start(Backbone.history.start());
   }
+
   if (PHONEGAP) {
     document.addEventListener('deviceready', init, false);
   } else {

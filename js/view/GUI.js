@@ -160,8 +160,6 @@
       }),
       downloadURLButton_tapHandler: function(event) {
         var reg = /micromessenger/i
-          , ios = /iPhone OS/
-          , isIOS = ios.test(navigator.userAgent)
           , isWeixin = reg.test(navigator.userAgent);
         if (isWeixin) {
           document.getElementById('cover').className = 'show';

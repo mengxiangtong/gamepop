@@ -128,7 +128,7 @@
           // 可以认为是用户点了后退按钮
           return this.$gui.back(true);
         }
-        //返回到主页面时，不显示下载栏
+        // 返回到主页面时，不显示下载栏
         if (!fragment) {
           $(".download-panel").hide();
         }

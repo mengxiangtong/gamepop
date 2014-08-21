@@ -25,7 +25,7 @@ module.exports = function (grunt) {
     index: {
       index: 'index.html'
     },
-    copy: {   //复制
+    copy: { // 复制
       font: {
         files: [{
           expand: true,
@@ -53,13 +53,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'css/',
           src: ['*.sass'],
-          dest: 'css/',   //压缩最终目录
-          ext: '.css'    //更改后缀名
+          dest: 'css/', // 压缩最终目录
+          ext: '.css' // 更改后缀名
         }]
       }
 
     },
-    imagemin: {      //图片压缩模块
+    imagemin: { // 图片压缩模块
       img: {
         files: [{
           expand: true,
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    uglify: {    //压缩以及合并javascript文件  压缩代码，用于减少文件体积
+    uglify: { // 压缩以及合并javascript文件  压缩代码，用于减少文件体积
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         compress: {
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {   //minify用于压缩css文件，combine用于将多个css文件合并一个文件
+    cssmin: { // minify用于压缩css文件，combine用于将多个css文件合并一个文件
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip'
@@ -135,7 +135,7 @@ module.exports = function (grunt) {
         src: csses,
         dest: BUILD + 'css/style.css'
       },
-      android: {  //android样式
+      android: { // android样式
         src: [csses, 'css/android.css'],
         dest: TEMP + 'css/android/style.css'
       },
@@ -161,7 +161,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    concat: { //合并文件，不仅可以合并JS文件，还可以合并CSS文件
+    concat: { // 合并文件，不仅可以合并JS文件，还可以合并CSS文件
       options: {
         separator: ';\n'
       },
@@ -212,7 +212,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compress: {  //压缩打包
+    compress: { // 压缩打包
       android: {
         options: {
           archive: '../android.<%= pkg.version %>.zip',
@@ -318,7 +318,7 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('index', 'make index html', function () {
     var html = grunt.file.read(this.data);
     // 取CSS
-    html = html.replace(CSS_REG, function (match, src) {  //页面中含有css
+    html = html.replace(CSS_REG, function (match, src) { // 页面中含有css
       csses.push(src);
       return '';
     });

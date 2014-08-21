@@ -58,7 +58,7 @@
         if (localStorage.getItem("no-download-panel")) { // 没有download-panel
           $(".content").css("padding-bottom", 0); // 没有download-panel时content的padding-bottom值
         }
-        //判断是否是使用safari浏览器打开
+        // 判断是否是使用safari浏览器打开
         if (isSafari) {
           $(".download-panel").remove();
           localStorage.setItem("no-download-panel",true);

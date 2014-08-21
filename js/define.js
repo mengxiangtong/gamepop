@@ -48,7 +48,6 @@ if (DEBUG) {
         console.log('share: ', url, title);
       }
     };
-
   }(window));
 
 }
