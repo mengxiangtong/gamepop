@@ -2,7 +2,13 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+  <style>
+    body{
+      margin: 0!important;
+    }
+  </style>
 </head>
+
 <body>
   <!-- 评论框架引用自 多说 http://dev.duoshuo.com/ 具体API文档请参考：http://dev.duoshuo.com/docs-->
 
@@ -36,6 +42,13 @@
       ds.charset = 'UTF-8';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
     })()
+    var ifr = window.parent.document.getElementById("suggustion");
+    var timer = setInterval(function(){
+      if(ifr.contentWindow.document.body.offsetHeight !== 0){
+        ifr.style.height = ifr.contentWindow.document.body.offsetHeight + 'px';
+        clearInterval(timer);
+      }
+    },500)
   };
 </script>
 </body>

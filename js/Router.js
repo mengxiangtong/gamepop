@@ -19,9 +19,7 @@
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
       'no-guide/:game(/:name)': 'showNoGuidePage',
-      'config': 'showConfigPage',
-      'config-intro': 'showConfigIntroPage',
-      'config-suggustion': 'showConfigSuggustionPage'
+      'config(-:query)': 'showConfigPage'
     },
     backHome: function () {
       this.game = '';
@@ -97,17 +95,19 @@
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga('send', 'pageview', 'no-guide/' + game + '/' + name);
     },
-    showConfigPage: function(){
-      this.$gui.showPopupPage('template/config.html');
-      ga('send', 'pageview');
-    },
-    showConfigIntroPage: function(){
-      this.$gui.showPopupPage('template/config-intro.html');
-      ga('send', 'pageview');
-    },
-    showConfigSuggustionPage: function(){
-      this.$gui.showPopupPage('template/config-suggustion.html');
-      ga('send', 'pageview');
+    showConfigPage: function(query){
+      if(query == "intro"){
+        this.$gui.showPopupPage('template/config-intro.html');
+        ga('send', 'pageview', 'config-intro');
+      }
+      else if(query == "suggustion"){
+        this.$gui.showPopupPage('template/config-suggustion.html');
+        ga('send', 'pageview', 'config-suggustion');
+      }
+      else {
+        this.$gui.showPopupPage('template/config.html');
+        ga('send', 'pageview', 'config');
+      }
     },
     /**
      * 记录首次访问时的地址

@@ -83,8 +83,6 @@
         .map('.search-result', gamepop.view.SearchResult, {
           collection: results
         })
-        .map('.setting-index', gamepop.view.ConfigPage)
-        .map('.setting-suggustion', gamepop.view.ConfigPage);
 
     createCss(document.body.clientWidth, document.body.clientHeight);
 
