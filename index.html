@@ -50,17 +50,27 @@
 <script type="text/x-handlebars-template" class="template" id="css">
   .page-container,
   .content,
-  #cards {
+  #cards { {{#if width}}
     width: {{width}}px;
+    {{/if}}
     height: {{height}}px;
   }
+  {{#if width}}
+  .hot-game .item {
+    width: {{hotGameItemWidth}}px;
+  }
+  .hot-game img {
+    width: {{hotGameItemWidth}}px;
+    height: {{hotGameItemWidth}}px;
+  }
   .home-page .item {
-    width: {{hpItemWidth}}px;
+    width: {{homepageItemWidth}}px;
   }
   .home-page img {
-    width: {{hpItemWidth}}px;
-    height: {{hpItemWidth}}px;
+    width: {{homepageItemWidth}}px;
+    height: {{homepageItemWidth}}px;
   }
+  {{/if}}
   #sidebar ul.in {
     height: {{sidebarHeight}}px;
   }
@@ -93,19 +103,25 @@
   </script>
   <div id="cards">
     <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
+    <div class="btn-group">
+      <button type="button" class="refresh" data-target="my-guides"><i class="fa fa-refresh fa-spin"></i></button>
+    </div>
     <h2>我的攻略</h2>
-    <ul class="my-guides list">
+    <ul class="my-guides list article-list">
       <script type="text/x-handlebars-template" class="template" id="my-guides">
         {{#each list}}
         <li class="item article">
           {{#if icon_path}}<img src="./img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph" >{{/if}}
-          <h3><a href="#/remote/{{guide_name}}/{{z}}/{{id}}/detail.html">{{topic}}</a></h3>
+          <h3><a href="#/remote/{{guide_name}}/{{category}}/{{id}}/detail.html">{{topic}}</a></h3>
           <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
         </li>
         {{/each}}
       </script>
     </ul>
-    <p class="more"><a href="javascript:void(0);" data-target="my-guides">换一换</a></p>
+    <div class="btn-group">
+      <button type="button" data-target="hot-game" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
+      <a href="#/page/hot-game" class="more hide"><i class="fa fa-ellipsis-h"></i></a>
+    </div>
     <h2>热门游戏</h2>
     <ul class="hot-game list">
       <script type="text/x-handlebars-template" class="template" id="hot-game">
@@ -117,15 +133,17 @@
         {{/each}}
       </script>
     </ul>
-    <p class="more"><a href="#/hot-game">更多</a></p>
+    <div class="btn-group">
+      <button type="button" data-target="girl" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
+      <a href="#/page/girl" class="more hide"><i class="fa fa-ellipsis-h"></i></a>
+    </div>
     <h2>福利社</h2>
-    <div class="girl item" data-href="{{url}}">
+    <div class="girl item">
       <script type="text/x-handlebars-template" class="template" id="girl">
         <img src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}">
         <h3>{{topic}}</h3>
       </script>
     </div>
-    <p class="more"><a href="#/girl">更多</a></p>
   </div>
 </div>
 <div id="sidebar" class="hide">
@@ -212,6 +230,16 @@
       <i class="fa fa-frown-o"></i> 加载失败
     </div>
   </div>
+</script>
+
+<script type="text/x-handlebars-template" id="hot-game-tpl">
+  {{#each list}}
+  <li class="item" data-href="#/remote/{{guide_name}}">
+    <img src="img/image.gif">
+    <h2>{{game_name}} <small>订阅</small></h2>
+    <button type="button" class="bookmark-button"></button>
+  </li>
+  {{/each}}
 </script>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>

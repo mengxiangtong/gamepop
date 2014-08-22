@@ -18,7 +18,8 @@
       "search/:keyword": "showSearch",
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
-      'no-guide/:game(/:name)': 'showNoGuidePage'
+      'no-guide/:game(/:name)': 'showNoGuidePage',
+      'page/:page': 'showPage'
     },
     backHome: function () {
       this.game = '';
@@ -93,6 +94,13 @@
       };
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga('send', 'pageview', 'no-guide/' + game + '/' + name);
+    },
+    showPage: function (page) {
+      this.data = {
+        type: page
+      };
+      this.$gui.showPopupPage('template/' + page + '.html', page, this.data);
+      ga('send', 'pageview', 'page/' + page);
     },
     /**
      * 记录首次访问时的地址

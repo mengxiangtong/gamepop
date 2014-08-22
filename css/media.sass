@@ -1,7 +1,45 @@
 @charset "utf-8"
 @import "define"
 
+/** 关于布局尺寸的样式 **/
+/** for android 720 **/
+.page-container,
+.content,
+#cards
+  width: 360px
+  height: 615px
+
+.home-page
+  .item
+    width: 100px
+
+  img
+    width: 100px
+    height: 100px
+
+#sidebar ul.in
+  height: 426px
+
+
 @media (max-width: 320px)
+  /** for ios 320*568 **/
+  .page-container,
+  .content,
+  #cards
+    width: 320px
+    height: 568px
+
+  .home-page
+    .item
+      width: 94px
+
+    img
+      width: 94px
+      height: 94px
+
+  #sidebar ul.in
+    height: 361px
+
   #my-apps-title
     font-size: 10px
     line-height: 12px
@@ -20,6 +58,16 @@
       margin-left: 13px
 
   #cards
+    .hot-game
+      height: 121px
+
+      .item
+        width: 86px
+        height: 86px
+
+        + .item
+          margin-left: 6px
+
     .girl
       h3
         font-size: 12px

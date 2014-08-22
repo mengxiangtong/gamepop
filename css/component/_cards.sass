@@ -1,6 +1,7 @@
 @charset "UTF-8"
 @import "../define"
 @import "compass/css3/transform"
+@import "../../bower_components/font-awesome/scss/variables"
 
 #cards
   @extend .transition
@@ -46,55 +47,93 @@
 
   h2
     font-size: 12px
-    line-height: 25px
+    line-height: 40px
     margin: 0
     opacity: .4
     padding-right: $gap-s
+    width: 100px
+
+    &:first-of-type
+      padding-top: $gap
 
   img
     display: block
 
   .list
     background-color: rgba(255, 255, 255, 0.4)
-    border-radius: 8px
+    border-radius: 4px
+    margin-bottom: $gap !important
 
-  .more
+  .btn-group
     font-size: 14px
-    line-height: 25px
-    margin: 0
-    text-align: right
+    line-height: 40px
+    margin: 0 -$gap 0 0
+    float: right
+    padding-top: $gap
 
-    a
-      text-decoration: underline
+    &:first-of-type
+      padding-top: $gap-l
+
+    > *
+      background: transparent
+      border: none
+      color: $white
+      display: inline-block
+      font-size: 16px
+      width: 40px
+      height: 40px
+      line-height: 40px
+      padding: 0
+      text-align: center
+      vertical-align: top
 
       &:active
-        text-decoration: none
+        @extend .tap-active
 
-      + a
-        margin-left: 30px
+  .article-list
+    padding: $gap
+
+    .item
+      padding: 0
+
+      + .item
+        margin-top: $gap
+        padding-top: $gap
+        border-top: 1px solid rgba(255, 255, 255, 0.8)
+
+    p
+      color: rgba(255, 255, 255, 0.8)
 
   .hot-game
     @extend .ul
     @extend .flex-row
     padding: $gap $gap 0 !important
+    height: 131px
+    display: none
 
     li
       @extend .one
+      width: 96px
+      height: 96px
 
       + li
-        margin-left: $gap-s
+        margin-left: 11px
 
     img
       width: 100%
-      border-radius: 20px
+      border-radius: 4px
 
     h3
       font-size: 12px
       line-height: 25px
+      height: 25px
       margin: 0
+      overflow: hidden
       text-align: center
+      word-wrap: no-wrap
 
   .girl
+    padding-bottom: $gap-icon
     position: relative
 
     img

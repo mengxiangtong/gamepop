@@ -23,7 +23,7 @@
       "has-guide": true
     },
     {
-      "id": "bilibili1",
+      "id": "ttfc",
       "url": "#/remote/qmfjdz/",
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
@@ -31,20 +31,20 @@
       "is_local": false
     },
     {
-      "id": "zhihu1",
+      "id": "qmfjdz",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
     },
     {
-      "id": "skype1",
+      "id": "qqhlddz",
       "url": "#/no-guide/skype",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg"
     },
     {
-      "id": "bilibili2",
+      "id": "jzds",
       "url": "#/local/hdppl/",
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
@@ -52,13 +52,13 @@
       "has-offline": true
     },
     {
-      "id": "skype2",
+      "id": "smtw",
       "url": "#/no-guide/skype",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg"
     },
     {
-      "id": "zhihu2",
+      "id": "ttaxc",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",

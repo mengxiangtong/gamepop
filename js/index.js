@@ -4,15 +4,26 @@
 ;(function () {
   'use strict';
   function createCss(width, height) {
+    // 作为客户端默认样式写在样式表中
+    if (width === 360 && height === 615 || width === 320 && height === 568) {
+      return;
+    }
     var style = document.createElement('style')
-      , hpItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
       , size = {
-        width: width,
         height: height,
-        hpItemWidth: hpItemWidth,
         sidebarHeight: height * .9 - 150 >> 0
       }
-      , content = TEMPLATES.css(size);
+      , content;
+    if (width !== 360 && width !== 320) { // 标准宽度不计算
+      var homepageItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
+        , hotGameItemWidth = width > 320 ? (width - 62) / 3 : (width - 52) / 3;
+      size = _.extend(size, {
+        width: width,
+        homepageItemWidth: homepageItemWidth,
+        hotGameItemWidth: hotGameItemWidth
+      });
+    }
+    content = TEMPLATES.css(size);
     style.innerHTML = content;
     document.head.appendChild(style);
   }
@@ -54,7 +65,8 @@
         max: 128
       })
       , cards = new gamepop.view.Cards({
-        el: '#cards'
+        el: '#cards',
+        collection: appsCollection
       })
       , sidebar = new gamepop.view.Sidebar({
         el: '#sidebar',

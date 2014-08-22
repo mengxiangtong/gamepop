@@ -7,12 +7,12 @@ var config = {
   topgame: 'http://a.yxpopo.com/topgame.php',
   search: 'http://s.yxpopo.com/search.do',
   rss: 'http://a.yxpopo.com/rss.php',
-  api: 'http://a.yxpopo.com',
+  api: 'http://a.yxpopo.com/cards.php'
 };
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
-  config.api = 'http://meathill.pc/gamepop-api/';
-  config.remote ='http://meathill.pc/gamepop-api/vguide/';
+  //config.api = 'http://meathill.pc/gamepop-api/cards.php';
+  //config.remote ='http://meathill.pc/gamepop-api/vguide/';
   //config.rss = 'http://meathill.pc/gamepop-api/rss.php';
   //config.topgame = 'http://meathill.pc/gamepop-api/topgame.php';
 }
