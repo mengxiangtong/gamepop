@@ -71,6 +71,18 @@
     height: {{homepageItemWidth}}px;
   }
   {{/if}}
+  #cards-toggle {
+    top: {{cards-toggle-top}}px;
+  }
+  #cards-toggle.active {
+    -moz-transform: translate(0, -{{cards-toggle-top}}px);
+    -ms-transform: translate(0, -{{cards-toggle-top}}px);
+    -webkit-transform: translate(0, -{{cards-toggle-top}}px);
+    transform: translate(0, -{{cards-toggle-top}}px);
+    -moz-transform: translate3d(0, -{{cards-toggle-top}}px, 0);
+    -webkit-transform: translate3d(0, -{{cards-toggle-top}}px, 0);
+    transform: translate3d(0, -{{cards-toggle-top}}px, 0);
+  }
   #sidebar ul.in {
     height: {{sidebarHeight}}px;
   }
@@ -79,8 +91,9 @@
 
 <div id="homepage">
   <img src="img/logo.png" width="38" height="37" class="homepage-logo">
-  <button type="button" class="btn sidebar-toggle"><i class="fa fa-bars"></i></button>
-  <button type="button" class="btn history-button"><i class="fa fa-history"></i></button>
+  <button type="button" class="btn" id="sidebar-toggle"><i class="fa fa-bars"></i></button>
+  <button type="button" class="btn" id="history-button"><i class="fa fa-history"></i></button>
+  <button type="button" class="hide" id="cards-toggle"><img src="img/arrow.svg" width="37" height="12"></button>
   <form id="search-form" action="">
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
@@ -102,7 +115,6 @@
     </a>
   </script>
   <div id="cards">
-    <button type="button" class="handle"><img src="img/arrow.svg" width="37" height="12"></button>
     <div class="btn-group">
       <button type="button" class="refresh" data-target="my-guides"><i class="fa fa-refresh fa-spin"></i></button>
     </div>
@@ -111,7 +123,7 @@
       <script type="text/x-handlebars-template" class="template" id="my-guides">
         {{#each list}}
         <li class="item article">
-          {{#if icon_path}}<img src="./img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph" >{{/if}}
+          {{#if icon_path}}<img src="./img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">{{/if}}
           <h3><a href="#/remote/{{guide_name}}/{{category}}/{{id}}/detail.html">{{topic}}</a></h3>
           <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
         </li>
@@ -120,7 +132,7 @@
     </ul>
     <div class="btn-group">
       <button type="button" data-target="hot-game" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
-      <a href="#/page/hot-game" class="more hide"><i class="fa fa-ellipsis-h"></i></a>
+      <a href="#/page/hot-game" class="more"><i class="fa fa-ellipsis-h"></i></a>
     </div>
     <h2>热门游戏</h2>
     <ul class="hot-game list">
@@ -135,7 +147,7 @@
     </ul>
     <div class="btn-group">
       <button type="button" data-target="girl" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
-      <a href="#/page/girl" class="more hide"><i class="fa fa-ellipsis-h"></i></a>
+      <a href="#/page/girl" class="more"><i class="fa fa-ellipsis-h"></i></a>
     </div>
     <h2>福利社</h2>
     <div class="girl item">
@@ -145,6 +157,7 @@
       </script>
     </div>
   </div>
+  <div id="cards-top-bar"></div>
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">

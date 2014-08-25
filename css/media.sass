@@ -1,5 +1,6 @@
 @charset "utf-8"
 @import "define"
+@import "compass/css3/transform"
 
 /** 关于布局尺寸的样式 **/
 /** for android 720 **/
@@ -56,6 +57,13 @@
       width: 55px
       height: 55px
       margin-left: 13px
+
+  #cards-toggle
+    top: 528px
+
+    &.active
+      @include translate(0, -528px)
+      @include translate3d(0, -528px, 0)
 
   #cards
     .hot-game

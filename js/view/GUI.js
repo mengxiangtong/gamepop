@@ -21,7 +21,7 @@
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
       'tap #homepage': 'homepage_tapHandler',
-      'tap .sidebar-toggle': 'sidebarToggle_tapHandler',
+      'tap #sidebar-toggle': 'sidebarToggle_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
       'tap .fav-button': 'favButton_tapHandler',
@@ -72,13 +72,16 @@
       }, options));
     },
     toggleSidebar: function () {
-      $('#homepage').toggleClass('back');
+      $('#homepage').toggleClass('side');
       $('#sidebar').toggleClass('hide');
       ga('send', 'event', 'toggle', 'sidebar');
     },
     backButton_tapHandler: function (event) {
-      if ($('#homepage').hasClass('back') && !event) {
+      if ($('#homepage').hasClass('side') && !event) { // 在侧滑状态
         return this.toggleSidebar();
+      }
+      if ($('#cards').hasClass('back') && !event) {
+        return $('#cards, #cards-toggle').removeClass('active');
       }
       this.back();
     },
@@ -100,7 +103,7 @@
       ga('send', 'event', 'game', 'play', this.$context.getValue('game-id'));
     },
     homepage_tapHandler: function (event) {
-      if ($(event.currentTarget).hasClass('back')) {
+      if ($(event.currentTarget).hasClass('side')) {
         this.toggleSidebar();
         event.preventDefault();
       }

@@ -6,8 +6,9 @@
 
   ns.Homepage = Backbone.View.extend({
     events: {
+      'tap #cards-toggle': 'cardsToggle_tapHandler',
       'tap .entrance': 'entrance_tapHandler',
-      'tap .history-button': 'historyButton_tapHandler'
+      'tap #history-button': 'historyButton_tapHandler'
     },
     initialize: function () {
       this.template = TEMPLATES.entrance;
@@ -21,7 +22,9 @@
       }))(store);
       this.model.on('change', this.model_changeHandler, this);
       this.model.fetch();
-      this.render();
+      if (store) {
+        this.render();
+      }
 
       this.collection.once('sync', this.collection_syncHandler, this);
     },
@@ -37,7 +40,14 @@
     },
     collection_syncHandler: function (collection) {
       if (collection.hasOtherUpdate()) {
-        this.$('.sidebar-toggle').addClass('reminder');
+        this.$('#sidebar-toggle').addClass('reminder');
+      }
+    },
+    cardsToggle_tapHandler: function () {
+      this.$el.toggleClass('back');
+      $('#cards, #cards-toggle').toggleClass('active');
+      if (!$('#cards').hasClass('active')) {
+        $('#cards-top-bar').hide();
       }
     },
     entrance_tapHandler: function () {
@@ -54,6 +64,9 @@
       this.model.fetch();
     },
     model_changeHandler: function (model) {
+      if (device.save(model.get('big_pic'))) {
+        this.model.set('big_pic', 'img/homepage.jpg', {silent: true});
+      }
       this.render();
 
       localStorage.setItem(KEY, JSON.stringify(model.toJSON()));

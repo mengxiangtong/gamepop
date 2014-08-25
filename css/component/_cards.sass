@@ -3,44 +3,61 @@
 @import "compass/css3/transform"
 @import "../../bower_components/font-awesome/scss/variables"
 
+#cards-toggle
+  @extend .transition
+  background: transparent
+  border: none
+  display: block
+  position: absolute
+  top: 575px
+  left: 50%
+  margin: 0 0 0 (-29px)
+  padding: 13px $gap $gap-icon
+  z-index: 18
+
+  &:active img
+    opacity: 1
+
+  &.active
+    @include translate(0, -575px)
+    @include translate3d(0, -575px, 0)
+    padding-top: 23px
+
+    img
+      @include rotate(180deg)
+
+  img
+    display: block
+    margin: 0 auto
+    opacity: 0.4
+
 #cards
   @extend .transition
   background-size: cover
   color: $white
   overflow: scroll
   -webkit-touch-scroll: touch
-  padding: $topbar-height $gap-icon 0
+  padding: $topbar-height + 15px $gap-icon 0
   position: absolute
-  top: 100%
+  top: 0
+  left: 0
   z-index: 15
-  @include translate(0, -40px)
-  @include translate3d(0, -40px)
+  @include translate(0, 100%)
+  @include translate3d(0, 100%, 0)
 
   &.active
-    @include translate(0, -100%)
+    @include translate(0, 0)
+    @include translate3d(0, 0, 0)
     background-image: url(../img/blur.jpg)
 
     > *
       display: block
 
-    .handle
-      @include rotate(180deg)
+    .hot-game
+      @extend .flex-row
 
   > *
     display: none
-
-  .handle
-    background: transparent
-    border: none
-    display: block
-    position: absolute
-    top: $gap
-    left: 50%
-    margin-left: -19px
-    opacity: 0.4
-
-    &:active
-      opacity: 1
 
   a
     color: $white
@@ -53,9 +70,6 @@
     padding-right: $gap-s
     width: 100px
 
-    &:first-of-type
-      padding-top: $gap
-
   img
     display: block
 
@@ -67,12 +81,8 @@
   .btn-group
     font-size: 14px
     line-height: 40px
-    margin: 0 -$gap 0 0
+    margin: 0 (-$gap) 0 0
     float: right
-    padding-top: $gap
-
-    &:first-of-type
-      padding-top: $gap-l
 
     > *
       background: transparent
@@ -106,10 +116,8 @@
 
   .hot-game
     @extend .ul
-    @extend .flex-row
     padding: $gap $gap 0 !important
     height: 131px
-    display: none
 
     li
       @extend .one
@@ -144,6 +152,16 @@
       position: absolute
       left: $gap
       right: $gap
-      bottom: $gap
+      bottom: $gap-l
       font-size: 14px
       margin: 0
+
+#cards-top-bar
+  background-size: cover
+  background-image: url(../img/blur.jpg)
+  display: none
+  position: absolute
+  top: 0
+  width: 100%
+  height: $topbar-height + 15px
+  z-index: 16

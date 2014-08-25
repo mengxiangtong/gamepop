@@ -9,7 +9,6 @@
   ns.Cards = Backbone.View.extend({
     $apps: null,
     events: {
-      'tap .handle': 'handle_tapHandler',
       'tap .refresh': 'refresh_tapHandler',
       'transitionend': 'transitionEndHandler',
       'webkitTransitionEnd': 'transitionEndHandler'
@@ -33,9 +32,6 @@
         }
       });
     },
-    handle_tapHandler: function () {
-      this.$el.toggleClass('active');
-    },
     model_changeHandler: function (model) {
       for (var prop in model.changed) {
         if (!model.changed[prop]) {
@@ -53,6 +49,7 @@
           lazyLoad(this.el);
         }
       }
+      $('#cards-toggle').removeClass('hide'); // 显示按钮
     },
     refresh_tapHandler: function (event) {
       var target = $(event.currentTarget)
@@ -64,6 +61,7 @@
     transitionEndHandler: function () {
       if (this.$el.hasClass('active')) {
         lazyLoad(this.el);
+        this.$el.next().show();
       }
     }
   });

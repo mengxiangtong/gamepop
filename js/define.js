@@ -3,7 +3,7 @@
  */
 var DEBUG = true
   , PHONEGAP = false
-  , WEB = false
+  , WEB = true
   , TEMPLATES = {}
   , gamepop = gamepop || {
     view: {},
@@ -43,6 +43,9 @@ if (DEBUG) {
       },
       openKeyboard: function () {
         console.log('zhima, zhima, open keyboard');
+      },
+      save: function (url) {
+        return false;
       },
       share: function (url, title) {
         console.log('share: ', url, title);

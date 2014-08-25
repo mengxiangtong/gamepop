@@ -11,7 +11,8 @@
     var style = document.createElement('style')
       , size = {
         height: height,
-        sidebarHeight: height * .9 - 150 >> 0
+        sidebarHeight: height * .9 - 150 >> 0,
+        'cards-toggle-top': height - 40
       }
       , content;
     if (width !== 360 && width !== 320) { // 标准宽度不计算
