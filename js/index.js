@@ -110,7 +110,7 @@
       document.body.className = 'web';
 
       // 用于记录download-panel是否存在
-      localStorage.setItem("no-download-panel",false);
+      localStorage.setItem("no-download-panel",0);
 
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

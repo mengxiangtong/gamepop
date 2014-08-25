@@ -55,7 +55,8 @@
         var userAgent = navigator.userAgent;
         var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
 
-        if (localStorage.getItem("no-download-panel")) { // 没有download-panel
+        var is_download_panel = Number(localStorage.getItem("no-download-panel")) ;
+        if (is_download_panel) { // 没有download-panel
           $(".content").css("padding-bottom", 0); // 没有download-panel时content的padding-bottom值
         }
         // 判断是否是使用safari浏览器打开
@@ -65,7 +66,7 @@
           $(".content").css("padding-bottom", 0);
         } else { // 不是safari浏览器
           $(".download-panel").show();
-          if (!localStorage.getItem("no-download-panel")) {
+          if (!is_download_panel) {
             $(".content").css("padding-bottom", "75px");
           }
         }

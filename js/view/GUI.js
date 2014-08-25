@@ -167,7 +167,7 @@
       },
       removePanel_tapHandler: function(event) {
           $(".download-panel").remove();
-          localStorage.setItem("no-download-panel", true);
+          localStorage.setItem("no-download-panel", 1);
           $(".content").css("padding-bottom", 0);
       }
     });
