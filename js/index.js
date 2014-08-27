@@ -17,11 +17,13 @@
       , content;
     if (width !== 360 && width !== 320) { // 标准宽度不计算
       var homepageItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
-        , hotGameItemWidth = width > 320 ? (width - 62) / 3 : (width - 52) / 3;
+        , hotGameItemWidth = width > 320 ? (width - 62) / 3 : (width - 52) / 3
+        , hotGameHeight = hotGameItemWidth + 35;
       size = _.extend(size, {
         width: width,
         homepageItemWidth: homepageItemWidth,
-        hotGameItemWidth: hotGameItemWidth
+        hotGameItemWidth: hotGameItemWidth,
+        'hot-game-height': hotGameHeight
       });
     }
     content = TEMPLATES.css(size);

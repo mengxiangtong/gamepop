@@ -34,6 +34,7 @@
 #cards
   @extend .transition
   background-size: cover
+  background-image: url(../img/bg.jpg)
   color: $white
   overflow: scroll
   -webkit-touch-scroll: touch
@@ -45,10 +46,12 @@
   @include translate(0, 100%)
   @include translate3d(0, 100%, 0)
 
+  &.ready
+    background-image: url(../img/homepage_blur.jpg)
+
   &.active
     @include translate(0, 0)
     @include translate3d(0, 0, 0)
-    background-image: url(../img/blur.jpg)
 
     > *
       display: block
@@ -158,10 +161,13 @@
 
 #cards-top-bar
   background-size: cover
-  background-image: url(../img/blur.jpg)
+  background-image: url(../img/bg.jpg)
   display: none
   position: absolute
   top: 0
   width: 100%
   height: $topbar-height + 15px
   z-index: 16
+
+  &.ready
+    background-image: url(../img/homepage_blur.jpg)

@@ -12,11 +12,15 @@
     },
     initialize: function () {
       this.template = TEMPLATES.entrance;
-      // 取上一次的记录
-      var store = localStorage.getItem(KEY);
-      if (store) {
-        store = JSON.parse(store);
+      var store;
+      if (!WEB) {
+        // 取上一次的记录
+        store = localStorage.getItem(KEY);
+        if (store) {
+          store = JSON.parse(store);
+        }
       }
+
       this.model = new (Backbone.Model.extend({
         urlRoot: config.topgame
       }))(store);
@@ -28,13 +32,22 @@
 
       this.collection.once('sync', this.collection_syncHandler, this);
     },
-    render: function () {
+    render: function (isClass) {
       if (!this.model.get('big_pic')) {
         return;
       }
       this.$('.entrance').remove();
       this.$el.append(this.template(this.model.toJSON()));
-      this.$el.addClass('ready');
+      if (WEB || !isClass) {
+        this.$el.css('background-image', 'url(' + this.model.get('big_pic') + ')');
+        if (this.model.get('blur_pic')) {
+          this.$('#cards,#cards-top-bar').css('background-image', 'url(' + this.model.get('blur_pic') + ')');
+        }
+      } else {
+        this.$el.addClass('ready')
+          .find('#cards').addClass('ready');
+      }
+
       this.$('.history-button').prop('disabled', false)
         .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
     },
@@ -64,12 +77,22 @@
       this.model.fetch();
     },
     model_changeHandler: function (model) {
-      if (device.save(model.get('big_pic'))) {
-        this.model.set('big_pic', 'img/homepage.jpg', {silent: true});
-      }
-      this.render();
+      if (WEB) { // 网页无法缓存本地图片
+        this.render();
+      } else { // 客户端把图片缓存在本地
+        if (device.save(model.get('big_pic'))) {
+          this.model.set({
+            'big_pic': 'img/homepage.jpg',
+            'blur_pic': 'img/homepage_blur.jpg'
+          }, {silent: true});
+          this.render(true);
+        } else {
+          this.render();
+        }
 
-      localStorage.setItem(KEY, JSON.stringify(model.toJSON()));
+        localStorage.setItem(KEY, JSON.stringify(model.toJSON()));
+      }
+
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

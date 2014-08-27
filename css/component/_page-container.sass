@@ -21,10 +21,15 @@
     z-index: 20
     padding: $gap $gap 0
 
-    .navbar-text
-      display: inline-block
+    h2
+      position: absolute
+      top: $gap
+      left: $topbar-height
+      right: $topbar-height
+      margin: 0
+      font-size: 18px
       line-height: $topbar-height - $gap
-      text-indent: $gap
+      text-align: center
 
     .navbar-btn-group
       float: right
@@ -116,7 +121,7 @@
 
       &.active:before
         content: $fa-var-bookmark
-        color: #FFD511
+        color: $bookmark-active-color
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)
 
       &:before

@@ -42,6 +42,7 @@
         game_name: game_name,
         'has-guide': true,
         'has-game': hasGame,
+        'has-search': true,
         'is-detail': type === 'detail',
         'is-index': isIndex,
         fav: fav,
@@ -96,10 +97,13 @@
       ga('send', 'pageview', 'no-guide/' + game + '/' + name);
     },
     showPage: function (page) {
+      var is_hot = page === 'hot';
       this.data = {
-        type: page
+        type: page,
+        'has-search': is_hot,
+        'title': is_hot ? '热门游戏' : 0
       };
-      this.$gui.showPopupPage('template/' + page + '.html', page, this.data);
+      this.$gui.showPopupPage(config[page], page, this.data);
       ga('send', 'pageview', 'page/' + page);
     },
     /**

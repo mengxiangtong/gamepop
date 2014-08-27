@@ -91,10 +91,14 @@
       setTimeout(function () {
         map.check(el);
       }, 50);
-      // lazyload
-      lazyLoad(this.el);
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
+      // 自动加载
+      if (this.$('.auto-load').length > 0) {
+        new gamepop.view.AutoLoad({
+          el: this.$('content')
+        });
+      }
     },
     show: function () {
       this.$el.show();
@@ -105,9 +109,17 @@
       this.$('.navbar-btn-group,.back-button').toggleClass('hide', isShow);
     },
     bookmarkButton_tapHandler: function (event) {
-      var button = $(event.currentTarget);
-      this.$rss.toggle(button.hasClass('active'), this.options.guide_name, this.$('h1').text(), this.$('.icon').attr('src'));
+      var button = $(event.currentTarget)
+        , parent = button.closest('.item');
+      if (parent.length === 0) {
+        parent = this.$('.game-info');
+      }
+      var guide_name = this.options.guide_name || button.closest('.item').data('id')
+        , title = parent.find('h1, h2').text()
+        , icon = parent.find('img').attr('src');
+      this.$rss.toggle(button.hasClass('active'), guide_name, title, icon);
       button.toggleClass('active');
+      event.stopPropagation();
     },
     cancelButton_tapHandler: function () {
       this.toggleSearchForm(false);
@@ -183,6 +195,8 @@
       }
       $('title').text('游戏宝典 ' + this.$('.content').find('h1, h2').first().text());
 
+      // lazyload
+      lazyLoad(this.el);
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     }

@@ -11,7 +11,6 @@
     $rss: null,
     fragment: '',
     events: {
-      'tap .bookmark-button': 'bookmarkButton_tapHandler',
       'tap .item': 'item_tapHandler'
     },
     initialize: function () {
@@ -22,7 +21,6 @@
       this.collection.on('request', this.collection_requestHandler, this);
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.search();
-      this.$rss.on('add remove', this.rss_changeHandler, this);
     },
     remove: function () {
       this.$el.off('scroll');
@@ -43,13 +41,6 @@
         this.collection.on('sync', this.collection_syncHandler, this);
       }
       lazyload(this.el);
-    },
-    bookmarkButton_tapHandler: function (event) {
-      var target = $(event.currentTarget)
-        , li = target.closest('li')
-        , id = li.attr('id').substr(7);
-      this.$rss.toggle(target.hasClass('active'), id, li.find('h2').text(), li.find('img').attr('src'));
-      event.stopPropagation();
     },
     collection_addHandler: function (model) {
       if (this.collection.guide_name !== this.guide_name) {
@@ -91,9 +82,6 @@
     },
     item_tapHandler: function (event) {
       ga('send', 'event', 'view', 'search', $(event.currentTarget).data('href'));
-    },
-    rss_changeHandler: function (model) {
-      this.$('#search-' + model.id).find('.bookmark-button').toggleClass('active', model.collection);
     },
     scrollHandler: function () {
       clearTimeout(this.timeout);

@@ -1,0 +1,54 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+@import "../../bower_components/font-awesome/scss/variables"
+
+.hot-game-list
+  @extend .ul
+  @extend .wrap-container
+  padding: 0 $gap-s + $gap 0 $gap-s
+
+  .item
+    @extend .wrap
+    width: 50%
+    padding-left: $gap
+    padding-bottom: $gap
+    position: relative
+
+  img
+    border-radius: $gap-s $gap-s 0 0
+    display: block
+    width: 100%
+
+  h2
+    background-color: $white
+    border: 1px solid $border-color
+    border-top: none
+    border-radius: 0 0 $gap-s $gap-s
+    font-size: 14px
+    line-height: 35px
+    margin: 0
+    padding: 0 $gap
+
+  .bookmark-button
+    position: absolute
+    right: $gap
+    bottom: $gap-l
+    background-color: $bookmark-color
+    color: $white
+    border: none
+    border-radius: 35px
+    width: 35px
+    height: 35px
+    font-size: 20px
+    line-height: 35px
+
+    &:active
+      background-color: darken($bookmark-color, 10%)
+
+    &:before
+      content: $fa-var-bookmark-o
+
+    &.active:before
+      color: $bookmark-active-color
+      content: $fa-var-bookmark
