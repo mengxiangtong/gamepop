@@ -19,6 +19,7 @@
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
       'no-guide/:game(/:name)': 'showNoGuidePage',
+      'external/:page': 'showExternalPage',
       'page/:page': 'showPage'
     },
     backHome: function () {
@@ -96,14 +97,23 @@
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga('send', 'pageview', 'no-guide/' + game + '/' + name);
     },
-    showPage: function (page) {
+    showExternalPage: function (page) {
       var is_hot = page === 'hot';
       this.data = {
         type: page,
         'has-search': is_hot,
-        'title': is_hot ? '热门游戏' : 0
+        'title': is_hot ? '热门游戏' : ''
       };
       this.$gui.showPopupPage(config[page], page, this.data);
+      ga('send', 'pageview', 'external/' + page);
+    },
+    showPage: function (page) {
+      var is_girl = page === 'girl';
+      this.data = {
+        type: page,
+        'title': is_girl ? '福利社' : ''
+      };
+      this.$gui.showPopupPage('template/' + page + '.html', page, this.data);
       ga('send', 'pageview', 'page/' + page);
     },
     /**

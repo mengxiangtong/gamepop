@@ -1,0 +1,150 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+/* ====================================
+ * icon-list & article-list
+ * ==================================*/
+.icon-list,
+.article-list
+
+  .item
+    overflow: hidden
+    padding: $gap-s
+
+    &:active
+      @extend .tap-active
+
+  img
+    display: blok
+    border-radius: 4px
+
+  h2 a:visited,
+  h3 a:visited
+    color: $mute
+
+    .search-result &
+      color: #DDD
+
+      .match
+        color: lighten($search-success, 10%)
+
+  p
+    margin: 0
+
+  &:only-child
+    display: list-item
+
+/* ====================================
+ * icon-list
+ * ==================================*/
+.icon-list
+  @extend .ul
+  padding: $gap
+  color: $white
+
+  .item
+    background: none
+    padding: $gap + $gap-s $gap-s 0
+    position: relative
+
+    &:first-child
+      padding-top: $gap
+
+    &.game
+
+      img
+        width: 60px
+        height: 60px
+        border-radius: 10px
+        float: left
+        margin-right: $gap
+
+      p
+        padding-bottom: 17px
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+        margin-left: 70px
+
+      .bookmark-button
+        position: absolute
+        top: 25px
+        right: -$gap-s
+        font-size: 30px
+        width: 40px
+        height: 40px
+        color: $white
+        background: none
+        border: none
+        padding: 0
+
+        &:before
+          content: $fa-var-bookmark-o
+
+        &.active:before
+          color: #ffd511
+          content: $fa-var-bookmark
+          text-shadow: 0 1px 0 rgba(0, 0, 0, .3)
+
+    &.article
+      background-color: rgba(0, 0, 0, .1)
+      border-radius: 6px
+      padding: $gap
+
+      + .article
+        margin-top: $gap-s
+
+      img
+        width: 90px
+        height: 60px
+        border-radius: 4px
+        float: right
+        margin: 0 0 0 10px
+
+      p
+        color: #C9D8F5
+        max-height: 5em
+        overflow: hidden
+
+      .match
+        color: $search-success
+
+  h2
+    font-size: 16px
+    line-height: 1.25em
+    margin: 0 0 7px
+
+    a
+      color: $white
+
+  p
+    font-size: 12px
+    line-height: 1.25em
+
+/* ====================================
+ * article-list
+ * ==================================*/
+.article-list
+  @extend .ul
+
+  .item
+
+    + .item
+      margin-top: $gap-s
+
+  img
+    width: 75px
+    height: 50px
+    float: right
+    margin-left: $gap
+
+  h3
+    font-size: 14px
+    line-height: 1.2em
+    margin: 0 0 $gap-s
+
+  p
+    font-size: 10px
+    line-height: 1em
+
+  &:last-child
+    padding-bottom: $gap

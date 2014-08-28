@@ -90,7 +90,7 @@
           this.render();
         }
 
-        localStorage.setItem(KEY, JSON.stringify(model.toJSON()));
+        localStorage.setItem(KEY, JSON.stringify(model.omit('id')));
       }
 
     }

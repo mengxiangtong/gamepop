@@ -6,11 +6,11 @@
 .hot-game-list
   @extend .ul
   @extend .wrap-container
-  padding: 0 $gap-s + $gap 0 $gap-s
+  padding: 0 $gap-s + $gap $gap-s $gap-s
 
   .item
     @extend .wrap
-    width: 50%
+    width: 170px
     padding-left: $gap
     padding-bottom: $gap
     position: relative
@@ -18,7 +18,8 @@
   img
     border-radius: $gap-s $gap-s 0 0
     display: block
-    width: 100%
+    width: 160px
+    height: 160px
 
   h2
     background-color: $white
@@ -27,6 +28,8 @@
     border-radius: 0 0 $gap-s $gap-s
     font-size: 14px
     line-height: 35px
+    height: 35px
+    overflow: hidden
     margin: 0
     padding: 0 $gap
 
@@ -52,3 +55,4 @@
     &.active:before
       color: $bookmark-active-color
       content: $fa-var-bookmark
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)

@@ -1,4 +1,7 @@
 @charset "utf-8"
+$font-size: 15px
+$line-height: 1.5em
+
 $topbar-height: 45px
 $gap-s: 5px
 $gap: 10px
@@ -74,11 +77,11 @@ $search-success: #F6421F
 .wrap-container
   // 这两个0解决inline-block时会在块之间产生空隙的问题
   font-size: 0
-  line-height: 0
 
-  *
-    font-size: 12px
-    line-height: 1.5em
+  *,
+  &:before,
+  &:after
+    font-size: $font-size
 
 .wrap
   display: inline-block

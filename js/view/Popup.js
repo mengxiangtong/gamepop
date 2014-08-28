@@ -41,7 +41,11 @@
       pages.push(this);
     },
     remove: function () {
-      this.$('.content').off('scroll');
+      var content = this.$('.content');
+      content.off('scroll');
+      if (content.data('auto-load')) {
+        content.data('auto-load').remove();
+      }
       this.$result.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
@@ -95,9 +99,11 @@
       this.$('.navbar-btn-group').removeClass('hide');
       // 自动加载
       if (this.$('.auto-load').length > 0) {
-        new gamepop.view.AutoLoad({
-          el: this.$('content')
-        });
+        var content = this.$('.content')
+          , autoLoad = new gamepop.view.AutoLoad({
+            el: content
+          });
+        content.data('auto-load', autoLoad);
       }
     },
     show: function () {

@@ -100,7 +100,11 @@
         })
         .map('.search-result', gamepop.view.SearchResult, {
           collection: results
-        });
+        })
+        .map('.hot-game-list', gamepop.view.HotGame, {
+          collection: rss
+        })
+        .map('#boobs', gamepop.view.Boobs);
 
     createCss(document.body.clientWidth, document.body.clientHeight);
 

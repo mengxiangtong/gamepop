@@ -135,7 +135,7 @@
     </ul>
     <div class="btn-group">
       <button type="button" data-target="hot-game" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
-      <a href="#/page/hot" class="more"><i class="fa fa-ellipsis-h"></i></a>
+      <a href="#/external/hot" class="more"><i class="fa fa-ellipsis-h"></i></a>
     </div>
     <h2>热门游戏</h2>
     <ul class="hot-game list">
@@ -242,7 +242,7 @@
   </header>
   <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
     <button type="button" class="cancel-button">取消</button>
-    <input type="text" name="keyword" placeholder="在{{game_name}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
+    <input type="text" name="keyword" placeholder="在{{game_name}}{{title}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
     <button {{#if keyword}}disabled{{/if}}><i class="fa fa-search"></i></button>
   </form>
   <div class="content">
@@ -252,12 +252,11 @@
   </div>
 </script>
 
-<script type="text/x-handlebars-template" id="hot-game-tpl">
+<script type="text/x-handlebars-template" id="boobs">
   {{#each list}}
   <li class="item" data-href="#/remote/{{guide_name}}">
-    <img src="img/image.gif">
-    <h2>{{game_name}} <small>订阅</small></h2>
-    <button type="button" class="bookmark-button"></button>
+    <img src="img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">
+    <h2>{{game_name}}</h2>
   </li>
   {{/each}}
 </script>
@@ -285,6 +284,8 @@
 <script src="js/view/SearchResult.js"></script>
 <script src="js/view/AutoLoad.js"></script>
 <script src="js/view/GamePage.js"></script>
+<script src="js/view/HotGame.js"></script>
+<script src="js/view/Boobs.js"></script>
 <script src="js/view/GUI.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>

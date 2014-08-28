@@ -1,0 +1,40 @@
+@charset "UTF-8"
+@import "../define"
+
+.carousel
+  overflow: hidden
+
+  ul
+    @extend .ul
+    @extend .flex-row
+    overflow: hidden
+    -webkit-backface-visibility: hidden
+    -webkit-transform-style: flat
+
+    &.animate
+      @extend .transition
+
+  li
+    @extend .one
+
+/* ----------------
+ * indicators
+ * --------------*/
+.indicators
+  position: absolute
+  left: 50%
+  bottom: $gap + $gap-s
+  font: 10px/10px Airal
+  background-image: url(../img/indicator.svg)
+  min-width: 10px
+  height: 10px
+
+  .token
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    overflow: hidden
+    background: $active-color
+
+    &.animate
+      @extend .transition
