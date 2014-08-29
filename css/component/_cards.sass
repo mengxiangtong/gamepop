@@ -33,12 +33,12 @@
 
 #cards
   @extend .transition
+  background: url(../img/bg.jpg) no-repeat
   background-size: cover
-  background-image: url(../img/bg.jpg)
   color: $white
   overflow: scroll
   -webkit-touch-scroll: touch
-  padding: $topbar-height + 15px $gap-icon 0
+  padding: $topbar-height + 15px $gap-icon $gap-icon
   position: absolute
   top: 0
   left: 0
@@ -144,19 +144,23 @@
       word-wrap: no-wrap
 
   .girl
-    padding-bottom: $gap-icon
+    height: 220px
     position: relative
 
     img
       width: 100%
-      border-radius: 8px
+      border-radius: 4px
 
     h3
+      background-color: rgba(0, 0, 0, 0.75)
+      border-radius: 0 0 4px 4px
       position: absolute
-      left: $gap
-      right: $gap
-      bottom: $gap-l
+      left: 0
+      right: 0
+      bottom: 0
       font-size: 14px
+      text-indent: $gap
+      line-height: 2em
       margin: 0
 
 #cards-top-bar

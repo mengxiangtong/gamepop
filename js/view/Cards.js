@@ -55,7 +55,7 @@
       var target = $(event.currentTarget)
         , type = target.data('target');
       target.find('i').addClass('fa-spin');
-      this.model.id = type;
+      this.model.set('id', type, {silent: true});
       this.model.fetch();
     },
     transitionEndHandler: function () {

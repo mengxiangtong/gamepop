@@ -23,7 +23,9 @@
         width: width,
         homepageItemWidth: homepageItemWidth,
         hotGameItemWidth: hotGameItemWidth,
-        'hot-game-height': hotGameHeight
+        'hot-game-height': hotGameHeight,
+        'girl-height': (width - 30 << 1) / 3,
+        'girl-item-height': (width - 30) / 3 >> 0
       });
     }
     content = TEMPLATES.css(size);
