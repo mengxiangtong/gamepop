@@ -43,8 +43,8 @@
     remove: function () {
       var content = this.$('.content');
       content.off('scroll');
-      if (content.data('auto-load')) {
-        content.data('auto-load').remove();
+      if (this.$('.auto-load').length > 0) {
+        this.$('.auto-load').data('mediator').remove();
       }
       this.$result.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
@@ -98,12 +98,14 @@
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
       // 自动加载
-      if (this.$('.auto-load').length > 0) {
-        var content = this.$('.content')
-          , autoLoad = new gamepop.view.AutoLoad({
-            el: content
+      var autoLoad = this.$('.auto-load');
+      if (autoLoad.length > 0) {
+        var content = autoLoad.children().length > 0 ? autoLoad : this.$('.content')
+          , mediator = new gamepop.view.AutoLoad({
+            el: content,
+            list: autoLoad
           });
-        content.data('auto-load', autoLoad);
+        autoLoad.data('mediator', mediator);
       }
     },
     show: function () {

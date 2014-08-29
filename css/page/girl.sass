@@ -3,11 +3,40 @@
 @import "../../bower_components/colors/sass/variables"
 
 #boobs
+  @extend .flex-column
+  height: 100%
+
   .tabs
     @extend .ul
     @extend .flex-row
     border-bottom: 1px solid $smoke
+    height: 35px
 
     li
       @extend .one
+      line-height: 2em
       text-align: center
+      padding-bottom: 4px
+
+      &.active
+        color: $search-color
+        border-bottom: 4px solid $search-color
+        padding-bottom: 0
+
+  .waterfall
+    @extend .one
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+
+  .column
+
+    .item
+      border: 1px solid $white
+      border-radius: 4px
+      height: 110px
+
+      img
+        border-radius: 4px
+        display: block
+        width: 100%
+        max-width: 100%

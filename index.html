@@ -240,11 +240,13 @@
     {{/unless}}
     <i class="fa fa-spin fa-spinner"></i>
   </header>
+  {{#if has-search}}
   <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
     <button type="button" class="cancel-button">取消</button>
     <input type="text" name="keyword" placeholder="在{{game_name}}{{title}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
     <button {{#if keyword}}disabled{{/if}}><i class="fa fa-search"></i></button>
   </form>
+  {{/if}}
   <div class="content">
     <div class="alert alert-error hide">
       <i class="fa fa-frown-o"></i> 加载失败
@@ -252,13 +254,10 @@
   </div>
 </script>
 
-<script type="text/x-handlebars-template" id="boobs">
-  {{#each list}}
-  <li class="item" data-href="#/remote/{{guide_name}}">
+<script type="text/x-handlebars-template" id="boobs" class="template">
+  <div class="item" data-href="#/remote/girl/{{id}}.html" id="girl-{{id }}">
     <img src="img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">
-    <h2>{{game_name}}</h2>
-  </li>
-  {{/each}}
+  </div>
 </script>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>

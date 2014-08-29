@@ -11,10 +11,14 @@
     border-left: 1px solid $smoke
     border-radius: 4px
     color: $gray
-    display: list-item
+    display: block
     line-height: 30px
     height: 30px
     text-align: center
+
+  &:empty:after,
+  &.no-scroll:after
+    display: none
 
   &.loading:after
     content: '加载中...'
@@ -22,11 +26,19 @@
   &.no-more:after
     content: '没有其它文章了。努力收集中，常来看哟~'
 
+  &.reloading:after
+    content: '重新加载，请稍候'
+
   &.hot-game-list:after
     margin: 0 0 $gap $gap
 
   &.article-list:after
     margin-top: $gap
+
+  &.waterfall:after
+    float: left
+    width: 100%
+    margin: $gap $gap $gap 0
 
 .no-result
   display: none

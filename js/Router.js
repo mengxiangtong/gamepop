@@ -43,7 +43,7 @@
         game_name: game_name,
         'has-guide': true,
         'has-game': hasGame,
-        'has-search': true,
+        'has-search': isIndex || isList,
         'is-detail': type === 'detail',
         'is-index': isIndex,
         fav: fav,
