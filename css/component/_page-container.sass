@@ -30,8 +30,11 @@
       margin: 0
       font-size: 18px
       line-height: $topbar-height - $gap
+      height: $topbar-height + $gap * 2
       padding: $gap $topbar-height
+      overflow: hidden
       text-align: center
+      text-overflow: ellipsis
       z-index: -1
 
     .navbar-btn-group
@@ -54,8 +57,7 @@
         margin-left: $gap
 
     .back-button
-      padding-top: 2px
-      line-height: $topbar-height - $gap - 2px
+      line-height: $topbar-height - $gap
       padding-right: 4px
       background-color: rgba(0, 0, 0, 0.6)
 
@@ -93,8 +95,6 @@
         background-color: darken($game-color, 15%)
 
     .fav-button
-      padding-top: 3px
-      line-height: $topbar-height - $gap - 3px
       background-color: $fav-color
 
       &.active:before
@@ -109,7 +109,7 @@
         background-color: darken($game-color, 15%)
 
     .search-button
-      padding: 0 0 2px 2px
+      padding: 0 0 1px 1px
       line-height: $topbar-height - $gap - 2px
       background-color: $search-color
 
@@ -230,8 +230,8 @@
     overflow: auto
     -webkit-overflow-scrolling: touch
 
-    > *:first-child
-      padding-top: $topbar-height + $gap
+    .alert-error
+      margin-top: $topbar-height + $gap
 
   &.active
     display: block

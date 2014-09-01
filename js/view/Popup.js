@@ -182,11 +182,11 @@
       }
     },
     loadCompleteHandler: function (response, status) {
+      this.$('.navbar .fa-spin').remove();
       if (status === 'error') {
         this.$('.alert').removeClass('hide');
         return;
       }
-      this.$('.navbar .fa-spin').remove();
 
       // 阅读记录
       if (/-detail/.test(this.$('.content').attr('class'))) {

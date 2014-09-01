@@ -3,6 +3,8 @@
  */
 
 (function () {
+  'use strict';
+
   var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
     , iframe;
   function createIframe() {
@@ -33,6 +35,21 @@
         action: action,
         label: label || '',
         value: value || ''
+      });
+    }
+  };
+  var device = window.device = {
+    share: function (url, title) {
+      callNative('share', {
+        url: url,
+        title: title
+      });
+    },
+    save: function (url1, url2, callback) {
+      callNative('save', {
+        url1: url1,
+        url2: url2,
+        callback: callback
       });
     }
   };

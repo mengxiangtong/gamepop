@@ -1,6 +1,6 @@
 {
   "name": "GamePop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a mobile game guide application",
   "main": "index.html",
   "scripts": {

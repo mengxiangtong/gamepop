@@ -1,21 +1,20 @@
 @charset "UTF-8"
-@import "define"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
 
-.guide-detail
+.article-body
+  padding: $topbar-height + $gap $gap-l $gap-l
+  background-color: #F1F1F1
+  border-bottom: 1px solid #CCC
 
-  .article-body
-    padding: 0 $gap-l $gap-l
-    background-color: #F1F1F1
-    border-bottom: 1px solid #CCC
+  a
+    color: $blue
+    text-decoration: underline
 
-    a
-      color: $blue
-      text-decoration: underline
-
-      &[target=_blank]:after
-        content: ' \f08e'
-        font-family: 'FontAwesome'
-        font-size: 0.8em
+    &[target=_blank]:after
+      content: ' \f08e'
+      font-family: 'FontAwesome'
+      font-size: 0.8em
 
   .guide-info
     font-size: 12px
@@ -65,6 +64,7 @@
         img:only-child
           display: block
 
+.guide-detail
   .comment-bar
     background-color: #F1F1F1
     display: block

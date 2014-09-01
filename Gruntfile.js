@@ -207,7 +207,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'template/',
-          src: ['search.html', 'no-guide.html'],
+          src: ['search.html', 'no-guide.html', 'girl.html'],
           dest: BUILD + 'template/'
         }]
       }

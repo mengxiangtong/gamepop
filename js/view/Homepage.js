@@ -41,14 +41,14 @@
       if (WEB || !isClass) {
         this.$el.css('background-image', 'url(' + this.model.get('big_pic') + ')');
         if (this.model.get('blur_pic')) {
-          this.$('#cards,#cards-top-bar').css('background-image', 'url(' + this.model.get('blur_pic') + ')');
+          this.$('#cards, #cards-top-bar').css('background-image', 'url(' + this.model.get('blur_pic') + ')');
         }
       } else {
         this.$el.addClass('ready')
           .find('#cards').addClass('ready');
       }
 
-      this.$('.history-button').prop('disabled', false)
+      this.$('#history-button').prop('disabled', false)
         .find('i').removeClass('fa-spin fa-spinner').addClass('fa-history');
     },
     collection_syncHandler: function (collection) {
@@ -80,12 +80,11 @@
       if (WEB) { // 网页无法缓存本地图片
         this.render();
       } else { // 客户端把图片缓存在本地
-        if (device.save(model.get('big_pic'))) {
+        if (device.save(model.get('big_pic'), model.get('blur_pic'), 'gamepop.ready')) {
           this.model.set({
             'big_pic': 'img/homepage.jpg',
             'blur_pic': 'img/homepage_blur.jpg'
           }, {silent: true});
-          this.render(true);
         } else {
           this.render();
         }

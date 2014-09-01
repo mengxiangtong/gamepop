@@ -11,6 +11,12 @@
     padding: 0
     height: $topbar-height
 
+    h2
+      background: none
+      line-height: $topbar-height
+      height: $topbar-height
+      padding: 0 $topbar-height
+
     .btn
       background: none
       border-radius: 0
@@ -20,9 +26,6 @@
 
       + .btn
         margin-left: 0
-
-    .back-button
-      padding-top: 0
 
     .back-button,
     .bookmark-button,
@@ -34,20 +37,24 @@
       &:active
         background-color: rgba(0,0,0,0.2)
 
+    .bookmark-button,
+    .shortcut-button
+      padding-top: 1px
+      line-height: $topbar-height - 1px
+
+    .game-button
+      padding-bottom: 1px
+      line-height: $topbar-height - 1px
+
     .ellipsis-v-button
       background-color: $green
 
       &:before
         content: $fa-var-ellipsis-v
 
-    .fav-button
-      padding: 0
-
-    .shortcut-button
-
-      &:after
-        top: 16px
-        left: 19px
+    .shortcut-button:after
+      top: 17px
+      left: 19px
 
   .search-form
     padding: 0
@@ -147,8 +154,8 @@
       input
         color: $smoke
 
-  header
-    padding-top: 60px
+.guide-index header
+  padding-top: $topbar-height + $gap-icon
 
 .icon-list
   .item

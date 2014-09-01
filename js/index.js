@@ -39,6 +39,19 @@
           , content = this.innerHTML.replace(/\s{2,}|\n/g, '');
         TEMPLATES[key] = Handlebars.compile(content);
       }).remove();
+
+      // 加载client
+      if (/android/i.test(navigator.userAgent)) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/android.css';
+        document.head.appendChild(link);
+      } else if (/iphone os/i.test(navigator.userAgent)) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/iOS.css';
+        document.head.appendChild(link);
+      }
     }
 
     var context = Nervenet.createContext()
@@ -114,10 +127,8 @@
     if (!WEB) {
       gamepop.back = _.bind(gui.backButton_tapHandler, gui);
       gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
-    }
-
-    // stat
-    if (WEB) { // 通过浏览器浏览，也可能是
+      gamepop.ready = _.bind(homepage.render, homepage);
+    } else { // 通过浏览器浏览，也可能是微信微博等
       var android = /android/i
         , isAndroid = android.test(navigator.userAgent);
 
@@ -127,6 +138,7 @@
       }
       document.body.className = 'web';
 
+      // stat
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=Array.prototype.pop.call(s.getElementsByTagName(o));

@@ -3,7 +3,7 @@
  */
 var DEBUG = true
   , PHONEGAP = false
-  , WEB = true
+  , WEB = false
   , TEMPLATES = {}
   , gamepop = gamepop || {
     view: {},
@@ -41,10 +41,8 @@ if (DEBUG) {
       addShortCut: function (game_name, guide_name, icon_path) {
         console.log('create desktop shortcut: ', game_name, guide_name, icon_path);
       },
-      openKeyboard: function () {
-        console.log('zhima, zhima, open keyboard');
-      },
-      save: function (url) {
+      save: function (url1, url2, callback) {
+        console.log(url1, url2, callback);
         return false;
       },
       share: function (url, title) {
