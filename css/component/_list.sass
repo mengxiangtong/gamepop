@@ -40,16 +40,16 @@
  * ==================================*/
 .icon-list
   @extend .ul
-  padding: $gap
+  padding: $gap-icon
   color: $white
 
   .item
     background: none
-    padding: $gap + $gap-s $gap-s 0
+    padding: $gap + $gap-s 0 0
     position: relative
 
     &:first-child
-      padding-top: $gap
+      padding-top: 0
 
     &.game
 
@@ -104,9 +104,6 @@
         color: #C9D8F5
         max-height: 5em
         overflow: hidden
-
-      .match
-        color: $search-success
 
   h2
     font-size: 16px

@@ -51,6 +51,8 @@
         link.rel = 'stylesheet';
         link.href = 'css/iOS.css';
         document.head.appendChild(link);
+        var ios = navigator.userAgent.match(/iphone os (\d)/i);
+        document.body.className = 'ios ios' + ios[1];
       }
     }
 

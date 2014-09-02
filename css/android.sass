@@ -4,6 +4,10 @@
 @import "../bower_components/colors/sass/variables"
 @import "../bower_components/font-awesome/scss/variables"
 
+
+.match
+  color: $yellow
+
 .page-container
   .navbar
     background-color: $navbar-background-color
@@ -27,16 +31,10 @@
       + .btn
         margin-left: 0
 
-    .back-button,
-    .bookmark-button,
-    .fav-button,
-    .game-button,
-    .shortcut-button,
-    .share-button,
-    .ellipsis-v-button
       &:active
         background-color: rgba(0,0,0,0.2)
 
+    .back-button,
     .bookmark-button,
     .shortcut-button
       padding-top: 1px
@@ -156,9 +154,3 @@
 
 .guide-index header
   padding-top: $topbar-height + $gap-icon
-
-.icon-list
-  .item
-    &.article
-      .match
-        color: $yellow

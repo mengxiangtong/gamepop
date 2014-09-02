@@ -35,11 +35,12 @@
     model_changeHandler: function (model) {
       for (var prop in model.changed) {
         if (!model.changed[prop]) {
+          this.$('.' + prop).addClass('hide');
           continue;
         }
         var data = model.get(prop)
           , html = TEMPLATES[prop](_.isArray(data) ? {list: data} : data);
-        this.$('.' + prop).html(html);
+        this.$('.list.' + prop + ', .item.' + prop).html(html);
 
         if (prop === 'girl') {
           this.$('.girl.item').data('href', '#/remote/girl/0/' + data.id + '/detail.html');

@@ -81,6 +81,7 @@
     showSearch: function (game, keyword) {
       this.data = {
         type: 'search',
+        'has-search': true,
         guide_name: keyword ? game: '',
         keyword: decodeURIComponent(keyword || game)
       };

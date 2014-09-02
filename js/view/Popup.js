@@ -43,8 +43,8 @@
     remove: function () {
       var content = this.$('.content');
       content.off('scroll');
-      if (this.$('.auto-load').length > 0) {
-        this.$('.auto-load').data('mediator').remove();
+      if (this.autoload) {
+        this.autoload.remove();
       }
       this.$result.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
@@ -100,12 +100,12 @@
       // 自动加载
       var autoLoad = this.$('.auto-load');
       if (autoLoad.length > 0) {
-        var content = autoLoad.children().length > 0 ? autoLoad : this.$('.content')
+        var content = autoLoad.data('self') ? autoLoad : this.$('.content')
           , mediator = new gamepop.view.AutoLoad({
             el: content,
             list: autoLoad
           });
-        autoLoad.data('mediator', mediator);
+        this.autoload = mediator;
       }
     },
     show: function () {

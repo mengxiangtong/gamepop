@@ -52,6 +52,9 @@
     tab_tapHandler: function (event) {
       var button = $(event.currentTarget)
         , category = button.data('category');
+      if (button.hasClass('active')) {
+        return;
+      }
       button.addClass('active')
         .siblings().removeClass('active');
       this.left.empty();

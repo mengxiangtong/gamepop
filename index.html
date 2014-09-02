@@ -84,11 +84,9 @@
     top: {{cards-toggle-top}}px;
   }
   #cards-toggle.active {
-    -moz-transform: translate(0, -{{cards-toggle-top}}px);
     -ms-transform: translate(0, -{{cards-toggle-top}}px);
     -webkit-transform: translate(0, -{{cards-toggle-top}}px);
     transform: translate(0, -{{cards-toggle-top}}px);
-    -moz-transform: translate3d(0, -{{cards-toggle-top}}px, 0);
     -webkit-transform: translate3d(0, -{{cards-toggle-top}}px, 0);
     transform: translate3d(0, -{{cards-toggle-top}}px, 0);
   }
@@ -124,10 +122,10 @@
     </a>
   </script>
   <div id="cards">
-    <div class="btn-group">
+    <div class="btn-group my-guides">
       <button type="button" class="refresh" data-target="my-guides"><i class="fa fa-refresh fa-spin"></i></button>
     </div>
-    <h2>我的攻略</h2>
+    <h2 class="my-guides">我的攻略</h2>
     <ul class="my-guides list article-list">
       <script type="text/x-handlebars-template" class="template" id="my-guides">
         {{#each list}}
@@ -220,7 +218,7 @@
 
 <script type="text/x-handlebars-template" class="template" id="popup">
   <header class="navbar">
-    <button type="button" class="btn back-button"><i class="fa fa-chevron-left"></i></button>
+    <button type="button" class="btn back-button"></button>
     {{#if title}}
     <h2>{{title}}</h2>
     {{/if}}
