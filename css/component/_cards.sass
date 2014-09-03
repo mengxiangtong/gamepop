@@ -87,7 +87,7 @@
     margin: 0 (-$gap) 0 0
     float: right
 
-    > *
+    button, a
       background: transparent
       border: none
       color: $white
@@ -101,7 +101,7 @@
       vertical-align: top
 
       &:active
-        @extend .tap-active
+        background: rgba(255, 255, 255, 0.2)
 
   .article-list
     padding: $gap
@@ -112,10 +112,10 @@
       + .item
         margin-top: $gap
         padding-top: $gap
-        border-top: 1px solid rgba(255, 255, 255, 0.8)
+        border-top: 1px solid rgba(255, 255, 255, 0.6)
 
     p
-      color: rgba(255, 255, 255, 0.8)
+      color: rgba(255, 255, 255, 0.6)
 
   .hot-game
     @extend .ul

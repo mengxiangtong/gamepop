@@ -20,9 +20,9 @@
       this.collection = new (Backbone.Collection.extend({
         url: config.girl
       }))();
-      this.collection.on('add', this.collection_addHandler, this);
+      this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.on('sync', this.collection_syncHandler, this);
-      this.collection.fetch();
+      this.collection.fetch({reset: true});
 
       var self = this;
       this.$('.waterfall').on('scroll', function () {
@@ -32,16 +32,23 @@
         }, 200);
       });
     },
+    render: function (model) {
+      // 因为现在导读图尺寸是一样的，所以暂时一边一个就好
+      var column = this.count & 1 ? this.right : this.left;
+      column.append(this.template(model.toJSON()));
+      this.count++;
+    },
     remove: function () {
       this.collection.off();
       this.$('.waterfall').off('scroll');
       Backbone.View.prototype.remove.call(this);
     },
     collection_addHandler: function (model) {
-      // 因为现在导读图尺寸是一样的，所以暂时一边一个就好
-      var column = this.count & 1 ? this.right : this.left;
-      column.append(this.template(model.toJSON()));
-      this.count++;
+      this.render(model);
+    },
+    collection_resetHandler: function () {
+      this.collection.each(this.render, this);
+      this.collection.on('add', this.collection_addHandler, this);
     },
     collection_syncHandler: function () {
       lazyLoad(this.el);
@@ -60,9 +67,10 @@
       this.left.empty();
       this.right.empty();
       this.$('.waterfall').removeClass('no-scroll');
+      this.collection.off('add');
       this.collection.url = category ? config.girl + category : config.girl;
+      this.collection.fetch({reset: true});
       this.count = this.page = 0;
-      this.collection.fetch();
     },
     needMoreHandler: function () {
       this.collection.fetch({data: {page: this.page + 1}});

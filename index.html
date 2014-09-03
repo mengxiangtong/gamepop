@@ -258,9 +258,13 @@
   </div>
 </script>
 
-<script type="text/x-handlebars-template" id="boobs" class="template">
-  <div class="item" data-href="#/remote/girl/{{id}}.html" id="girl-{{id }}">
+<script type="text/x-handlebars-template" class="template" id="boobs">
+  <div class="item" data-href="#/remote/girl/{{id}}.html" id="girl-{{id}}">
+    {{#if icon_path}}
     <img src="img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">
+    {{else}}
+    <p>{{topic}}</p>
+    {{/if}}
   </div>
 </script>
 
@@ -292,3 +296,4 @@
 <script src="js/view/GUI.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>
+<script src="js/polyfill/iOS.js"></script>

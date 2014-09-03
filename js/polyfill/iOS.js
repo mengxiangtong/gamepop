@@ -18,8 +18,8 @@
     for (var prop in options) {
       params.push(prop + '=' + options[prop]);
     }
-    console.log('call native: app://' + method + '/?' + params.join('&'));
-    iframe.attr('src', 'app://' + method + '/?' + params.join('&'));
+    console.log('call native: gamepop://' + method + '/?' + params.join('&'));
+    iframe.attr('src', 'gamepop://' + method + '/?' + params.join('&'));
   }
 
   var ga = window.ga = function (method, type, category, action, label, value) {
