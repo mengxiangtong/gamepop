@@ -163,7 +163,10 @@
         .find('input, button').prop('disabled', false);
     },
     shareButton_tapHandler: function () {
-      device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + $('title').text());
+      var url = 'http://m.yxpopo.com/' + location.hash
+        , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
+        , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
+      device.share(url, title, pic);
     },
     shortcutButton_tapHandler: function () {
       device.addShortCut(this.options.game_name, this.options.guide_name, this.$('.icon').attr('src'));

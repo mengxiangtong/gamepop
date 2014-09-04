@@ -39,10 +39,11 @@
     }
   };
   var device = window.device = {
-    share: function (url, title) {
+    share: function (url, title, pic) {
       callNative('share', {
         url: url,
-        title: title
+        title: title,
+        pic: pic
       });
     },
     save: function (url1, url2, callback) {

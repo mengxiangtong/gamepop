@@ -98,6 +98,7 @@
 
     context
       .mapValue('gui', gui)
+      .mapValue('homepage', homepage)
       .mapValue('sidebar', sidebar)
       .mapValue('router', router)
       .mapValue('apps', appsCollection)

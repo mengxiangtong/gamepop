@@ -10,7 +10,7 @@
   ns.GUI = Backbone.View.extend({
     $router: null,
     $context: null,
-    $sidebar: null,
+    $homepage: null,
     $fav: null,
     events: {
       'click': 'clickHandler',
@@ -20,8 +20,6 @@
       'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
-      'tap #homepage': 'homepage_tapHandler',
-      'tap #sidebar-toggle': 'sidebarToggle_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
       'tap .fav-button': 'favButton_tapHandler',
@@ -71,19 +69,10 @@
         classes: className
       }, options));
     },
-    toggleSidebar: function () {
-      $('#homepage').toggleClass('side');
-      $('#sidebar').toggleClass('hide');
-      ga('send', 'event', 'toggle', 'sidebar');
-    },
     backButton_tapHandler: function (event) {
-      if ($('#homepage').hasClass('side') && !event) { // 在侧滑状态
-        return this.toggleSidebar();
+      if (event || this.$homepage.isNormal()) {
+        this.back();
       }
-      if ($('#cards').hasClass('back') && !event) {
-        return $('#cards, #cards-toggle').removeClass('active');
-      }
-      this.back();
     },
     downloadButton_tapHandler: function () {
       ga('send', 'event', 'game', 'download', this.$context.getValue('game-id'));
@@ -102,12 +91,6 @@
     gameButton_tapHandler: function () {
       ga('send', 'event', 'game', 'play', this.$context.getValue('game-id'));
     },
-    homepage_tapHandler: function (event) {
-      if ($(event.currentTarget).hasClass('side')) {
-        this.toggleSidebar();
-        event.preventDefault();
-      }
-    },
     item_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , href = target.data('href') || target.find('a').attr('href');
@@ -115,11 +98,6 @@
         return;
       }
       this.$router.navigate(href);
-    },
-    sidebarToggle_tapHandler: function (event) {
-      $(event.currentTarget).removeClass('reminder');
-      this.toggleSidebar();
-      event.stopPropagation();
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
@@ -138,13 +116,13 @@
       event.preventDefault();
     },
     swipeLeftHandler: function () {
-      if (Popup.pages.length === 0 && !$('#homepage').hasClass('back')) {
-        this.toggleSidebar();
+      if (Popup.pages.length === 0 && !this.$homepage.el.classList.contains('back')) {
+        this.$homepage.toggleSidebar();
       }
     },
     swipeRightHandler: function () {
-      if (Popup.pages.length === 0 && $('#homepage').hasClass('back')) {
-        this.toggleSidebar();
+      if (Popup.pages.length === 0 && this.$homepage.el.classList.contains('back')) {
+        this.$homepage.toggleSidebar();
       }
     },
     touchHandler: function (event) {

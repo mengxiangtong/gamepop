@@ -45,8 +45,8 @@ if (DEBUG) {
         console.log(url1, url2, callback);
         return false;
       },
-      share: function (url, title) {
-        console.log('share: ', url, title);
+      share: function (url, title, pic) {
+        console.log('share: ', url, title, pic);
       }
     };
   }(window));

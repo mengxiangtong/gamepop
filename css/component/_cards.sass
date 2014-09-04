@@ -1,5 +1,6 @@
 @charset "UTF-8"
 @import "../define"
+@import "../../bower_components/colors/sass/variables"
 @import "compass/css3/transform"
 @import "../../bower_components/font-awesome/scss/variables"
 
@@ -45,9 +46,6 @@
   z-index: 15
   @include translate(0, 100%)
   @include translate3d(0, 100%, 0)
-
-  &.ready
-    background-image: url(../img/homepage_blur.jpg)
 
   &.active
     @include translate(0, 0)
@@ -172,6 +170,3 @@
   width: 100%
   height: $topbar-height + 15px
   z-index: 16
-
-  &.ready
-    background-image: url(../img/homepage_blur.jpg)
