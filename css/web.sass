@@ -1,11 +1,8 @@
 @charset "utf-8"
 @import "define"
-@import "component/homepage-search"
 @import "../bower_components/colors/sass/variables"
-@import "../bower_components/font-awesome/scss/variables"
-@import "../bower_components/font-awesome/scss/core"
 
-.download-panel
+#download-panel
   height: 75px
   position: fixed
   bottom: 0
@@ -14,7 +11,6 @@
   z-index: 9999
   padding: $gap 120px 0 $gap
   background-color: $download-background-color
-  display: none
 
   img
     width: 55px
@@ -24,47 +20,53 @@
 
   h2
     font-size: 14px
-    line-height: 17px
-    margin: 0 0 $gap - 5px
+    line-height: 1.2em
+    margin: 0 0 $gap-s
 
   p
-    margin: -3px
+    margin: 0
 
     i
       color: $star-color
       font-size: 18px
-      line-height: 0
+      line-height: 1em
 
-  .download-url-button
-    width: 70px
-    height: $gap-l + 15px
-    line-height: $gap-l + 15px
-    text-align: center
-    color: $white
-    background-color: $navbar-background-color
-    border-radius: 4px
-    position: absolute
-    float: right
-    top: $gap-l
-    right: 35px
-
-  .remove-panel
+  .remove-button
+    border: none
+    background: transparent
+    padding: 0
+    margin: 0
     height: 35px
     width: 35px
     line-height: 35px
     font-size: 25px
-    text-align: center
-    color: $black
     position: absolute
-    float: right
     right: 0
     top: $gap-l
 
+    &:active
+      background: darken($download-background-color, 20%)
+
+  + .page-container
+    padding-bottom: 75px
+
+#download-app-button
+  width: 70px
+  height: 35px
+  line-height: 35px
+  text-align: center
+  color: $white
+  background-color: $navbar-background-color
+  border-radius: 4px
+  position: absolute
+  top: $gap-l
+  right: 35px
+
+  &:active
+    background-color: darken($navbar-background-color, 15%)
+
 #cover
-  background-color: rgba(0, 0, 0, 0.8)
-  background-image: url(../img/web/jiantou.png)
-  background-repeat: no-repeat
-  background-position: right top
+  background: rgba(0, 0, 0, 0.8) url(../img/web/jiantou.png) no-repeat right top
   position: absolute
   z-index: 9999
   top: 0
@@ -73,7 +75,7 @@
   bottom: 0
   display: none
 
-  &.show
+  &.active
     display: block
 
 .web

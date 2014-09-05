@@ -133,19 +133,20 @@
     ns.GUI = ns.GUI.extend({
       events: _.extend(ns.GUI.prototype.events, { // 用于与上一级的GUI中的events属性合并
         'tap .download-url-button': 'downloadURLButton_tapHandler',
-        'tap .remove-panel': 'removePanel_tapHandler'
+        'tap .remove-button': 'removeButton_tapHandler',
+        'tap #cover': 'cover_tapHandler'
       }),
-      downloadURLButton_tapHandler: function(event) {
-        var reg = /micromessenger/i
-          , isWeixin = reg.test(navigator.userAgent);
-        if (isWeixin) {
-          document.getElementById('cover').className = 'show';
+      cover_tapHandler: function (event) {
+        $(event.currentTarget).remove();
+      },
+      downloadURLButton_tapHandler: function() { // 微信禁用一般的下载，只有让用户自行打开浏览器
+        if (/micromessenger/i.test(navigator.userAgent)) {
+          document.getElementById('cover').className = 'active';
         }
       },
-      removePanel_tapHandler: function(event) {
-          $(".download-panel").remove();
-          localStorage.setItem("no-download-panel", 1);
-          $(".content").css("padding-bottom", 0);
+      removeButton_tapHandler: function() {
+        $("#download-panel").remove();
+        localStorage.setItem("download", 'hide');
       }
     });
   }

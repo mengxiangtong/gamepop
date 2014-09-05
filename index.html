@@ -195,7 +195,8 @@
   </div>
 </div>
 
-<div class="download-panel">
+<!-- download begin -->
+<div id="download-panel">
   <img src="img/web/114.png" alt="游戏宝典">
   <h2>游戏宝典 - 所有游戏攻略在这云集</h2>
   <p>
@@ -205,12 +206,13 @@
     <i class="fa fa-star"></i>
     <i class="fa fa-star"></i>
   </p>
-  <a class = "download-url-button" target="_blank" href="">
+  <a id="download-app-button" target="_blank" href="#">
     免费下载
   </a>
-  <a class="remove-panel">&times;</a>
+  <button type="button" class="remove-button">&times;</button>
 </div>
 <div id="cover"></div>
+<!-- download end -->
 
 <script type="text/x-handlebars-template" class="template" id="search-result">
   {{#each list}}

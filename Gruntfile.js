@@ -132,7 +132,7 @@ module.exports = function (grunt) {
         report: 'gzip'
       },
       web: {
-        src: csses,
+        src: [csses, 'css/web.css'],
         dest: BUILD + 'css/style.css'
       },
       android: { // android样式

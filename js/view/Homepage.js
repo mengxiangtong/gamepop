@@ -50,8 +50,8 @@
     },
     isNormal: function () {
       if (/back|side/.test(this.el.className)) {
-        if (this.el.className === 'side') {
-          this.el.className = '';
+        if (this.el.classList.contains('side')) {
+          this.el.classList.remove('side');
         } else {
           this.toggleCards(false);
         }

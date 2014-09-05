@@ -152,9 +152,7 @@
           return this.$gui.back(true);
         }
         // 返回到主页面时，不显示下载栏
-        if (!fragment) {
-          $(".download-panel").hide();
-        }
+        $("#download-panel").toggle(!!fragment);
         Backbone.Router.prototype.execute.call(this, callback, args);
       }
     });

@@ -40,22 +40,23 @@
         TEMPLATES[key] = Handlebars.compile(content);
       }).remove();
 
-      // 加载client的CSS
-      if (!WEB) {
+      // 加载client或web的CSS
+      if (WEB) {
+        var link = document.createElement('link');
+        link.href = 'css/web.css';
+      } else {
         if (/android/i.test(navigator.userAgent)) {
           var link = document.createElement('link');
-          link.rel = 'stylesheet';
           link.href = 'css/android.css';
-          document.head.appendChild(link);
         } else if (/iphone os/i.test(navigator.userAgent)) {
           var link = document.createElement('link');
-          link.rel = 'stylesheet';
           link.href = 'css/iOS.css';
-          document.head.appendChild(link);
           var ios = navigator.userAgent.match(/iphone os (\d)/i);
           document.body.className = 'ios ios' + ios[1];
         }
       }
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
     }
 
     var context = Nervenet.createContext()
@@ -138,19 +139,20 @@
         , isAndroid = android.test(navigator.userAgent);
 
       if (isAndroid) {
-        var css = $('<link href="css/android.css" rel="stylesheet" />');
-        $('head').append(css);
-        $(".download-url-button").attr("href",config.android_url);
+        var css = document.createElement('link');
+        css.rel = "stylesheet";
+        css.href = "css/android.css";
+        document.head.appendChild(css);
+        $("#download-app-button").attr("href", config.android_url);
       }else{
-        $(".download-url-button").attr("href",config.ios_url);
+        $("#download-app-button").attr("href", config.ios_url);
       }
-      // 添加下载栏条
-      var web_css = $('<link href="css/web.css" rel="stylesheet" />');
-      $('head').append(web_css);
-      document.body.className = 'web';
 
-      // 用于记录download-panel是否存在
-      localStorage.setItem("no-download-panel",0);
+      // 添加下载栏条
+      if (localStorage.getItem('download')) {
+        $('#download-panel').remove();
+      }
+      document.body.className = 'web';
 
       // stat
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -10,7 +10,7 @@ var config = {
   api: 'http://a.yxpopo.com/cards.php',
   hot: 'http://a.yxpopo.com/hot/',
   girl: 'http://a.yxpopo.com/girl/',
-  ios_url: 'http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003.ipa',
+  ios_url: 'http://itunes.apple.com/cn/app/you-xi-bao-dian/id892347556?mt=8',
   android_url: 'http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003_signed.apk'
 };
 if (DEBUG) {
