@@ -49,16 +49,46 @@
 <link rel="stylesheet" href="css/media.css">
 <script type="text/x-handlebars-template" class="template" id="css">
   .page-container,
-  .content {
+  .content,
+  #cards { {{#if width}}
     width: {{width}}px;
+    {{/if}}
     height: {{height}}px;
   }
+  {{#if width}}
   .home-page .item {
-    width: {{hpItemWidth}}px;
+    width: {{homepageItemWidth}}px;
   }
   .home-page img {
-    width: {{hpItemWidth}}px;
-    height: {{hpItemWidth}}px;
+    width: {{homepageItemWidth}}px;
+    height: {{homepageItemWidth}}px;
+  }
+  #cards .hot-game {
+    height: {{hot-game-height}}px;
+  }
+  #cards .hot-game .item {
+    width: {{hotGameItemWidth}}px;
+  }
+  #cards .hot-game img {
+    width: {{hotGameItemWidth}}px;
+    height: {{hotGameItemWidth}}px;
+  }
+  #cards .girl {
+    height: {{girl-height}}px;
+  }
+  #boobs .item {
+    height: {{girl-item-height}}px;
+  }
+  {{/if}}
+  #cards-toggle {
+    top: {{cards-toggle-top}}px;
+  }
+  #cards-toggle.active {
+    -ms-transform: translate(0, -{{cards-toggle-top}}px);
+    -webkit-transform: translate(0, -{{cards-toggle-top}}px);
+    transform: translate(0, -{{cards-toggle-top}}px);
+    -webkit-transform: translate3d(0, -{{cards-toggle-top}}px, 0);
+    transform: translate3d(0, -{{cards-toggle-top}}px, 0);
   }
   #sidebar ul.in {
     height: {{sidebarHeight}}px;
@@ -68,8 +98,9 @@
 
 <div id="homepage">
   <img src="img/logo.png" width="38" height="37" class="homepage-logo">
-  <button type="button" class="btn sidebar-toggle"><i class="fa fa-bars"></i></button>
-  <button type="button" class="btn history-button"><i class="fa fa-history"></i></button>
+  <button type="button" class="btn" id="sidebar-toggle"><i class="fa fa-bars"></i></button>
+  <button type="button" class="btn" id="history-button"><i class="fa fa-history"></i></button>
+  <button type="button" class="hide" id="cards-toggle"><img src="img/arrow.svg" width="37" height="12"></button>
   <form id="search-form" action="">
     <input type="text" name="keyword" placeholder="搜索您最爱的游戏" autocomplete="off">
     <button><i class="fa fa-search"></i></button>
@@ -90,8 +121,52 @@
       <span>点击进入</span>
     </a>
   </script>
+  <div id="cards">
+    <div class="btn-group my-guides">
+      <button type="button" class="refresh" data-target="my-guides"><i class="fa fa-refresh fa-spin"></i></button>
+    </div>
+    <h2 class="my-guides">我的攻略</h2>
+    <ul class="my-guides list article-list">
+      <script type="text/x-handlebars-template" class="template" id="my-guides">
+        {{#each list}}
+        <li class="item article">
+          {{#if icon_path}}<img src="./img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">{{/if}}
+          <h3><a href="#/remote/{{guide_name}}/{{category}}/{{id}}/detail.html">{{topic}}</a></h3>
+          <p>来源：{{source}}{{^source}}原创{{/source}} | <time>{{pub_date}}</time></p>
+        </li>
+        {{/each}}
+      </script>
+    </ul>
+    <div class="btn-group">
+      <button type="button" data-target="hot-game" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
+      <a href="#/external/hot" class="more"><i class="fa fa-ellipsis-h"></i></a>
+    </div>
+    <h2>热门游戏</h2>
+    <ul class="hot-game list">
+      <script type="text/x-handlebars-template" class="template" id="hot-game">
+        {{#each list}}
+        <li class="item game" data-href="#/remote/{{guide_name}}">
+          <img src="./img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">
+          <h3>{{game_name}}</h3>
+        </li>
+        {{/each}}
+      </script>
+    </ul>
+    <div class="btn-group">
+      <button type="button" data-target="girl" class="refresh"><i class="fa fa-refresh fa-spin"></i></button>
+      <a href="#/page/girl" class="more"><i class="fa fa-ellipsis-h"></i></a>
+    </div>
+    <h2>福利社</h2>
+    <div class="girl item">
+      <script type="text/x-handlebars-template" class="template" id="girl">
+        <img src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}">
+        <h3>{{topic}}</h3>
+      </script>
+    </div>
+  </div>
+  <div id="cards-top-bar"></div>
 </div>
-<div id="sidebar" class="hide">
+<div id="sidebar">
   <div class="panel-group">
     <h4 class="panel-heading active"><i class="fa fa-bookmark-o"></i> 我的订阅 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse in rss">
@@ -148,7 +223,7 @@
     <p>{{{content}}}</p>
   </li>
   {{else}}
-  <li class="item game" data-href="#/remote/{{guide_name}}" id="search-{{guide_name}}">
+  <li class="item game" data-href="#/remote/{{guide_name}}" data-id="{{guide_name}}">
     <img src="./img/image.gif" data-src="{{#if icon_path}}http://r.yxpopo.com/{{icon_path}}{{else}}img/image.gif{{/if}}" class="ph">
     <h2>{{game_name}}</h2>
     <p>总计收录{{article_num}}篇攻略<br>最后更新时间{{update_time}}</p>
@@ -160,14 +235,18 @@
 
 <script type="text/x-handlebars-template" class="template" id="popup">
   <header class="navbar">
-    <button type="button" class="btn back-button"><i class="fa fa-chevron-left"></i></button>
+    <button type="button" class="btn back-button"></button>
+    {{#if title}}
+    <h2>{{title}}</h2>
+    {{/if}}
     {{#unless keyword}}
     <div class="navbar-btn-group hide">
+      {{#if has-search}}
+      <button type="button" class="btn search-button"></button>
+      {{/if}}
       {{#if has-guide}}
       {{#if is-detail}}
       <button type="button" class="btn fav-button {{#if fav}}active{{/if}}"></button>
-      {{else}}
-      <button type="button" class="btn search-button"></button>
       {{/if}}
       {{#if is-index}}
       <button type="button" class="btn bookmark-button {{#if bookmark}}active{{/if}}"></button>
@@ -182,15 +261,27 @@
     {{/unless}}
     <i class="fa fa-spin fa-spinner"></i>
   </header>
+  {{#if has-search}}
   <form class="search-form {{#unless keyword}}cover{{/unless}}" {{#unless keyword}}style="display:none"{{/unless}}>
     <button type="button" class="cancel-button">取消</button>
-    <input type="text" name="keyword" placeholder="在{{game_name}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
+    <input type="text" name="keyword" placeholder="在{{game_name}}{{title}}中搜索" autocomplete="off" value="{{keyword}}" {{#if keyword}}disabled{{/if}}>
     <button {{#if keyword}}disabled{{/if}}><i class="fa fa-search"></i></button>
   </form>
+  {{/if}}
   <div class="content">
     <div class="alert alert-error hide">
       <i class="fa fa-frown-o"></i> 加载失败
     </div>
+  </div>
+</script>
+
+<script type="text/x-handlebars-template" class="template" id="boobs">
+  <div class="item" data-href="#/remote/girl/{{id}}.html" id="girl-{{id}}">
+    {{#if icon_path}}
+    <img src="img/image.gif" data-src="http://fast-cdn.dianjoy.com/gamepop/{{icon_path}}" class="ph">
+    {{else}}
+    <p>{{topic}}</p>
+    {{/if}}
   </div>
 </script>
 
@@ -210,11 +301,15 @@
 <script src="js/model/RSSCollection.js"></script>
 <script src="js/view/AppsList.js"></script>
 <script src="js/view/Homepage.js"></script>
+<script src="js/view/Cards.js"></script>
 <script src="js/view/Sidebar.js"></script>
 <script src="js/view/Popup.js"></script>
 <script src="js/view/SearchForm.js"></script>
 <script src="js/view/SearchResult.js"></script>
+<script src="js/view/AutoLoad.js"></script>
 <script src="js/view/GamePage.js"></script>
+<script src="js/view/HotGame.js"></script>
+<script src="js/view/Boobs.js"></script>
 <script src="js/view/GUI.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>

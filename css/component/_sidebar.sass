@@ -7,11 +7,15 @@
   z-index: 5
   position: absolute
   top: 5%
-  left: 22% // 为了能将“我的订阅”中的删除按钮显示在左上角
-  right: 2% // 同上，为了显示更新数量
+  left: 21% // 为了能将“我的订阅”中的删除按钮显示在左上角，把更新数放右上角
+  right: 3% // 同上，为了显示更新数量
   bottom: 5%
   color: $white
+  display: none
   overflow: hidden
+
+  #homepage.side + &
+    display: block
 
   .panel-group
     height: 100%
@@ -21,7 +25,7 @@
     line-height: 50px
     height: 50px
     border-bottom: 1px solid rgba(255, 255, 255, 0.3)
-    margin: 0 $gap-icon 0 0 // 为了能将“我的订阅”中的删除按钮显示在左上角
+    margin: 0 $gap 0 $gap-s // 为了能将“我的订阅”中的删除按钮显示在左上角，把更新数放右上角
     position: relative
 
     .fa-clock-o,
@@ -61,6 +65,9 @@
     &.collapse
       height: 0
 
+    &.in
+      height: 403px
+
     li
       font-size: 12px
       white-space: nowrap
@@ -70,7 +77,7 @@
   .my-fav,
   .recent,
   .rss
-    padding: 0 $gap-icon 0 0 // 为了能将“我的订阅”中的删除按钮显示在左上角
+    padding: 0 $gap 0 $gap-s // 为了能将“我的订阅”中的删除按钮显示在左上角
 
     .delete-button
       display: none

@@ -4,12 +4,22 @@
 @import "../bower_components/colors/sass/variables"
 @import "../bower_components/font-awesome/scss/variables"
 
+
+.match
+  color: $yellow
+
 .page-container
   .navbar
     background-color: $navbar-background-color
     color: $white
     padding: 0
     height: $topbar-height
+
+    h2
+      background: none
+      line-height: $topbar-height
+      height: $topbar-height
+      padding: 0 $topbar-height
 
     .btn
       background: none
@@ -21,18 +31,18 @@
       + .btn
         margin-left: 0
 
-    .back-button
-      padding-top: 0
+      &:active
+        background-color: rgba(0,0,0,0.2)
 
     .back-button,
     .bookmark-button,
-    .fav-button,
-    .game-button,
-    .shortcut-button,
-    .share-button,
-    .ellipsis-v-button
-      &:active
-        background-color: rgba(0,0,0,0.2)
+    .shortcut-button
+      padding-top: 1px
+      line-height: $topbar-height - 1px
+
+    .game-button
+      padding-bottom: 1px
+      line-height: $topbar-height - 1px
 
     .ellipsis-v-button
       background-color: $green
@@ -40,14 +50,9 @@
       &:before
         content: $fa-var-ellipsis-v
 
-    .fav-button
-      padding: 0
-
-    .shortcut-button
-
-      &:after
-        top: 16px
-        left: 19px
+    .shortcut-button:after
+      top: 17px
+      left: 19px
 
   .search-form
     padding: 0
@@ -147,8 +152,5 @@
       input
         color: $smoke
 
-.icon-list
-  .item
-    &.article
-      .match
-        color: $yellow
+.guide-index header
+  padding-top: $topbar-height + $gap-icon

@@ -7,13 +7,18 @@ var config = {
   topgame: 'http://a.yxpopo.com/topgame.php',
   search: 'http://s.yxpopo.com/search.do',
   rss: 'http://a.yxpopo.com/rss.php',
+  api: 'http://a.yxpopo.com/cards.php',
+  hot: 'http://a.yxpopo.com/hot/',
+  girl: 'http://a.yxpopo.com/girl/',
   ios_url: 'http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003.ipa',
   android_url: 'http://fast-cdn.dianjoy.com/gamemaster/popo_v1.2.0_003_signed.apk'
-
 };
 if (DEBUG) {
   config.apps = 'mocks/apps.json';
+  config.hot = 'http://meathill.pc/gamepop-api/hot/';
+  config.girl = 'http://meathill.pc/gamepop-api/girl/';
+  //config.api = 'http://meathill.pc/gamepop-api/cards.php';
   //config.remote ='http://meathill.pc/gamepop-api/vguide/';
   //config.rss = 'http://meathill.pc/gamepop-api/rss.php';
-  //config.topgame = 'http://meathill.pc/gamepop-api/topgame.php';
+  config.topgame = 'http://meathill.pc/gamepop-api/topgame.php';
 }

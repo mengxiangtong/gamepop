@@ -1,7 +1,46 @@
 @charset "utf-8"
 @import "define"
+@import "compass/css3/transform"
+
+/** 关于布局尺寸的样式 **/
+/** for android 720 **/
+.page-container,
+.content,
+#cards
+  width: 360px
+  height: 615px
+
+.home-page
+  .item
+    width: 100px
+
+  img
+    width: 100px
+    height: 100px
+
+#sidebar ul.in
+  height: 411px
+
 
 @media (max-width: 320px)
+  /** for ios 320*568 **/
+  .page-container,
+  .content,
+  #cards
+    width: 320px
+    height: 568px
+
+  .home-page
+    .item
+      width: 94px
+
+    img
+      width: 94px
+      height: 94px
+
+  #sidebar ul.in
+    height: 361px
+
   #my-apps-title
     font-size: 10px
     line-height: 12px
@@ -19,15 +58,36 @@
       height: 55px
       margin-left: 13px
 
+  #cards-toggle
+    top: 528px
+
+    &.active
+      @include translate(0, -528px)
+      @include translate3d(0, -528px, 0)
+
+  #cards
+    .hot-game
+      height: 121px
+
+      .item
+        width: 86px
+        height: 86px
+
+        + .item
+          margin-left: 6px
+
+    .girl
+      height: 193px
+
+      h3
+        font-size: 12px
+
   #sidebar
     right: 3%
 
     .rss
       .item
         width: 60px
-
-        + .item
-          margin-left: 22px
 
         img
           width: 60px
@@ -50,7 +110,7 @@
 
     h1
       font-size: 17px
-      margin-top: 0
+      margin: 0
 
       small
         font-size: 9px
@@ -70,6 +130,17 @@
 
     p
       font-size: 9px
+
+  .hot-game-list
+    .item
+      width: 150px
+
+    img
+      width: 140px
+      height: 140px
+
+  #boobs .column .item
+    height: 96px
 
 @media (min-width: 480px)
   #apps,

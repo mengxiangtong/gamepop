@@ -23,7 +23,7 @@
       "has-guide": true
     },
     {
-      "id": "bilibili1",
+      "id": "qmfjdz",
       "url": "#/remote/qmfjdz/",
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
@@ -31,35 +31,35 @@
       "is_local": false
     },
     {
-      "id": "zhihu1",
+      "id": "zhihu",
       "url": "#/remote/zhihu/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true
     },
     {
-      "id": "skype1",
-      "url": "#/no-guide/skype",
+      "id": "qqhlddz",
+      "url": "#/no-guide/qqhlddz",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg"
     },
     {
-      "id": "bilibili2",
-      "url": "#/local/hdppl/",
+      "id": "jzds",
+      "url": "#/local/jzds/",
       "name": "哔哩哔哩动画",
       "icon": "./mocks/images/bilibili.jpg",
       "has-guide": true,
       "has-offline": true
     },
     {
-      "id": "skype2",
-      "url": "#/no-guide/skype",
+      "id": "smtw",
+      "url": "#/no-guide/smtw",
       "name": "Skype",
       "icon": "./mocks/images/skype.jpg"
     },
     {
-      "id": "zhihu2",
-      "url": "#/remote/zhihu/",
+      "id": "ttaxc",
+      "url": "#/remote/ttaxc/",
       "name": "知乎日报",
       "icon": "./mocks/images/zhihu.jpg",
       "has-guide": true

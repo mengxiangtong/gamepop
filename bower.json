@@ -1,6 +1,6 @@
 {
   "name": "GamePop",
-  "version": "0.7.1",
+  "version": "1.0.4",
   "authors": [
     "Meathill <lujia.zhai@dianjoy.com>"
   ],
@@ -28,7 +28,7 @@
     "handlebars": "~1.3.0",
     "jquery": "~2.1.1",
     "lodash": "~2.4.1",
-    "font-awesome": "~4.1.0",
+    "font-awesome": "~4.2.0",
     "nervenet": "~0.1.7",
     "animate.css": "meathill/animate.css#3.1.2",
     "hammerjs": "~1.1.3",

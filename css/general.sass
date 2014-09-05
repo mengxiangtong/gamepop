@@ -23,8 +23,8 @@ body
   -webkit-user-select: none
   color: $font-color
   font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif
-  font-size: 15px
-  line-height: 1.6em
+  font-size: $font-size
+  line-height: $line-height
   background: $active-color url(../img/bg.jpg) no-repeat
   background-size: cover
   padding: 0
@@ -51,12 +51,17 @@ a
   background-size: 38px 37px
 
 .text-success
-  color: rgb(28, 184, 65)
+  color: $success
+
+.match
+  color: $search-success
 
 #app-bridge
   display: none
 
+
 @import "component/homepage"
+@import "component/cards"
 @import "component/sidebar"
 @import "component/homepage-search"
 @import "component/app-list"

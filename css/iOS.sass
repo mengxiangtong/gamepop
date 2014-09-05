@@ -1,3 +1,22 @@
+@charset "UTF-8"
+@import "define"
+@import "../bower_components/colors/sass/variables"
+@import "compass/css3/transform"
+
+.page-container
+  .navbar
+    .fav-button
+      padding-top: 3px
+      line-height: $topbar-height - $gap - 3px
+
+    .back-button
+      padding-top: 2px
+      line-height: $topbar-height - $gap - 2px
+
+    .share-button
+      padding-top: 1px
+      line-height: $topbar-height - $gap - 1px
+
 .ios
   .game-info small,
   .shortcut-button
@@ -7,24 +26,40 @@
   .homepage-logo
     top: 36px
 
-  .sidebar-toggle
+  #sidebar-toggle
     top: 32px
+
+  #cards-toggle.active
+    @include translate(0, -508px)
+    @include translate3d(0, -508px, 0)
+
+  #cards-top-bar
+    height: 80px
+
+  #cards
+    padding-top: 80px
 
   .page-container
     .navbar
-      padding-top: 20px
+      padding-top: $gap-l
+
+      h2
+        padding: $gap-l $topbar-height 0
+
+      .fa-spinner
+        top: $gap-l
 
     .search-form
-      padding-top: 20px
+      padding-top: $gap-l
 
       button
         top: 23px
 
-    .content > *:first-child
-      padding-top: 65px
-
-  .guide-list section
+  .guide-index header,
+  .guide-list section,
+  .guide-detail section,
+  #boobs
     padding-top: 65px
 
-  .game-button
-    display: none
+  .search-result
+    padding-top: 55px

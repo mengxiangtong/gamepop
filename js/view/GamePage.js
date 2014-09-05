@@ -10,7 +10,6 @@
 
   ns.GamePage = Backbone.View.extend({
     $rss: null,
-    page: 1,
     events: {
       'remove': 'remove',
       'tap .collapse': 'gameInfo_tapHandler'
@@ -46,16 +45,10 @@
           }
         }
       }
-
-      if (this.$('.auto-load').length > 0) {
-        this.$el.on('scroll', _.bind(this.scrollHandler, this));
-      }
-
     },
     remove: function () {
       this.carousel.remove();
       this.carousel = null;
-      this.$el.off('scroll');
       this.model.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
@@ -69,25 +62,6 @@
       });
       this.model.on('change', this.model_changeHandler, this);
     },
-    fetch: function () {
-      this.page += 1;
-      var list = this.$('.auto-load')
-        , $el = this.$el;
-      if (list.length === 0) {
-        return;
-      }
-      $.get(config.remote + list.data('src').replace('{page}', this.page), function (response) {
-        if (response) {
-          list.append(response).removeClass('loading');
-        } else {
-          list.removeClass('loading auto-load').addClass('no-more');
-          setTimeout(function () {
-            list.removeClass('no-more');
-          }, 3000);
-          $el.off('scroll');
-        }
-      });
-    },
     gameInfo_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , collapse = target.hasClass('active');
@@ -97,20 +71,6 @@
     model_changeHandler: function (model) {
       for (var prop in model.changed) {
         this.$('#' + this.guide_name + '-' + prop + ' span').remove();
-      }
-    },
-    scrollHandler: function () {
-      clearTimeout(this.timeout);
-      var self = this
-        , list = this.$('.auto-load');
-      if (this.el.scrollHeight - this.el.scrollTop - this.el.clientHeight < 10) {
-        this.timeout = setTimeout(function () {
-          if (list.length === 0 || list.hasClass('loading')) {
-            return;
-          }
-          list.addClass('loading');
-          self.fetch();
-        }, 100);
       }
     }
   });

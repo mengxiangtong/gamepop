@@ -21,48 +21,49 @@
     z-index: 20
     padding: $gap $gap 0
 
-    .navbar-text
-      display: inline-block
+    h2
+      background-color: $page-background-color
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      margin: 0
+      font-size: 18px
       line-height: $topbar-height - $gap
-      text-indent: $gap
+      height: $topbar-height + $gap * 2
+      padding: $gap $topbar-height
+      overflow: hidden
+      text-align: center
+      text-overflow: ellipsis
+      z-index: -1
 
     .navbar-btn-group
       float: right
 
     .btn
+      @extend .fa
       color: $white
-      font-size: 20px
+      font-size: 21px
       line-height: $topbar-height - $gap
       width: $topbar-height - $gap
       height: $topbar-height - $gap
       padding: 0
-      margin: 0
       border: none
       border-radius: $topbar-height
-      text-align: center
       vertical-align: top
 
       + .btn
         margin-left: $gap
 
     .back-button
-      padding-top: 2px
-      line-height: $topbar-height - $gap - 2px
       padding-right: 4px
       background-color: rgba(0, 0, 0, 0.6)
 
+      &:before
+        content: $fa-var-chevron-left
+
       &:active
         background-color: #222
-
-    .game-button,
-    .download-button,
-    .fav-button,
-    .search-button,
-    .bookmark-button,
-    .shortcut-button,
-    .ellipsis-v-button,
-    .share-button
-      @extend .fa
 
     .game-button
       background-color: $game-color
@@ -85,8 +86,6 @@
         background-color: darken($game-color, 15%)
 
     .fav-button
-      padding-top: 3px
-      line-height: $topbar-height - $gap - 3px
       background-color: $fav-color
 
       &.active:before
@@ -101,7 +100,7 @@
         background-color: darken($game-color, 15%)
 
     .search-button
-      padding: 0 0 2px 2px
+      padding: 0 0 1px 1px
       line-height: $topbar-height - $gap - 2px
       background-color: $search-color
 
@@ -116,7 +115,7 @@
 
       &.active:before
         content: $fa-var-bookmark
-        color: #FFD511
+        color: $bookmark-active-color
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)
 
       &:before
@@ -145,7 +144,7 @@
         background: darken($green, 15%)
 
     .share-button
-      background-color: $yellow
+      background-color: $share-color
 
       &:before
         content: $fa-var-share-alt
@@ -160,9 +159,6 @@
       right: $gap
       font-size: 1.5em
 
-    .back-button:active
-      background-color: rgba(0, 0, 0, 0.2)
-
   .search-form
     @extend #search-form
     position: fixed
@@ -170,7 +166,7 @@
     left: $topbar-height
     right: 0
     z-index: 25
-    padding: $gap $gap
+    padding: $gap
 
     input
       box-shadow: none
@@ -222,8 +218,8 @@
     overflow: auto
     -webkit-overflow-scrolling: touch
 
-    > *:first-child
-      padding-top: $topbar-height + $gap
+    .alert-error
+      margin-top: $topbar-height + $gap
 
   &.active
     display: block

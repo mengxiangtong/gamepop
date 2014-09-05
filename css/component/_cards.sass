@@ -1,0 +1,172 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+@import "compass/css3/transform"
+@import "../../bower_components/font-awesome/scss/variables"
+
+#cards-toggle
+  @extend .transition
+  background: transparent
+  border: none
+  display: block
+  position: absolute
+  top: 575px
+  left: 50%
+  margin: 0 0 0 (-29px)
+  padding: 13px $gap $gap-icon
+  z-index: 18
+
+  &:active img
+    opacity: 1
+
+  &.active
+    @include translate(0, -575px)
+    @include translate3d(0, -575px, 0)
+    padding-top: 23px
+
+    img
+      @include rotate(180deg)
+
+  img
+    display: block
+    margin: 0 auto
+    opacity: 0.4
+
+#cards
+  @extend .transition
+  background: url(../img/bg.jpg) no-repeat
+  background-size: cover
+  color: $white
+  overflow: scroll
+  -webkit-touch-scroll: touch
+  padding: $topbar-height + 15px $gap-icon $gap-icon
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 15
+  @include translate(0, 100%)
+  @include translate3d(0, 100%, 0)
+
+  &.active
+    @include translate(0, 0)
+    @include translate3d(0, 0, 0)
+
+    > *
+      display: block
+
+    .hot-game
+      @extend .flex-row
+
+  > *
+    display: none
+
+  a
+    color: $white
+
+  h2
+    font-size: 12px
+    line-height: 40px
+    margin: 0
+    opacity: .4
+    padding-right: $gap-s
+    width: 100px
+
+  img
+    display: block
+
+  .list
+    background-color: rgba(255, 255, 255, 0.4)
+    border-radius: 4px
+    margin-bottom: $gap !important
+
+  .btn-group
+    font-size: 14px
+    line-height: 40px
+    margin: 0 (-$gap) 0 0
+    float: right
+
+    button, a
+      background: transparent
+      border: none
+      color: $white
+      display: inline-block
+      font-size: 16px
+      width: 40px
+      height: 40px
+      line-height: 40px
+      padding: 0
+      text-align: center
+      vertical-align: top
+
+      &:active
+        background: rgba(255, 255, 255, 0.2)
+
+  .article-list
+    padding: $gap
+
+    .item
+      padding: 0
+
+      + .item
+        margin-top: $gap
+        padding-top: $gap
+        border-top: 1px solid rgba(255, 255, 255, 0.6)
+
+    p
+      color: rgba(255, 255, 255, 0.6)
+
+  .hot-game
+    @extend .ul
+    padding: $gap $gap 0 !important
+    height: 131px
+
+    li
+      @extend .one
+      width: 96px
+      height: 96px
+
+      + li
+        margin-left: 11px
+
+    img
+      width: 100%
+      border-radius: 4px
+
+    h3
+      font-size: 12px
+      line-height: 25px
+      height: 25px
+      margin: 0
+      overflow: hidden
+      text-align: center
+      word-wrap: no-wrap
+
+  .girl
+    height: 220px
+    position: relative
+
+    img
+      width: 100%
+      border-radius: 4px
+
+    h3
+      background-color: rgba(0, 0, 0, 0.75)
+      border-radius: 0 0 4px 4px
+      position: absolute
+      left: 0
+      right: 0
+      bottom: 0
+      font-size: 14px
+      text-indent: $gap
+      line-height: 2em
+      margin: 0
+
+#cards-top-bar
+  background-size: cover
+  background-image: url(../img/bg.jpg)
+  display: none
+  position: absolute
+  top: 0
+  width: 100%
+  height: $topbar-height + 15px
+  z-index: 16
