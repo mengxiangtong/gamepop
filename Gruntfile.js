@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
-    , WEB_REG = /<!-- .* begin -->[\S\s]+<!-- .* end -->/g
+    , WEB_REG = /<!-- .* begin -->[\S\s]+?<!-- .* end -->/g
     , csses = []
     , libs = []
     , jses = [];
@@ -163,7 +163,14 @@ module.exports = function (grunt) {
     },
     concat: { // 合并文件，不仅可以合并JS文件，还可以合并CSS文件
       options: {
-        separator: ';\n'
+        separator: ';\n',
+        stripBanners: {
+          block: true,
+          line: true
+        },
+        process: function (src) {
+          return src.replace(/\/\/[#@]\s.+/, '');
+        }
       },
       web: {
         src: libs,
