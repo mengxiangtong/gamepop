@@ -4,17 +4,17 @@
 ;(function () {
   'use strict';
   function createCss(width, height) {
-    // 作为客户端默认样式写在样式表中
-    if (width === 360 && height === 615 || width === 320 && height === 568) {
-      return;
-    }
-    var style = document.createElement('style')
-      , size = {
+    // 客户端包含若干默认样式
+    // 宽320、360
+    // 高567、568、615、640
+    var size = {};
+    if ([567, 568, 615, 640].indexOf(height) === -1) {
+      size = {
         height: height,
         sidebarHeight: height * .9 - 150 >> 0,
         'cards-toggle-top': height - 40
-      }
-      , content;
+      };
+    }
     if (width !== 360 && width !== 320) { // 标准宽度不计算
       var homepageItemWidth = width > 320 ? (width - 60) / 3 : (width - 38) / 3
         , hotGameItemWidth = width > 320 ? (width - 62) / 3 : (width - 52) / 3
@@ -28,7 +28,11 @@
         'girl-item-height': (width - 30) / 3 >> 0
       });
     }
-    content = TEMPLATES.css(size);
+    if (!size.height && !size.width) {
+      return;
+    }
+    var style = document.createElement('style')
+      , content = TEMPLATES.css(size);
     style.innerHTML = content;
     document.head.appendChild(style);
   }

@@ -2,33 +2,10 @@
 @import "define"
 @import "compass/css3/transform"
 
-/** 关于布局尺寸的样式 **/
-/** for android 720 **/
-.page-container,
-.content,
-#cards
-  width: 360px
-  height: 615px
-
-.home-page
-  .item
-    width: 100px
-
-  img
-    width: 100px
-    height: 100px
-
-#sidebar ul.in
-  height: 411px
-
-
 @media (max-width: 320px)
-  /** for ios 320*568 **/
   .page-container,
-  .content,
   #cards
     width: 320px
-    height: 568px
 
   .home-page
     .item
@@ -37,9 +14,6 @@
     img
       width: 94px
       height: 94px
-
-  #sidebar ul.in
-    height: 361px
 
   #my-apps-title
     font-size: 10px
@@ -58,13 +32,6 @@
       height: 55px
       margin-left: 13px
 
-  #cards-toggle
-    top: 528px
-
-    &.active
-      @include translate(0, -528px)
-      @include translate3d(0, -528px, 0)
-
   #cards
     .hot-game
       height: 121px
@@ -72,6 +39,10 @@
       .item
         width: 86px
         height: 86px
+
+        img
+          width: 86px
+          height: 86px
 
         + .item
           margin-left: 6px
@@ -161,3 +132,48 @@
   .history-button,
   .download-panel
     display: none
+
+@media (height: 567px)
+  .page-container,
+  #cards
+    height: 567px
+
+  #cards-toggle
+    top: 527px
+
+    &.active
+      @include translate(0, -527px)
+      @include translate3d(0, -527px, 0)
+
+  #sidebar ul.in
+    height: 360px
+
+@media (height: 568px)
+  .page-container,
+  #cards
+    height: 568px
+
+  #cards-toggle
+    top: 528px
+
+    &.active
+      @include translate(0, -528px)
+      @include translate3d(0, -528px, 0)
+
+  #sidebar ul.in
+    height: 361px
+
+@media (height: 640px)
+  .page-container,
+  #cards
+    height: 640px
+
+  #cards-toggle
+    top: 600px
+
+    &.active
+      @include translate(0, -600px)
+      @include translate3d(0, -600px, 0)
+
+  #sidebar ul.in
+    height: 426px
