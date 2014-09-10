@@ -282,12 +282,6 @@ module.exports = function (grunt) {
 
   if (isWeb) { // 网页版需要一些特殊的操作
     grunt.config.merge({
-      'copy' : {
-        web: {
-          src: 'mocks/web.json',
-          dest: BUILD + '/apps.json'
-        }
-      },
       'imagemin': {
         img: {
           files: [{
@@ -323,9 +317,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-replace');
   grunt.registerMultiTask('index', 'make index html', function () {
-    var html = grunt.file.read(this.data);
+    var html = grunt.file.read(this.data)
+      , map = grunt.file.readJSON('bower-cdn-map.json');
     // 取CSS
     html = html.replace(CSS_REG, function (match, src) { // 页面中含有css
+      if (isWeb) {
+        for (var key in map) {
+          var reg = new RegExp(key);
+          if (reg.test(src)) {
+            return match.replace(src, map[key]);
+          }
+        }
+      }
       csses.push(src);
       return '';
     });
@@ -334,6 +337,14 @@ module.exports = function (grunt) {
       var isLib = src.substr(0, 2) !== 'js';
       if (src.indexOf('define.js') !== -1) {
         return '';
+      }
+      if (isWeb) {
+        for (var key in map) {
+          var reg = new RegExp(key);
+          if (reg.test(src)) {
+            return match.replace(src, map[key]);
+          }
+        }
       }
       src = src.replace('handlebars.min', 'handlebars.runtime.min');
       isLib ? libs.push(src) : jses.push(src);
@@ -361,6 +372,14 @@ module.exports = function (grunt) {
     };
     grunt.file.write(config.version, JSON.stringify(version));
   });
+  grunt.registerTask('apps-json', 'create apps.json file for web', function () {
+    var apps = {
+      apps: [],
+      device_id: 'web-version',
+      version: grunt.config.get('pkg').version + '.' + grunt.template.today('mmddhhMM')
+    };
+    grunt.file.write(BUILD + 'apps.json', JSON.stringify(apps));
+  });
 
   grunt.registerTask('default', [
     'clean:start',
@@ -381,7 +400,7 @@ module.exports = function (grunt) {
   grunt.registerTask('web', [
     'clean:start',
     'index',
-    'copy',
+    'copy:svg',
     'compass',
     'imagemin',
     'handlebars',
@@ -391,6 +410,7 @@ module.exports = function (grunt) {
     'concat',
     'htmlmin',
     'version',
+    'apps-json',
     'clean:end'
   ]);
 };
