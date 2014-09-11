@@ -13,6 +13,7 @@
 
   ns.Carousel = Backbone.View.extend({
     width: 360,
+    indicatorWidth: 10,
     total: 0,
     current: 0,
     events: {
@@ -29,7 +30,7 @@
       });
       this.container = this.$('ul');
       this.indicator = options.indicator;
-      this.indicatorWidth = options.indicator.width();
+      this.indicatorBarWidth = options.indicator.width() - this.indicatorWidth;
       this.token = this.indicator.children();
       this.refresh();
     },
@@ -40,16 +41,11 @@
       return this.showPane(this.current - 1, true);
     },
     refresh: function () {
-      this.width = this.$el.width();
+      this.width = gamepop.width;
       this.total = Math.ceil(this.container.outerWidth() / this.width);
 
       // indicators
-      var width = this.indicatorWidth * (this.total * 2 - 1);
-      this.indicatorBarWidth = width - this.indicatorWidth;
-      this.indicator.css({
-        width: width,
-        'margin-left': -(width >> 1) + 'px'
-      }).show();
+      this.indicator.show();
     },
     setContainerOffset: function (percent, animate) {
       this.container.toggleClass("animate", animate);

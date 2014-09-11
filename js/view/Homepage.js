@@ -60,10 +60,12 @@
       return true;
     },
     toggleCards: function (isShow) {
-      isShow = isShow === null ? !this.$el.hasClass('back') : isShow;
+      isShow = isShow === undefined ? !this.$el.hasClass('back') : isShow;
       this.$el.toggleClass('back', isShow);
       this.$('#cards, #cards-toggle').toggleClass('active', isShow);
-      this.$('#cards-top-bar').toggle(isShow);
+      if (!isShow) {
+        this.$('#cards-top-bar').hide();
+      }
     },
     toggleSidebar: function () {
       this.$el.toggleClass('side');

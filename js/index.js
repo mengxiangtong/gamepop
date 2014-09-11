@@ -8,6 +8,7 @@
     // 宽320、360
     // 高567、568、615、640
     var size = {};
+    gamepop.width = width;
     if ([567, 568, 615, 640].indexOf(height) === -1) {
       size = {
         height: height,

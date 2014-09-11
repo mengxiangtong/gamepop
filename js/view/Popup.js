@@ -78,7 +78,7 @@
 
       this.$('.content')
         .addClass(this.options.classes)
-        .load(this.options.url, _.bind(this.loadCompleteHandler, this));
+        .load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
@@ -130,6 +130,8 @@
           });
         this.autoload = mediator;
       }
+      // lazyload
+      lazyLoad(this.el);
     },
     show: function () {
       this.$el.show();
@@ -230,7 +232,6 @@
       $('title').text('游戏宝典 ' + this.$('.content').find('h1, h2').first().text());
 
       // lazyload
-      lazyLoad(this.el);
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     }

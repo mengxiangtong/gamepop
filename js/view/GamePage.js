@@ -4,10 +4,6 @@
 ;(function (ns) {
   'use strict';
 
-  var width = document.body.clientWidth
-    , gap = width > 320 ? 15 : 9
-    , allGaps = width > 320 ? 60 : 38;
-
   ns.GamePage = Backbone.View.extend({
     $rss: null,
     events: {
@@ -18,12 +14,7 @@
       // 初始化carousel
       var carousel = this.carousel = this.$('.carousel');
       if (carousel.length > 0) {
-        var length = carousel.find('.item').length
-          , width = (document.body.clientWidth - allGaps) / 3 + gap
-          , space = 3 - length % 3;
-        space = space > 2 ? 0 : space;
-        carousel.find('ul').width(width * (length + space))
-          .css('padding-right', width * space);
+        var length = carousel.find('.item').length;
         if (length > 3) {
           this.carousel = new gamepop.component.Carousel({
             el: carousel[0],
@@ -34,7 +25,7 @@
           carousel.removeClass('carousel');
         }
 
-        // 看看是不是要增加更新数量
+        // 看看是不是要显示更新数量
         var guide_name = this.guide_name = this.el.className.split(' ').pop();
         if (this.$rss.get(guide_name)) {
           this.model = this.$rss.get(guide_name);
