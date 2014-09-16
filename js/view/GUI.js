@@ -33,7 +33,6 @@
     },
     back: function (isRouter) {
       if (WEB) {
-        // Web模式下，不存在Android的Back键，所以都是后退，也就直接后退就行了
         if (gamepop.history.length === 0) {
           return this.$router.navigate('#/');
         }
@@ -43,15 +42,14 @@
           history.back();
         }
       } else {
+        // client应用中，back键被捕获了，所以一定是手工后退
         var hash = location.hash.substr(2);
         if (hash === '' || gamepop.history.length === 0) {
           location.href = 'popo:return';
         } else if (!Popup.isSearch()) {
           gamepop.history.pop();
           Popup.removeLast();
-          if (!isRouter) {
-            history.back();
-          }
+          history.back();
         }
       }
     },

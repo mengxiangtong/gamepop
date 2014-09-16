@@ -60,8 +60,10 @@
           document.body.className = 'ios ios' + ios[1];
         }
       }
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
+      if (link) {
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
     }
 
     var context = Nervenet.createContext()
