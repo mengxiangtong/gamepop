@@ -11,7 +11,8 @@
     var style = document.createElement('style')
       , size = {
         height: height,
-        sidebarHeight: height * .9 - 150 >> 0,
+        hpItemWidth: hpItemWidth,
+        sidebarHeight: height * .9 - 195 - 75 >> 0
         'cards-toggle-top': height - 40
       }
       , content;
@@ -58,8 +59,8 @@
 
     var context = Nervenet.createContext()
       , gui = new gamepop.view.GUI({
-          el: document.body
-        })
+      el: document.body
+    })
       , appsCollection = new gamepop.model.AppsCollection()
       , rss = new gamepop.model.RSSCollection(null, {apps: appsCollection})
       , homepage = new gamepop.view.Homepage({
@@ -118,7 +119,8 @@
         .map('.search-result', gamepop.view.SearchResult, {
           collection: results
         })
-        .map('.hot-game-list', gamepop.view.HotGame, {
+        .map('.weibo-login-wrap', gamepop.view.weiboLogin)
+        .map('.qq-login-wrap', gamepop.view.qqLogin);        .map('.hot-game-list', gamepop.view.HotGame, {
           collection: rss
         })
         .map('#boobs', gamepop.view.Boobs);

@@ -7,7 +7,8 @@
       'tap .panel-heading': 'heading_tapHandler',
       'tap .edit-button': 'editButton_tapHandler',
       'tap .delete-button': 'deleteButton_tapHandler',
-      'tap .item': 'item_tapHandler'
+      'tap .item': 'item_tapHandler',
+      'tap .logout': 'logout_tapHandler'
     },
     initialize: function (options) {
       this.template = TEMPLATES['sidebar-tpl'];
@@ -26,6 +27,24 @@
       options.rss.on('change', this.collection_changeHandler, this);
       options.rss.on('remove', this.collection_removeHandler, this);
       this.render(options.rss);
+
+//    用户信息初始化
+      this.profile = TEMPLATES['sidebar-login'];
+      if(localStorage.getItem('login') !== null){
+        var login = JSON.parse(localStorage.getItem('login'));
+        this.$('#profile').html(this.profile({
+          login_img : login.login_img,
+          login_name : login.login_name
+        }))
+        this.$('#logout').addClass('logout').html('注销');
+      }
+      else{
+        this.$('#profile').html(this.profile({
+          login_img : "img/default_avatar.png",
+          login_name : "请登录"
+        }))
+      }
+
     },
     render: function (collection) {
       var target = this.getTarget(collection);
@@ -84,6 +103,15 @@
     },
     item_tapHandler: function (event) {
       ga('send', 'event', 'view', 'sidebar', $(event.currentTarget).data('href'));
+    },
+    logout_tapHandler: function(){
+      alert('注销成功！');
+      localStorage.removeItem('login');
+      this.$('#profile').html(this.profile({
+        login_img : "img/default_avatar.png",
+        login_name : "请登录"
+      }))
+      this.$('#logout').removeClass('logout').html('内容同步更加精彩');
     }
   });
 }(Nervenet.createNameSpace('gamepop.view')));

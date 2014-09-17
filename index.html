@@ -168,6 +168,15 @@
 </div>
 <div id="sidebar" class="hide">
   <div class="panel-group">
+    <div id="profile">
+      <script type="text/x-handlebars-template" class="template" id="sidebar-login">
+      <img src="{{login_img}}" alt="用户头像"/>
+      <div class="profile-content">
+        <a href="#/login" id="login">{{login_name}}</a>
+        <p id="logout">内容同步更加精彩</p>
+      </div>
+      </script>
+    </div>
     <h4 class="panel-heading active"><i class="fa fa-bookmark-o"></i> 我的订阅 <i class="fa fa-edit edit-button"></i></h4>
     <ul class="panel-collapse collapse in rss">
     </ul>
@@ -294,5 +303,7 @@
 <script src="js/view/HotGame.js"></script>
 <script src="js/view/Boobs.js"></script>
 <script src="js/view/GUI.js"></script>
+<script src="js/view/qqLogin.js"></script>
+<script src="js/view/weiboLogin.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>

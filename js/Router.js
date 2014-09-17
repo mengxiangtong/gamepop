@@ -19,9 +19,8 @@
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
       'no-guide/:game(/:name)': 'showNoGuidePage',
-      'external/:page': 'showExternalPage',
-      'page/:page': 'showPage'
-    },
+	  'external/:page': 'showExternalPage',
+      '(:query-)login' : 'showLoginPage'    },
     backHome: function () {
       this.game = '';
       this.$gui.backHome();
@@ -108,7 +107,24 @@
       this.$gui.showPopupPage(config[page], page, this.data);
       ga('send', 'pageview', 'external/' + page);
     },
-    showPage: function (page) {
+    showLoginPage : function(query){
+      if (query == "qq") {
+        this.$gui.showPopupPage('template/qq-login.html');
+        ga('send', 'pageview', 'qq-login');
+      }
+      else if (query == "weibo") {
+        this.$gui.showPopupPage('template/weibo-login.html');
+        ga('send', 'pageview', 'weibo-login');
+      }
+      else if (query == "wx") {
+        this.$gui.showPopupPage('template/wx-login.html');
+        ga('send', 'pageview', 'wx-login');
+      }
+      else {
+        this.$gui.showPopupPage('template/login.html');
+        ga('send', 'pageview', 'login');
+      }
+    },    showPage: function (page) {
       var is_girl = page === 'girl';
       this.data = {
         type: page,
