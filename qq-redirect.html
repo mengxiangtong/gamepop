@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>登录成功，页面跳转中....</title>
+  <style>
+    #info{
+      display: block;
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<span id="info">登录成功，页面跳转中....</span>
+<body>
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.js"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-callback="true" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){
+  if(QC.Login.check()){
+    QC.Login.getMe(function(openId, accessToken){
+      a = openId;
+      b = accessToken;
+      url = "https://graph.qq.com/user/get_user_info?access_token="+b+"&oauth_consumer_key=101148626&openid="+a;
+    });
+  }
+})
+</script>
+</body>
+</html>
