@@ -3,18 +3,14 @@
  */
 var DEBUG = true
   , PHONEGAP = false
-  , WEB = false
+  , WEB = true
   , TEMPLATES = {}
   , gamepop = gamepop || {
     view: {},
     model: {},
     polyfill: {},
     controller: {}
-  }
-  , DUOSHUO = {
-    EmbedThread: function (dom) {}
-  }
-  , ga = null;
+  };
 
 if (!WEB) {
   ga = function (method, type, category, action, label, value) {

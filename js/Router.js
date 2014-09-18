@@ -101,10 +101,11 @@
     },
     showConfigPage: function(query) {
       if (query) {
-        this.$gui.showPopupPage('template/config-' + query + '.html');
+        var title = query === 'intro' ? '应用介绍' : '意见建议';
+        this.$gui.showPopupPage('template/config-' + query + '.html', 'config config-' + query, {title: title});
         return ga('send', 'pageview', 'config/' + query);
       }
-      this.$gui.showPopupPage('template/config.html');
+      this.$gui.showPopupPage('template/config.html', 'config', {title: '设置'});
       ga('send', 'pageview', 'config');
     },
     showExternalPage: function (page) {

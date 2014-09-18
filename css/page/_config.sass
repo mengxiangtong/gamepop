@@ -1,56 +1,37 @@
 @charset "UTF-8"
+@import "../../bower_components/colors/sass/variables"
+@import "../define"
 
-.setting-index
+.settings
+  background-color: $list-background-color
+  border: 1px solid $border-color
+  border-radius: 5px
+  list-style: none
+  padding: 0
+  margin: $topbar-height + $gap 10px 0
 
-  h1
-    margin: 0
-
-  ul
-    list-style: none
-    padding: 0
-    border: 1px solid $config-border-color
-    border-radius: 5px
-    margin: 0 10px
-
-    .top-radius
-      border-top-left-radius: 5px
-      border-top-right-radius: 5px
-
-    .bottom-radius
-      border-bottom-left-radius: 5px
-      border-bottom-right-radius: 5px
-
-    li
-      height: 55px
-      line-height: 55px
-      font-size: 18px
-      position: relative
-      background-color: white
-      border-bottom: 1px solid $config-border-color
-      padding: 0 10px
-      color: $config-color
-
-      span
-        position: absolute
-        right: 0
-        margin-right: 28px
+  li
+    height: 55px
+    line-height: 55px
+    font-size: 18px
+    border-bottom: 1px solid $border-color
+    padding: 0 10px
 
 .setting-intro
-  background-color: white
+  background-color: $white
   height: 100%
-
-  img
-    display: block
-    margin: 60px auto 0
-    width: 222px
+  padding: $topbar-height + $gap-l $gap-l + $gap-s
 
   p
-    color: #999999
-    margin: 0 24px
+    color: #999
 
-.setting-suggustion
-  background-color: white
+    &:first-child
+      text-align: center
+
+.setting-comment
+  background-color: $white
   height: 100%
+  padding: $topbar-height $gap-s 0
 
-  iframe
-    height: 100%
+  .ds-thread
+    padding: $gap-s $gap 0

@@ -142,8 +142,10 @@
       gamepop.refresh = _.bind(appsCollection.fetch, appsCollection, {reset: true});
       gamepop.ready = _.bind(homepage.render, homepage);
     } else { // 通过浏览器浏览，也可能是微信微博等
-      var android = /android/i
-        , isAndroid = android.test(navigator.userAgent);
+      var userAgent = navigator.userAgent
+        , isAndroid = /android/i.test(userAgent)
+        , isChrome = /chrome/i.test(userAgent)
+        , isSafari = /safari/i.test(userAgent);
 
       if (isAndroid) {
         var css = document.createElement('link');
@@ -156,7 +158,7 @@
       }
 
       // 添加下载栏条
-      if (localStorage.getItem('download')) {
+      if (localStorage.getItem('download') || isSafari && !isChrome) {
         $('#download-panel').remove();
       }
       document.body.className = 'web';
@@ -169,6 +171,13 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-35957679-14', 'auto');
+
+      // comment
+      window.duoshuoQuery = {short_name: "yxpopo"};
+      var script = document.createElement('script');
+      script.src = 'http://static.duoshuo.com/embed.js';
+      script.type = 'text/javascript';
+      document.head.appendChild(script);
     }
 
     // 除了首次访问，其它路径都记录下来，以便回退时找到跳出点

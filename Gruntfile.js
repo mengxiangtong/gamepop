@@ -158,6 +158,9 @@ module.exports = function (grunt) {
           src: ['*.js'],
           dest: TEMP,
           filter: 'isFile'
+        }, {
+          src: 'template/config.html',
+          dest: TEMP + 'config.html'
         }]
       }
     },
@@ -214,8 +217,11 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'template/',
-          src: ['search.html', 'no-guide.html', 'girl.html'],
+          src: ['*.html', '!config.html', '!*-web.html'],
           dest: BUILD + 'template/'
+        }, {
+          src: TEMP + 'config.html',
+          dest: BUILD + 'template/config.html'
         }]
       }
     },
@@ -300,6 +306,14 @@ module.exports = function (grunt) {
         'android': {
           src: 'css/android.css',
           dest: BUILD + 'css/android.css'
+        }
+      },
+      'htmlmin': {
+        web: {
+          files: [{
+            src: 'template/config-comment-web.html',
+            dest: BUILD + 'template/config-comment.html'
+          }]
         }
       }
     });

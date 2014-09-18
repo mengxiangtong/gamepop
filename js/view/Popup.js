@@ -54,28 +54,6 @@
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
 
-      //使用网页版本浏览
-      if (WEB) {
-        var userAgent = navigator.userAgent;
-        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
-
-        var is_download_panel = Number(localStorage.getItem("no-download-panel")) ;
-        if (is_download_panel) { // 没有download-panel
-          $(".content").css("padding-bottom", 0); // 没有download-panel时content的padding-bottom值
-        }
-        // 判断是否是使用safari浏览器打开
-        if (isSafari) {
-          $(".download-panel").remove();
-          localStorage.setItem("no-download-panel",true);
-          $(".content").css("padding-bottom", 0);
-        } else { // 不是safari浏览器
-          $(".download-panel").show();
-          if (!is_download_panel) {
-            $(".content").css("padding-bottom", "75px");
-          }
-        }
-      }
-
       this.$('.content')
         .addClass(this.options.classes)
         .load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
@@ -117,6 +95,13 @@
         , el = this.el;
       setTimeout(function () {
         map.check(el);
+        // 网页版生成评论框
+        if (WEB) {
+          var duoshuo = el.getElementsByClassName('ds-thread');
+          if (duoshuo.length > 0) {
+            DUOSHUO.EmbedThread(duoshuo[0]);
+          }
+        }
       }, 50);
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
