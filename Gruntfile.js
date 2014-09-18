@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     , CSS_REG = /<link rel="stylesheet" href="(\S+)">/g
     , JS_REG = /<script src="(\S+)"><\/script>/g
     , TEMPLATE_REG = /<script( \S+)+ id="([\w\-]+)">([\S\s]+?)<\/script>/g
-    , WEB_REG = /<!-- .* begin -->[\S\s]+<!-- .* end -->/g
+    , WEB_REG = /<!-- .* begin -->[\S\s]+?<!-- .* end -->/g
     , csses = []
     , libs = []
     , jses = [];
@@ -25,7 +25,7 @@ module.exports = function (grunt) {
     index: {
       index: 'index.html'
     },
-    copy: {   //复制
+    copy: { // 复制
       font: {
         files: [{
           expand: true,
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compass: {   //将sass文件编译compass成css
+    compass: { // 将sass文件编译compass成css
       css: {
         options: {
           environment: 'production',
@@ -53,13 +53,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'css/',
           src: ['*.sass'],
-          dest: 'css/',   //压缩最终目录
-          ext: '.css'    //更改后缀名
+          dest: 'css/', // 压缩最终目录
+          ext: '.css' // 更改后缀名
         }]
       }
 
     },
-    imagemin: {      //图片压缩模块
+    imagemin: { // 图片压缩模块
       img: {
         files: [{
           expand: true,
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    uglify: {    //压缩以及合并javascript文件  压缩代码，用于减少文件体积
+    uglify: { // 压缩以及合并javascript文件  压缩代码，用于减少文件体积
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         compress: {
@@ -126,16 +126,16 @@ module.exports = function (grunt) {
         }]
       }
     },
-    cssmin: {   //minify用于压缩css文件，combine用于将多个css文件合并一个文件
+    cssmin: { // minify用于压缩css文件，combine用于将多个css文件合并一个文件
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip'
       },
       web: {
-        src: csses,
+        src: [csses, 'css/web.css'],
         dest: BUILD + 'css/style.css'
       },
-      android: {  //android样式
+      android: { // android样式
         src: [csses, 'css/android.css'],
         dest: TEMP + 'css/android/style.css'
       },
@@ -161,9 +161,16 @@ module.exports = function (grunt) {
         }]
       }
     },
-    concat: { //合并文件，不仅可以合并JS文件，还可以合并CSS文件
+    concat: { // 合并文件，不仅可以合并JS文件，还可以合并CSS文件
       options: {
-        separator: ';\n'
+        separator: ';\n',
+        stripBanners: {
+          block: true,
+          line: true
+        },
+        process: function (src) {
+          return src.replace(/\/\/[#@]\s.+/, '');
+        }
       },
       web: {
         src: libs,
@@ -207,12 +214,12 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'template/',
-          src: ['search.html', 'no-guide.html'],
+          src: ['search.html', 'no-guide.html', 'girl.html'],
           dest: BUILD + 'template/'
         }]
       }
     },
-    compress: {  //压缩打包
+    compress: { // 压缩打包
       android: {
         options: {
           archive: '../android.<%= pkg.version %>.zip',
@@ -275,12 +282,6 @@ module.exports = function (grunt) {
 
   if (isWeb) { // 网页版需要一些特殊的操作
     grunt.config.merge({
-      'copy' : {
-        web: {
-          src: 'mocks/web.json',
-          dest: BUILD + '/apps.json'
-        }
-      },
       'imagemin': {
         img: {
           files: [{
@@ -316,9 +317,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-replace');
   grunt.registerMultiTask('index', 'make index html', function () {
-    var html = grunt.file.read(this.data);
+    var html = grunt.file.read(this.data)
+      , map = grunt.file.readJSON('bower-cdn-map.json');
     // 取CSS
-    html = html.replace(CSS_REG, function (match, src) {  //页面中含有css
+    html = html.replace(CSS_REG, function (match, src) { // 页面中含有css
+      if (isWeb) {
+        for (var key in map) {
+          var reg = new RegExp(key);
+          if (reg.test(src)) {
+            return match.replace(src, map[key]);
+          }
+        }
+      }
       csses.push(src);
       return '';
     });
@@ -327,6 +337,14 @@ module.exports = function (grunt) {
       var isLib = src.substr(0, 2) !== 'js';
       if (src.indexOf('define.js') !== -1) {
         return '';
+      }
+      if (isWeb) {
+        for (var key in map) {
+          var reg = new RegExp(key);
+          if (reg.test(src)) {
+            return match.replace(src, map[key]);
+          }
+        }
       }
       src = src.replace('handlebars.min', 'handlebars.runtime.min');
       isLib ? libs.push(src) : jses.push(src);
@@ -354,6 +372,14 @@ module.exports = function (grunt) {
     };
     grunt.file.write(config.version, JSON.stringify(version));
   });
+  grunt.registerTask('apps-json', 'create apps.json file for web', function () {
+    var apps = {
+      apps: [],
+      device_id: 'web-version',
+      version: grunt.config.get('pkg').version + '.' + grunt.template.today('mmddhhMM')
+    };
+    grunt.file.write(BUILD + 'apps.json', JSON.stringify(apps));
+  });
 
   grunt.registerTask('default', [
     'clean:start',
@@ -374,7 +400,7 @@ module.exports = function (grunt) {
   grunt.registerTask('web', [
     'clean:start',
     'index',
-    'copy',
+    'copy:svg',
     'compass',
     'imagemin',
     'handlebars',
@@ -384,6 +410,7 @@ module.exports = function (grunt) {
     'concat',
     'htmlmin',
     'version',
+    'apps-json',
     'clean:end'
   ]);
 };

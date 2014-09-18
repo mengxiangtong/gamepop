@@ -1,0 +1,76 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+.guide-index
+  header
+    padding-top: $topbar-height + $gap
+    position: relative
+    background: #226b75 url(../img/bg.jpg) no-repeat
+    background-size: cover
+    color: $white
+
+  .game-info
+    padding: 0 $gap + $gap-s
+    overflow: hidden
+
+    &:last-child
+      padding-bottom: $gap + $gap-s
+
+    p
+      margin: 0 0 0 85px
+      font-size: 12px
+      line-height: 1.6em
+
+      &.collapse
+        @extend .transition
+        height: 3em
+
+  .icon
+    display: block
+    float: left
+    margin-right: 15px
+    width: 70px
+    height: 70px
+    border: 1px solid #FFF
+    border-radius: 15px
+
+  h1
+    font-size: 18px
+    margin: 5px 0
+
+    small
+      font-size: 10px
+
+  .home-page
+    padding: 0 0 $gap
+
+    ul
+      @extend .ul
+      @extend .flex-row
+      padding: $gap-icon 0 0
+
+    li
+      margin-left: $gap-icon
+      position: relative
+
+    .item
+      width: 100px
+
+    img
+      border-radius: $gap-s
+      width: 100px
+      height: 100px
+
+    h3
+      margin: 0
+      font-size: 12px
+      line-height: 2em
+      text-align: center
+
+    span
+      @extend .update-number
+
+  .carousel,
+  .stoned
+    padding-bottom: $gap + $gap-l

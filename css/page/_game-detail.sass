@@ -1,0 +1,77 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+.article-body
+  padding: $topbar-height + $gap $gap-l $gap-l
+  background-color: #F1F1F1
+  border-bottom: 1px solid #CCC
+
+  a
+    color: $blue
+    text-decoration: underline
+
+    &[target=_blank]:after
+      content: ' \f08e'
+      font-family: 'FontAwesome'
+      font-size: 0.8em
+
+  .guide-info
+    font-size: 12px
+    color: $mute
+
+  hr
+    border-color: $white
+
+  h1
+    line-height: 1.5em
+    margin: 0 0 $gap
+
+  article
+    padding: 0 0 1em
+    line-height: 1.6
+
+    blockquote
+      padding: 10px 20px
+      margin: 0 0 20px
+      font-size: 1.25em
+      border-left: 5px solid #CCC
+      background-color: #DDD
+
+      p:last-child
+        margin-bottom: 0
+
+    img
+      max-width: 100%
+      border-radius: 6px
+
+    .ph
+      width: 320px
+      height: 180px
+
+    p
+      margin: 0 0 10px
+
+    table
+      border-collapse: collapse
+      border-spacing: 0
+
+      th
+        border-bottom-width: 2px
+        font-weight: bold
+
+      th,
+      td
+        border: 1px solid 1px
+        padding: 2px
+
+        img:only-child
+          display: block
+
+.guide-detail .comment-bar
+  background-color: #F1F1F1
+  display: block
+  margin: $gap-icon
+  border: 1px solid #CCC
+  line-height: 30px
+  text-align: center

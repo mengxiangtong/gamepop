@@ -1,0 +1,63 @@
+@charset "UTF-8"
+@import "../define"
+
+.game-page
+
+  > h2
+    font-size: 12px
+    line-height: 14px
+    margin: $gap
+
+    i
+      color: $white
+      border-radius: 7px
+      font-size: 10px
+      width: 14px
+      line-height: 14px
+      text-align: center
+      vertical-align: top
+
+    &.hot
+      color: $hot-color
+
+      i
+        background-color: $hot-color
+
+    &.news
+      color: $latest-color
+
+      i
+        background-color: $latest-color
+
+  .article-list
+    padding: 0 $gap $gap
+
+    .item
+      border: 1px solid $smoke
+      border-radius: 4px
+      background-color: $list-background-color
+
+      + .item
+        margin-top: $gap-s
+
+    p
+      color: $mute
+
+/* ====================================
+ * no-guide
+ * ==================================*/
+.no-guide
+  @extend .all-center
+  height: 100%
+
+  p
+    text-align: center
+    color: #999
+
+  .btn
+    background-color: $active-color
+    width: 165px
+    line-height: 45px
+    font-size: 14px
+    color: $white
+    margin-top: 50px

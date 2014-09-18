@@ -3,6 +3,8 @@
  */
 
 (function () {
+  'use strict';
+
   var iOS = navigator.userAgent.match(/iPhone OS (\d+)/)
     , iframe;
   function createIframe() {
@@ -16,8 +18,8 @@
     for (var prop in options) {
       params.push(prop + '=' + options[prop]);
     }
-    console.log('call native: app://' + method + '/?' + params.join('&'));
-    iframe.attr('src', 'app://' + method + '/?' + params.join('&'));
+    console.log('call native: gamepop://' + method + '/?' + params.join('&'));
+    iframe.attr('src', 'gamepop://' + method + '/?' + params.join('&'));
   }
 
   var ga = window.ga = function (method, type, category, action, label, value) {
@@ -33,6 +35,22 @@
         action: action,
         label: label || '',
         value: value || ''
+      });
+    }
+  };
+  var device = window.device = {
+    share: function (url, title, pic) {
+      callNative('share', {
+        url: url,
+        title: title,
+        pic: pic
+      });
+    },
+    save: function (url1, url2, callback) {
+      callNative('save', {
+        url1: url1,
+        url2: url2,
+        callback: callback
       });
     }
   };

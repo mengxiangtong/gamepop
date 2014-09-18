@@ -10,18 +10,16 @@
   ns.GUI = Backbone.View.extend({
     $router: null,
     $context: null,
-    $sidebar: null,
+    $homepage: null,
     $fav: null,
     events: {
       'click': 'clickHandler',
       'click .no-click': 'preventDefault',
-      'click .item': 'item_clickHandler',
+      'click .item': 'preventDefault',
       'swipeleft': 'swipeLeftHandler',
       'swiperight': 'swipeRightHandler',
       'touch': 'touchHandler',
       'tap .item': 'item_tapHandler',
-      'tap #homepage': 'homepage_tapHandler',
-      'tap .sidebar-toggle': 'sidebarToggle_tapHandler',
       'tap .back-button': 'backButton_tapHandler',
       'tap .download-button': 'downloadButton_tapHandler',
       'tap .fav-button': 'favButton_tapHandler',
@@ -35,7 +33,6 @@
     },
     back: function (isRouter) {
       if (WEB) {
-        // Web模式下，不存在Android的Back键，所以都是后退，也就直接后退就行了
         if (gamepop.history.length === 0) {
           return this.$router.navigate('#/');
         }
@@ -45,15 +42,14 @@
           history.back();
         }
       } else {
+        // client应用中，back键被捕获了，所以一定是手工后退
         var hash = location.hash.substr(2);
         if (hash === '' || gamepop.history.length === 0) {
           location.href = 'popo:return';
         } else if (!Popup.isSearch()) {
           gamepop.history.pop();
           Popup.removeLast();
-          if (!isRouter) {
-            history.back();
-          }
+          history.back();
         }
       }
     },
@@ -71,16 +67,10 @@
         classes: className
       }, options));
     },
-    toggleSidebar: function () {
-      $('#homepage').toggleClass('back');
-      $('#sidebar').toggleClass('hide');
-      ga('send', 'event', 'toggle', 'sidebar');
-    },
     backButton_tapHandler: function (event) {
-      if ($('#homepage').hasClass('back') && !event) {
-        return this.toggleSidebar();
+      if (event || this.$homepage.isNormal()) {
+        this.back();
       }
-      this.back();
     },
     downloadButton_tapHandler: function () {
       ga('send', 'event', 'game', 'download', this.$context.getValue('game-id'));
@@ -99,16 +89,6 @@
     gameButton_tapHandler: function () {
       ga('send', 'event', 'game', 'play', this.$context.getValue('game-id'));
     },
-    homepage_tapHandler: function (event) {
-      if ($(event.currentTarget).hasClass('back')) {
-        this.toggleSidebar();
-        event.preventDefault();
-      }
-    },
-    item_clickHandler: function (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    },
     item_tapHandler: function (event) {
       var target = $(event.currentTarget)
         , href = target.data('href') || target.find('a').attr('href');
@@ -116,11 +96,6 @@
         return;
       }
       this.$router.navigate(href);
-    },
-    sidebarToggle_tapHandler: function (event) {
-      $(event.currentTarget).removeClass('reminder');
-      this.toggleSidebar();
-      event.stopPropagation();
     },
     clickHandler: function (event) {
       // 有些功能我们用tap触发，之后可能有ui切换，这个时候系统可能会给手指离开的位置上的a触发一个click事件
@@ -139,17 +114,38 @@
       event.preventDefault();
     },
     swipeLeftHandler: function () {
-      if (Popup.pages.length === 0 && !$('#homepage').hasClass('back')) {
-        this.toggleSidebar();
+      if (Popup.pages.length === 0 && !this.$homepage.el.classList.contains('back')) {
+        this.$homepage.toggleSidebar();
       }
     },
     swipeRightHandler: function () {
-      if (Popup.pages.length === 0 && $('#homepage').hasClass('back')) {
-        this.toggleSidebar();
+      if (Popup.pages.length === 0 && this.$homepage.el.classList.contains('back')) {
+        this.$homepage.toggleSidebar();
       }
     },
     touchHandler: function (event) {
       lastTouch = event.target;
     }
   });
+  if (WEB) {
+    ns.GUI = ns.GUI.extend({
+      events: _.extend(ns.GUI.prototype.events, { // 用于与上一级的GUI中的events属性合并
+        'tap .download-url-button': 'downloadURLButton_tapHandler',
+        'tap .remove-button': 'removeButton_tapHandler',
+        'tap #cover': 'cover_tapHandler'
+      }),
+      cover_tapHandler: function (event) {
+        $(event.currentTarget).remove();
+      },
+      downloadURLButton_tapHandler: function() { // 微信禁用一般的下载，只有让用户自行打开浏览器
+        if (/micromessenger/i.test(navigator.userAgent)) {
+          document.getElementById('cover').className = 'active';
+        }
+      },
+      removeButton_tapHandler: function() {
+        $("#download-panel").remove();
+        localStorage.setItem("download", 'hide');
+      }
+    });
+  }
 }(Nervenet.createNameSpace('gamepop.view')));

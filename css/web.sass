@@ -1,4 +1,82 @@
-@charset "UTF-8"
+@charset "utf-8"
+@import "define"
+@import "../bower_components/colors/sass/variables"
+
+#download-panel
+  height: 75px
+  position: fixed
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 9999
+  padding: $gap 120px 0 $gap
+  background-color: $download-background-color
+
+  img
+    width: 55px
+    height: 55px
+    margin-right: $gap
+    float: left
+
+  h2
+    font-size: 14px
+    line-height: 1.2em
+    margin: 0 0 $gap-s
+
+  p
+    margin: 0
+
+    i
+      color: $star-color
+      font-size: 18px
+      line-height: 1em
+
+  .remove-button
+    border: none
+    background: transparent
+    padding: 0
+    margin: 0
+    height: 35px
+    width: 35px
+    line-height: 35px
+    font-size: 25px
+    position: absolute
+    right: 0
+    top: $gap-l
+
+    &:active
+      background: darken($download-background-color, 20%)
+
+  + .page-container
+    padding-bottom: 75px
+
+#download-app-button
+  width: 70px
+  height: 35px
+  line-height: 35px
+  text-align: center
+  color: $white
+  background-color: $navbar-background-color
+  border-radius: 4px
+  position: absolute
+  top: $gap-l
+  right: 35px
+
+  &:active
+    background-color: darken($navbar-background-color, 15%)
+
+#cover
+  background: rgba(0, 0, 0, 0.8) url(../img/web/jiantou.png) no-repeat right top
+  position: absolute
+  z-index: 9999
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: none
+
+  &.active
+    display: block
 
 .web
   .game-button,

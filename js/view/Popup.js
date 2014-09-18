@@ -41,7 +41,11 @@
       pages.push(this);
     },
     remove: function () {
-      this.$('.content').off('scroll');
+      var content = this.$('.content');
+      content.off('scroll');
+      if (this.autoload) {
+        this.autoload.remove();
+      }
       this.$result.off(null, null, this);
       Backbone.View.prototype.remove.call(this);
     },
@@ -49,9 +53,32 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
+
+      //使用网页版本浏览
+      if (WEB) {
+        var userAgent = navigator.userAgent;
+        var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") < 1 ;
+
+        var is_download_panel = Number(localStorage.getItem("no-download-panel")) ;
+        if (is_download_panel) { // 没有download-panel
+          $(".content").css("padding-bottom", 0); // 没有download-panel时content的padding-bottom值
+        }
+        // 判断是否是使用safari浏览器打开
+        if (isSafari) {
+          $(".download-panel").remove();
+          localStorage.setItem("no-download-panel",true);
+          $(".content").css("padding-bottom", 0);
+        } else { // 不是safari浏览器
+          $(".download-panel").show();
+          if (!is_download_panel) {
+            $(".content").css("padding-bottom", "75px");
+          }
+        }
+      }
+
       this.$('.content')
         .addClass(this.options.classes)
-        .load(this.options.url, _.bind(this.loadCompleteHandler, this));
+        .load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
@@ -91,10 +118,20 @@
       setTimeout(function () {
         map.check(el);
       }, 50);
-      // lazyload
-      lazyLoad(this.el);
       // 功能按钮
       this.$('.navbar-btn-group').removeClass('hide');
+      // 自动加载
+      var autoLoad = this.$('.auto-load');
+      if (autoLoad.length > 0) {
+        var content = autoLoad.data('self') ? autoLoad : this.$('.content')
+          , mediator = new gamepop.view.AutoLoad({
+            el: content,
+            list: autoLoad
+          });
+        this.autoload = mediator;
+      }
+      // lazyload
+      lazyLoad(this.el);
     },
     show: function () {
       this.$el.show();
@@ -105,9 +142,17 @@
       this.$('.navbar-btn-group,.back-button').toggleClass('hide', isShow);
     },
     bookmarkButton_tapHandler: function (event) {
-      var button = $(event.currentTarget);
-      this.$rss.toggle(button.hasClass('active'), this.options.guide_name, this.$('h1').text(), this.$('.icon').attr('src'));
+      var button = $(event.currentTarget)
+        , parent = button.closest('.item');
+      if (parent.length === 0) {
+        parent = this.$('.game-info');
+      }
+      var guide_name = this.options.guide_name || button.closest('.item').data('id')
+        , title = parent.find('h1, h2').text()
+        , icon = parent.find('img').attr('src');
+      this.$rss.toggle(button.hasClass('active'), guide_name, title, icon);
       button.toggleClass('active');
+      event.stopPropagation();
     },
     cancelButton_tapHandler: function () {
       this.toggleSearchForm(false);
@@ -143,7 +188,10 @@
         .find('input, button').prop('disabled', false);
     },
     shareButton_tapHandler: function () {
-      device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + $('title').text());
+      var url = 'http://m.yxpopo.com/' + location.hash
+        , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
+        , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
+      device.share(url, title, pic);
     },
     shortcutButton_tapHandler: function () {
       device.addShortCut(this.options.game_name, this.options.guide_name, this.$('.icon').attr('src'));
@@ -162,11 +210,11 @@
       }
     },
     loadCompleteHandler: function (response, status) {
+      this.$('.navbar .fa-spin').remove();
       if (status === 'error') {
         this.$('.alert').removeClass('hide');
         return;
       }
-      this.$('.navbar .fa-spin').remove();
 
       // 阅读记录
       if (/-detail/.test(this.$('.content').attr('class'))) {
@@ -183,6 +231,7 @@
       }
       $('title').text('游戏宝典 ' + this.$('.content').find('h1, h2').first().text());
 
+      // lazyload
       this.$('.content').on('scroll', function () { lazyLoad(this, 800); });
       this.initMediator();
     }

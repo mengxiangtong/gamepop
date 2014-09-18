@@ -1,0 +1,14 @@
+@charset "UTF-8"
+@import "../define"
+@import "../../bower_components/colors/sass/variables"
+
+.waterfall
+  padding: $gap 0 $gap $gap
+
+  .column
+    float: left
+    padding-right: $gap
+    width: 50%
+
+  .item + .item
+    margin-top: $gap

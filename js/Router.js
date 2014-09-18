@@ -19,7 +19,9 @@
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
       'no-guide/:game(/:name)': 'showNoGuidePage',
-      'config(-:query)': 'showConfigPage'
+      'config(/:query)': 'showConfigPage',
+      'external/:page': 'showExternalPage',
+      'page/:page': 'showPage'
     },
     backHome: function () {
       this.game = '';
@@ -42,6 +44,7 @@
         game_name: game_name,
         'has-guide': true,
         'has-game': hasGame,
+        'has-search': isIndex || isList,
         'is-detail': type === 'detail',
         'is-index': isIndex,
         fav: fav,
@@ -79,6 +82,7 @@
     showSearch: function (game, keyword) {
       this.data = {
         type: 'search',
+        'has-search': true,
         guide_name: keyword ? game: '',
         keyword: decodeURIComponent(keyword || game)
       };
@@ -95,19 +99,32 @@
       this.$gui.showPopupPage('template/no-guide.html', 'no-guide', this.data);
       ga('send', 'pageview', 'no-guide/' + game + '/' + name);
     },
-    showConfigPage: function(query){
-      if(query == "intro"){
-        this.$gui.showPopupPage('template/config-intro.html');
-        ga('send', 'pageview', 'config-intro');
+    showConfigPage: function(query) {
+      if (query) {
+        this.$gui.showPopupPage('template/config-' + query + '.html');
+        return ga('send', 'pageview', 'config/' + query);
       }
-      else if(query == "suggustion"){
-        this.$gui.showPopupPage('template/config-suggustion.html');
-        ga('send', 'pageview', 'config-suggustion');
-      }
-      else {
-        this.$gui.showPopupPage('template/config.html');
-        ga('send', 'pageview', 'config');
-      }
+      this.$gui.showPopupPage('template/config.html');
+      ga('send', 'pageview', 'config');
+    },
+    showExternalPage: function (page) {
+      var is_hot = page === 'hot';
+      this.data = {
+        type: page,
+        'has-search': is_hot,
+        'title': is_hot ? '热门游戏' : ''
+      };
+      this.$gui.showPopupPage(config[page], page, this.data);
+      ga('send', 'pageview', 'external/' + page);
+    },
+    showPage: function (page) {
+      var is_girl = page === 'girl';
+      this.data = {
+        type: page,
+        'title': is_girl ? '福利社' : ''
+      };
+      this.$gui.showPopupPage('template/' + page + '.html', page, this.data);
+      ga('send', 'pageview', 'page/' + page);
     },
     /**
      * 记录首次访问时的地址
@@ -143,6 +160,8 @@
           // 可以认为是用户点了后退按钮
           return this.$gui.back(true);
         }
+        // 返回到主页面时，不显示下载栏
+        $("#download-panel").toggle(!!fragment);
         Backbone.Router.prototype.execute.call(this, callback, args);
       }
     });

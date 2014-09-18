@@ -1,7 +1,20 @@
 @charset "utf-8"
 @import "define"
+@import "compass/css3/transform"
 
 @media (max-width: 320px)
+  .page-container,
+  #cards
+    width: 320px
+
+  .home-page
+    .item
+      width: 94px
+
+    img
+      width: 94px
+      height: 94px
+
   #my-apps-title
     font-size: 10px
     line-height: 12px
@@ -19,15 +32,33 @@
       height: 55px
       margin-left: 13px
 
+  #cards
+    .hot-game
+      height: 121px
+
+      .item
+        width: 86px
+        height: 86px
+
+        img
+          width: 86px
+          height: 86px
+
+        + .item
+          margin-left: 6px
+
+    .girl
+      height: 193px
+
+      h3
+        font-size: 12px
+
   #sidebar
     right: 3%
 
     .rss
       .item
         width: 60px
-
-        + .item
-          margin-left: 22px
 
         img
           width: 60px
@@ -50,7 +81,7 @@
 
     h1
       font-size: 17px
-      margin-top: 0
+      margin: 0
 
       small
         font-size: 9px
@@ -71,6 +102,21 @@
     p
       font-size: 9px
 
+  .article-body article .ph
+    width: 280px
+    height: 157px
+
+  .hot-game-list
+    .item
+      width: 150px
+
+    img
+      width: 140px
+      height: 140px
+
+  #boobs .column .item
+    height: 96px
+
 @media (min-width: 480px)
   #apps,
   #guide-list
@@ -87,5 +133,51 @@
   .apps-title,
   #apps,
   .entrance,
-  .history-button
+  .history-button,
+  .download-panel
     display: none
+
+@media (height: 567px)
+  .page-container,
+  #cards
+    height: 567px
+
+  #cards-toggle
+    top: 527px
+
+    &.active
+      @include translate(0, -527px)
+      @include translate3d(0, -527px, 0)
+
+  #sidebar ul.in
+    height: 360px
+
+@media (height: 568px)
+  .page-container,
+  #cards
+    height: 568px
+
+  #cards-toggle
+    top: 528px
+
+    &.active
+      @include translate(0, -528px)
+      @include translate3d(0, -528px, 0)
+
+  #sidebar ul.in
+    height: 361px
+
+@media (height: 640px)
+  .page-container,
+  #cards
+    height: 640px
+
+  #cards-toggle
+    top: 600px
+
+    &.active
+      @include translate(0, -600px)
+      @include translate3d(0, -600px, 0)
+
+  #sidebar ul.in
+    height: 426px
