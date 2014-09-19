@@ -132,7 +132,8 @@
         .map('.hot-game-list', gamepop.view.HotGame, {
           collection: rss
         })
-        .map('#boobs', gamepop.view.Boobs);
+        .map('#boobs', gamepop.view.Boobs)
+        .map('.comment-page', gamepop.view.Comment);
 
     createCss(document.body.clientWidth, document.body.clientHeight);
 

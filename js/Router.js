@@ -18,6 +18,7 @@
       "search/:keyword": "showSearch",
       "search/:game/:keyword": "showSearch",
       'remote/:game(/*path)': 'showRemoteGuide',
+      'comment/:game/:category/:id/:topic': 'showCommentPage',
       'no-guide/:game(/:name)': 'showNoGuidePage',
       'config(/:query)': 'showConfigPage',
       'external/:page': 'showExternalPage',
@@ -78,6 +79,18 @@
       }
       this.$gui.showPopupPage(config.remote + game + '/' + path, 'game-page guide-' + type + ' ' + game, this.data);
       ga('send', 'pageview', 'remote/' + game + '/' + path);
+    },
+    showCommentPage: function (game, category, id, topic) {
+      this.data = {
+        type: 'comment',
+        iframe: !WEB,
+        guide_name: game,
+        category: category,
+        topic: topic,
+        id: id
+      };
+
+      this.$gui.showPopupPage('', 'comment-page comment-' + id, this.data);
     },
     showSearch: function (game, keyword) {
       this.data = {

@@ -30,7 +30,6 @@
     },
     initialize: function (options) {
       this.options = options;
-      this.url = options.url;
       if (this.$apps.device_id) {
         this.render();
       } else {
@@ -53,9 +52,15 @@
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
 
-      this.$('.content')
-        .addClass(this.options.classes)
-        .load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
+      var content = this.$('.content');
+      content.addClass(this.options.classes);
+      if (this.options.url) {
+        content.load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
+      } else {
+        content.empty();
+        this.$('.navbar .fa-spin').remove();
+        this.initMediator();
+      }
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
