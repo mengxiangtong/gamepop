@@ -11,9 +11,9 @@
     var style = document.createElement('style')
       , size = {
         height: height,
-        hpItemWidth: hpItemWidth,
+//        hpItemWidth: hpItemWidth,
         sidebarHeight: height * .9 - 195 - 75 >> 0
-        'cards-toggle-top': height - 40
+//        'cards-toggle-top': height - 40
       }
       , content;
     if (width !== 360 && width !== 320) { // 标准宽度不计算
@@ -120,7 +120,8 @@
           collection: results
         })
         .map('.weibo-login-wrap', gamepop.view.weiboLogin)
-        .map('.qq-login-wrap', gamepop.view.qqLogin);        .map('.hot-game-list', gamepop.view.HotGame, {
+        .map('.qq-login-wrap', gamepop.view.qqLogin)
+        .map('.hot-game-list', gamepop.view.HotGame, {
           collection: rss
         })
         .map('#boobs', gamepop.view.Boobs);

@@ -17,16 +17,12 @@
           if (timer) {
             clearInterval(timer);
           }
-          dfd.resolve();
+          dfd.resolve($gui);
         }
       },1000);
-      this.ajax_request = _.bind($gui.back,$gui)
-      $.when(dfd).then(
-        this.ajax_request
-      )
+      dfd.done(this.ajax_request);
     },
-    ajax_request: function(){
-      alert(1);
+    ajax_request: function(n){
       $.ajax({
         url: "https://graph.qq.com/user/get_user_info?access_token="+document.qqlogin.b+"&oauth_consumer_key=101148626&openid="+document.qqlogin.a,
         type : "get",
@@ -42,12 +38,10 @@
           'login_id' : document.qqlogin.a
         };
         localStorage.setItem('login',JSON.stringify(login_data));
-        this.back();
-        this.back();
+        n.back();
+        n.back();
       })
     }
-
-
   })
 
 }(Nervenet.createNameSpace('gamepop.view')));
