@@ -4,7 +4,6 @@
 ;(function (ns) {
   'use strict';
 
-  //没有暴露事件，只能写到这儿了
   var lazyLoad = gamepop.component.lazyLoad
     , fadeOutPage
     , pages = [];
