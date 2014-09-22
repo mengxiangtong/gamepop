@@ -30,6 +30,7 @@
     },
     initialize: function (options) {
       this.options = options;
+      this.url = options.url;
       if (this.$apps.device_id) {
         this.render();
       } else {
