@@ -68,7 +68,7 @@
     },
     checkSearchStatus: function () {
       if (this.isSearch) {
-        this.toggleSearchForm(false)
+        this.toggleSearchForm(false);
         return true;
       }
       return false;
@@ -96,9 +96,10 @@
       }
       // 给load进来的页面增加mediator
       var map = this.$context.mediatorMap
-        , el = this.el;
+        , el = this.el
+        , options = this.options;
       setTimeout(function () {
-        map.check(el);
+        map.check(el, options);
         // 网页版生成评论框
         if (WEB) {
           var duoshuo = el.getElementsByClassName('ds-thread');

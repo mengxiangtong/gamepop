@@ -87,9 +87,8 @@
         guide_name: game,
         category: category,
         topic: topic,
-        id: id
+        title: '跟帖'
       };
-
       this.$gui.showPopupPage('', 'comment-page comment-' + id, this.data);
     },
     showSearch: function (game, keyword) {
