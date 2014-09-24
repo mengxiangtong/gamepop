@@ -22,6 +22,9 @@
       'tap .cancel-button': 'cancelButton_tapHandler',
       'tap .search-button': 'searchButton_tapHandler',
       'tap .share-button': 'shareButton_tapHandler',
+      'tap .share-cancel-button': 'shareCancelButton_tapHandler',
+      'tap .wx-share': 'wxShare_tapHandler',
+      'tap .wx-share-cancel-button': 'wxShareCancelButton_tapHandler',
       'tap .shortcut-button': 'shortcutButton_tapHandler',
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
@@ -52,16 +55,13 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
-
-      var content = this.$('.content');
-      content.addClass(this.options.classes);
-      if (this.options.url) {
-        content.load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
-      } else {
-        content.empty();
-        this.$('.navbar .fa-spin').remove();
-        this.initMediator();
+      var isWeixin = /micromessenger/i.test(navigator.userAgent);
+      if(isWeixin) {
+        this.$el.find(".share-button").hide();
       }
+      this.$('.content')
+        .addClass(this.options.classes)
+        .load(this.options.url, _.bind(this.loadCompleteHandler, this));
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
@@ -179,10 +179,24 @@
         .find('input, button').prop('disabled', false);
     },
     shareButton_tapHandler: function () {
-      var url = 'http://m.yxpopo.com/' + location.hash
-        , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
-        , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
-      device.share(url, title, pic);
+        var title = ($('title').text())
+          , url = encodeURIComponent(window.location.href);
+        device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + title);
+        this.$(".share-form").fadeIn()
+          .find(".qq-share").attr("href", "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&showcount=0&desc=&summary=&title=" + title + "&pics=").end()
+          .find(".qzone-share").attr("href", "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&title=" + title + "&pics=" + "" + "&summary=" + "").end()
+          .find(".twb-share").attr("href", "http://share.v.t.qq.com/index.php?c=share&a=index&title=" + title + "&url=" + url + "&appkey=ce15e084124446b9a612a5c29f82f080&site=www.jiathis.com&pic=").end()
+          .find(".swb-share").attr("href", "http://service.weibo.com/share/share.php?title=" + title + "&url=" + url + "&source=bookmark&appkey=2992571369&pic=&ralateUid=").end()
+          .find(".renren-share").attr("href", "http://widget.renren.com/dialog/share?resourceUrl=" + url + "&srcUrl=" + url + "&title=" + title + "&pic=&description=").end();
+    },
+    shareCancelButton_tapHandler: function(){
+      $('.share-form').fadeOut();
+    },
+    wxShare_tapHandler: function(){
+      this.$('.wx-share-content').fadeIn().find('img').attr('src','http://s.jiathis.com/qrcode.php?url='+location.href);
+    },
+    wxShareCancelButton_tapHandler: function(){
+      this.$('.wx-share-content').fadeOut();
     },
     shortcutButton_tapHandler: function () {
       device.addShortCut(this.options.game_name, this.options.guide_name, this.$('.icon').attr('src'));

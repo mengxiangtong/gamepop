@@ -105,7 +105,9 @@
         rss: rss
       })
       , router = new gamepop.Router();
-
+setInterval(function(){
+  console.log(location.href)
+},5000)
     context
       .mapValue('gui', gui)
       .mapValue('homepage', homepage)

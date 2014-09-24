@@ -271,6 +271,56 @@
     <button {{#if keyword}}disabled{{/if}}><i class="fa fa-search"></i></button>
   </form>
   {{/if}}
+  <div class="share-form cover" style="display:none">
+    <div class="share-form-pop">
+      <p class="share-form-title">分享到<i class="share-cancel-button">×</i></p>
+      <div class="flex-row">
+        <div>
+          <a href="" target="_blank" class="qq-share">
+            <i class="fa fa-qq fa-3x"></i>
+            <p>QQ</p>
+          </a>
+        </div>
+        <div>
+          <a href="" target="_blank" class="qzone-share">
+            <i class="fa fa-star-o fa-3x"></i>
+            <p>QQ空间</p>
+          </a>
+        </div>
+        <div>
+          <a href="" target="_blank" class="twb-share">
+            <i class="fa fa-tencent-weibo fa-3x"></i>
+            <p>腾讯微博</p>
+          </a>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div>
+          <a href="" target="_blank" class="swb-share">
+            <i class="fa fa-weibo fa-3x"></i>
+            <p>新浪微博</p>
+          </a>
+        </div>
+        <div>
+          <a class="wx-share">
+            <i class="fa fa-weixin fa-3x"></i>
+            <p>微信</p>
+          </a>
+        </div>
+        <div>
+          <a href="" target="_blank" class="renren-share">
+            <i class="fa fa-renren fa-3x"></i>
+            <p>人人网</p>
+          </a>
+        </div>
+      </div>
+      <div class="wx-share-content">
+        <p class="wx-share-content-title">分享到微信朋友圈 <i class="wx-share-cancel-button">×</i></p>
+        <img src="" alt="二维码加载中..."/>
+        <p>打开微信，点击底部的“发现”，使用 “扫一扫” 即可将网页分享到我的朋友圈。</p>
+      </div>
+    </div>
+  </div>
   <div class="content">
     <div class="alert alert-error hide">
       <i class="fa fa-frown-o"></i> 加载失败
@@ -325,6 +375,6 @@
 <script src="js/view/HotGame.js"></script>
 <script src="js/view/Boobs.js"></script>
 <script src="js/view/GUI.js"></script>
+<script src='js/wx-share.js'></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>
-

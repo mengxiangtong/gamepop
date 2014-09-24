@@ -157,7 +157,7 @@
       right: $gap
       font-size: 1.5em
 
-  .search-form
+  .search-form,.share-form
     @extend #search-form
     position: absolute
     top: 0
@@ -237,3 +237,111 @@
 
 .out
   display: none !important
+
+.share-form-pop
+  position: fixed
+  bottom: 0
+  right: 0
+  left: 0
+  text-align: center
+  background-color: white
+
+  .share-form-title
+    margin: 0
+    height: 40px
+    line-height: 40px
+    border-top: 4px solid #00b3ee
+    background-color: rgb(220,220,220)
+
+    .share-cancel-button
+      font-style: normal
+      font-size: 30px
+      width: 40px
+      height: 40px
+      line-height: 40px
+      position: absolute
+      right: 0
+
+  .flex-row
+    width: 100%
+    padding: 15px 0
+    border-bottom: 1px solid rgb(220,220,220)
+
+    p
+      margin: 10px 0 0 0
+
+    div
+      -webkit-box-flex: 1
+      box-flex: 1
+      -webkit-flex: 1
+      flex: 1
+
+      i
+        padding: 10px
+        border-radius: 5px
+        color: white
+
+      .qq-share
+        i
+          background-color: rgb(106,146,219)
+
+      .qzone-share
+        i
+          background-color: rgb(239,122,235)
+          padding: 10px 12px
+
+      .twb-share
+        i
+          background-color: rgb(253,147,82)
+          padding: 10px 16px
+
+      .swb-share
+        i
+          background-color: rgb(255,109,109)
+
+      .wx-share
+        i
+          background-color: rgb(125,207,97)
+          padding: 10px 8px
+
+      .renren-share
+        i
+          background-color: rgb(109,215,238)
+          padding: 10px 13px
+
+
+  p
+    margin: 0
+
+    span
+      display: block
+      width: 30%
+      height: 34px
+      line-height: 34px
+      margin: 3px auto
+      border: 1px solid rgb(220,220,220)
+
+  .wx-share-content
+    display: none
+    position: fixed
+    left: 8px
+    right: 8px
+    top: 50%
+    -webkit-transform: translateY(-50%)
+    background-color: whitesmoke
+    padding-bottom: 20px
+
+    .wx-share-content-title
+      border-bottom: 1px solid rgb(220,220,220)
+      height: 40px
+      line-height: 40px
+      position: relative
+
+      i
+        font-style: normal
+        font-size: 30px
+        width: 40px
+        height: 40px
+        line-height: 40px
+        position: absolute
+        right: 0
