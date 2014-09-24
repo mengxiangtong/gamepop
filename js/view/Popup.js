@@ -128,7 +128,7 @@
       this.$el.show();
     },
     toggleSearchForm: function (isShow) {
-      this.isSearch = isShow = isShow === undefined ? !this.isSearch : isShow;
+      this.isSearch = isShow = isShow === undefined ? !this.isSearch() : isShow;
       this.$('.search-form')[isShow ? 'fadeIn' : 'fadeOut']('fast');
       this.$('.navbar-btn-group,.back-button').toggleClass('hide', isShow);
     },

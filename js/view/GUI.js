@@ -50,6 +50,14 @@
           gamepop.history.pop();
           Popup.removeLast();
           history.back();
+
+          // 登录过程中，可能产生两个#/config/comment的history，所以如果hash === location.hash
+          // 则认为是此状况，那么history.back()。因为没有办法通过事件取得history变化，所以姑且50ms后检查吧
+          setTimeout(function () {
+            if (hash === location.hash) {
+              history.back();
+            }
+          }, 50);
         }
       }
     },

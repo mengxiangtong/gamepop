@@ -292,7 +292,7 @@
   <h2>{{topic}}</h2>
   <hr>
   {{#if iframe}}
-  <iframe src="http://m.yxpopo.com/comment.html?short_name=yxpopo&key={{id}}&title={{topic}}&url=http%3A%2F%2Fm.yxpopo.com%2F%23%2Fremote%2F{{guide_name}}%2F{{category}}%2F{{id}}%2Fdetail.html" frameborder="0" width="100%" height="100%" id="app-comment"></iframe>
+  <iframe src="http://m.yxpopo.com/comment.html?short_name=yxpopo&key={{key}}&title={{topic}}&url=http%3A%2F%2Fm.yxpopo.com%2F%23%2Fremote%2F{{guide_name}}%2F{{category}}%2F{{key}}%2Fdetail.html" frameborder="0" width="100%" height="100%" id="app-comment"></iframe>
   {{else}}
   <div class="ds-thread" data-thread-key="{{id}}" data-title="{{topic}}"></div>
   {{/if}}
@@ -303,7 +303,7 @@
 <script src="bower_components/hammerjs/hammer.min.js"></script>
 <script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone-min.js"></script>
-<script src="bower_components/nervenet/nervenet.js"></script>
+<script src="bower_components/nervenet/nervenet.min.js"></script>
 <script src="js/component/lazyLoad.js"></script>
 <script src="js/component/Carousel.js"></script>
 <script src="js/define.js"></script>
