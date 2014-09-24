@@ -314,6 +314,10 @@ module.exports = function (grunt) {
             src: 'template/config-comment-web.html',
             dest: BUILD + 'template/config-comment.html'
           }]
+        },
+        comment: {
+          src: 'comment.html',
+          dest: BUILD + 'comment.html'
         }
       }
     });

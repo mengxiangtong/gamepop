@@ -53,9 +53,15 @@
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
 
-      this.$('.content')
-        .addClass(this.options.classes)
-        .load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
+      var content = this.$('.content');
+      content.addClass(this.options.classes);
+      if (this.options.url) {
+        content.load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
+      } else {
+        content.empty();
+        this.$('.navbar .fa-spin').remove();
+        this.initMediator();
+      }
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
@@ -63,7 +69,7 @@
     },
     checkSearchStatus: function () {
       if (this.isSearch) {
-        this.toggleSearchForm(false)
+        this.toggleSearchForm(false);
         return true;
       }
       return false;
@@ -91,9 +97,10 @@
       }
       // 给load进来的页面增加mediator
       var map = this.$context.mediatorMap
-        , el = this.el;
+        , el = this.el
+        , options = this.options;
       setTimeout(function () {
-        map.check(el);
+        map.check(el, options);
         // 网页版生成评论框
         if (WEB) {
           var duoshuo = el.getElementsByClassName('ds-thread');

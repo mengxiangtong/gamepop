@@ -3,8 +3,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
   <style>
-    body{
-      margin: 0!important;
+    body {
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
@@ -17,6 +18,9 @@
   <!-- 多说评论框 end -->
 
 <script>
+  var duoshuoQuery = {
+    short_name: 'yxpopo'
+  };
   window.onload = function () {
     var match
       , pattern = /\+/g
@@ -25,7 +29,7 @@
           return decodeURIComponent(s.replace(pattern, " "));
         }
       , query = window.location.search.substring(1);
-      duoshuoQuery = {};
+
     while (match = search.exec(query)) {
       duoshuoQuery[decode(match[1])] = decode(match[2]);
     }
