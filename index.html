@@ -378,3 +378,14 @@
 <script src='js/wx-share.js'></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>
+<script src="https://cn.avoscloud.com/scripts/lib/av-0.4.2.min.js"></script>
+<script>
+  AV.initialize("rjzvingxewazmz2cuvmeh1jfl6h24gpmlx06i0n4mrzdf9ke", "eaqp5ila9yleh8x7xkvc2kna667ochzmilcve2cym3xyvvd9");
+  var TestObject = AV.Object.extend("TestObject");
+  var testObject = new TestObject();
+  testObject.save({foo: "bar"}, {
+    success: function(object) {
+      alert("AVOS Cloud works!");
+    }
+  });
+</script>
