@@ -12,7 +12,7 @@
     if ([567, 568, 615, 640].indexOf(height) === -1) {
       size = {
         height: height,
-        sidebarHeight: height * .9 - 150 >> 0,
+        sidebarHeight: height * .9 - 200 >> 0,
         'cards-toggle-top': height - 40
       };
     }

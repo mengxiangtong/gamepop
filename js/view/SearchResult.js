@@ -18,6 +18,7 @@
       this.list = this.$('ul');
       this.loading = this.$('.loading');
       this.guide_name = this.$router.data.guide_name;
+      this.list.addClass(this.guide_name ? 'article' : 'game');
       this.collection.on('request', this.collection_requestHandler, this);
       this.collection.on('reset', this.collection_resetHandler, this);
       this.collection.search();

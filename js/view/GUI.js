@@ -52,10 +52,10 @@
           history.back();
 
           // 登录过程中，可能产生两个#/config/comment的history，所以如果hash === location.hash
-          // 则认为是此状况，那么history.back()。因为没有办法通过事件取得history变化，所以姑且50ms后检查吧
+          // 则认为是此状况，那么history.go(-1)。因为没有办法通过事件取得history变化，所以姑且50ms后检查吧
           setTimeout(function () {
-            if (hash === location.hash.substr(2) && /comment\//.test(hash)) {
-              history.back();
+            if (hash === location.hash.substr(2) && /\/comment$|^comment\//.test(hash)) {
+              history.go(-2);
             }
           }, 50);
         }
@@ -135,6 +135,7 @@
       lastTouch = event.target;
     }
   });
+
   if (WEB) {
     ns.GUI = ns.GUI.extend({
       events: _.extend(ns.GUI.prototype.events, { // 用于与上一级的GUI中的events属性合并
