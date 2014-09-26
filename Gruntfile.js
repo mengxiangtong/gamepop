@@ -109,7 +109,7 @@ module.exports = function (grunt) {
       },
       web: {
         files: [{
-          src: jses,
+          src: [jses,'!js/WxShare.js'],
           dest: TEMP + 'index.js'
         }]
       },
@@ -318,6 +318,14 @@ module.exports = function (grunt) {
         comment: {
           src: 'comment.html',
           dest: BUILD + 'comment.html'
+        }
+      },
+      uglify: {
+        web:{
+          files: [{
+            src: ['js/WxShare.js'],
+            dest: TEMP + 'index.js'
+          }]
         }
       }
     });
