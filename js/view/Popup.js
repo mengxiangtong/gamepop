@@ -21,6 +21,7 @@
       'tap .bookmark-button': 'bookmarkButton_tapHandler',
       'tap .cancel-button': 'cancelButton_tapHandler',
       'tap .search-button': 'searchButton_tapHandler',
+      'tap .share-button': 'shareButton_tapHandler',
       'tap .shortcut-button': 'shortcutButton_tapHandler',
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
@@ -156,6 +157,10 @@
     searchButton_tapHandler: function () {
       this.toggleSearchForm(true);
     },
+    shareButton_tapHandler: function(){
+      var title = $('title').text();
+      device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + title);
+    },
     searchForm_submitHandler: function (event) {
       if (event.currentTarget.elements.keyword.value === '') {
         return false;
@@ -258,7 +263,7 @@
         'tap .wx-share': 'wxShare_tapHandler'
       }),
       shareButton_tapHandler: function () {
-        var title = ($('title').text())
+        var title = $('title').text()
             , url = encodeURIComponent(window.location.href);
         device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + title);
         this.$(".share-modal").fadeIn()

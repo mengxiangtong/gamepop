@@ -109,7 +109,7 @@ module.exports = function (grunt) {
       },
       web: {
         files: [{
-          src: [jses,'!js/WxShare.js'],
+          src: jses,
           dest: TEMP + 'index.js'
         }]
       },
