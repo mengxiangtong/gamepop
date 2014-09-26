@@ -158,8 +158,10 @@
       this.toggleSearchForm(true);
     },
     shareButton_tapHandler: function(){
-      var title = $('title').text();
-      device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + title);
+      var url = 'http://m.yxpopo.com/' + location.hash
+        , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
+        , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
+      device.share(url, title, pic);
     },
     searchForm_submitHandler: function (event) {
       if (event.currentTarget.elements.keyword.value === '') {
@@ -263,9 +265,8 @@
         'tap .wx-share': 'wxShare_tapHandler'
       }),
       shareButton_tapHandler: function () {
-        var title = $('title').text()
+        var title =  '游戏攻略全都有，这下不怕了，哈哈。请看：'+$('title').text()
             , url = encodeURIComponent(window.location.href);
-        device.share('http://m.yxpopo.com/' + location.hash, '游戏攻略全都有，这下不怕了，哈哈。请看：' + title);
         this.$(".share-modal").fadeIn()
             .find(".qq-share").attr("href", "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&showcount=0&desc=&summary=&title=" + title + "&pics=").end()
             .find(".qzone-share").attr("href", "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&title=" + title + "&pics=" + "" + "&summary=" + "").end()
