@@ -32,11 +32,14 @@
       this.profile = TEMPLATES['sidebar-login'];
       if(localStorage.getItem('login') !== null){
         var login = JSON.parse(localStorage.getItem('login'));
+//    显示用户信息
         this.$('#profile').html(this.profile({
           login_img : login.login_img,
           login_name : login.login_name
         }))
         this.$('#logout').addClass('logout').html('注销');
+        
+
       }
       else{
         this.$('#profile').html(this.profile({

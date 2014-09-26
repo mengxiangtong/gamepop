@@ -307,3 +307,23 @@
 <script src="js/view/weiboLogin.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>
+<script src="https://cn.avoscloud.com/scripts/lib/av-0.4.2.min.js"></script>
+
+<script>
+  AV.initialize("rjzvingxewazmz2cuvmeh1jfl6h24gpmlx06i0n4mrzdf9ke", "eaqp5ila9yleh8x7xkvc2kna667ochzmilcve2cym3xyvvd9");
+  // 初始化 param1：应用 id、param2：应用 key
+  var GamePop = AV.Object.extend("GamePop");
+  var gameScore1 = new GamePop();
+      gameScore1.set("score", 1338);
+      gameScore1.set("playerName", "Sean Plott");
+      gameScore1.set("cheatMode", false);
+      gameScore1.save(null, {
+        success: function(gameScore) {
+          alert('New object created with objectId: ' + gameScore.id);
+          alert(gameScore.get("score"));
+        },
+        error: function(gameScore, error) {
+          alert('Failed to create new object, with error code: ' + error.description);
+        }
+  });
+</script>
