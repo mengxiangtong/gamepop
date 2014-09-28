@@ -5,7 +5,16 @@
   'use strict';
 
   var lastTouch
+    , lashHash
+    , timeout
     , Popup = gamepop.view.Popup;
+
+  function compareHistory() {
+    if (lashHash === location.hash.substr(2) && /\/comment$|^comment\//.test(lashHash)) {
+      history.back();
+      timeout = setTimeout(compareHistory, 50);
+    }
+  }
 
   ns.GUI = Backbone.View.extend({
     $router: null,
@@ -43,7 +52,7 @@
         }
       } else {
         // client应用中，back键被捕获了，所以一定是手工后退
-        var hash = location.hash.substr(2);
+        var hash = lashHash = location.hash.substr(2);
         if (hash === '' || gamepop.history.length === 0) {
           location.href = 'popo:return';
         } else if (!Popup.isSearch()) {
@@ -52,12 +61,9 @@
           history.back();
 
           // 登录过程中，可能产生两个#/config/comment的history，所以如果hash === location.hash
-          // 则认为是此状况，那么history.go(-1)。因为没有办法通过事件取得history变化，所以姑且50ms后检查吧
-          setTimeout(function () {
-            if (hash === location.hash.substr(2) && /\/comment$|^comment\//.test(hash)) {
-              history.go(-2);
-            }
-          }, 50);
+          // 则认为是此状况，那么history.back()。因为没有办法通过事件取得history变化，所以姑且50ms后检查吧
+          clearTimeout(timeout);
+          timeout = setTimeout(compareHistory, 50);
         }
       }
     },
