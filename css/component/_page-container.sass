@@ -157,7 +157,7 @@
       right: $gap
       font-size: 1.5em
 
-  .search-form,.share-modal
+  .search-form
     @extend #search-form
     position: absolute
     top: 0
@@ -238,92 +238,108 @@
 .out
   display: none !important
 
-.share-modal-pop
-  position: fixed
-  bottom: 50%
+
+.share-modal
+  position: absolute
+  top: 0
+  left: $topbar-height
   right: 0
-  left: 0
-  text-align: center
-  background-color: white
-  transform: translateY(50%)
-  margin: 0 8px
+  z-index: 25
 
-  .share-modal-title
-    margin: 0
-    height: 40px
-    line-height: 40px
-    border-top: 4px solid #00b3ee
-    background-color: rgb(220,220,220)
+  .share-modal-pop
+    position: fixed
+    bottom: 50%
+    right: 0
+    left: 0
+    text-align: center
+    background-color: white
+    transform: translateY(50%)
+    margin: 0 $gap
 
-    .share-cancel-button
-      font-style: normal
-      font-size: 30px
-      padding: 0
-      width: 40px
+    .share-modal-title
+      margin: 0
       height: 40px
       line-height: 40px
-      position: absolute
-      right: 0
+      border-top: 4px solid #00b3ee
+      background-color: rgb(220,220,220)
 
-  a
-    display: inline-block
-    width: 33%
-    padding: 15px 0 0
-    border-bottom: 1px solid rgb(220,220,220)
+      .share-cancel-button
+        font-style: normal
+        font-size: 30px
+        padding: 0
+        width: 40px
+        height: 40px
+        line-height: 40px
+        position: absolute
+        right: 0
+        outline: none
+        background-color: transparent
+        border: none
 
-    p
-      margin: 10px 0
+    ul
+      @extend .wrap-container
+      padding: 0
 
-  h4
-    margin: 10px 0 0 0
+      li
+        @extend .wrap
+        width: 33%
+        border-bottom: 1px solid rgb(220,220,220)
+        padding: 15px 0 0 0
 
-  i
-    padding: 10px
-    border-radius: 5px
-    color: white
+      a
+        &:after
+          display: block
+          margin: 10px 0
+          font-size: 15px
+        i
+          font-size: 3em
+          padding: 10px
+          border-radius: 5px
+          color: white
 
-  .qq-share
-    i
-      background-color: rgb(106,146,219)
+    .qq-share
+      i
+        background-color: rgb(106,146,219)
+      &:after
+        content: "QQ"
 
-  .qzone-share
-    i
-      background-color: rgb(239,122,235)
-      padding: 10px 12px
+    .qzone-share
+      i
+        background-color: rgb(239,122,235)
+        padding: 10px 12px
+      &:after
+        content: "QQ空间"
 
-  .twb-share
-    i
-      background-color: rgb(253,147,82)
-      padding: 10px 16px
+    .twb-share
+      i
+        background-color: rgb(253,147,82)
+        padding: 10px 16px
+      &:after
+        content: "腾讯微博"
 
-  .swb-share
-    i
-      background-color: rgb(255,109,109)
+    .swb-share
+      i
+        background-color: rgb(255,109,109)
+      &:after
+        content: "新浪微博"
 
-  .wx-share
-    i
-      background-color: rgb(125,207,97)
-      padding: 10px 8px
+    .wx-share
+      i
+        background-color: rgb(125,207,97)
+        padding: 10px 8px
+      &:after
+        content: "微信"
 
-    .weixin-share-qrcode
-      color: transparent
-      background-size: 100%!important
+      .weixin-share-qrcode
+        color: transparent
+        background-size: 100%!important
 
-    .no-weixin-share-qrcode
-      background-image: url('')!important
+      .no-weixin-share-qrcode
+        background-image: url('')!important
 
-  .renren-share
-    i
-      background-color: rgb(109,215,238)
-      padding: 10px 13px
-
-  p
-    margin: 0
-
-    span
-      display: block
-      width: 30%
-      height: 34px
-      line-height: 34px
-      margin: 3px auto
-      border: 1px solid rgb(220,220,220)
+    .renren-share
+      i
+        background-color: rgb(109,215,238)
+        padding: 10px 13px
+      &:after
+        content: "人人网"

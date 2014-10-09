@@ -273,31 +273,39 @@
   {{/if}}
   <div class="share-modal cover" style="display:none">
     <div class="share-modal-pop">
-      <h4 class="share-modal-title">分享到<i class="share-cancel-button">×</i></h4>
-      <a href="" target="_blank" class="qq-share">
-        <i class="fa fa-qq fa-3x"></i>
-        <p>QQ</p>
-      </a>
-      <a href="" target="_blank" class="qzone-share">
-        <i class="fa fa-star-o fa-3x"></i>
-        <p>QQ空间</p>
-      </a>
-      <a href="" target="_blank" class="twb-share">
-        <i class="fa fa-tencent-weibo fa-3x"></i>
-        <p>腾讯微博</p>
-      </a>
-      <a href="" target="_blank" class="swb-share">
-        <i class="fa fa-weibo fa-3x"></i>
-        <p>新浪微博</p>
-      </a>
-      <a class="wx-share">
-        <i class="no-weixin-share-qrcode fa fa-weixin fa-3x"></i>
-        <p>微信</p>
-      </a>
-      <a href="" target="_blank" class="renren-share">
-        <i class="fa fa-renren fa-3x"></i>
-        <p>人人网</p>
-      </a>
+      <h4 class="share-modal-title">分享到<button class="share-cancel-button">×</button></h4>
+      <ul>
+        <li>
+          <a href="" target="_blank" class="qq-share">
+            <i class="fa fa-qq fa-3x"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank" class="qzone-share">
+            <i class="fa fa-star-o fa-3x"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank" class="twb-share">
+            <i class="fa fa-tencent-weibo fa-3x"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank" class="swb-share">
+            <i class="fa fa-weibo fa-3x"></i>
+          </a>
+        </li>
+        <li>
+          <a class="wx-share">
+            <i class="no-weixin-share-qrcode fa fa-weixin fa-3x"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank" class="renren-share">
+            <i class="fa fa-renren fa-3x"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="content">
@@ -330,7 +338,7 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script src="bower_components/hammerjs/hammer.min.js"></script>
-<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone-min.js"></script>
 <script src="bower_components/nervenet/nervenet.js"></script>
 <script src="js/component/lazyLoad.js"></script>

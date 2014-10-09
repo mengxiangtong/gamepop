@@ -324,7 +324,7 @@ module.exports = function (grunt) {
         web:{
           files: [{
             src: ['js/WxShare.js'],
-            dest: TEMP + 'index.js'
+            dest: BUILD + 'js/WxShare.js'
           }]
         }
       }
