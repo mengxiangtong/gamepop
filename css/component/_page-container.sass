@@ -249,12 +249,11 @@
   .share-modal-pop
     position: fixed
     bottom: 50%
-    right: 0
-    left: 0
+    right: $gap
+    left: $gap
     text-align: center
     background-color: white
     transform: translateY(50%)
-    margin: 0 $gap
 
     .share-modal-title
       margin: 0
@@ -335,7 +334,7 @@
         background-size: 100%!important
 
       .no-weixin-share-qrcode
-        background-image: url('')!important
+        background-image: none!important
 
     .renren-share
       i
