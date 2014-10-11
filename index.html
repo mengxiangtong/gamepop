@@ -326,4 +326,17 @@
           alert('Failed to create new object, with error code: ' + error.description);
         }
   });
+
+  var query = new AV.Query(GamePop);
+  query.get("54363e37e4b0f3306f912f65", {
+    success: function(gameScore) {
+      // The object was retrieved successfully.
+      alert(gameScore.get("score"));
+    },
+    error: function(object, error) {
+      alert(123)
+      // The object was not retrieved successfully.
+      // error is a AV.Error with an error code and description.
+    }
+  });
 </script>
