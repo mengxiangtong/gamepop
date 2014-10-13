@@ -26,7 +26,7 @@
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
-      'animationEnd': 'animationEndHandler'
+      'animationEnd': 'animationEndHandler',
     },
     initialize: function (options) {
       this.options = options;
@@ -179,10 +179,10 @@
         .toggleClass('failed', collection.length === 0)
         .find('input, button').prop('disabled', false);
     },
-    shareButton_tapHandler: function(){
+    shareButton_tapHandler: function () {
       var url = 'http://m.yxpopo.com/' + location.hash
-          , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
-          , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
+        , title = '游戏攻略全都有，真是宝典啊，哈哈。来看这篇：' + $('title').text()
+        , pic = this.$('.icon').text() || 'http://m.yxpopo.com/img/web/144.png';
       device.share(url, title, pic);
     },
     shortcutButton_tapHandler: function () {
@@ -256,31 +256,4 @@
     return page.checkSearchStatus();
   };
   Popup.pages = pages;
-
-  if (WEB) {
-    ns.Popup = ns.Popup.extend({
-      events: _.extend(ns.Popup.prototype.events, { // 用于与上一级的Popup中的events属性合并
-        'tap .share-button': 'shareButton_tapHandler',
-        'tap .share-cancel-button': 'shareCancelButton_tapHandler',
-        'tap .wx-share': 'wxShare_tapHandler'
-      }),
-      shareButton_tapHandler: function () {
-        var title =  '游戏攻略全都有，这下不怕了，哈哈。请看：'+$('title').text()
-            , url = encodeURIComponent(window.location.href);
-        this.$(".share-modal").fadeIn()
-            .find(".qq-share").attr("href", "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&showcount=0&desc=&summary=&title=" + title + "&pics=").end()
-            .find(".qzone-share").attr("href", "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&title=" + title + "&pics=" + "" + "&summary=" + "").end()
-            .find(".twb-share").attr("href", "http://share.v.t.qq.com/index.php?c=share&a=index&title=" + title + "&url=" + url + "&appkey=ce15e084124446b9a612a5c29f82f080&site=www.jiathis.com&pic=").end()
-            .find(".swb-share").attr("href", "http://service.weibo.com/share/share.php?title=" + title + "&url=" + url + "&source=bookmark&appkey=2992571369&pic=&ralateUid=").end()
-            .find(".renren-share").attr("href", "http://widget.renren.com/dialog/share?resourceUrl=" + url + "&srcUrl=" + url + "&title=" + title + "&pic=&description=").end();
-      },
-      shareCancelButton_tapHandler: function(){
-        this.$('.share-modal').fadeOut();
-      },
-      wxShare_tapHandler: function(){
-        this.$('.fa-weixin').toggleClass('weixin-share-qrcode no-weixin-share-qrcode')
-          .css('background-image','url(http://s.jiathis.com/qrcode.php?url='+location.href+')')
-      }
-    });
-  }
 }(Nervenet.createNameSpace('gamepop.view')));

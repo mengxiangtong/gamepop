@@ -132,7 +132,10 @@
       events: _.extend(ns.GUI.prototype.events, { // 用于与上一级的GUI中的events属性合并
         'tap .download-url-button': 'downloadURLButton_tapHandler',
         'tap .remove-button': 'removeButton_tapHandler',
-        'tap #cover': 'cover_tapHandler'
+        'tap #cover': 'cover_tapHandler',
+        'tap .share-button': 'shareButton_tapHandler',
+        'tap .share-cancel-button': 'shareCancelButton_tapHandler',
+        'tap .wx-share': 'wxShare_tapHandler'
       }),
       cover_tapHandler: function (event) {
         $(event.currentTarget).remove();
@@ -145,6 +148,23 @@
       removeButton_tapHandler: function() {
         $("#download-panel").remove();
         localStorage.setItem("download", 'hide');
+      },
+      shareButton_tapHandler: function () {
+        var title =  '游戏攻略全都有，这下不怕了，哈哈。请看：'+$('title').text()
+          , url = encodeURIComponent(window.location.href);
+        this.$('.popup-cover').fadeIn().siblings(".share-modal-pop").fadeIn()
+          .find(".qq-share").attr("href", "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&showcount=0&desc=&summary=&title=" + title + "&pics=").end()
+          .find(".qzone-share").attr("href", "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&title=" + title + "&pics=" + "" + "&summary=" + "").end()
+          .find(".twb-share").attr("href", "http://share.v.t.qq.com/index.php?c=share&a=index&title=" + title + "&url=" + url + "&appkey=ce15e084124446b9a612a5c29f82f080&site=www.jiathis.com&pic=").end()
+          .find(".swb-share").attr("href", "http://service.weibo.com/share/share.php?title=" + title + "&url=" + url + "&source=bookmark&appkey=2992571369&pic=&ralateUid=").end()
+          .find(".renren-share").attr("href", "http://widget.renren.com/dialog/share?resourceUrl=" + url + "&srcUrl=" + url + "&title=" + title + "&pic=&description=").end();
+      },
+      shareCancelButton_tapHandler: function(){
+        this.$('.popup-cover').fadeOut().siblings(".share-modal-pop").fadeOut();
+      },
+      wxShare_tapHandler: function(){
+        this.$('.fa-weixin').toggleClass('weixin-share-qrcode no-weixin-share-qrcode')
+          .css('background-image','url(http://s.jiathis.com/qrcode.php?url='+location.href+')')
       }
     });
   }
