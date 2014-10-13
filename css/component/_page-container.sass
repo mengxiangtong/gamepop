@@ -242,7 +242,8 @@
 .share-modal
   position: absolute
   top: 0
-  left: $topbar-height
+  left: 0
+  bottom: 0
   right: 0
   z-index: 25
 
@@ -254,6 +255,7 @@
     text-align: center
     background-color: white
     transform: translateY(50%)
+    z-index: 100
 
     .share-modal-title
       margin: 0
@@ -281,7 +283,7 @@
 
       li
         @extend .wrap
-        width: 33%
+        width: 33.333333%
         border-bottom: 1px solid rgb(220,220,220)
         padding: 15px 0 0 0
 
@@ -291,7 +293,7 @@
           margin: 10px 0
           font-size: 15px
         i
-          font-size: 3em
+          font-size: 50px
           padding: 10px
           border-radius: 5px
           color: white
@@ -342,3 +344,12 @@
         padding: 10px 13px
       &:after
         content: "人人网"
+
+  .cover
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0, 0, 0, 0.75)
+    z-index: 50

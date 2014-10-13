@@ -14,7 +14,8 @@ module.exports = function (grunt) {
     , WEB_REG = /<!-- .* begin -->[\S\s]+?<!-- .* end -->/g
     , csses = []
     , libs = []
-    , jses = [];
+    , jses = []
+    , SHARE_POP_REG = /<div class="share-modal">([\S\s]+?)<div class="content">/g;
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -380,6 +381,11 @@ module.exports = function (grunt) {
     libs.push(TEMP + 'index.js');
     // 取模板
     html = html.replace(TEMPLATE_REG, function (match, other, id, content) {
+      // 取POPUP的HTML，在非WEB模式下不加载此DOM
+      if (!isWeb) {
+        content = content.replace(SHARE_POP_REG,"<div class='content'>")
+      }
+
       content = content.replace(/\s{2,}|\n|\r/g, '');
       grunt.file.write(TEMP + 'handlebars/' + id + '.hbs', content);
       return '';
