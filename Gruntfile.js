@@ -14,8 +14,7 @@ module.exports = function (grunt) {
     , WEB_REG = /<!-- .* begin -->[\S\s]+?<!-- .* end -->/g
     , csses = []
     , libs = []
-    , jses = []
-    , SHARE_POP_REG = /<div class="share-modal-pop">([\S\s]+?)<div class="popup-cover"><\/div>/g;
+    , jses = [];
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -388,7 +387,7 @@ module.exports = function (grunt) {
     // 为client导出时，不需要各种适配
     // 取POPUP的HTML，在非WEB模式下不加载此DOM
     if (!isWeb) {
-      html = html.replace(WEB_REG, '').replace(SHARE_POP_REG, '');
+      html = html.replace(WEB_REG, '');
     }
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
     grunt.file.write(TEMP + this.data, html);
