@@ -26,7 +26,7 @@
       'keydown .search-form input': 'input_keyDownHandler',
       'submit .search-form': 'searchForm_submitHandler',
       'webkitAnimationEnd': 'animationEndHandler',
-      'animationEnd': 'animationEndHandler',
+      'animationEnd': 'animationEndHandler'
     },
     initialize: function (options) {
       this.options = options;
@@ -60,9 +60,15 @@
         this.$el.find(".share-button").hide();
       }
 
-      this.$('.content')
-        .addClass(this.options.classes)
-        .load(this.options.url, _.bind(this.loadCompleteHandler, this));
+      var content = this.$('.content');
+      content.addClass(this.options.classes);
+      if (this.options.url) {
+        content.load(this.options.url, {width: gamepop.width},  _.bind(this.loadCompleteHandler, this));
+      } else {
+        content.empty();
+        this.$('.navbar .fa-spin').remove();
+        this.initMediator();
+      }
       // 搜索界面需要特殊背景
       if (/search/.test(this.options.classes)) {
         this.$el.addClass('search');
