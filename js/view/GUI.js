@@ -158,13 +158,13 @@
           .find(".twb-share").attr("href", "http://share.v.t.qq.com/index.php?c=share&a=index&title=" + title + "&url=" + url + "&appkey=ce15e084124446b9a612a5c29f82f080&site=www.jiathis.com&pic=").end()
           .find(".swb-share").attr("href", "http://service.weibo.com/share/share.php?title=" + title + "&url=" + url + "&source=bookmark&appkey=2992571369&pic=&ralateUid=").end()
           .find(".renren-share").attr("href", "http://widget.renren.com/dialog/share?resourceUrl=" + url + "&srcUrl=" + url + "&title=" + title + "&pic=&description=").end();
+        this.$('.fa-weixin').css('background-image','url(http://s.jiathis.com/qrcode.php?url='+location.href+')')
       },
       shareCancelButton_tapHandler: function(){
         this.$('.popup-cover').fadeOut().siblings(".share-modal-pop").fadeOut();
       },
       wxShare_tapHandler: function(){
-        this.$('.fa-weixin').toggleClass('weixin-share-qrcode no-weixin-share-qrcode')
-          .css('background-image','url(http://s.jiathis.com/qrcode.php?url='+location.href+')')
+        this.$('.fa-weixin').toggleClass('weixin-share-qrcode')
       }
     });
   }

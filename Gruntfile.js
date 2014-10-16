@@ -306,6 +306,10 @@ module.exports = function (grunt) {
         'android': {
           src: 'css/android.css',
           dest: BUILD + 'css/android.css'
+        },
+        'wx': {
+          src: 'css/wx.css',
+          dest: BUILD + 'css/wx.css'
         }
       },
       'htmlmin': {
@@ -385,7 +389,8 @@ module.exports = function (grunt) {
       return '';
     });
     // 为client导出时，不需要各种适配
-    // 取POPUP的HTML，在非WEB模式下不加载此DOM
+
+    // web版专用的元素在这里过滤掉
     if (!isWeb) {
       html = html.replace(WEB_REG, '');
     }

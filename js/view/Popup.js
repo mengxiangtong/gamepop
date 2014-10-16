@@ -52,14 +52,6 @@
       this.options['has-game'] = this.$apps.get(this.options.guide_name);
       this.$el.html(TEMPLATES.popup(this.options));
       this.$el.appendTo('body');
-
-      // 是否在微信中打开
-      var isWeixin = /micromessenger/i.test(navigator.userAgent);
-      if(isWeixin) {
-        $("<script src='js/WxShare.js'></script>").appendTo($('body'));
-        this.$el.find(".share-button").hide();
-      }
-
       var content = this.$('.content');
       content.addClass(this.options.classes);
       if (this.options.url) {

@@ -146,7 +146,16 @@
       var userAgent = navigator.userAgent
         , isAndroid = /android/i.test(userAgent)
         , isChrome = /chrome/i.test(userAgent)
-        , isSafari = /safari/i.test(userAgent);
+        , isSafari = /safari/i.test(userAgent)
+        , isWeixin = /micromessenger/i.test(navigator.userAgent);
+
+      if(isWeixin) {
+        $("<script src='js/WxShare.js'></script>").appendTo($('body'));
+        var wx_css = document.createElement('link');
+        wx_css.rel = "stylesheet";
+        wx_css.href = "css/wx.css";
+        document.head.appendChild(wx_css);
+      }
 
       if (isAndroid) {
         var css = document.createElement('link');
