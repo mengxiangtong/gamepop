@@ -15,20 +15,20 @@ var dataForWeixin = {
 
 function onWxBridgeReady() {
   // 发送给好友;
-    WeixinJSBridge.on("menu:share:appmessage", function (argv) {
-      WeixinJSBridge.invoke("sendAppMessage", {
-        "appid": dataForWeixin.appId,
-        "img_url": dataForWeixin.img,
-        "img_width": dataForWeixin.img_width,
-        "img_height": dataForWeixin.img_height,
-        "link": location.href,
-        "desc": $("article").find('p').eq(0).html(),
-        "title": $("title").text()
-       },
-      function (res) {
-        WeixinJSBridge.log(res.err_msg);
-      });
+  WeixinJSBridge.on("menu:share:appmessage", function (argv) {
+    WeixinJSBridge.invoke("sendAppMessage", {
+      "appid": dataForWeixin.appId,
+      "img_url": dataForWeixin.img,
+      "img_width": dataForWeixin.img_width,
+      "img_height": dataForWeixin.img_height,
+      "link": location.href,
+      "desc": $("article").find('p').eq(0).html(),
+      "title": $("title").text()
+     },
+    function (res) {
+      WeixinJSBridge.log(res.err_msg);
     });
+  });
 
   // 分享到朋友圈;
   WeixinJSBridge.on("menu:share:timeline", function (argv) {
@@ -44,6 +44,7 @@ function onWxBridgeReady() {
       WeixinJSBridge.log(res.err_msg);
     });
   });
+
   // 分享到微博;
   WeixinJSBridge.on("menu:share:weibo", function (argv) {
     WeixinJSBridge.invoke("shareWeibo", {
@@ -54,6 +55,7 @@ function onWxBridgeReady() {
       WeixinJSBridge.log(res.err_msg);
     });
   });
+
   // 分享到Facebook
   WeixinJSBridge.on("menu:share:facebook", function (argv) {
     WeixinJSBridge.invoke("shareFB", {
@@ -78,5 +80,5 @@ if (typeof WeixinJSBridge == "undefined") {
     document.attachEvent("onWeixinJSBridgeReady", onWxBridgeReady);
   }
 } else {
-    onWxBridgeReady();
+  onWxBridgeReady();
 }
