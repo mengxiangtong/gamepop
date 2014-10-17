@@ -161,7 +161,7 @@
         this.$('.fa-weixin').css('background-image','url(http://s.jiathis.com/qrcode.php?url='+location.href+')')
       },
       shareCancelButton_tapHandler: function(){
-        this.$('.popup-cover').fadeOut().siblings(".share-modal-pop").fadeOut();
+        this.$('.popup-cover,.share-modal-pop').fadeOut();
       },
       wxShare_tapHandler: function(){
         this.$('.fa-weixin').toggleClass('weixin-share-qrcode')

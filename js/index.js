@@ -150,7 +150,9 @@
         , isWeixin = /micromessenger/i.test(navigator.userAgent);
 
       if(isWeixin) {
-        $("<script src='js/WxShare.js'></script>").appendTo($('body'));
+        var wxShare = document.createElement('script');
+        wxShare.src = "js/WxShare.js";
+        document.head.appendChild(wxShare);
         var wx_css = document.createElement('link');
         wx_css.rel = "stylesheet";
         wx_css.href = "css/wx.css";
