@@ -389,11 +389,11 @@ module.exports = function (grunt) {
       return '';
     });
     // 为client导出时，不需要各种适配
-
     // web版专用的元素在这里过滤掉
     if (!isWeb) {
       html = html.replace(WEB_REG, '');
     }
+
     html = html.replace('<title>', '<link rel="stylesheet" href="css/style.css"><title>');
     grunt.file.write(TEMP + this.data, html);
   });
