@@ -307,36 +307,52 @@
 <script src="js/view/weiboLogin.js"></script>
 <script src="js/Router.js"></script>
 <script src="js/index.js"></script>
+
 <script src="https://cn.avoscloud.com/scripts/lib/av-0.4.2.min.js"></script>
 
 <script>
   AV.initialize("rjzvingxewazmz2cuvmeh1jfl6h24gpmlx06i0n4mrzdf9ke", "eaqp5ila9yleh8x7xkvc2kna667ochzmilcve2cym3xyvvd9");
   // 初始化 param1：应用 id、param2：应用 key
-  var GamePop = AV.Object.extend("GamePop");
-  var gameScore1 = new GamePop();
-      gameScore1.set("score", 1338);
-      gameScore1.set("playerName", "Sean Plott");
-      gameScore1.set("cheatMode", false);
-      gameScore1.save(null, {
-        success: function(gameScore) {
-          alert('New object created with objectId: ' + gameScore.id);
-          alert(gameScore.get("score"));
-        },
-        error: function(gameScore, error) {
-          alert('Failed to create new object, with error code: ' + error.description);
-        }
-  });
+  var GameScore = AV.Object.extend("test");
+  gameScore = new GameScore();
+//  gameScore.set("score", 1337);
+//  gameScore.set("playerName", "Sean Plott");
+//  gameScore.set("cheatMode", false);
+//  gameScore.save(null, {
+//    success: function(gameScore) {
+//      // Execute any logic that should take place after the object is saved.
+//     console.log('New object created with objectId: ' + gameScore.id);
+//    },
+//    error: function(gameScore, error) {
+//      // Execute any logic that should take place if the save fails.
+//      // error is a AV.Error with an error code and description.
+//      alert('Failed to create new object, with error code: ' + error.description);
+//    }
+//  });
 
-  var query = new AV.Query(GamePop);
-  query.get("54363e37e4b0f3306f912f65", {
+  var query = new AV.Query(GameScore);
+  query.get("54509576e4b09818312a9261", {
     success: function(gameScore) {
       // The object was retrieved successfully.
-      alert(gameScore.get("score"));
+      var score = gameScore.set("score",1111111);
+//      var playerName = gameScore.get("playerName");
+//      var cheatMode = gameScore.get("cheatMode");
+//      alert(score+playerName+cheatMode);
+      gameScore.save();
     },
     error: function(object, error) {
-      alert(123)
       // The object was not retrieved successfully.
       // error is a AV.Error with an error code and description.
     }
   });
+
+//  gameScore.save(null, {
+//    success: function(gameScore) {
+//      // Now let's update it with some new data. In this case, only cheatMode and score
+//      // will get sent to the cloud. playerName hasn't changed.
+//      gameScore.set("cheatMode", true);
+//      gameScore.set("score", 1111);
+//      gameScore.save();
+//    }
+//  });
 </script>
