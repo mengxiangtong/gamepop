@@ -29,6 +29,7 @@
     "nervenet": "^0.1.9",
     "animate.css": "^3.5.1",
     "hammerjs": "~2.0.6",
-    "colors": "~2.2.0"
+    "colors": "~2.2.0",
+    "jquery": "~2.1.4"
   }
 }

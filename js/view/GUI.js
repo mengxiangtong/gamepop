@@ -1,8 +1,8 @@
 /**
  * Created by meathill on 14-1-21.
  */
-;(function (ns) {
-  'use strict';
+'use strict';
+(function (ns) {
 
   var lastTouch
     , lashHash

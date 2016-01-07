@@ -1,8 +1,8 @@
 /**
  * main
  */
-;(function () {
-  'use strict';
+'use strict';
+(function () {
   function createCss(width, height) {
     // 客户端包含若干默认样式
     // 宽320、360
@@ -166,12 +166,14 @@
 
       // stat
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=Array.prototype.pop.call(s.getElementsByTagName(o));
-        a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o);
+      m=m[m.length - 1];
+      a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-35957679-14', 'auto');
+      ga('send', 'pageview');
 
       // comment
       window.duoshuoQuery = {short_name: "yxpopo"};
